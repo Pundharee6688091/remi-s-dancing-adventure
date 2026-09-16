@@ -1,0 +1,19 @@
+; Remi's song - tutorial chart
+#TITLE:  Remi's song
+#BPM:    120
+#OFFSET: 0
+#LEVEL:  1
+#WAVE:   song.mp3
+
+; 11 up  12 left  13 right  14 down
+; 0 rest   1 tap
+
+#00413: 1000
+#00512: 1000
+#00611: 1000
+#00714: 1000
+
+;#00813: 10001000
+;#00912: 10001000
+;#01011: 10001000
+;#01114: 10001000

@@ -1,0 +1,25 @@
+{
+  "win_hp_percent": 30,
+  "user_offset_ms": 0,
+
+  "windows_ms": {
+	"perfect": 45,
+	"great": 90,
+	"good": 135
+  },
+
+  "residual": {
+	"perfect": 0,
+	"great": 30,
+	"good": 50,
+	"miss": 100
+  },
+
+  "stars_hp_percent": {
+	"3": 0,
+	"2": 15,
+	"1": 30
+  },
+
+  "note_speed_px_per_ms": 0.6
+}

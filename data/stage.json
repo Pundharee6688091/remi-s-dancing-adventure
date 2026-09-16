@@ -1,0 +1,19 @@
+{
+  "nodes": [
+	{ "id": "v1_1", "type": "story", "timeline": "ch1_intro",
+	  "requires": [], "pos": [180, 360] },
+
+	{ "id": "s1_1", "type": "fight", "label": "1-1",
+	  "requires": ["v1_1"], "pos": [400, 300],
+	  "song": "song_tutorial", "opponent": "Remi",
+	  "win": { "type": "hp_below", "value": 30 } },
+
+	{ "id": "v1_2", "type": "story", "timeline": "ch1_elion",
+	  "requires": ["s1_1"], "pos": [620, 340] },
+
+	{ "id": "s1_2", "type": "fight", "label": "1-2",
+	  "requires": ["v1_2"], "pos": [840, 280],
+	  "song": "song_elion", "opponent": "Elion",
+	  "win": { "type": "hp_below", "value": 30 } }
+  ]
+}

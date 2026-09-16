@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://byfwtamkfkfnb"]
+
+[ext_resource type="Script" uid="uid://truvl2fcivco" path="res://scenes/rhythm/battle.gd" id="1_efdsi"]
+[ext_resource type="Script" uid="uid://dpw8vkin7y4i2" path="res://scenes/rhythm/conductor.gd" id="2_o0565"]
+[ext_resource type="Script" uid="uid://cox60iaoehfsf" path="res://scenes/rhythm/track_panel.gd" id="3_103gh"]
+[ext_resource type="Script" uid="uid://c7pnl0i2n3nsa" path="res://scenes/rhythm/note_field.gd" id="4_sasum"]
+[ext_resource type="Script" uid="uid://b6lhg4qujjm1o" path="res://scenes/rhythm/hud.gd" id="5_yecsb"]
+[ext_resource type="Script" uid="uid://d3u3ywbqu2yr3" path="res://scenes/rhythm/result_overlay.gd" id="6_st8th"]
+[ext_resource type="Script" uid="uid://d2cdpmrc5pwjf" path="res://scenes/rhythm/pause_overlay.gd" id="7_st8th"]
+
+[node name="Battle" type="Control" unique_id=1101702470]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_efdsi")
+
+[node name="Song" type="AudioStreamPlayer" parent="." unique_id=1753628390]
+
+[node name="Conductor" type="Node" parent="." unique_id=76721395]
+script = ExtResource("2_o0565")
+
+[node name="Debug" type="Label" parent="." unique_id=1711428741]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="TrackPanel" type="Control" parent="." unique_id=2091360685]
+anchors_preset = 0
+offset_top = 440.0
+offset_right = 40.0
+offset_bottom = 480.0
+script = ExtResource("3_103gh")
+
+[node name="Notes" type="Control" parent="TrackPanel" unique_id=310217603]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_sasum")
+
+[node name="Judgement" type="Label" parent="." unique_id=1781856404]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="HUD" type="Control" parent="." unique_id=1205102026]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_yecsb")
+
+[node name="Result" type="Control" parent="." unique_id=1998386505]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_st8th")
+
+[node name="Pause" type="Control" parent="." unique_id=1666301894]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_st8th")

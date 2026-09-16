@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://clw12makep4jc"]
+
+[ext_resource type="Script" uid="uid://cc71rb3ax76hf" path="res://scenes/ui/save_slots.gd" id="1_s2pwt"]
+
+[node name="SaveSlots" type="Control" unique_id=233734634]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_s2pwt")
