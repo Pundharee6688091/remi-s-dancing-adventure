@@ -10,4 +10,4 @@ func _set_direction(v: int) -> void:
 func _draw() -> void:
 	var pts := NoteArt.at(direction, size / 2.0)
 	draw_colored_polygon(pts, Palette.WHITE)
-	draw_polyline(NoteArt.closed(pts), Palette.INK, 2.5, true)
+	draw_colored_polygon(pts, Palette.lane_color(direction))

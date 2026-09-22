@@ -32,6 +32,7 @@ func show_result(r: Dictionary) -> void:
 	_lines.text = "\n".join([
 		"Monster HP left   %d%%" % r.hp,
 		stars,
+		"Max combo  %d" % r.max_combo,
 		"",
 		"Perfect  %d" % c.perfect,
 		"Great    %d" % c.great,

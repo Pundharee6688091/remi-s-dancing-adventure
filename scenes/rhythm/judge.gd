@@ -2,6 +2,8 @@ class_name Judge
 extends RefCounted
 
 var hp := 100.0
+var combo := 0
+var max_combo := 0
 var counts := {"perfect": 0, "great": 0, "good": 0, "miss": 0}
 
 var _field: NoteField = null
@@ -11,6 +13,8 @@ func setup(field: NoteField) -> void:
 	_field = field
 	_total = maxi(field.notes.size(), 1)
 	hp = 100.0
+	combo = 0
+	max_combo = 0
 	counts = {"perfect": 0, "great": 0, "good": 0, "miss": 0}
 
 
@@ -57,6 +61,7 @@ func result() -> Dictionary:
 		"stars": Rules.stars_for_hp(hp),
 		"won": Rules.is_win(hp),
 		"counts": counts.duplicate(),
+		"max_combo": max_combo,
 	}
 
 
@@ -79,5 +84,12 @@ func _apply(n: Dictionary, judgement: String) -> void:
 		else:
 			_field.recycle(n)            # a hit note vanishes at once
 
-	Events.note_judged.emit(judgement)
+	if judgement == "perfect" or judgement == "great":
+		combo += 1
+		max_combo = maxi(max_combo, combo)
+	else:
+		combo = 0                     # Good and Miss break the combo
+
+	Events.note_judged.emit(judgement, n.lane)
+	Events.combo_changed.emit(combo)
 	Events.hp_changed.emit(hp)

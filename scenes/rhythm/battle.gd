@@ -6,7 +6,7 @@ enum State { COUNTDOWN, PLAYING, PAUSED, RESULT }
 @onready var conductor: Conductor = $Conductor
 @onready var track: TrackPanel = $TrackPanel
 @onready var field: NoteField = $TrackPanel/Notes
-@onready var judgement_label: Label = $Judgement
+@onready var countdown_label: Label = $Judgement
 @onready var hud: BattleHUD = $HUD
 @onready var pause_overlay: PauseOverlay = $Pause
 @onready var result_overlay: ResultOverlay = $Result
@@ -34,7 +34,7 @@ func _ready() -> void:
 	pause_overlay.restart_pressed.connect(_restart)
 	pause_overlay.quit_pressed.connect(GameManager.leave_stage)
 	
-	print("router depth: ", SceneRouter.depth())
+	Events.note_judged.connect(_on_note_judged)
 	_restart()
 
 func setup(params: Dictionary) -> void:
@@ -77,10 +77,9 @@ func _lane_input(event: InputEvent, judging: bool) -> void:
 		var action := InputManager.lane_action(lane)
 		if event.is_action_pressed(action):
 			track.ghosts[lane].set_pressed(true)
+			track.ghosts[lane].set_pressed(true)
 			if judging:
-				var j := judge.press(lane, conductor.song_time_ms())
-				if j != "":
-					_show_judgement(j)
+				judge.press(lane, conductor.song_time_ms())
 		elif event.is_action_released(action):
 			track.ghosts[lane].set_pressed(false)
 
@@ -109,7 +108,7 @@ func _pause() -> void:
 	_countdown_id += 1                       # invalidate a running countdown
 	state = State.PAUSED
 	song.stream_paused = true
-	judgement_label.modulate.a = 0.0
+	countdown_label.modulate.a = 0.0
 	pause_overlay.open()
 
 
@@ -150,17 +149,15 @@ func _countdown() -> bool:
 	var my_id := _countdown_id
 
 	for n in [3, 2, 1]:
-		judgement_label.text = str(n)
-		judgement_label.modulate.a = 1.0
+		countdown_label.text = str(n)
+		countdown_label.modulate.a = 1.0
 		await get_tree().create_timer(0.6).timeout
 		if my_id != _countdown_id:
 			return false          # something superseded us
 
-	judgement_label.modulate.a = 0.0
+	countdown_label.modulate.a = 0.0
 	return true
+	
 
-
-func _show_judgement(j: String) -> void:
-	judgement_label.text = j.to_upper()
-	judgement_label.modulate.a = 1.0
-	create_tween().tween_property(judgement_label, "modulate:a", 0.0, 0.4)
+func _on_note_judged(judgement: String, lane: int) -> void:
+	track.pop_judgement(lane, judgement)
