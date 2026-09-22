@@ -2,44 +2,73 @@ extends Control
 
 var _view: MapView
 var _detail: StageDetail
-var _progress: Label
+var _progress: Bar
+var _steps: Label
 var _party: Label
 
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
-	var title := Label.new()
-	title.text = "World map"
-	title.position = Vector2(40, 30)
-	add_child(title)
-
-	_progress = Label.new()
-	_progress.position = Vector2(240, 30)
-	add_child(_progress)
-
-	_party = Label.new()
-	_party.position = Vector2(40, 600)
-	add_child(_party)
-
 	_view = MapView.new()
 	_view.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_view.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_view)
 
-	var hint := Label.new()
-	hint.text = "◀ ▶ Move     Enter Open     Esc Main menu"
-	hint.position = Vector2(40, 660)
-	add_child(hint)
+	_build_top_bar()
+
+	var hints := HintBar.new()
+	add_child(hints)
+	hints.set_hints([["< >", "Walk"], ["Enter", "Open"], ["Esc", "Main menu"]])
 
 	_detail = StageDetail.new()
 	_detail.fight_pressed.connect(GameManager.enter_node)
 	add_child(_detail)
 
 	Events.progress_changed.connect(_refresh)
-
 	_view.cursor = _start_cursor()
 	_refresh()
+
+
+func _build_top_bar() -> void:
+	var strip := ColorRect.new()
+	strip.color = Palette.WHITE
+	strip.size = Vector2(1280, 82)
+	strip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(strip)
+
+	var rule := ColorRect.new()
+	rule.color = Palette.INK
+	rule.position = Vector2(0, 82)
+	rule.size = Vector2(1280, 2)
+	rule.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(rule)
+
+	_text("World map", Vector2(40, 20), 32)
+	_text("Progress", Vector2(240, 36), 18, Palette.MUTED)
+
+	_progress = Bar.new()
+	_progress.position = Vector2(340, 36)
+	_progress.size = Vector2(300, 22)
+	_progress.fill_color = Palette.AMBER
+	add_child(_progress)
+
+	_steps = _text("", Vector2(664, 36), 18, Palette.MUTED)
+
+	_party = _text("", Vector2(1020, 36), 18, Palette.MUTED)
+	_party.size = Vector2(220, 26)
+	_party.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+
+
+func _text(value: String, pos: Vector2, size_px := 18, color := Palette.INK) -> Label:
+	var l := Label.new()
+	l.text = value
+	l.position = pos
+	l.add_theme_font_size_override("font_size", size_px)
+	l.add_theme_color_override("font_color", color)
+	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(l)
+	return l
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -83,22 +112,16 @@ func _start_cursor() -> int:
 
 
 func _refresh() -> void:
-	var fights := 0
-	var cleared := 0
-	var stars := 0
+	var total := Rules.node_order.size()
+	var done := 0
 	for id in Rules.node_order:
-		if Rules.stage(id).get("type") != "fight":
-			continue
-		fights += 1
-		stars += GameManager.stars_for(id)
 		if GameManager.is_cleared(id):
-			cleared += 1
+			done += 1
 
-	_progress.text = "Cleared %d / %d     Stars %d / %d" % [
-		cleared, fights, stars, fights * 3]
+	_progress.value = float(done) / maxf(total, 1)
+	_steps.text = "%d / %d steps" % [done, total]
 
 	var party: Array = GameManager.save.get("party", [])
-	_party.text = "Party: Remi" + ("" if party.is_empty()
-		else ", " + ", ".join(PackedStringArray(party)))
+	_party.text = "Party %d / 4" % (party.size() + 1)
 
 	_view.queue_redraw()

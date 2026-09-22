@@ -1,19 +1,35 @@
 {
   "nodes": [
-	{ "id": "v1_1", "type": "story", "timeline": "ch1_elion",
-	  "requires": [], "pos": [180, 360] },
-
-	{ "id": "s1_1", "type": "fight", "label": "1-1",
-	  "requires": ["v1_1"], "pos": [400, 300],
-	  "song": "song_tutorial", "opponent": "Elion",
+	{ "id": "s0_1", "type": "fight", "label": "Tutorial",
+	  "requires": [], "pos": [110, 220],
+	  "song": "song_tutorial", "opponent": "",
 	  "win": { "type": "hp_below", "value": 30 } },
 
-	{ "id": "v1_2", "type": "story", "timeline": "ch1_Theo",
-	  "requires": ["s1_1"], "pos": [620, 340] },
+	{ "id": "v1_1", "type": "story", "label": "Story 1",
+	  "timeline": "ch1_intro", "requires": [], "pos": [200, 340] },
+
+	{ "id": "s1_1", "type": "fight", "label": "1-1",
+	  "requires": ["v1_1"], "pos": [365, 415],
+	  "song": "song_elion", "opponent": "Elion",
+	  "win": { "type": "hp_below", "value": 30 } },
+
+	{ "id": "v1_2", "type": "story", "label": "Story 2",
+	  "timeline": "ch1_elion", "requires": ["s1_1"], "pos": [530, 330] },
 
 	{ "id": "s1_2", "type": "fight", "label": "1-2",
-	  "requires": ["v1_2"], "pos": [840, 280],
-	  "song": "song_elion", "opponent": "Theo",
-	  "win": { "type": "hp_below", "value": 30 } }
+	  "requires": ["v1_2"], "pos": [690, 410],
+	  "song": "song_theo", "opponent": "Theo",
+	  "win": { "type": "hp_below", "value": 30 } },
+
+	{ "id": "v1_3", "type": "story", "label": "Story 3",
+	  "timeline": "ch2_theo", "requires": ["s1_2"], "pos": [855, 325] },
+
+	{ "id": "s1_3", "type": "fight", "label": "1-3",
+	  "requires": ["v1_3"], "pos": [1020, 405],
+	  "song": "song_cassia", "opponent": "Cassia",
+	  "win": { "type": "hp_below", "value": 30 } },
+
+	{ "id": "v1_4", "type": "story", "label": "Story 4",
+	  "timeline": "ch3_cassia", "requires": ["s1_3"], "pos": [1180, 320] }
   ]
 }
