@@ -20,9 +20,10 @@ func _ready() -> void:
 	box.add_child(title)
 
 	_first = _button(box, "Resume", func() -> void: resume_pressed.emit())
-	_button(box, "Restart stage", func() -> void: restart_pressed.emit())
-	_button(box, "Quit stage", func() -> void: quit_pressed.emit())
+	var restart := _button(box, "Restart stage", func() -> void: restart_pressed.emit())
+	var quit := _button(box, "Quit stage", func() -> void: quit_pressed.emit())
 
+	UIKit.trap_focus([_first, restart, quit])
 	hide()
 
 

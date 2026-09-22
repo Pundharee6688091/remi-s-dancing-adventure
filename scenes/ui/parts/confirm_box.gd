@@ -32,6 +32,7 @@ func _ready() -> void:
 	_yes.pressed.connect(func() -> void: _answer(true))
 	row.add_child(_yes)
 
+	UIKit.trap_focus([_no, _yes])
 	hide()
 
 

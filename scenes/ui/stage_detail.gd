@@ -68,6 +68,8 @@ func open(stage_id: String) -> void:
 	_info.text = "\n".join(PackedStringArray(lines))
 
 	_fight.disabled = not available
+	_fight.focus_mode = Control.FOCUS_ALL if available else Control.FOCUS_NONE
+	UIKit.trap_focus([_fight, _back] if available else [_back])
 	show()
 	(_fight if available else _back).grab_focus()
 

@@ -23,3 +23,18 @@ static func card(parent: Node, pos: Vector2, width: float) -> VBoxContainer:
 	box.add_theme_constant_override("separation", 12)
 	panel.add_child(box)
 	return box
+
+
+## Keep keyboard focus inside a popup.
+static func trap_focus(controls: Array) -> void:
+	var n := controls.size()
+	for i in n:
+		var c: Control = controls[i]
+		var prev: Control = controls[(i - 1 + n) % n]
+		var next: Control = controls[(i + 1) % n]
+		c.focus_neighbor_left = c.get_path_to(prev)
+		c.focus_neighbor_top = c.get_path_to(prev)
+		c.focus_neighbor_right = c.get_path_to(next)
+		c.focus_neighbor_bottom = c.get_path_to(next)
+		c.focus_previous = c.get_path_to(prev)
+		c.focus_next = c.get_path_to(next)

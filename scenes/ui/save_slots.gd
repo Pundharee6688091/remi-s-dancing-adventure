@@ -120,6 +120,7 @@ func _build_name_panel() -> void:
 	hint.text = "Enter Start     Esc Cancel"
 	box.add_child(hint)
 
+	UIKit.trap_focus([_name_edit])
 	_name_panel.hide()
 
 
