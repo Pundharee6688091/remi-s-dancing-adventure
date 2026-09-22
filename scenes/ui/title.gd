@@ -3,7 +3,7 @@ extends Control
 const SAVE_SLOTS := "res://scenes/ui/save_slots.tscn"
 
 func _ready() -> void:
-	set_anchors_preset(Control.PRESET_FULL_RECT)
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_label("REMI'S DANCING ADVENTURE", Vector2(430, 280))
 	_label("PRESS ANY BUTTON", Vector2(520, 360))
 

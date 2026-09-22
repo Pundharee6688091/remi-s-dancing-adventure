@@ -29,9 +29,9 @@ offset_bottom = 23.0
 
 [node name="TrackPanel" type="Control" parent="." unique_id=2091360685]
 anchors_preset = 0
-offset_top = 440.0
+offset_top = 420.0
 offset_right = 40.0
-offset_bottom = 480.0
+offset_bottom = 460.0
 script = ExtResource("3_103gh")
 
 [node name="Notes" type="Control" parent="TrackPanel" unique_id=310217603]
@@ -42,8 +42,10 @@ script = ExtResource("4_sasum")
 
 [node name="Judgement" type="Label" parent="." unique_id=1781856404]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 600.0
+offset_top = 300.0
+offset_right = 640.0
+offset_bottom = 323.0
 
 [node name="HUD" type="Control" parent="." unique_id=1205102026]
 anchors_preset = 0
@@ -51,14 +53,14 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("5_yecsb")
 
-[node name="Result" type="Control" parent="." unique_id=1998386505]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("6_st8th")
-
 [node name="Pause" type="Control" parent="." unique_id=1666301894]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("7_st8th")
+
+[node name="Result" type="Control" parent="." unique_id=1998386505]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_st8th")

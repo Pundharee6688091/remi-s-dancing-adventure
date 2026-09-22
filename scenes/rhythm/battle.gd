@@ -4,7 +4,7 @@ enum State { COUNTDOWN, PLAYING, PAUSED, RESULT }
 
 @onready var song: AudioStreamPlayer = $Song
 @onready var conductor: Conductor = $Conductor
-@onready var track: Control = $TrackPanel
+@onready var track: TrackPanel = $TrackPanel
 @onready var field: NoteField = $TrackPanel/Notes
 @onready var judgement_label: Label = $Judgement
 @onready var hud: BattleHUD = $HUD
@@ -136,6 +136,7 @@ func _on_song_finished() -> void:
 	Events.song_finished.emit()
 
 	var r := judge.result()
+	r.won = GameManager.evaluate_win(stage_id, judge.hp)
 	result_overlay.show_result(r)
 
 	if r.won:

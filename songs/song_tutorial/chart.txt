@@ -1,19 +1,79 @@
-; Remi's song - tutorial chart
-#TITLE:  Remi's song
+; Remi's Song - Tutorial Chart
+#TITLE:  Remi's Song
 #BPM:    120
 #OFFSET: 0
 #LEVEL:  1
 #WAVE:   song.mp3
 
 ; 11 up  12 left  13 right  14 down
-; 0 rest   1 tap
+; 0 rest  1 tap
 
-#00413: 1000
-#00512: 1000
-#00611: 1000
-#00714: 1000
+; Learn each direction
+#00113: 1000
+#00212: 1000
+#00311: 1000
+#00414: 1000
 
-;#00813: 10001000
-;#00912: 10001000
-;#01011: 10001000
-;#01114: 10001000
+; Simple two-note rhythm
+#00513: 1010
+#00612: 1010
+#00711: 1010
+#00814: 1010
+
+; Rhythm break - bars 9-10
+
+; Return to single notes
+#01113: 1000
+#01212: 1000
+#01311: 1000
+#01414: 1000
+
+; Easy continuation
+#01513: 1000
+
+; Break - bar 16
+
+; Single-note practice
+#01714: 1000
+#01813: 1000
+#01912: 1000
+#02011: 1000
+
+; Two-note practice
+#02113: 1000
+#02112: 0010
+#02211: 1000
+#02214: 0010
+#02312: 1010
+#02413: 1010
+
+; Slow down
+#02511: 1000
+#02614: 1000
+#02712: 1000
+
+; Break - bar 28
+
+; Simple recovery
+#02913: 1000
+#03012: 1000
+#03111: 1000
+#03214: 1000
+
+; Final two-note practice
+#03313: 1000
+#03312: 0010
+#03411: 1000
+#03414: 0010
+#03513: 1010
+#03612: 1010
+
+; Slow ending
+#03713: 1000
+#03811: 1000
+#03914: 1000
+
+; Ending
+#04013: 1000
+#04112: 1000
+#04211: 1000

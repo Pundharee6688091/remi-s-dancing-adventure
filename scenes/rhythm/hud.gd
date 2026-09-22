@@ -8,7 +8,7 @@ var monster_pct: Label
 var _length_ms := 1.0
 
 func _ready() -> void:
-	set_anchors_preset(Control.PRESET_FULL_RECT)
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	_label("SONG", Vector2(40, 22))

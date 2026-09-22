@@ -77,7 +77,7 @@ func _apply(n: Dictionary, judgement: String) -> void:
 		if judgement == "miss":
 			n.node.modulate.a = 0.3      # fades but keeps sliding out
 		else:
-			_field._recycle(n)            # a hit note vanishes at once
+			_field.recycle(n)            # a hit note vanishes at once
 
 	Events.note_judged.emit(judgement)
 	Events.hp_changed.emit(hp)

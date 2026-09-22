@@ -16,14 +16,12 @@ func set_pressed(on: bool) -> void:
 	queue_redraw()
 
 func _draw() -> void:
-	var centre := size / 2.0
-	var pts := PackedVector2Array()
-	for p in NoteArt.arrow_points(direction, NoteArt.SIZE):
-		pts.append(p + centre)
+	var pts := NoteArt.at(direction, size / 2.0, NoteArt.SIZE + 2.0)
+	draw_colored_polygon(pts, Color(Palette.RED, 0.45 if _pressed else 0.12))
 
+	var loop := NoteArt.closed(pts)
 	if _pressed:
-		draw_colored_polygon(pts, Color(1, 1, 1, 0.9))
+		draw_polyline(loop, Palette.RED, 3.0, true)
 	else:
-		var loop := pts.duplicate()
-		loop.append(pts[0])
-		draw_polyline(loop, Color(1, 1, 1, 0.3), 2.0)
+		for i in pts.size():
+			draw_dashed_line(loop[i], loop[i + 1], Palette.RED, 2.5, 5.0)

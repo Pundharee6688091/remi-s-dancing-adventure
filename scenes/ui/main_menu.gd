@@ -5,7 +5,7 @@ var _story: Button
 
 
 func _ready() -> void:
-	set_anchors_preset(Control.PRESET_FULL_RECT)
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
 	var who := Label.new()
 	who.text = GameManager.save.get("name", "")
@@ -18,7 +18,7 @@ func _ready() -> void:
 	box.add_theme_constant_override("separation", 10)
 	add_child(box)
 
-	_story = _item(box, "Story", func() -> void: GameManager.start_stage("s1_1"))
+	_story = _item(box, "Story", func() -> void: SceneRouter.goto(GameManager.WORLD_MAP))
 	_item(box, "Collection", Callable()).disabled = true
 	_item(box, "Achievements", Callable()).disabled = true
 	_item(box, "Settings", Callable()).disabled = true

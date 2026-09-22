@@ -2,6 +2,7 @@ extends Node
 
 const BATTLE := "res://scenes/rhythm/battle.tscn"
 const MAIN_MENU := "res://scenes/ui/main_menu.tscn"
+const WORLD_MAP := "res://scenes/ui/world_map.tscn"
 
 var slot := 0
 var save: Dictionary = {}
@@ -24,7 +25,29 @@ func load_slot(chosen: int) -> void:
 	save = SaveManager.load_slot(slot)
 	SceneRouter.goto(MAIN_MENU)
 
+# ------------ World Map ---------------
+func is_cleared(id: String) -> bool:
+	if Rules.stage(id).get("type") == "story":
+		return save.get("seen", []).has(id)
+	return save.get("stars", {}).has(id)
 
+func is_unlocked(id: String) -> bool:
+	for req in Rules.stage(id).get("requires", []):
+		if not is_cleared(req):
+			return false
+	return true
+	
+func stars_for(id: String) -> int:
+	return int(save.get("stars", {}).get(id, 0))
+	
+func enter_node(id: String) -> void:
+	match String(Rules.stage(id).get("type", "")):
+		"story":
+			_play_story(id)
+		"fight":
+			start_stage(id)
+
+# ------------ Battle ----------------
 func start_stage(stage_id: String) -> void:
 	current_stage_id = stage_id
 	SceneRouter.goto(BATTLE, {"stage_id": stage_id})
@@ -57,3 +80,13 @@ func _on_stage_cleared(stage_id: String, stars: int) -> void:
 
 func _on_stage_failed(_stage_id: String) -> void:
 	pass      # nothing changed, so nothing is written
+
+
+# ------------ Visual Novel -------------
+func _play_story(id: String) -> void:
+	print("Story ", id, " -> timeline ", Rules.stage(id).get("timeline", ""))
+	if not save.seen.has(id):
+		save.seen.append(id)
+		SaveManager.write(slot, save)
+	current_stage_id = id
+	Events.progress_changed.emit()

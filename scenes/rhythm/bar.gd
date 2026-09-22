@@ -9,6 +9,6 @@ func _set_value(v: float) -> void:
 	queue_redraw()
 
 func _draw() -> void:
-	draw_rect(Rect2(Vector2.ZERO, size), Color(1, 1, 1, 0.12), true)
-	draw_rect(Rect2(0.0, 0.0, size.x * value, size.y), fill_color, true)
-	draw_rect(Rect2(Vector2.ZERO, size), Color(1, 1, 1, 0.3), false, 1.0)
+	draw_rect(Rect2(Vector2.ZERO, size), Palette.WHITE)
+	draw_rect(Rect2(0.0, 0.0, size.x * value, size.y), fill_color)
+	draw_rect(Rect2(Vector2.ZERO, size), Palette.INK, false, 2.0)

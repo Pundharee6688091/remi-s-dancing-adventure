@@ -9,18 +9,10 @@ var _no: Button
 
 
 func _ready() -> void:
-	set_anchors_preset(Control.PRESET_FULL_RECT)
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
-	var dim := ColorRect.new()
-	dim.color = Color(0, 0, 0, 0.6)
-	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
-	add_child(dim)
-
-	var box := VBoxContainer.new()
-	box.position = Vector2(440, 280)
-	box.custom_minimum_size = Vector2(400, 0)
-	box.add_theme_constant_override("separation", 14)
-	add_child(box)
+	UIKit.dim(self)
+	var box := UIKit.card(self, Vector2(440, 260), 400)
 
 	_label = Label.new()
 	_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://7ef073q3x8un"]
+
+[ext_resource type="Script" uid="uid://ckxi82468krt2" path="res://scenes/ui/map_view.gd" id="1_dkmbx"]
+
+[node name="MapView" type="Control" unique_id=1133825669]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dkmbx")

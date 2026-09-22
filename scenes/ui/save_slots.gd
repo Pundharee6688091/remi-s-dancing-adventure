@@ -10,7 +10,7 @@ var _pending_slot := 1
 
 
 func _ready() -> void:
-	set_anchors_preset(Control.PRESET_FULL_RECT)
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
 	var title := Label.new()
 	title.text = "Select profile"
@@ -100,19 +100,11 @@ func _on_delete_answered(yes: bool) -> void:
 
 func _build_name_panel() -> void:
 	_name_panel = Control.new()
-	_name_panel.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_name_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(_name_panel)
 
-	var dim := ColorRect.new()
-	dim.color = Color(0, 0, 0, 0.6)
-	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
-	_name_panel.add_child(dim)
-
-	var box := VBoxContainer.new()
-	box.position = Vector2(440, 260)
-	box.custom_minimum_size = Vector2(400, 0)
-	box.add_theme_constant_override("separation", 12)
-	_name_panel.add_child(box)
+	UIKit.dim(_name_panel)
+	var box := UIKit.card(_name_panel, Vector2(440, 240), 400)
 
 	var l := Label.new()
 	l.text = "New game — what should we call you?"

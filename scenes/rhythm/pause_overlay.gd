@@ -8,20 +8,13 @@ signal quit_pressed
 var _first: Button
 
 func _ready() -> void:
-	set_anchors_preset(Control.PRESET_FULL_RECT)
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
-	var dim := ColorRect.new()
-	dim.color = Color(0, 0, 0, 0.7)
-	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
-	add_child(dim)
-
-	var box := VBoxContainer.new()
-	box.position = Vector2(520, 250)
-	box.custom_minimum_size = Vector2(240, 0)
-	box.add_theme_constant_override("separation", 12)
-	add_child(box)
+	UIKit.dim(self)
+	var box := UIKit.card(self, Vector2(430, 190), 420)
 
 	var title := Label.new()
+	title.add_theme_font_size_override("font_size", 32)
 	title.text = "PAUSED"
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	box.add_child(title)

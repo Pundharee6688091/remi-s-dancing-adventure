@@ -44,7 +44,7 @@ func update(now: float) -> void:
 			- (n.t_ms - now) * speed \
 			- NoteArt.SIZE / 2.0
 		if n.node.position.x > TrackPanel.RIGHT + 60.0:
-			_recycle(n)
+			recycle(n)
 
 
 func alive_count() -> int:
@@ -74,7 +74,7 @@ func _new_note() -> Note:
 	return node
 
 
-func _recycle(n: Dictionary) -> void:
+func recycle(n: Dictionary) -> void:
 	n.node.hide()
 	_pool.append(n.node)
 	n.node = null
@@ -83,6 +83,6 @@ func _recycle(n: Dictionary) -> void:
 func reset() -> void:
 	for n in notes:
 		if n.node != null:
-			_recycle(n)
+			recycle(n)
 		n.judged = false
 	_next_spawn = 0

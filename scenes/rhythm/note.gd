@@ -8,8 +8,6 @@ func _set_direction(v: int) -> void:
 	queue_redraw()
 
 func _draw() -> void:
-	var centre := size / 2.0
-	var pts := PackedVector2Array()
-	for p in NoteArt.arrow_points(direction, NoteArt.SIZE):
-		pts.append(p + centre)
-	draw_colored_polygon(pts, Color.WHITE)
+	var pts := NoteArt.at(direction, size / 2.0)
+	draw_colored_polygon(pts, Palette.WHITE)
+	draw_polyline(NoteArt.closed(pts), Palette.INK, 2.5, true)

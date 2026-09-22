@@ -5,22 +5,14 @@ var _title: Label
 var _lines: Label
 
 func _ready() -> void:
-	set_anchors_preset(Control.PRESET_FULL_RECT)
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	var dim := ColorRect.new()
-	dim.color = Color(0, 0, 0, 0.75)
-	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
-	dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(dim)
-
-	var box := VBoxContainer.new()
-	box.position = Vector2(440, 200)
-	box.custom_minimum_size = Vector2(400, 0)
-	box.add_theme_constant_override("separation", 14)
-	add_child(box)
+	UIKit.dim(self)
+	var box := UIKit.card(self, Vector2(440, 140), 400)
 
 	_title = Label.new()
+	_title.add_theme_font_size_override("font_size", 32)
 	_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	box.add_child(_title)
 
