@@ -1,0 +1,82 @@
+keys,en,th
+UI_GAME_TITLE,REMI'S DANCING ADVENTURE,การผจญภัยนักเต้นของเรมี
+UI_PRESS_ANY_BUTTON,PRESS ANY BUTTON,กดปุ่มใดก็ได้
+UI_STORY,Story,เนื้อเรื่อง
+UI_COLLECTION,Collection,ของสะสม
+UI_ACHIEVEMENTS,Achievements,ความสำเร็จ
+UI_SETTINGS,Settings,ตั้งค่า
+UI_QUIT,Quit,ออกจากเกม
+UI_QUIT_CONFIRM,Quit the game?,ต้องการออกจากเกมหรือไม่
+UI_MENU_HINT,▲ ▼ Move     Enter Select     Esc Change profile,▲ ▼ เลื่อน     Enter เลือก     Esc เปลี่ยนโปรไฟล์
+UI_SELECT_PROFILE,Select profile,เลือกโปรไฟล์
+UI_SLOTS_HINT,◀ ▶ Choose slot     Enter Select     Del Delete     Esc Back,◀ ▶ เลือกช่อง     Enter เลือก     Del ลบ     Esc ย้อนกลับ
+UI_EMPTY_SLOT,"New game
+empty slot","เกมใหม่
+ช่องว่าง"
+UI_DELETE_CONFIRM,"Delete profile ""%s""? This cannot be undone.","ลบโปรไฟล์ ""%s"" หรือไม่ การลบนี้ย้อนกลับไม่ได้"
+UI_DELETE,Delete,ลบ
+UI_NAME_PROMPT,New game — what should we call you?,เกมใหม่ — อยากให้เราเรียกคุณว่าอะไร
+UI_YOUR_NAME,Your name,ชื่อของคุณ
+UI_NAME_HINT,Enter Start     Esc Cancel,Enter เริ่ม     Esc ยกเลิก
+UI_YES,Yes,ตกลง
+UI_CANCEL,Cancel,ยกเลิก
+UI_BACK,Back,ย้อนกลับ
+UI_WORLD_MAP,World map,แผนที่
+UI_PROGRESS,Progress,ความคืบหน้า
+UI_STEPS,%d / %d steps,%d / %d ขั้น
+UI_PARTY,Party %d / 4,ทีม %d / 4
+UI_WALK,Walk,เดิน
+UI_OPEN,Open,เปิด
+UI_MAIN_MENU,Main menu,เมนูหลัก
+UI_STAGE,Stage %s,ด่าน %s
+UI_FIGHT,Fight!,สู้!
+UI_SONG,Song      %s,เพลง       %s
+UI_BPM,BPM       %d,BPM        %d
+UI_LEVEL,Level     %s,ระดับ      %s
+UI_SONG_MISSING,This song is not in the game yet.,ยังไม่มีเพลงนี้ในเกม
+UI_OPPONENT,Opponent  %s,คู่แข่ง      %s
+UI_BEST,Best      %s,ดีที่สุด     %s
+UI_REWARD,Reward    %s joins your party,รางวัล     %s เข้าร่วมทีมของคุณ
+UI_LOCKED,locked,ล็อกอยู่
+UI_CLEARED,cleared,ผ่านแล้ว
+UI_NOT_CLEARED,not cleared,ยังไม่ผ่าน
+UI_SEEN,seen,ดูแล้ว
+UI_NOT_SEEN,not seen yet,ยังไม่ได้ดู
+UI_DOT_FIGHT,· fight,· ต่อสู้
+UI_DOT_STORY,· story scene,· ฉากเนื้อเรื่อง
+UI_STAGE_CLEAR_COUNT,Stage Clear: %d/%d,ผ่านด่าน: %d/%d
+UI_LEGEND_STORY,story scene,ฉากเนื้อเรื่อง
+UI_LEGEND_FIGHT,fight,ต่อสู้
+UI_LEGEND_DONE,done,ผ่านแล้ว
+UI_SONG_LABEL,SONG,เพลง
+UI_COMBO,COMBO,คอมโบ
+UI_MONSTER_HP,MONSTER HP,พลังชีวิตศัตรู
+UI_PAUSED,PAUSED,หยุดชั่วคราว
+UI_RESUME,Resume,เล่นต่อ
+UI_RESTART_STAGE,Restart stage,เริ่มด่านใหม่
+UI_QUIT_STAGE,Quit stage,ออกจากด่าน
+UI_STAGE_CLEAR_TITLE,STAGE CLEAR,ผ่านด่าน
+UI_STAGE_FAILED_TITLE,STAGE FAILED,ไม่ผ่านด่าน
+UI_MONSTER_HP_LEFT,Monster HP left   %d%%,พลังชีวิตศัตรูที่เหลือ   %d%%
+UI_BEST_PCT,Best  %d%%,ดีที่สุด  %d%%
+UI_NEW_BEST,NEW BEST!  (was %d%%),สถิติใหม่!  (เดิม %d%%)
+UI_MAX_COMBO,Max combo  %d,คอมโบสูงสุด  %d
+UI_PERFECT,Perfect  %d,Perfect  %d
+UI_GREAT,Great    %d,Great    %d
+UI_GOOD,Good     %d,Good     %d
+UI_MISS,Miss     %d,Miss     %d
+UI_PLAY_AGAIN,Enter to play again,กด Enter เพื่อเล่นอีกครั้ง
+UI_SLOT_LINE,%s · last played %s,%s · เล่นล่าสุด %s
+UI_MON_1,Jan,ม.ค.
+UI_MON_2,Feb,ก.พ.
+UI_MON_3,Mar,มี.ค.
+UI_MON_4,Apr,เม.ย.
+UI_MON_5,May,พ.ค.
+UI_MON_6,Jun,มิ.ย.
+UI_MON_7,Jul,ก.ค.
+UI_MON_8,Aug,ส.ค.
+UI_MON_9,Sep,ก.ย.
+UI_MON_10,Oct,ต.ค.
+UI_MON_11,Nov,พ.ย.
+UI_MON_12,Dec,ธ.ค.
+UI_LANGUAGE,Language,ภาษา

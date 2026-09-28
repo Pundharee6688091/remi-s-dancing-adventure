@@ -24,26 +24,26 @@ func _ready() -> void:
 
 
 func show_result(r: Dictionary) -> void:
-	_title.text = "STAGE CLEAR" if r.won else "STAGE FAILED"
+	_title.text = tr("UI_STAGE_CLEAR_TITLE") if r.won else tr("UI_STAGE_FAILED_TITLE")
 
 	var c: Dictionary = r.counts
 	var stars: String = "★".repeat(r.stars) + "☆".repeat(3 - r.stars)
 
-	var best := "Best  %d%%" % r.previous_best
+	var best := tr("UI_BEST_PCT") % r.previous_best
 	if r.won and r.hp < r.previous_best:
-		best = "NEW BEST!  (was %d%%)" % r.previous_best
+		best = tr("UI_NEW_BEST") % r.previous_best
 
 	_lines.text = "\n".join([
-		"Monster HP left   %d%%" % r.hp,
+		tr("UI_MONSTER_HP_LEFT") % r.hp,
 		stars,
 		best,
-		"Max combo  %d" % r.max_combo,
+		tr("UI_MAX_COMBO") % r.max_combo,
 		"",
-		"Perfect  %d" % c.perfect,
-		"Great    %d" % c.great,
-		"Good     %d" % c.good,
-		"Miss     %d" % c.miss,
+		tr("UI_PERFECT") % c.perfect,
+		tr("UI_GREAT") % c.great,
+		tr("UI_GOOD") % c.good,
+		tr("UI_MISS") % c.miss,
 		"",
-		"Enter to play again",
+		tr("UI_PLAY_AGAIN"),
 	])
 	show()

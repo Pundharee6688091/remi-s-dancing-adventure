@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://bqnv2hk2npbd"]
 
 [ext_resource type="Script" uid="uid://cnehdttykkqci" path="res://scenes/ui/title.gd" id="1_t6us6"]
+[ext_resource type="StyleBox" uid="uid://detwlqlh7ct7f" path="res://themes/panel_fill.tres" id="2_4v1qu"]
+[ext_resource type="Script" uid="uid://fo864rkagmm8" path="res://scenes/ui/parts/dashed_box.gd" id="3_s1drf"]
+[ext_resource type="StyleBox" uid="uid://1m06h7jbr8vj" path="res://themes/pill.tres" id="4_s1drf"]
+[ext_resource type="StyleBox" uid="uid://bm2sfxu4asgah" path="res://themes/pill_hover.tres" id="5_ve8eu"]
 
 [node name="Title" type="Control" unique_id=622938894]
 layout_mode = 3
@@ -10,3 +14,100 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_t6us6")
+
+[node name="Body" type="MarginContainer" parent="." unique_id=936764860]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 56
+
+[node name="Row" type="HBoxContainer" parent="Body" unique_id=1726271890]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Left" type="VBoxContainer" parent="Body/Row" unique_id=354466275]
+custom_minimum_size = Vector2(560, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 28
+
+[node name="Logo" type="PanelContainer" parent="Body/Row/Left" unique_id=1426270150]
+custom_minimum_size = Vector2(520, 220)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("2_4v1qu")
+
+[node name="LogoLabel" type="Label" parent="Body/Row/Left/Logo" unique_id=1904924728]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.169, 0.169, 0.169, 1)
+theme_override_font_sizes/font_size = 26
+text = "UI_GAME_TITLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Press" type="MarginContainer" parent="Body/Row/Left" unique_id=76005211]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 6
+script = ExtResource("3_s1drf")
+
+[node name="PressLabel" type="Label" parent="Body/Row/Left/Press" unique_id=1779371393]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "UI_PRESS_ANY_BUTTON"
+
+[node name="KeyArt" type="PanelContainer" parent="Body/Row" unique_id=850388512]
+custom_minimum_size = Vector2(560, 560)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("2_4v1qu")
+
+[node name="Art" type="TextureRect" parent="Body/Row/KeyArt" unique_id=475481253]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(520, 520)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Version" type="Label" parent="." unique_id=380987068]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -93.0
+offset_right = 224.0
+offset_bottom = -71.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+text = "v0.1"
+
+[node name="Pill" type="Button" parent="." unique_id=821584625]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -99.0
+offset_right = -24.0
+offset_bottom = -65.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_s1drf")
+theme_override_styles/pressed = ExtResource("5_ve8eu")
+theme_override_styles/hover = ExtResource("4_s1drf")

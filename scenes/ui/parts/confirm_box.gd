@@ -36,10 +36,10 @@ func _ready() -> void:
 	hide()
 
 
-func ask(question: String, yes_text := "Yes", no_text := "Cancel") -> void:
+func ask(question: String, yes_text := "", no_text := "") -> void:
 	_label.text = question
-	_yes.text = yes_text
-	_no.text = no_text
+	_yes.text = yes_text if yes_text != "" else tr("UI_YES")
+	_no.text = no_text if no_text != "" else tr("UI_CANCEL")
 	show()
 	_no.grab_focus()
 

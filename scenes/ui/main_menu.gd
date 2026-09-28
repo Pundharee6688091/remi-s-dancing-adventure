@@ -18,14 +18,14 @@ func _ready() -> void:
 	box.add_theme_constant_override("separation", 10)
 	add_child(box)
 
-	_story = _item(box, "Story", func() -> void: SceneRouter.goto(GameManager.WORLD_MAP))
-	_item(box, "Collection", Callable()).disabled = true
-	_item(box, "Achievements", Callable()).disabled = true
-	_item(box, "Settings", Callable()).disabled = true
-	_item(box, "Quit", func() -> void: _confirm.ask("Quit the game?", "Quit", "Cancel"))
+	_story = _item(box, tr("UI_STORY"), func() -> void: SceneRouter.goto(GameManager.WORLD_MAP))
+	_item(box, tr("UI_COLLECTION"), Callable()).disabled = true
+	_item(box, tr("UI_ACHIEVEMENTS"), Callable()).disabled = true
+	_item(box, tr("UI_SETTINGS"), Callable()).disabled = true
+	_item(box, tr("UI_QUIT"), func() -> void: _confirm.ask(tr("UI_QUIT_CONFIRM"), tr("UI_QUIT"), tr("UI_CANCEL")))
 
 	var hint := Label.new()
-	hint.text = "▲ ▼ Move     Enter Select     Esc Change profile"
+	hint.text = tr("UI_MENU_HINT")
 	hint.position = Vector2(80, 660)
 	add_child(hint)
 

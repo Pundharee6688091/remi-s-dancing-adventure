@@ -13,7 +13,7 @@ func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
 	var title := Label.new()
-	title.text = "Select profile"
+	title.text = tr("UI_SELECT_PROFILE")
 	title.position = Vector2(60, 50)
 	add_child(title)
 
@@ -31,7 +31,7 @@ func _ready() -> void:
 		_cards.append(b)
 
 	var hint := Label.new()
-	hint.text = "◀ ▶ Choose slot     Enter Select     Del Delete     Esc Back"
+	hint.text = tr("UI_SLOTS_HINT")
 	hint.position = Vector2(60, 660)
 	add_child(hint)
 
@@ -49,7 +49,7 @@ func _refresh() -> void:
 	for i in SLOTS:
 		var s := SaveManager.summary(i + 1)
 		if s.is_empty():
-			_cards[i].text = "New game\nempty slot"
+			_cards[i].text = tr("UI_EMPTY_SLOT")
 		else:
 			_cards[i].text = "%s\n%s" % [s.name, s.line]
 
@@ -82,8 +82,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		var slot := _focused_slot()
 		if slot > 0 and SaveManager.exists(slot):
 			_pending_slot = slot
-			_confirm.ask('Delete profile "%s"? This cannot be undone.'
-				% SaveManager.summary(slot).name, "Delete", "Cancel")
+			_confirm.ask(tr("UI_DELETE_CONFIRM")
+				% SaveManager.summary(slot).name, tr("UI_DELETE"), tr("UI_CANCEL"))
 
 
 func _focused_slot() -> int:
@@ -107,17 +107,17 @@ func _build_name_panel() -> void:
 	var box := UIKit.card(_name_panel, Vector2(440, 240), 400)
 
 	var l := Label.new()
-	l.text = "New game — what should we call you?"
+	l.text = tr("UI_NAME_PROMPT")
 	box.add_child(l)
 
 	_name_edit = LineEdit.new()
 	_name_edit.max_length = 16
-	_name_edit.placeholder_text = "Your name"
+	_name_edit.placeholder_text = tr("UI_YOUR_NAME")
 	_name_edit.text_submitted.connect(func(_t: String) -> void: _start_new())
 	box.add_child(_name_edit)
 
 	var hint := Label.new()
-	hint.text = "Enter Start     Esc Cancel"
+	hint.text = tr("UI_NAME_HINT")
 	box.add_child(hint)
 
 	UIKit.trap_focus([_name_edit])

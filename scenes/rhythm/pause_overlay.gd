@@ -15,13 +15,13 @@ func _ready() -> void:
 
 	var title := Label.new()
 	title.add_theme_font_size_override("font_size", 32)
-	title.text = "PAUSED"
+	title.text = tr("UI_PAUSED")
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	box.add_child(title)
 
-	_first = _button(box, "Resume", func() -> void: resume_pressed.emit())
-	var restart := _button(box, "Restart stage", func() -> void: restart_pressed.emit())
-	var quit := _button(box, "Quit stage", func() -> void: quit_pressed.emit())
+	_first = _button(box, tr("UI_RESUME"), func() -> void: resume_pressed.emit())
+	var restart := _button(box, tr("UI_RESTART_STAGE"), func() -> void: restart_pressed.emit())
+	var quit := _button(box, tr("UI_QUIT_STAGE"), func() -> void: quit_pressed.emit())
 
 	UIKit.trap_focus([_first, restart, quit])
 	hide()

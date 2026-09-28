@@ -146,24 +146,24 @@ func _draw_info_card(font: Font) -> void:
 		HORIZONTAL_ALIGNMENT_CENTER, ph.size.x, 15, Palette.MUTED)
 
 	var fight: bool = n.get("type") == "fight"
-	var title: String = n.get("label", "Story")
+	var title: String = n.get("label", tr("UI_STORY"))
 	var x := card.position.x + 144
 	draw_string(font, Vector2(x, card.position.y + 46), title,
 		HORIZONTAL_ALIGNMENT_LEFT, -1, 26, Palette.INK)
 	var tw := font.get_string_size(title, HORIZONTAL_ALIGNMENT_LEFT, -1, 26).x
 	draw_string(font, Vector2(x + tw + 10, card.position.y + 46),
-		"· fight" if fight else "· story scene",
+		tr("UI_DOT_FIGHT") if fight else tr("UI_DOT_STORY"),
 		HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Palette.MUTED)
 
 	var line := ""
 	if not GameManager.is_unlocked(id):
-		line = "locked"
+		line = tr("UI_LOCKED")
 	elif fight:
 		var stars := GameManager.stars_for(id)
 		line = "%s · %s" % [n.get("song", "?"),
-			"cleared" if stars > 0 else "not cleared"]
+			tr("UI_CLEARED") if stars > 0 else tr("UI_NOT_CLEARED")]
 	else:
-		line = "seen" if GameManager.is_cleared(id) else "not seen yet"
+		line = tr("UI_SEEN") if GameManager.is_cleared(id) else tr("UI_NOT_SEEN")
 	draw_string(font, Vector2(x, card.position.y + 78), line,
 		HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Palette.MUTED)
 
@@ -179,7 +179,7 @@ func _draw_legend(font: Font) -> void:
 		if GameManager.is_cleared(id):
 			cleared += 1
 
-	draw_string(font, Vector2(900, 588), "Stage Clear: %d/%d" % [cleared, fights],
+	draw_string(font, Vector2(900, 588), tr("UI_STAGE_CLEAR_COUNT") % [cleared, fights],
 		HORIZONTAL_ALIGNMENT_RIGHT, 330, 18, Palette.MUTED)
 
 	var box := Rect2(900, 600, 330, 44)
@@ -188,8 +188,8 @@ func _draw_legend(font: Font) -> void:
 
 	var y := box.position.y + box.size.y / 2.0
 	var x := box.position.x + 22.0
-	for item in [["story scene", Palette.WHITE, 7.0], ["fight", Palette.WHITE, 11.0],
-			["done", GREEN, 9.0]]:
+	for item in [[tr("UI_LEGEND_STORY"), Palette.WHITE, 7.0], [tr("UI_LEGEND_FIGHT"), Palette.WHITE, 11.0],
+			[tr("UI_LEGEND_DONE"), GREEN, 9.0]]:
 		var radius: float = item[2]
 		draw_circle(Vector2(x, y), radius, item[1])
 		draw_arc(Vector2(x, y), radius, 0.0, TAU, 24, Palette.INK, 2.0)

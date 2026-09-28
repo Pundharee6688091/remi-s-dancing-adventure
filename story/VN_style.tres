@@ -33,9 +33,9 @@ scene = ExtResource("6_er38a")
 overrides = {
 "box_color_custom": "Color(1, 1, 1, 1)",
 "box_color_use_global": "false",
-"box_margin_bottom": "56.0",
+"box_margin_bottom": "47.0",
 "box_panel": "\"res://story/bubble_panel.tres\"",
-"box_size": "Vector2(880, 200)",
+"box_size": "Vector2(1090, 290)",
 "name_label_box_modulate": "Color(1, 1, 1, 1)",
 "name_label_box_offset": "Vector2(34, 22)",
 "name_label_box_panel": "\"res://story/name_panel.tres\"",

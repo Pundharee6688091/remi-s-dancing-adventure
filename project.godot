@@ -38,6 +38,7 @@ directories/dch_directory={
 }
 directories/dtl_directory={
 "ch1_meet_elion": "res://story/ch1_meet_elion.dtl",
+"ch2_meet_theo": "res://story/ch2_meet_theo.dtl",
 "tutorial": "res://story/tutorial.dtl"
 }
 layout/style_directory={
@@ -110,6 +111,10 @@ dialogic_default_action={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://lang/ui.en.translation", "res://lang/ui.th.translation")
 
 [physics]
 

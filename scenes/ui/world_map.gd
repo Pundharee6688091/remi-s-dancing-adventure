@@ -19,7 +19,7 @@ func _ready() -> void:
 
 	var hints := HintBar.new()
 	add_child(hints)
-	hints.set_hints([["< >", "Walk"], ["Enter", "Open"], ["Esc", "Main menu"]])
+	hints.set_hints([["< >", tr("UI_WALK")], ["Enter", tr("UI_OPEN")], ["Esc", tr("UI_MAIN_MENU")]])
 
 	_detail = StageDetail.new()
 	_detail.fight_pressed.connect(GameManager.enter_node)
@@ -44,8 +44,8 @@ func _build_top_bar() -> void:
 	rule.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(rule)
 
-	_text("World map", Vector2(40, 20), 32)
-	_text("Progress", Vector2(240, 36), 18, Palette.MUTED)
+	_text(tr("UI_WORLD_MAP"), Vector2(40, 20), 32)
+	_text(tr("UI_PROGRESS"), Vector2(240, 36), 18, Palette.MUTED)
 
 	_progress = Bar.new()
 	_progress.position = Vector2(340, 36)
@@ -119,9 +119,9 @@ func _refresh() -> void:
 			done += 1
 
 	_progress.value = float(done) / maxf(total, 1)
-	_steps.text = "%d / %d steps" % [done, total]
+	_steps.text = tr("UI_STEPS") % [done, total]
 
 	var party: Array = GameManager.save.get("party", [])
-	_party.text = "Party %d / 4" % (party.size() + 1)
+	_party.text = tr("UI_PARTY") % (party.size() + 1)
 
 	_view.queue_redraw()

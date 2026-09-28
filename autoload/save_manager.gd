@@ -2,8 +2,6 @@ extends Node
 
 const SLOTS := 3
 const VERSION := 1
-const MONTHS := ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-	"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 const DEFAULTS := {"stars": {}, "best_hp": {}, "seen": [], "party": []}
 
 
@@ -62,7 +60,7 @@ func summary(slot: int) -> Dictionary:
 		return {}
 	return {
 		"name": s.get("name", "?"),
-		"line": "%s · last played %s" % [
+		"line": tr("UI_SLOT_LINE") % [
 			_progress_label(s), _pretty_date(s.get("last_played", ""))],
 	}
 
@@ -81,14 +79,14 @@ func _progress_label(save: Dictionary) -> String:
 		last = n.get("label", id)
 		if not stars.has(id):
 			break
-	return "Stage " + last
+	return tr("UI_STAGE") % last
 
 
 func _pretty_date(iso: String) -> String:
 	var parts := iso.split("-")
 	if parts.size() != 3:
 		return iso
-	return "%d %s" % [int(parts[2]), MONTHS[int(parts[1]) - 1]]
+	return "%d %s" % [int(parts[2]), tr("UI_MON_%d" % int(parts[1]))]
 
 
 ## Adds any field a save file is missing, so an old profile gains best_hp

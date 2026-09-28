@@ -6,6 +6,7 @@ func _ready() -> void:
 	_add("lane_2", KEY_D, JOY_BUTTON_DPAD_RIGHT, KEY_RIGHT)
 	_add("lane_3", KEY_S, JOY_BUTTON_DPAD_DOWN, KEY_DOWN)
 	_add("delete", KEY_DELETE, JOY_BUTTON_X, KEY_BACKSPACE)
+	_add("toggle_language", KEY_F2, JOY_BUTTON_Y)
 
 
 static func lane_action(lane: int) -> String:

@@ -9,6 +9,7 @@ var _current_params := {}
 
 
 func _ready() -> void:
+	Events.language_changed.connect(reload)
 	call_deferred("clear_to", TITLE)
 
 
@@ -58,3 +59,8 @@ func _swap(path: String, params: Dictionary) -> void:
 	_current_params = params
 	_current = inst
 	add_child(inst)
+
+
+func reload() -> void:
+	if _current_path != "":
+		_swap(_current_path, _current_params)

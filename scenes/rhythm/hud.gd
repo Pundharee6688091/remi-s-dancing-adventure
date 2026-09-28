@@ -15,16 +15,16 @@ func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	# song progress, top left
-	_label("SONG", Vector2(40, 22), 18, Palette.MUTED)
+	_label(tr("UI_SONG_LABEL"), Vector2(40, 22), 18, Palette.MUTED)
 	song_bar = _bar(Vector2(40, 48), Vector2(360, 10), Palette.INK)
 
 	# combo, left of the lanes
 	combo_value = _label("", Vector2(40, 330), 46, Palette.INK)
-	combo_word = _label("COMBO", Vector2(44, 392), 16, Palette.MUTED)
+	combo_word = _label(tr("UI_COMBO"), Vector2(44, 392), 16, Palette.MUTED)
 	combo_word.visible = false
 
 	# monster health, just above the lanes on the right
-	_label("MONSTER HP", Vector2(700, 356), 18, Palette.MUTED)
+	_label(tr("UI_MONSTER_HP"), Vector2(700, 356), 18, Palette.MUTED)
 	monster_pct = _label("100%", Vector2(1080, 350), 26, Palette.INK)
 	monster_pct.size = Vector2(160, 32)
 	monster_pct.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT

@@ -27,12 +27,12 @@ func _ready() -> void:
 	box.add_child(row)
 
 	_fight = Button.new()
-	_fight.text = "Fight!"
+	_fight.text = tr("UI_FIGHT")
 	_fight.pressed.connect(_on_fight)
 	row.add_child(_fight)
 
 	_back = Button.new()
-	_back.text = "Back"
+	_back.text = tr("UI_BACK")
 	_back.pressed.connect(hide)
 	row.add_child(_back)
 
@@ -46,24 +46,24 @@ func open(stage_id: String) -> void:
 	var available := ResourceLoader.exists(Rules.song_path(song_id)) \
 		and FileAccess.file_exists(Rules.chart_path(song_id))
 
-	_title.text = "Stage %s" % n.get("label", "")
+	_title.text = tr("UI_STAGE") % n.get("label", "")
 
 	var lines: Array[String] = []
 	if available:
 		var chart := ChartParser.parse(Rules.chart_path(song_id))
-		lines.append("Song      %s" % chart.title)
-		lines.append("BPM       %d" % int(chart.bpm))
-		lines.append("Level     %s" % "●".repeat(int(chart.level)))
+		lines.append(tr("UI_SONG") % chart.title)
+		lines.append(tr("UI_BPM") % int(chart.bpm))
+		lines.append(tr("UI_LEVEL") % "●".repeat(int(chart.level)))
 	else:
-		lines.append("This song is not in the game yet.")
+		lines.append(tr("UI_SONG_MISSING"))
 
 	var opp: String = n.get("opponent", "")
-	lines.append("Opponent  %s" % (opp if opp != "" else "—"))
+	lines.append(tr("UI_OPPONENT") % (opp if opp != "" else "—"))
 
 	var best := GameManager.stars_for(stage_id)
-	lines.append("Best      %s" % ("★".repeat(best) if best > 0 else "not cleared"))
+	lines.append(tr("UI_BEST") % ("★".repeat(best) if best > 0 else tr("UI_NOT_CLEARED")))
 	if opp != "":
-		lines.append("Reward    %s joins your party" % opp)
+		lines.append(tr("UI_REWARD") % opp)
 
 	_info.text = "\n".join(PackedStringArray(lines))
 
