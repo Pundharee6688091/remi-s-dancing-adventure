@@ -29,9 +29,14 @@ func show_result(r: Dictionary) -> void:
 	var c: Dictionary = r.counts
 	var stars: String = "★".repeat(r.stars) + "☆".repeat(3 - r.stars)
 
+	var best := "Best  %d%%" % r.previous_best
+	if r.won and r.hp < r.previous_best:
+		best = "NEW BEST!  (was %d%%)" % r.previous_best
+
 	_lines.text = "\n".join([
 		"Monster HP left   %d%%" % r.hp,
 		stars,
+		best,
 		"Max combo  %d" % r.max_combo,
 		"",
 		"Perfect  %d" % c.perfect,

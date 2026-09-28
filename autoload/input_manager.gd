@@ -1,10 +1,10 @@
 extends Node
 
 func _ready() -> void:
-	_add("lane_0", KEY_W, JOY_BUTTON_DPAD_UP)
-	_add("lane_1", KEY_A, JOY_BUTTON_DPAD_LEFT)
-	_add("lane_2", KEY_D, JOY_BUTTON_DPAD_RIGHT)
-	_add("lane_3", KEY_S, JOY_BUTTON_DPAD_DOWN)
+	_add("lane_0", KEY_W, JOY_BUTTON_DPAD_UP, KEY_UP)
+	_add("lane_1", KEY_A, JOY_BUTTON_DPAD_LEFT, KEY_LEFT)
+	_add("lane_2", KEY_D, JOY_BUTTON_DPAD_RIGHT, KEY_RIGHT)
+	_add("lane_3", KEY_S, JOY_BUTTON_DPAD_DOWN, KEY_DOWN)
 	_add("delete", KEY_DELETE, JOY_BUTTON_X, KEY_BACKSPACE)
 
 

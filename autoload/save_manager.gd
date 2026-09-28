@@ -4,6 +4,7 @@ const SLOTS := 3
 const VERSION := 1
 const MONTHS := ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 	"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+const DEFAULTS := {"stars": {}, "best_hp": {}, "seen": [], "party": []}
 
 
 func exists(slot: int) -> bool:
@@ -18,6 +19,7 @@ func create(slot: int, player_name: String) -> Dictionary:
 		"created": today,
 		"last_played": today,
 		"stars": {},
+		"best_hp": {},
 		"seen": [],
 		"party": [],
 	}
@@ -32,8 +34,9 @@ func load_slot(slot: int) -> Dictionary:
 	if f == null:
 		return {}
 	var parsed = JSON.parse_string(f.get_as_text())
-	return parsed if typeof(parsed) == TYPE_DICTIONARY else {}
-
+	if typeof(parsed) != TYPE_DICTIONARY:
+		return {}
+	return _fill_defaults(parsed)
 
 func write(slot: int, save: Dictionary) -> void:
 	save.version = VERSION
@@ -86,3 +89,12 @@ func _pretty_date(iso: String) -> String:
 	if parts.size() != 3:
 		return iso
 	return "%d %s" % [int(parts[2]), MONTHS[int(parts[1]) - 1]]
+
+
+## Adds any field a save file is missing, so an old profile gains best_hp
+## without being rewritten, and a new profile read by older code still works.
+func _fill_defaults(save: Dictionary) -> Dictionary:
+	for key in DEFAULTS:
+		if not save.has(key):
+			save[key] = DEFAULTS[key].duplicate()
+	return save

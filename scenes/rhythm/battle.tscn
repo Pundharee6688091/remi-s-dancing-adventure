@@ -3,10 +3,12 @@
 [ext_resource type="Script" uid="uid://truvl2fcivco" path="res://scenes/rhythm/battle.gd" id="1_efdsi"]
 [ext_resource type="Script" uid="uid://dpw8vkin7y4i2" path="res://scenes/rhythm/conductor.gd" id="2_o0565"]
 [ext_resource type="Script" uid="uid://cox60iaoehfsf" path="res://scenes/rhythm/track_panel.gd" id="3_103gh"]
+[ext_resource type="Texture2D" uid="uid://ciqs25kppadct" path="res://sprite/Remi/Remi.png" id="3_nbtlf"]
 [ext_resource type="Script" uid="uid://c7pnl0i2n3nsa" path="res://scenes/rhythm/note_field.gd" id="4_sasum"]
 [ext_resource type="Script" uid="uid://b6lhg4qujjm1o" path="res://scenes/rhythm/hud.gd" id="5_yecsb"]
 [ext_resource type="Script" uid="uid://d3u3ywbqu2yr3" path="res://scenes/rhythm/result_overlay.gd" id="6_st8th"]
 [ext_resource type="Script" uid="uid://d2cdpmrc5pwjf" path="res://scenes/rhythm/pause_overlay.gd" id="7_st8th"]
+[ext_resource type="Texture2D" uid="uid://bv76h1qsueb8w" path="res://songs/song_theo/Enemy.png" id="9_tb7li"]
 
 [node name="Battle" type="Control" unique_id=1101702470]
 layout_mode = 3
@@ -26,6 +28,17 @@ script = ExtResource("2_o0565")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="Remi" type="Sprite2D" parent="." unique_id=1704623360]
+position = Vector2(166, 384.00003)
+scale = Vector2(0.19299996, 0.21670982)
+texture = ExtResource("3_nbtlf")
+flip_h = true
+
+[node name="Enemy" type="Sprite2D" parent="." unique_id=2093938493]
+position = Vector2(1057, 221)
+scale = Vector2(0.193125, 0.21685019)
+texture = ExtResource("9_tb7li")
 
 [node name="TrackPanel" type="Control" parent="." unique_id=2091360685]
 anchors_preset = 0

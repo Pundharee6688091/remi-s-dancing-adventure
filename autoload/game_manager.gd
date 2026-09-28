@@ -37,6 +37,9 @@ func is_unlocked(id: String) -> bool:
 			return false
 	return true
 	
+func best_hp_for(id: String) -> int:
+	return int(save.get("best_hp", {}).get(id, 100))
+
 func stars_for(id: String) -> int:
 	return int(save.get("stars", {}).get(id, 0))
 	
@@ -67,9 +70,10 @@ func evaluate_win(stage_id: String, hp: float) -> bool:
 			return false
 
 
-func _on_stage_cleared(stage_id: String, stars: int) -> void:
-	var best := int(save.stars.get(stage_id, 0))
-	save.stars[stage_id] = maxi(best, stars)
+func _on_stage_cleared(stage_id: String, hp: int) -> void:
+	var best := mini(int(save.best_hp.get(stage_id, 100)), hp)
+	save.best_hp[stage_id] = best
+	save.stars[stage_id] = Rules.stars_for_hp(best)
 
 	var opponent: String = Rules.stage(stage_id).get("opponent", "")
 	if opponent != "" and not save.party.has(opponent):

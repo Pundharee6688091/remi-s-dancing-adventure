@@ -23,6 +23,9 @@ func song_path(song_id: String) -> String:
 func chart_path(song_id: String) -> String:
 	return "res://songs/%s/chart.txt" % song_id
 
+func enemy_path(song_id: String) -> String:
+	return "res://songs/%s/Enemy.png" % song_id
+
 func window(judgement: String) -> float:
 	return float(data.windows_ms[judgement])
 
@@ -48,6 +51,7 @@ func stars_for_hp(hp: float) -> int:
 	if h <= int(t["2"]): return 2
 	if h <= int(t["1"]): return 1
 	return 0
+
 
 func _load(path: String) -> Dictionary:
 	var f := FileAccess.open(path, FileAccess.READ)
