@@ -1,0 +1,30 @@
+class_name VnView
+extends Control
+
+var timeline := ""
+
+
+func setup(params: Dictionary) -> void:
+	timeline = String(params.get("timeline", ""))
+
+
+func _ready() -> void:
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	if timeline == "":
+		push_warning("Story node has no timeline")
+		Events.story_finished.emit()
+		return
+	Dialogic.timeline_ended.connect(_on_timeline_ended)
+	Dialogic.start(timeline)
+
+
+func _on_timeline_ended() -> void:
+	Dialogic.timeline_ended.disconnect(_on_timeline_ended)
+	Events.story_finished.emit()
+
+
+func _exit_tree() -> void:
+	if Dialogic.timeline_ended.is_connected(_on_timeline_ended):
+		Dialogic.timeline_ended.disconnect(_on_timeline_ended)
+	if Dialogic.current_timeline != null:
+		Dialogic.end_timeline()

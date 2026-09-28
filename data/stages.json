@@ -6,7 +6,7 @@
 	  "win": { "type": "hp_below", "value": 30 } },
 
 	{ "id": "v1_1", "type": "story", "label": "Story 1",
-	  "timeline": "ch1_intro", "requires": [], "pos": [200, 340] },
+	  "timeline": "ch1_meet_elion", "requires": [], "pos": [200, 340] },
 
 	{ "id": "s1_1", "type": "fight", "label": "1-1",
 	  "requires": ["v1_1"], "pos": [365, 415],

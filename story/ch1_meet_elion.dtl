@@ -1,0 +1,64 @@
+# Reset the reveal so the scene plays correctly on a replay or a reloaded save.
+set {elion_name} = "???"
+
+narrator: One fateful day, Remi heard that a nearby festival was holding a dancing contest.
+narrator: The grand prize was 100 gold... and a chance to perform in the capital city.
+narrator: It was the perfect opportunity for Remi to finally show everyone what he could do.
+narrator: But there was one problem... the contest only allowed group performances with at least four members.
+narrator: If Remi wanted to enter, he would need to find some teammates and convince them to join his group.
+narrator: And so, his search for the perfect dance team began.
+
+join remi (Sad) left
+
+remi: Squeak…
+
+narrator: Remi searched high and low, looking for anyone who was alone and wouldn't be afraid of him just because he was a rat.
+narrator: But no matter where he looked, no one seemed to notice the small rat wandering around.
+narrator: After searching for so long, Remi began to feel tired and discouraged.
+narrator: Just as he was about to give up, he noticed someone approaching him...
+
+join elion (Confused) right
+
+elion: Eh?
+
+narrator: The one who found Remi was a tall young elf with long, straight blonde hair. He carried himself like a trained warrior, calm, confident, and composed, yet there was an unmistakable kindness in his eyes.
+narrator: Unlike everyone else, he did not hesitate or look down on Remi. Instead, he approached with a gentle smile and greeted him in a deep, calm voice.
+
+elion: Sir, may I ask why you are lying here on the ground? Are you injured?
+remi: Squeak... Squeak squeak.
+elion (Sad): Oh, my lord... So that is what happened.
+elion: I am sorry you had to go through that, you must have felt terribly alone.
+remi (Confused): Squeak... Squeak?
+elion (surprised): Ah! Forgive me. I have been speaking to you without even introducing myself.
+
+# He introduces himself here, so the name box stops saying ??? from this point on.
+set {elion_name} = "Elion"
+
+elion (Default): <Empty Text Event>
+elion (confused): It is an honor to meet you, Sir...?
+remi (happy): Squeak!
+elion (smile): Remi, is it? A pleasure to meet you, Sir Remi!
+elion (default): Now then, Sir Remi. What brought you all the way out here?
+remi (please): Squeak... Squeak squeak squeak.
+elion (confused): A dancing contest? And you require companions to form a team?
+elion (thinking): I see…
+elion (smile): Then I shall accompany you!
+remi (surprised): Squeak?!
+elion (default): Of course. You are searching for help, and I am standing right here. It would be rather strange of me to refuse, would it not?
+elion (determined): Besides, as a paladin, lending a hand to those in need is simply the right thing to do!
+remi (happy): Squeak! Squeak squeak!
+elion (confused): Ah, yes! You mentioned that you were a dancer.
+elion (determined): I must confess, I have never seen a rat dance before.
+elion (thinking): ...Though I suppose I have never asked one to.
+
+narrator: For someone who looked so dignified, Elion seemed completely serious.
+
+elion (determined): Now you have made me curious, Sir Remi.
+elion (smile): Before we set off, would you honor me with a performance?
+remi (happy): Squeak!
+
+narrator: Remi quickly jumped back onto his feet. After searching all day, he had finally found someone willing to believe in him.
+
+elion (default): The stage is yours, Sir Remi!
+
+narrator: And so, with his very first companion watching, Remi's first performance began…

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dhg3qdhb64xb6"]
+
+[ext_resource type="Script" uid="uid://blg2jndl314li" path="res://scenes/ui/vn_view.gd" id="1_2sygn"]
+
+[node name="VnView" type="Control" unique_id=1255231983]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_2sygn")

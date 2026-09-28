@@ -3,6 +3,7 @@ extends Node
 const BATTLE := "res://scenes/rhythm/battle.tscn"
 const MAIN_MENU := "res://scenes/ui/main_menu.tscn"
 const WORLD_MAP := "res://scenes/ui/world_map.tscn"
+const VN_VIEW := "res://scenes/ui/vn_view.tscn"
 
 var slot := 0
 var save: Dictionary = {}
@@ -12,6 +13,7 @@ var current_stage_id := ""
 func _ready() -> void:
 	Events.stage_cleared.connect(_on_stage_cleared)
 	Events.stage_failed.connect(_on_stage_failed)
+	Events.story_finished.connect(_on_story_finished)
 
 
 func start_new_game(new_slot: int, player_name: String) -> void:
@@ -88,9 +90,13 @@ func _on_stage_failed(_stage_id: String) -> void:
 
 # ------------ Visual Novel -------------
 func _play_story(id: String) -> void:
-	print("Story ", id, " -> timeline ", Rules.stage(id).get("timeline", ""))
-	if not save.seen.has(id):
-		save.seen.append(id)
-		SaveManager.write(slot, save)
 	current_stage_id = id
+	SceneRouter.goto(VN_VIEW, {"timeline": Rules.stage(id).get("timeline", "")})
+
+
+func _on_story_finished() -> void:
+	if not save.seen.has(current_stage_id):
+		save.seen.append(current_stage_id)
+		SaveManager.write(slot, save)
+	SceneRouter.back()
 	Events.progress_changed.emit()

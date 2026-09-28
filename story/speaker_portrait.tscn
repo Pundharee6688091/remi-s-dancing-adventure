@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dfxvw543eojxy"]
+
+[ext_resource type="Script" uid="uid://dmq5b207lray4" path="res://story/speaker_portrait.gd" id="1_5h5qm"]
+
+[node name="SpeakerPortrait" type="Node2D" unique_id=33740913]
+script = ExtResource("1_5h5qm")
+
+[node name="Portrait" type="Sprite2D" parent="." unique_id=1899586736]
+centered = false
