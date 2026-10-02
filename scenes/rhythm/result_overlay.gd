@@ -21,22 +21,33 @@ func _set_hints() -> void:
 
 
 func show_result(r: Dictionary) -> void:
-	%Title.text = tr("UI_STAGE_CLEAR_TITLE") if r.won else tr("UI_STAGE_FAILED_TITLE")
+	var won: bool = r.won
+	var opponent: String = r.get("opponent", "")
+	var win_at: int = r.get("win_at", 30)
+
+	%Title.text = tr("UI_STAGE_CLEAR_TITLE") if won else tr("UI_STAGE_FAILED_TITLE")
+	%Title.add_theme_color_override("font_color", Palette.INK if won else Palette.RED)
 	%Sub.text = tr("UI_RESULT_SUB") % [tr("UI_STAGE") % r.get("stage", ""), r.get("song", "")]
 
-	var opponent: String = r.get("opponent", "")
 	var art := UIKit.cropped_texture(Rules.enemy_path(r.get("song_id", "")))
 	%Portrait.texture = art
 	# The tutorial has no opponent, so an empty placeholder box would read
 	# as a missing asset rather than as "there is nobody here".
 	%Art.visible = art != null
-	%Flavour.text = tr("UI_TOO_TIRED") % opponent if r.won and opponent != "" else ""
-	%Join.visible = r.won and opponent != ""
-	%JoinText.text = tr("UI_JOINED") % opponent
-	%Reward.visible = r.won and opponent != ""
-	%RewardText.text = tr("UI_JOINED") % opponent
 
-	var win_at: int = r.get("win_at", 30)
+	if opponent == "":
+		%Flavour.text = ""
+	elif won:
+		%Flavour.text = tr("UI_TOO_TIRED") % opponent
+	else:
+		%Flavour.text = tr("UI_STILL_FIGHT") % opponent
+	%Reason.text = "" if won else tr("UI_FAIL_REASON") % [r.hp, win_at]
+
+	%Join.visible = won and opponent != ""
+	%JoinText.text = tr("UI_JOINED") % opponent
+	%RewardText.text = tr("UI_JOINED") % opponent if won and opponent != "" \
+		else tr("UI_NO_REWARD")
+
 	%HpValue.text = "%d%%" % r.hp
 	%WinLine.text = tr("UI_WIN_LINE") % win_at
 	%HpBar.value = r.hp / 100.0
@@ -54,9 +65,28 @@ func show_result(r: Dictionary) -> void:
 	%NotesValue.text = "%d / %d" % [total - int(c.miss), total]
 	%StarsValue.text = "★".repeat(r.stars) + "☆".repeat(3 - r.stars)
 
+	_set_buttons(won)
 	show()
-	%Continue.grab_focus()
-	UIKit.trap_focus([%Continue, %Retry])
+
+
+## A cleared stage offers Continue first. A failed one offers Retry first and
+## never offers Continue, since there is nothing to continue to.
+func _set_buttons(won: bool) -> void:
+	if won:
+		%Continue.text = tr("UI_CONTINUE")
+		%Continue.custom_minimum_size = Vector2(220, 0)
+		%Retry.text = tr("UI_RETRY")
+		%Retry.custom_minimum_size = Vector2(260, 0)
+		%Buttons.move_child(%Continue, 0)
+		%Continue.grab_focus()
+	else:
+		%Continue.text = tr("UI_BACK_TO_MAP")
+		%Continue.custom_minimum_size = Vector2(220, 0)
+		%Retry.text = tr("UI_RETRY_SHORT")
+		%Retry.custom_minimum_size = Vector2(220, 0)
+		%Buttons.move_child(%Retry, 0)
+		%Retry.grab_focus()
+	UIKit.trap_focus([%Buttons.get_child(0), %Buttons.get_child(1)])
 
 
 func _on_continue_pressed() -> void:

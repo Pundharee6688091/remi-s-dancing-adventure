@@ -79,12 +79,27 @@ func _confirm() -> void:
 func _start_cursor() -> int:
 	var order: Array = Rules.node_order
 	var i := order.find(GameManager.current_stage_id)
-	if i >= 0:
+
+	# Still on something unfinished, so stay there.
+	if i >= 0 and not GameManager.is_cleared(order[i]):
 		return i
-	for j in order.size():
+
+	# Nothing in progress: the first thing still to do.
+	if i < 0:
+		return _next_open(order, -1)
+
+	# Just finished order[i], so step forward to what comes next rather than
+	# scanning from the start and landing back on the tutorial.
+	return _next_open(order, i)
+
+
+## First unlocked, uncleared node after [param from], wrapping around.
+func _next_open(order: Array, from: int) -> int:
+	for step in order.size():
+		var j := (from + 1 + step) % order.size()
 		if GameManager.is_unlocked(order[j]) and not GameManager.is_cleared(order[j]):
 			return j
-	return 0
+	return maxi(from, 0)
 
 
 func _refresh() -> void:

@@ -122,3 +122,8 @@ UI_J_PERFECT,Perfect,Perfect
 UI_J_GREAT,Great,Great
 UI_J_GOOD,Good,Good
 UI_J_MISS,Miss,Miss
+UI_BACK_TO_MAP,Back to map,กลับไปที่แผนที่
+UI_RETRY_SHORT,Retry,ลองใหม่
+UI_STILL_FIGHT,%s can still fight. Try again!,%s ยังสู้ไหว ลองใหม่อีกครั้ง!
+UI_FAIL_REASON,It still had %d%% HP. You needed to get it under %d%%.,ศัตรูยังเหลือพลังชีวิต %d%% คุณต้องทำให้เหลือต่ำกว่า %d%%
+UI_NO_REWARD,none this time. Progress on other stages is not lost.,ยังไม่มีรางวัล ความคืบหน้าด่านอื่นไม่หายไป
