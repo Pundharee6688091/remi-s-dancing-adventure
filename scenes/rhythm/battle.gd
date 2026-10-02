@@ -123,18 +123,17 @@ func _unhandled_input(event: InputEvent) -> void:
 func _lane_input(event: InputEvent, judging: bool) -> void:
 	for lane in 4:
 		var action := InputManager.lane_action(lane)
-		if event.is_action_pressed(action):
-			track.ghosts[lane].set_pressed(true)
-			if event.is_action_pressed(action):
-				track.ghosts[lane].set_pressed(true)
-				_show_pose(lane)
-				_pose_time = POSE_HOLD
-				if judging:
-					judge.press(lane, conductor.song_time_ms())
-			if judging:
-				judge.press(lane, conductor.song_time_ms())
-		elif event.is_action_released(action):
+		if event.is_action_released(action):
 			track.ghosts[lane].set_pressed(false)
+			continue
+		if not event.is_action_pressed(action):
+			continue
+
+		track.ghosts[lane].set_pressed(true)
+		_show_pose(lane)
+		_pose_time = POSE_HOLD
+		if judging:
+			judge.press(lane, conductor.song_time_ms())
 
 
 ## Put this stage's opponent on screen. No art means no opponent.
