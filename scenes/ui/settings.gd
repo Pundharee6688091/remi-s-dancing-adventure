@@ -136,8 +136,22 @@ func _refresh() -> void:
 	_slider("Offset", Settings.offset + Settings.OFFSET_RANGE,
 		Settings.OFFSET_RANGE * 2, tr("UI_MS") % Settings.offset)
 
+	_refresh_preview()
 	_choice("Language", Loc.current() == "en")
 	_choice("Fullscreen", Settings.fullscreen)
+
+
+## The caption says what the picture means, since "25 px past the line" is
+## only useful if you know which way that pushes your timing.
+func _refresh_preview() -> void:
+	%Preview.queue_redraw()
+	var px := roundi(absf(float(Settings.offset) * Rules.note_speed()))
+	if Settings.offset == 0:
+		%PreviewCaption.text = tr("UI_OFFSET_ON") % Settings.offset
+	elif Settings.offset > 0:
+		%PreviewCaption.text = tr("UI_OFFSET_PAST") % [Settings.offset, px]
+	else:
+		%PreviewCaption.text = tr("UI_OFFSET_SHORT") % [Settings.offset, px]
 
 
 func _slider(name: String, value: int, out_of: int, label: String) -> void:

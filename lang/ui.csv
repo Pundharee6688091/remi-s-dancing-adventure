@@ -140,3 +140,6 @@ UI_ADJUST,Adjust,ปรับ
 UI_ADJUST_HINT,adjust,ปรับ
 UI_SET_OFFSET,Audio offset,ชดเชยเสียง
 UI_MS,%+d ms,%+d ms
+UI_OFFSET_ON,%+d ms · the arrow is on the line when the beat plays,%+d ms · ลูกศรอยู่ตรงเส้นพอดีตอนจังหวะดัง
+UI_OFFSET_PAST,"%+d ms · the arrow is %d px past the line when the beat plays, so you press early",%+d ms · ลูกศรเลยเส้นไป %d px ตอนจังหวะดัง คุณจึงต้องกดเร็วขึ้น
+UI_OFFSET_SHORT,"%+d ms · the arrow is %d px short of the line when the beat plays, so you press late",%+d ms · ลูกศรยังไม่ถึงเส้น %d px ตอนจังหวะดัง คุณจึงต้องกดช้าลง

@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scenes/ui/settings.gd" id="1_set"]
 [ext_resource type="Script" path="res://scenes/rhythm/bar.gd" id="2_bar"]
 [ext_resource type="Script" path="res://scenes/ui/parts/hint_bar.gd" id="3_hb"]
+[ext_resource type="Script" path="res://scenes/ui/parts/offset_preview.gd" id="4_prev"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -305,6 +306,26 @@ text = "UI_OPEN_ARROW"
 custom_minimum_size = Vector2(84, 0)
 layout_mode = 2
 size_flags_vertical = 4
+
+[node name="PreviewCaption" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 40.0
+offset_top = 556.0
+offset_right = 1240.0
+offset_bottom = 578.0
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_font_sizes/font_size = 15
+
+[node name="Preview" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 40.0
+offset_top = 582.0
+offset_right = 1240.0
+offset_bottom = 644.0
+mouse_filter = 2
+script = ExtResource("4_prev")
 
 [node name="Hints" type="Control" parent="."]
 unique_name_in_owner = true
