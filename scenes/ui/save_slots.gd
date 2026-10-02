@@ -33,7 +33,9 @@ func _ready() -> void:
 	_confirm.visibility_changed.connect(_sync_hints)
 	_name_panel.visibility_changed.connect(_sync_hints)
 	_name_edit.text_submitted.connect(func(_t: String) -> void: _submit_name())
-	UIKit.trap_focus([_name_edit])
+	_name_edit.text_changed.connect(func(_t: String) -> void: _update_counter())
+	%Note.text = tr("UI_NAME_NOTE")
+	%NameHints.set_hints([["Enter", tr("UI_START")], ["Esc", tr("UI_CANCEL")]])
 
 	_set_hints()
 	Events.language_changed.connect(_set_hints)
@@ -110,16 +112,29 @@ func _ask_name(renaming: bool) -> void:
 	_renaming = renaming
 	var info := SaveManager.summary(_pending_slot)
 	_name_edit.text = info.name if renaming and not info.is_empty() else ""
-	(%Prompt as Label).text = tr("UI_RENAME_PROMPT") if renaming else tr("UI_NAME_PROMPT")
+	%NameTitle.text = tr("UI_RENAME") if renaming else tr("UI_NEW_GAME")
+	%Prompt.text = tr("UI_RENAME_PROMPT") if renaming else tr("UI_NAME_PROMPT")
+	_update_counter()
 	_name_panel.show()
 	_name_edit.grab_focus()
 	_name_edit.select_all()
 
 
+func _update_counter() -> void:
+	%Counter.text = "%d / %d" % [_name_edit.text.length(), _name_edit.max_length]
+
+
+func _close_name_panel() -> void:
+	_name_panel.hide()
+	_cards[_pending_slot - 1].grab_focus()
+
+
 func _submit_name() -> void:
 	var n := _name_edit.text.strip_edges()
 	if n.is_empty():
-		return
+		if _renaming:
+			return
+		n = tr("UI_DEFAULT_NAME")
 	_name_panel.hide()
 
 	if not _renaming:
@@ -169,8 +184,7 @@ func _on_delete_answered(yes: bool) -> void:
 func _input(event: InputEvent) -> void:
 	if _name_panel.visible and event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
-		_name_panel.hide()
-		_cards[_pending_slot - 1].grab_focus()
+		_close_name_panel()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -184,4 +198,3 @@ func _unhandled_input(event: InputEvent) -> void:
 			SceneRouter.back()
 	elif event.is_action_pressed("delete"):
 		_ask_delete(_pending_slot)
-

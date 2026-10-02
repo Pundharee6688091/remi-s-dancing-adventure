@@ -15,7 +15,7 @@ empty slot","เกมใหม่
 ช่องว่าง"
 UI_DELETE_CONFIRM,"Delete profile ""%s""?","ลบโปรไฟล์ ""%s"" หรือไม่"
 UI_DELETE,Delete,ลบ
-UI_NAME_PROMPT,New game — what should we call you?,เกมใหม่ — อยากให้เราเรียกคุณว่าอะไร
+UI_NAME_PROMPT,What should we call you?,อยากให้เราเรียกคุณว่าอะไร
 UI_YOUR_NAME,Your name,ชื่อของคุณ
 UI_NAME_HINT,Enter Start     Esc Cancel,Enter เริ่ม     Esc ยกเลิก
 UI_YES,Yes,ตกลง
@@ -106,3 +106,6 @@ UI_DELETE_PROFILE,Delete profile,ลบโปรไฟล์
 UI_RENAME_PROMPT,What should we call you instead?,อยากให้เราเรียกคุณว่าอะไรแทน
 UI_HIT_ON_GHOST,Hit on the ghost,กดตรงลูกศรจาง
 UI_PAUSE,Pause,หยุดชั่วคราว
+UI_START,Start,เริ่ม
+UI_DEFAULT_NAME,Remi,เรมี
+UI_NAME_NOTE,"Type your name · Thai or English · leave empty for ""Remi""","พิมพ์ชื่อของคุณ · ไทยหรืออังกฤษ · เว้นว่างไว้จะใช้ ""เรมี"""

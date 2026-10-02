@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/parts/confirm_box.tscn" id="3_cf"]
 [ext_resource type="Script" path="res://scenes/ui/parts/hint_bar.gd" id="4_hb"]
 [ext_resource type="Script" path="res://scenes/ui/parts/dashed_box.gd" id="5_dash"]
+[ext_resource type="StyleBox" path="res://themes/field_box.tres" id="6_field"]
+[ext_resource type="StyleBox" path="res://themes/flat.tres" id="7_flat"]
 
 [node name="SaveSlots" type="Control"]
 layout_mode = 3
@@ -346,33 +348,96 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Card" type="PanelContainer" parent="NamePanel/Centre"]
-custom_minimum_size = Vector2(440, 0)
+custom_minimum_size = Vector2(560, 0)
 layout_mode = 2
 theme_type_variation = &"Card"
 
 [node name="Box" type="VBoxContainer" parent="NamePanel/Centre/Card"]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 0
+
+[node name="NameTitle" type="Label" parent="NamePanel/Centre/Card/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
 
 [node name="Prompt" type="Label" parent="NamePanel/Centre/Card/Box"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
-horizontal_alignment = 1
-autowrap_mode = 3
-text = "UI_NAME_PROMPT"
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 
-[node name="NameEdit" type="LineEdit" parent="NamePanel/Centre/Card/Box"]
+[node name="Gap1" type="Control" parent="NamePanel/Centre/Card/Box"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+
+[node name="Field" type="PanelContainer" parent="NamePanel/Centre/Card/Box"]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = ExtResource("6_field")
+
+[node name="Row" type="HBoxContainer" parent="NamePanel/Centre/Card/Box/Field"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="NameEdit" type="LineEdit" parent="NamePanel/Centre/Card/Box/Field/Row"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = ExtResource("7_flat")
+theme_override_styles/focus = ExtResource("7_flat")
 placeholder_text = "UI_YOUR_NAME"
-max_length = 16
+max_length = 12
 
-[node name="Hint" type="Label" parent="NamePanel/Centre/Card/Box"]
+[node name="Counter" type="Label" parent="NamePanel/Centre/Card/Box/Field/Row"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
-horizontal_alignment = 1
-text = "UI_NAME_HINT"
+theme_override_font_sizes/font_size = 14
+vertical_alignment = 1
+
+[node name="Gap2" type="Control" parent="NamePanel/Centre/Card/Box"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="Note" type="Label" parent="NamePanel/Centre/Card/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_font_sizes/font_size = 14
+autowrap_mode = 3
+
+[node name="Gap3" type="Control" parent="NamePanel/Centre/Card/Box"]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="NamePanel/Centre/Card/Box"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Start" type="Button" parent="NamePanel/Centre/Card/Box/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "UI_START"
+
+[node name="Cancel" type="Button" parent="NamePanel/Centre/Card/Box/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "UI_CANCEL"
+
+[node name="NameHints" type="Control" parent="NamePanel"]
+unique_name_in_owner = true
+layout_mode = 1
+mouse_filter = 2
+script = ExtResource("4_hb")
 
 [node name="Hints" type="Control" parent="."]
 unique_name_in_owner = true
@@ -386,3 +451,6 @@ unique_name_in_owner = true
 [connection signal="pressed" from="Detail/Box/Actions/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="Detail/Box/Actions/Rename" to="." method="_on_rename_pressed"]
 [connection signal="pressed" from="Detail/Box/Actions/DeleteProfile" to="." method="_on_delete_profile_pressed"]
+
+[connection signal="pressed" from="NamePanel/Centre/Card/Box/Buttons/Start" to="." method="_submit_name"]
+[connection signal="pressed" from="NamePanel/Centre/Card/Box/Buttons/Cancel" to="." method="_close_name_panel"]
