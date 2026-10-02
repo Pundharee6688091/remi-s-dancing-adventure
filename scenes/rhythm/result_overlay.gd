@@ -25,7 +25,11 @@ func show_result(r: Dictionary) -> void:
 	%Sub.text = tr("UI_RESULT_SUB") % [tr("UI_STAGE") % r.get("stage", ""), r.get("song", "")]
 
 	var opponent: String = r.get("opponent", "")
-	%Portrait.texture = UIKit.cropped_texture(Rules.enemy_path(r.get("song_id", "")))
+	var art := UIKit.cropped_texture(Rules.enemy_path(r.get("song_id", "")))
+	%Portrait.texture = art
+	# The tutorial has no opponent, so an empty placeholder box would read
+	# as a missing asset rather than as "there is nobody here".
+	%Art.visible = art != null
 	%Flavour.text = tr("UI_TOO_TIRED") % opponent if r.won and opponent != "" else ""
 	%Join.visible = r.won and opponent != ""
 	%JoinText.text = tr("UI_JOINED") % opponent

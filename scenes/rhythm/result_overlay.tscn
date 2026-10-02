@@ -30,7 +30,7 @@ offset_left = 40.0
 offset_top = 18.0
 offset_right = 1240.0
 offset_bottom = 62.0
-theme_override_constants/separation = 20
+theme_override_constants/separation = 28
 alignment = 0
 
 [node name="Title" type="Label" parent="Header"]
@@ -54,6 +54,7 @@ offset_bottom = 644.0
 theme_override_constants/separation = 0
 
 [node name="Art" type="PanelContainer" parent="Left"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(420, 300)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_fill")
@@ -65,7 +66,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Gap1" type="Control" parent="Left"]
-custom_minimum_size = Vector2(0, 12)
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
 [node name="Flavour" type="Label" parent="Left"]
@@ -256,24 +257,32 @@ horizontal_alignment = 2
 [node name="Side" type="VBoxContainer" parent="Right/Stats/Box"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Notes" type="VBoxContainer" parent="Right/Stats/Box/Side"]
+layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="NotesKey" type="Label" parent="Right/Stats/Box/Side"]
+[node name="NotesKey" type="Label" parent="Right/Stats/Box/Side/Notes"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 text = "UI_NOTES_HIT"
 
-[node name="NotesValue" type="Label" parent="Right/Stats/Box/Side"]
+[node name="NotesValue" type="Label" parent="Right/Stats/Box/Side/Notes"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 
-[node name="StarsKey" type="Label" parent="Right/Stats/Box/Side"]
+[node name="Stars" type="VBoxContainer" parent="Right/Stats/Box/Side"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StarsKey" type="Label" parent="Right/Stats/Box/Side/Stars"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 text = "UI_LBL_STARS"
 
-[node name="StarsValue" type="Label" parent="Right/Stats/Box/Side"]
+[node name="StarsValue" type="Label" parent="Right/Stats/Box/Side/Stars"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9098039, 0.6392157, 0.23921569, 1)

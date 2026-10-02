@@ -2,35 +2,40 @@ set {theo_name} = "???"
 
 Narrator: Remi finished his dance with a proud bow as Elion applauded enthusiastically.
 
+join elion right 
+Elion (Smile): Fantastic! Just as I expected from such a talented dancer!
 
-Elion: Fantastic! Just as I expected from such a talented dancer! /Elion.smile
-Remi: Squeak! /Remi.happy
+join remi left 
+Remi (happy): Squeak!
+
 Elion: Your moves were wonderful, Sir Remi. I can see how much effort you have put into them. 
-Elion: You truly have worked hard for this dream. /Elion.default
-Elion: Then it is settled. As promised, I shall accompany you as your teammate. /Elion.smile
-Elion: Together, we shall enter this contest and claim that grand prize! /Elion.determined
-Elion: Although... that reminds me. You said we require a group of four, correct? /Elion.confused
-Remi: Squeak… /Remi.sad
-Elion: Hmm... Then we still need two more companions. /Elion.thinking
-Elion: I wonder who might be willing to join us- /Elion.default
+Elion (Default): You truly have worked hard for this dream.
+Elion (Smile): Then it is settled. As promised, I shall accompany you as your teammate.
+Elion (Determined): Together, we shall enter this contest and claim that grand prize!
+Elion (Confused): Although... that reminds me. You said we require a group of four, correct?
+Remi (Sad): Squeak…
+Elion (Thinking): Hmm... Then we still need two more companions.
+Elion (Default): I wonder who might be willing to join us-
 Narrator: Before Elion could finish his sentence, someone suddenly crashed straight into him.
-Elion: Whoa-! /Elion.surprised
+Elion (Surprised): Whoa-!
 Narrator: It was a young elf boy who seemed to have been in a rush to go somewhere.
-???: Ah-! /Theo.surprised
+join Theo rightmost
+Theo (Surprised): Ah-!
 Narrator: A young boy with green hair and a charming face stumbled into view. From the wand in his hand, he appeared to be some kind of spellcaster.
 Narrator: He fell to the ground, his green hair dropping over his face as the wand slipped from his hand.
 Narrator: Looking dazed and confused, he slowly raised his head toward Elion, who was already kneeling beside him to help.
 Elion: I am terribly sorry! Are you alright- 
-Elion: Oh! It is you! /Elion.confused
-???: Eh...? Isn’t it Elion? What are the odds of running into you here…! /Theo.confused
+Elion (Confused): Oh! It is you!
+Theo (Confused): Eh...? Isn’t it Elion? What are the odds of running into you here…!
 Narrator: It seemed that Elion and the mysterious boy already knew each other somehow.
 Narrator: Elion helped him back onto his feet before picking up the fallen wand and handing it back to him.
-Elion: Well, I am currently looking for members to join a dancing contest at the festival.  /Elion.default
-Elion: We need a group of four, so I am helping gather enough people to enter.  /Elion.smile
-???: Ah! The dance contest! /Theo.surprised
-???: I’m actually going to sign up for it! They promise quite a lot of gold as a reward. I really need those for my research fund…! /Theo.smile
-???: Sorry, Elion…! I have to part with you now. Hope we meet again…! /Theo.default
-Elion, Remi: /Remi.surprised /Elion.surprised
+Elion (Default): Well, I am currently looking for members to join a dancing contest at the festival.
+Elion (Smile): We need a group of four, so I am helping gather enough people to enter.
+Theo (Surprised): Ah! The dance contest!
+Theo (Smile): I’m actually going to sign up for it! They promise quite a lot of gold as a reward. I really need those for my research fund…!
+Theo (Default): Sorry, Elion…! I have to part with you now. Hope we meet again…!
+Elion
+Remi: /Remi.surprised /Elion.surprised
 Narrator: As the boy was about to sprint off, Elion and Remi stopped him from rushing forward!
 Elion: Sir Theo! We are also going to participate in the contest too! Could you hear us out for a while? We need two more members for our party right now…! /Elion.determined
 Remi: Squeak! Squeak squeak!! Squeak—! /Remi.please
