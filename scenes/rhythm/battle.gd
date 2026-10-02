@@ -105,9 +105,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			if event.is_action_pressed("ui_cancel"):
 				_resume()
 		State.RESULT:
-			if event.is_action_pressed("ui_accept"):
-				_restart()
-			elif event.is_action_pressed("ui_cancel"):
+			# Enter belongs to the focused button on the result screen now.
+			# Esc stays as a shortcut straight back to the map.
+			if event.is_action_pressed("ui_cancel"):
 				GameManager.leave_stage()
 				
 				
