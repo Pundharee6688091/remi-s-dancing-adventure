@@ -1,12 +1,12 @@
 set {theo_name} = "???"
 
-Narrator: Remi finished his dance with a proud bow as Elion applauded enthusiastically.
+narrator: Remi finished his dance with a proud bow as Elion applauded enthusiastically.
 
 join elion right 
 Elion (Smile): Fantastic! Just as I expected from such a talented dancer!
 
 join remi left 
-Remi (happy): Squeak!
+Remi (Happy): Squeak!
 
 Elion: Your moves were wonderful, Sir Remi. I can see how much effort you have put into them. 
 Elion (Default): You truly have worked hard for this dream.
