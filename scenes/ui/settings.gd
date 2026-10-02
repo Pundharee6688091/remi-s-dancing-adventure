@@ -16,9 +16,90 @@ signal closed()
 
 
 func _ready() -> void:
+	_wire_mouse()
 	_set_hints()
 	Events.language_changed.connect(_on_language_changed)
 	_refresh()
+
+
+## Rows are not Buttons, so the mouse is wired by hand: hovering highlights a
+## row, dragging a bar sets its value, clicking a pill picks it.
+func _wire_mouse() -> void:
+	for i in ROWS.size():
+		var idx := i
+		var row: Control = get_node("%" + ROWS[i])
+		row.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		row.mouse_entered.connect(func() -> void: _hover(idx))
+
+		var bar: Control = row.get_node_or_null("Box/Bar")
+		if bar != null:
+			bar.mouse_filter = Control.MOUSE_FILTER_STOP
+			bar.mouse_entered.connect(func() -> void: _hover(idx))
+			bar.gui_input.connect(func(e: InputEvent) -> void: _bar_input(idx, bar, e))
+
+		for pill in [["Box/OptA", -1], ["Box/OptB", 1]]:
+			var node: Control = row.get_node_or_null(pill[0])
+			if node != null:
+				node.mouse_filter = Control.MOUSE_FILTER_STOP
+				node.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+				node.mouse_entered.connect(func() -> void: _hover(idx))
+				var dir: int = pill[1]
+				node.gui_input.connect(func(e: InputEvent) -> void: _pill_input(idx, dir, e))
+
+		var open: Control = row.get_node_or_null("Box/Open")
+		if open != null:
+			open.mouse_filter = Control.MOUSE_FILTER_STOP
+			open.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+			open.mouse_entered.connect(func() -> void: _hover(idx))
+			open.gui_input.connect(func(e: InputEvent) -> void: _open_input(idx, e))
+
+
+func _hover(idx: int) -> void:
+	if _row != idx:
+		_row = idx
+		_refresh()
+
+
+static func _is_drag(event: InputEvent) -> bool:
+	if event is InputEventMouseButton:
+		return event.button_index == MOUSE_BUTTON_LEFT and event.pressed
+	if event is InputEventMouseMotion:
+		return (event.button_mask & MOUSE_BUTTON_MASK_LEFT) != 0
+	return false
+
+
+func _bar_input(idx: int, bar: Control, event: InputEvent) -> void:
+	if not _is_drag(event):
+		return
+	_hover(idx)
+	var t := clampf(event.position.x / maxf(bar.size.x, 1.0), 0.0, 1.0)
+	match ROWS[idx]:
+		"Music":
+			Settings.set_value("music", roundi(t * 100.0 / STEP) * STEP)
+		"Sfx":
+			Settings.set_value("sfx", roundi(t * 100.0 / STEP) * STEP)
+		"Speed":
+			Settings.set_value("note_speed", 1 + roundi(t * (Settings.SPEED_STEPS - 1)))
+		"Offset":
+			var ms := t * Settings.OFFSET_RANGE * 2.0 - Settings.OFFSET_RANGE
+			Settings.set_value("offset",
+				roundi(ms / Settings.OFFSET_STEP) * Settings.OFFSET_STEP)
+	_refresh()
+
+
+func _pill_input(idx: int, dir: int, event: InputEvent) -> void:
+	if not (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT
+			and event.pressed):
+		return
+	_hover(idx)
+	_adjust(dir)
+
+
+func _open_input(idx: int, event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT \
+			and event.pressed:
+		_hover(idx)
+		_activate()
 
 
 func _set_hints() -> void:
@@ -116,7 +197,8 @@ func _adjust(dir: int) -> void:
 			Loc.apply("en" if dir < 0 else "th")
 			return          # _on_language_changed refreshes
 		"Fullscreen":
-			Settings.set_value("fullscreen", dir > 0)
+			# ON is the left pill, so left means on, matching Language.
+			Settings.set_value("fullscreen", dir < 0)
 		_:
 			return
 	_refresh()
