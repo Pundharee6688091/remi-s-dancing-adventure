@@ -2,6 +2,7 @@ extends Control
 ## Layout lives in save_slots.tscn.
 
 const SLOTS := 3
+const PORTRAIT := "res://characters/remi/Remi_default.png"
 
 var _cards: Array[Button] = []
 var _pending_slot := 1
@@ -13,6 +14,9 @@ var _pending_slot := 1
 
 func _ready() -> void:
 	_cards = [%Slot1, %Slot2, %Slot3]
+	var art := UIKit.cropped_texture(PORTRAIT)
+	for c in _cards:
+		(c.get_node("Pad/Box/Art/Filled/Portrait") as TextureRect).texture = art
 	for i in SLOTS:
 		var slot := i + 1
 		_cards[i].pressed.connect(func() -> void: _on_card_pressed(slot))
@@ -35,13 +39,20 @@ func _sync_hints() -> void:
 	%Hints.visible = not (_confirm.visible or _name_panel.visible)
 
 
+## Each card is the same tree, so the pieces are reached by path rather
+## than by a unique name per slot.
 func _refresh() -> void:
 	for i in SLOTS:
-		var s := SaveManager.summary(i + 1)
-		if s.is_empty():
-			_cards[i].text = tr("UI_EMPTY_SLOT")
-		else:
-			_cards[i].text = "%s\n%s" % [s.name, s.line]
+		var card: Button = _cards[i]
+		var info := SaveManager.summary(i + 1)
+		var used := not info.is_empty()
+
+		card.get_node("Pad/Box/Art/Filled").visible = used
+		card.get_node("Pad/Box/Art/Empty").visible = not used
+		(card.get_node("Pad/Box/Name") as Label).text = \
+			info.name if used else tr("UI_NEW_GAME")
+		(card.get_node("Pad/Box/Line") as Label).text = \
+			info.line if used else tr("UI_EMPTY_SLOT_LINE")
 
 
 func _on_card_pressed(slot: int) -> void:

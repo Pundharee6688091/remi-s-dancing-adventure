@@ -1,8 +1,10 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scenes/ui/save_slots.gd" id="1_ss"]
-[ext_resource type="PackedScene" path="res://scenes/ui/parts/confirm_box.tscn" id="2_cf"]
-[ext_resource type="Script" path="res://scenes/ui/parts/hint_bar.gd" id="9_hb"]
+[ext_resource type="StyleBox" path="res://themes/panel_fill.tres" id="2_fill"]
+[ext_resource type="PackedScene" path="res://scenes/ui/parts/confirm_box.tscn" id="3_cf"]
+[ext_resource type="Script" path="res://scenes/ui/parts/hint_bar.gd" id="4_hb"]
+[ext_resource type="Script" path="res://scenes/ui/parts/dashed_box.gd" id="5_dash"]
 
 [node name="SaveSlots" type="Control"]
 layout_mode = 3
@@ -15,34 +17,257 @@ script = ExtResource("1_ss")
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
-offset_left = 60.0
-offset_top = 50.0
-offset_right = 500.0
-offset_bottom = 82.0
+offset_left = 32.0
+offset_top = 18.0
+offset_right = 600.0
+offset_bottom = 68.0
+theme_override_font_sizes/font_size = 40
 text = "UI_SELECT_PROFILE"
 
 [node name="Row" type="HBoxContainer" parent="."]
 layout_mode = 1
-offset_left = 60.0
-offset_top = 200.0
-offset_right = 1012.0
-offset_bottom = 420.0
+offset_left = 40.0
+offset_top = 240.0
+offset_right = 868.0
+offset_bottom = 492.0
 theme_override_constants/separation = 24
 
 [node name="Slot1" type="Button" parent="Row"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 220)
+custom_minimum_size = Vector2(260, 252)
 layout_mode = 2
+
+[node name="Pad" type="MarginContainer" parent="Row/Slot1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Box" type="VBoxContainer" parent="Row/Slot1/Pad"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Art" type="Control" parent="Row/Slot1/Pad/Box"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Filled" type="PanelContainer" parent="Row/Slot1/Pad/Box/Art"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("2_fill")
+
+[node name="Portrait" type="TextureRect" parent="Row/Slot1/Pad/Box/Art/Filled"]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Empty" type="MarginContainer" parent="Row/Slot1/Pad/Box/Art"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("5_dash")
+
+[node name="Plus" type="Label" parent="Row/Slot1/Pad/Box/Art/Empty"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_font_sizes/font_size = 40
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Gap" type="Control" parent="Row/Slot1/Pad/Box"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Name" type="Label" parent="Row/Slot1/Pad/Box"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 26
+
+[node name="Line" type="Label" parent="Row/Slot1/Pad/Box"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_font_sizes/font_size = 15
 
 [node name="Slot2" type="Button" parent="Row"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 220)
+custom_minimum_size = Vector2(260, 252)
 layout_mode = 2
+
+[node name="Pad" type="MarginContainer" parent="Row/Slot2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Box" type="VBoxContainer" parent="Row/Slot2/Pad"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Art" type="Control" parent="Row/Slot2/Pad/Box"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Filled" type="PanelContainer" parent="Row/Slot2/Pad/Box/Art"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("2_fill")
+
+[node name="Portrait" type="TextureRect" parent="Row/Slot2/Pad/Box/Art/Filled"]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Empty" type="MarginContainer" parent="Row/Slot2/Pad/Box/Art"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("5_dash")
+
+[node name="Plus" type="Label" parent="Row/Slot2/Pad/Box/Art/Empty"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_font_sizes/font_size = 40
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Gap" type="Control" parent="Row/Slot2/Pad/Box"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Name" type="Label" parent="Row/Slot2/Pad/Box"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 26
+
+[node name="Line" type="Label" parent="Row/Slot2/Pad/Box"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_font_sizes/font_size = 15
 
 [node name="Slot3" type="Button" parent="Row"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 220)
+custom_minimum_size = Vector2(260, 252)
 layout_mode = 2
+
+[node name="Pad" type="MarginContainer" parent="Row/Slot3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Box" type="VBoxContainer" parent="Row/Slot3/Pad"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Art" type="Control" parent="Row/Slot3/Pad/Box"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Filled" type="PanelContainer" parent="Row/Slot3/Pad/Box/Art"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("2_fill")
+
+[node name="Portrait" type="TextureRect" parent="Row/Slot3/Pad/Box/Art/Filled"]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Empty" type="MarginContainer" parent="Row/Slot3/Pad/Box/Art"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("5_dash")
+
+[node name="Plus" type="Label" parent="Row/Slot3/Pad/Box/Art/Empty"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_font_sizes/font_size = 40
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Gap" type="Control" parent="Row/Slot3/Pad/Box"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Name" type="Label" parent="Row/Slot3/Pad/Box"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 26
+
+[node name="Line" type="Label" parent="Row/Slot3/Pad/Box"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_font_sizes/font_size = 15
 
 [node name="NamePanel" type="Control" parent="."]
 unique_name_in_owner = true
@@ -72,7 +297,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Card" type="PanelContainer" parent="NamePanel/Centre"]
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(440, 0)
 layout_mode = 2
 theme_type_variation = &"Card"
 
@@ -82,6 +307,7 @@ theme_override_constants/separation = 16
 
 [node name="Prompt" type="Label" parent="NamePanel/Centre/Card/Box"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 26
 horizontal_alignment = 1
 autowrap_mode = 3
 text = "UI_NAME_PROMPT"
@@ -102,7 +328,7 @@ text = "UI_NAME_HINT"
 unique_name_in_owner = true
 layout_mode = 1
 mouse_filter = 2
-script = ExtResource("9_hb")
+script = ExtResource("4_hb")
 
-[node name="Confirm" parent="." instance=ExtResource("2_cf")]
+[node name="Confirm" parent="." instance=ExtResource("3_cf")]
 unique_name_in_owner = true
