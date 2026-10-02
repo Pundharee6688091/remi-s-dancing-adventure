@@ -61,6 +61,8 @@ func _ready() -> void:
 	pause_overlay.resume_pressed.connect(_resume)
 	pause_overlay.restart_pressed.connect(_restart)
 	pause_overlay.quit_pressed.connect(GameManager.leave_stage)
+	result_overlay.continue_pressed.connect(GameManager.leave_stage)
+	result_overlay.retry_pressed.connect(_restart)
 	
 	Events.note_judged.connect(_on_note_judged)
 
@@ -233,8 +235,14 @@ func _on_song_finished() -> void:
 	conductor.stop()
 	Events.song_finished.emit()
 
+	var st := Rules.stage(stage_id)
 	var r := judge.result()
 	r.won = GameManager.evaluate_win(stage_id, judge.hp)
+	r.stage = st.get("label", "")
+	r.song = _chart.get("title", "")
+	r.song_id = st.get("song", "")
+	r.opponent = st.get("opponent", "")
+	r.win_at = int(st.get("win", {}).get("value", 30))
 	r.previous_best = GameManager.best_hp_for(stage_id)
 	result_overlay.show_result(r)
 

@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" path="res://scenes/rhythm/result_overlay.gd" id="1_ro"]
 [ext_resource type="Script" path="res://scenes/ui/parts/hint_bar.gd" id="2_hb"]
+[ext_resource type="Script" path="res://scenes/rhythm/bar.gd" id="3_bar"]
+[ext_resource type="StyleBox" path="res://themes/panel_fill.tres" id="4_fill"]
 
 [node name="ResultOverlay" type="Control"]
 visible = false
@@ -11,52 +13,315 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 script = ExtResource("1_ro")
 
-[node name="Dim" type="ColorRect" parent="."]
+[node name="Bg" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-color = Color(0.169, 0.169, 0.169, 0.35)
+color = Color(0.96862745, 0.9607843, 0.9411765, 1)
 
-[node name="Centre" type="CenterContainer" parent="."]
+[node name="Header" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+offset_left = 40.0
+offset_top = 18.0
+offset_right = 1240.0
+offset_bottom = 62.0
+theme_override_constants/separation = 20
+alignment = 0
 
-[node name="Card" type="PanelContainer" parent="Centre"]
-custom_minimum_size = Vector2(400, 0)
+[node name="Title" type="Label" parent="Header"]
+unique_name_in_owner = true
 layout_mode = 2
-mouse_filter = 2
-theme_type_variation = &"Card"
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 40
 
-[node name="Box" type="VBoxContainer" parent="Centre/Card"]
+[node name="Sub" type="Label" parent="Header"]
+unique_name_in_owner = true
 layout_mode = 2
-mouse_filter = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+
+[node name="Left" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 40.0
+offset_top = 74.0
+offset_right = 460.0
+offset_bottom = 644.0
+theme_override_constants/separation = 0
+
+[node name="Art" type="PanelContainer" parent="Left"]
+custom_minimum_size = Vector2(420, 300)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_fill")
+
+[node name="Portrait" type="TextureRect" parent="Left/Art"]
+unique_name_in_owner = true
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Gap1" type="Control" parent="Left"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="Flavour" type="Label" parent="Left"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+autowrap_mode = 3
+
+[node name="Gap2" type="Control" parent="Left"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="Join" type="HBoxContainer" parent="Left"]
+unique_name_in_owner = true
+layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Title" type="Label" parent="Centre/Card/Box"]
-unique_name_in_owner = true
+[node name="Icon" type="PanelContainer" parent="Left/Join"]
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
-horizontal_alignment = 1
+theme_override_styles/panel = ExtResource("4_fill")
 
-[node name="Lines" type="Label" parent="Centre/Card/Box"]
+[node name="JoinText" type="Label" parent="Left/Join"]
 unique_name_in_owner = true
 layout_mode = 2
-horizontal_alignment = 1
+size_flags_vertical = 4
+
+[node name="Right" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 500.0
+offset_top = 74.0
+offset_right = 1240.0
+offset_bottom = 644.0
+theme_override_constants/separation = 14
+
+[node name="Hp" type="PanelContainer" parent="Right"]
+layout_mode = 2
+
+[node name="Box" type="VBoxContainer" parent="Right/Hp"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Row" type="HBoxContainer" parent="Right/Hp/Box"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Key" type="Label" parent="Right/Hp/Box/Row"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "UI_LBL_MONSTER_HP"
+
+[node name="HpValue" type="Label" parent="Right/Hp/Box/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 26
+
+[node name="WinLine" type="Label" parent="Right/Hp/Box/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.7882353, 0.3137255, 0.18431373, 1)
+theme_override_font_sizes/font_size = 14
+
+[node name="Gap" type="Control" parent="Right/Hp/Box"]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+
+[node name="HpBar" type="Control" parent="Right/Hp/Box"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+script = ExtResource("3_bar")
+fill_color = Color(0.7882353, 0.3137255, 0.18431373, 1)
+
+[node name="Stats" type="PanelContainer" parent="Right"]
+layout_mode = 2
+
+[node name="Box" type="HBoxContainer" parent="Right/Stats"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Judge" type="VBoxContainer" parent="Right/Stats/Box"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Perfect" type="HBoxContainer" parent="Right/Stats/Box/Judge"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Key" type="Label" parent="Right/Stats/Box/Judge/Perfect"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+text = "UI_J_PERFECT"
+
+[node name="BarPerfect" type="Control" parent="Right/Stats/Box/Judge/Perfect"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+script = ExtResource("3_bar")
+value = 0.0
+fill_color = Color(0.9098039, 0.6392157, 0.23921569, 1)
+
+[node name="CountPerfect" type="Label" parent="Right/Stats/Box/Judge/Perfect"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(46, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="Great" type="HBoxContainer" parent="Right/Stats/Box/Judge"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Key" type="Label" parent="Right/Stats/Box/Judge/Great"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+text = "UI_J_GREAT"
+
+[node name="BarGreat" type="Control" parent="Right/Stats/Box/Judge/Great"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+script = ExtResource("3_bar")
+value = 0.0
+fill_color = Color(0.56078434, 0.7490196, 0.41568628, 1)
+
+[node name="CountGreat" type="Label" parent="Right/Stats/Box/Judge/Great"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(46, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="Good" type="HBoxContainer" parent="Right/Stats/Box/Judge"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Key" type="Label" parent="Right/Stats/Box/Judge/Good"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+text = "UI_J_GOOD"
+
+[node name="BarGood" type="Control" parent="Right/Stats/Box/Judge/Good"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+script = ExtResource("3_bar")
+value = 0.0
+fill_color = Color(0.6117647, 0.76862746, 0.84705883, 1)
+
+[node name="CountGood" type="Label" parent="Right/Stats/Box/Judge/Good"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(46, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="Miss" type="HBoxContainer" parent="Right/Stats/Box/Judge"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Key" type="Label" parent="Right/Stats/Box/Judge/Miss"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+text = "UI_J_MISS"
+
+[node name="BarMiss" type="Control" parent="Right/Stats/Box/Judge/Miss"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+script = ExtResource("3_bar")
+value = 0.0
+fill_color = Color(0.7882353, 0.3137255, 0.18431373, 1)
+
+[node name="CountMiss" type="Label" parent="Right/Stats/Box/Judge/Miss"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(46, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="Side" type="VBoxContainer" parent="Right/Stats/Box"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="NotesKey" type="Label" parent="Right/Stats/Box/Side"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+text = "UI_NOTES_HIT"
+
+[node name="NotesValue" type="Label" parent="Right/Stats/Box/Side"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+
+[node name="StarsKey" type="Label" parent="Right/Stats/Box/Side"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+text = "UI_LBL_STARS"
+
+[node name="StarsValue" type="Label" parent="Right/Stats/Box/Side"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9098039, 0.6392157, 0.23921569, 1)
+theme_override_font_sizes/font_size = 30
+
+[node name="Reward" type="PanelContainer" parent="Right"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Row" type="HBoxContainer" parent="Right/Reward"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Key" type="Label" parent="Right/Reward/Row"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+text = "UI_REWARDS"
+
+[node name="RewardText" type="Label" parent="Right/Reward/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Push" type="Control" parent="Right"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Buttons" type="HBoxContainer" parent="Right"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Continue" type="Button" parent="Right/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "UI_CONTINUE"
+
+[node name="Retry" type="Button" parent="Right/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+text = "UI_RETRY"
 
 [node name="Hints" type="Control" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
 mouse_filter = 2
 script = ExtResource("2_hb")
+
+[connection signal="pressed" from="Right/Buttons/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="Right/Buttons/Retry" to="." method="_on_retry_pressed"]

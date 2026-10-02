@@ -1,9 +1,13 @@
 class_name ResultOverlay
 extends Control
-## Layout lives in result_overlay.tscn.
+## Layout lives in result_overlay.tscn, built from ResultClear.dc.html.
+## A full-screen page rather than a card: opponent on the left, the numbers
+## on the right. No score panel, since the monster's HP is the score.
 
-@onready var _title: Label = %Title
-@onready var _lines: Label = %Lines
+signal continue_pressed
+signal retry_pressed
+
+const JUDGEMENTS := ["perfect", "great", "good", "miss"]
 
 
 func _ready() -> void:
@@ -12,31 +16,48 @@ func _ready() -> void:
 	hide()
 
 
-## Enter replays the stage, Esc goes back to the map. See battle.gd's
-## State.RESULT branch.
 func _set_hints() -> void:
-	%Hints.set_hints([["Enter", tr("UI_PLAY_AGAIN")], ["Esc", tr("UI_QUIT_STAGE")]])
+	%Hints.set_hints([[["←", "→"], tr("UI_MOVE")], ["Enter", tr("UI_CONFIRM")]])
 
 
 func show_result(r: Dictionary) -> void:
-	_title.text = tr("UI_STAGE_CLEAR_TITLE") if r.won else tr("UI_STAGE_FAILED_TITLE")
+	%Title.text = tr("UI_STAGE_CLEAR_TITLE") if r.won else tr("UI_STAGE_FAILED_TITLE")
+	%Sub.text = tr("UI_RESULT_SUB") % [tr("UI_STAGE") % r.get("stage", ""), r.get("song", "")]
+
+	var opponent: String = r.get("opponent", "")
+	%Portrait.texture = UIKit.cropped_texture(Rules.enemy_path(r.get("song_id", "")))
+	%Flavour.text = tr("UI_TOO_TIRED") % opponent if r.won and opponent != "" else ""
+	%Join.visible = r.won and opponent != ""
+	%JoinText.text = tr("UI_JOINED") % opponent
+	%Reward.visible = r.won and opponent != ""
+	%RewardText.text = tr("UI_JOINED") % opponent
+
+	var win_at: int = r.get("win_at", 30)
+	%HpValue.text = "%d%%" % r.hp
+	%WinLine.text = tr("UI_WIN_LINE") % win_at
+	%HpBar.value = r.hp / 100.0
+	%HpBar.marker = win_at / 100.0
 
 	var c: Dictionary = r.counts
-	var stars: String = "★".repeat(r.stars) + "☆".repeat(3 - r.stars)
+	var total := 0
+	for j in JUDGEMENTS:
+		total += int(c[j])
+	for j in JUDGEMENTS:
+		var cap: String = String(j).capitalize()
+		get_node("%Bar" + cap).value = float(c[j]) / maxf(total, 1)
+		(get_node("%Count" + cap) as Label).text = str(c[j])
 
-	var best := tr("UI_BEST_PCT") % r.previous_best
-	if r.won and r.hp < r.previous_best:
-		best = tr("UI_NEW_BEST") % r.previous_best
+	%NotesValue.text = "%d / %d" % [total - int(c.miss), total]
+	%StarsValue.text = "★".repeat(r.stars) + "☆".repeat(3 - r.stars)
 
-	_lines.text = "\n".join([
-		tr("UI_MONSTER_HP_LEFT") % r.hp,
-		stars,
-		best,
-		tr("UI_MAX_COMBO") % r.max_combo,
-		"",
-		tr("UI_PERFECT") % c.perfect,
-		tr("UI_GREAT") % c.great,
-		tr("UI_GOOD") % c.good,
-		tr("UI_MISS") % c.miss,
-	])
 	show()
+	%Continue.grab_focus()
+	UIKit.trap_focus([%Continue, %Retry])
+
+
+func _on_continue_pressed() -> void:
+	continue_pressed.emit()
+
+
+func _on_retry_pressed() -> void:
+	retry_pressed.emit()

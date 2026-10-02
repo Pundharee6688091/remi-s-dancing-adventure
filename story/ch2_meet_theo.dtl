@@ -1,0 +1,73 @@
+set {theo_name} = "???"
+
+Narrator: Remi finished his dance with a proud bow as Elion applauded enthusiastically.
+
+
+Elion: Fantastic! Just as I expected from such a talented dancer! /Elion.smile
+Remi: Squeak! /Remi.happy
+Elion: Your moves were wonderful, Sir Remi. I can see how much effort you have put into them. 
+Elion: You truly have worked hard for this dream. /Elion.default
+Elion: Then it is settled. As promised, I shall accompany you as your teammate. /Elion.smile
+Elion: Together, we shall enter this contest and claim that grand prize! /Elion.determined
+Elion: Although... that reminds me. You said we require a group of four, correct? /Elion.confused
+Remi: Squeak… /Remi.sad
+Elion: Hmm... Then we still need two more companions. /Elion.thinking
+Elion: I wonder who might be willing to join us- /Elion.default
+Narrator: Before Elion could finish his sentence, someone suddenly crashed straight into him.
+Elion: Whoa-! /Elion.surprised
+Narrator: It was a young elf boy who seemed to have been in a rush to go somewhere.
+???: Ah-! /Theo.surprised
+Narrator: A young boy with green hair and a charming face stumbled into view. From the wand in his hand, he appeared to be some kind of spellcaster.
+Narrator: He fell to the ground, his green hair dropping over his face as the wand slipped from his hand.
+Narrator: Looking dazed and confused, he slowly raised his head toward Elion, who was already kneeling beside him to help.
+Elion: I am terribly sorry! Are you alright- 
+Elion: Oh! It is you! /Elion.confused
+???: Eh...? Isn’t it Elion? What are the odds of running into you here…! /Theo.confused
+Narrator: It seemed that Elion and the mysterious boy already knew each other somehow.
+Narrator: Elion helped him back onto his feet before picking up the fallen wand and handing it back to him.
+Elion: Well, I am currently looking for members to join a dancing contest at the festival.  /Elion.default
+Elion: We need a group of four, so I am helping gather enough people to enter.  /Elion.smile
+???: Ah! The dance contest! /Theo.surprised
+???: I’m actually going to sign up for it! They promise quite a lot of gold as a reward. I really need those for my research fund…! /Theo.smile
+???: Sorry, Elion…! I have to part with you now. Hope we meet again…! /Theo.default
+Elion, Remi: /Remi.surprised /Elion.surprised
+Narrator: As the boy was about to sprint off, Elion and Remi stopped him from rushing forward!
+Elion: Sir Theo! We are also going to participate in the contest too! Could you hear us out for a while? We need two more members for our party right now…! /Elion.determined
+Remi: Squeak! Squeak squeak!! Squeak—! /Remi.please
+Theo: !!! /Theo.surprised
+Theo: … /Theo.confused
+Elion, Remi: …!!!
+Theo: …/Theo.thinking
+
+Theo: …Alright. I could team up with you. However, you said you needed two more members. So it’s Elion and…? /Theo.default
+
+Elion: Pardon me, Sir Theo. This is my companion and reliable teammate, Sir Remi! /Elion.default
+Remi: Squeak! /Remi.happy
+Elion: And Sir Remi, this is Sir Theo, a wonderful mage companion of mine. /Elion.smile
+Theo: Nice to meet you, Mr.Remi. /Theo.smile
+Elion: Sir Theo, Sir Remi here is an exquisite and determined dancer. He is a pure soul who follows his dream despite the segregation and discrimination of his kind in the performing industry. I guarantee Sir Remi is a promising member of our team. /Elion.determined
+Remi: Squeak… /Remi.please
+Theo: …! /Theo.surprised
+Theo: … /Theo.thinking
+Theo: (Elion is talking with a rat…? Since when could he do that…?) 
+Theo: (Ah… The rat… Remi was it…? Mister  Remi is also a dancer…? And he was discriminated against in the industry because he is a rat? Wait— A rat can dance?! I have never seen one dance before. They can dance???) /Theo.confused
+Theo: (No, no, no. That is a prejudice that rats can’t dance, is it?  Isn’t  that the same thing as what Mr. Remi faced? I’m… a bad person?) /Theo.thinking
+Theo: (From the first place, performing industry…? Rat language? Dancing rats? What is this information?! Why is Elion so normal about this??? Is this normal??? I guess this is normal???) /Theo.crashout
+Elion: Theo, sir? /Elion.confused
+
+Remi: Squeak…? /Remi.confused
+Theo: Ah— Um…! Sorry…! /Theo.surprised
+Theo: I get the situation now. If that’s the case, I can join your party!... /Theo.thinking
+Theo: However, I really aim to win this competition. I need to see your capability first. Excuse my formalistic procedure, but would you mind showing your skills to me? /Theo.default
+Remi: !!! /Remi.surprised
+Elion: This is an amazing opportunity, Sir Remi! Let’s show him what you are made of. /Elion.determined
+Theo: I do know Elion and his style, so I must admit I am a little bit curious about you, new fella. I would appreciate it if you would be so kind as to dance to my tune? /Theo.smile
+
+Remi: Squeak! Squeak squeak! /Remi.happy
+
+Elion: Now that’s the spirit! Let’s dance right away! /Elion.smile
+
+Theo: Thank you, Mr. Remi.
+Theo: (I’m glad my confusion didn’t offend him.)
+Theo: (And also, thank the universe I didn’t ask Elion if Mr.Remi was his midday snack at first when I saw him holding a rat.) /Theo.thinking
+Theo: (That would be so much more awkward...) /Theo.crashout

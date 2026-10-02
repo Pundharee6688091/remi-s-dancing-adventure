@@ -109,3 +109,16 @@ UI_PAUSE,Pause,หยุดชั่วคราว
 UI_START,Start,เริ่ม
 UI_DEFAULT_NAME,Remi,เรมี
 UI_NAME_NOTE,"Type your name · Thai or English · leave empty for ""Remi""","พิมพ์ชื่อของคุณ · ไทยหรืออังกฤษ · เว้นว่างไว้จะใช้ ""เรมี"""
+UI_RESULT_SUB,%s · %s,%s · %s
+UI_LBL_MONSTER_HP,Monster HP left,พลังชีวิตศัตรูที่เหลือ
+UI_WIN_LINE,win line %d%%,เส้นชนะ %d%%
+UI_TOO_TIRED,%s is too tired to keep fighting.,%s เหนื่อยเกินกว่าจะสู้ต่อแล้ว
+UI_JOINED,%s joined your party!,%s เข้าร่วมทีมของคุณแล้ว!
+UI_NOTES_HIT,Notes hit,โน้ตที่กดถูก
+UI_LBL_STARS,Stars,ดาว
+UI_REWARDS,Rewards,รางวัล
+UI_RETRY,Retry for a better run,ลองใหม่ให้ดีกว่าเดิม
+UI_J_PERFECT,Perfect,Perfect
+UI_J_GREAT,Great,Great
+UI_J_GOOD,Good,Good
+UI_J_MISS,Miss,Miss
