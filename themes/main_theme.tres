@@ -117,6 +117,54 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.169, 0.169, 0.169, 1)
 
+[sub_resource type="StyleBoxFlat" id="row_box"]
+content_margin_left = 16.0
+content_margin_top = 0.0
+content_margin_right = 16.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.169, 0.169, 0.169, 1)
+
+[sub_resource type="StyleBoxFlat" id="row_box_on"]
+content_margin_left = 16.0
+content_margin_top = 0.0
+content_margin_right = 16.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 0.953, 0.867, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.169, 0.169, 0.169, 1)
+
+[sub_resource type="StyleBoxFlat" id="choice_box"]
+content_margin_left = 12.0
+content_margin_top = 2.0
+content_margin_right = 12.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.169, 0.169, 0.169, 1)
+
+[sub_resource type="StyleBoxFlat" id="choice_box_on"]
+content_margin_left = 12.0
+content_margin_top = 2.0
+content_margin_right = 12.0
+content_margin_bottom = 2.0
+bg_color = Color(0.9098039, 0.6392157, 0.23921569, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.169, 0.169, 0.169, 1)
+
 [sub_resource type="StyleBoxEmpty" id="empty"]
 
 [resource]
@@ -158,3 +206,11 @@ Pill/styles/focus = SubResource("empty")
 Pill/styles/hover = ExtResource("3_pillhv")
 Pill/styles/normal = ExtResource("2_pill")
 Pill/styles/pressed = ExtResource("8_pillpr")
+Row/base_type = &"PanelContainer"
+Row/styles/panel = SubResource("row_box")
+RowOn/base_type = &"PanelContainer"
+RowOn/styles/panel = SubResource("row_box_on")
+Choice/base_type = &"Label"
+Choice/styles/normal = SubResource("choice_box")
+ChoiceOn/base_type = &"Label"
+ChoiceOn/styles/normal = SubResource("choice_box_on")

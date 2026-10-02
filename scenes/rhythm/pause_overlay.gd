@@ -11,7 +11,7 @@ signal quit_pressed
 
 
 func _ready() -> void:
-	UIKit.trap_focus([%Resume, %Restart, %Quit])
+	UIKit.trap_focus([%Resume, %Restart, %Settings, %Quit])
 
 	_set_hints()
 	Events.language_changed.connect(_set_hints)
@@ -36,6 +36,10 @@ func _on_resume_pressed() -> void:
 
 func _on_restart_pressed() -> void:
 	restart_pressed.emit()
+
+
+func _on_settings_pressed() -> void:
+	SceneRouter.goto(GameManager.SETTINGS)
 
 
 func _on_quit_pressed() -> void:

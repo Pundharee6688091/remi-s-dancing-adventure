@@ -127,3 +127,14 @@ UI_RETRY_SHORT,Retry,ลองใหม่
 UI_STILL_FIGHT,%s can still fight. Try again!,%s ยังสู้ไหว ลองใหม่อีกครั้ง!
 UI_FAIL_REASON,It still had %d%% HP. You needed to get it under %d%%.,ศัตรูยังเหลือพลังชีวิต %d%% คุณต้องทำให้เหลือต่ำกว่า %d%%
 UI_NO_REWARD,none this time. Progress on other stages is not lost.,ยังไม่มีรางวัล ความคืบหน้าด่านอื่นไม่หายไป
+UI_SETTINGS_NOTE,changes apply and save immediately,การเปลี่ยนแปลงจะถูกบันทึกทันที
+UI_SET_MUSIC,Music volume,เสียงเพลง
+UI_SET_SFX,Sound effects,เสียงประกอบ
+UI_SET_SPEED,Note speed,ความเร็วโน้ต
+UI_SET_FULLSCREEN,Fullscreen,เต็มจอ
+UI_SET_CONTROLS,Controls,ปุ่มควบคุม
+UI_ON,ON,เปิด
+UI_OFF,OFF,ปิด
+UI_OPEN_ARROW,Open ›,เปิด ›
+UI_ADJUST,Adjust,ปรับ
+UI_ADJUST_HINT,adjust,ปรับ

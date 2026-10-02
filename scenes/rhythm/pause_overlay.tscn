@@ -70,8 +70,8 @@ layout_mode = 2
 text = "UI_RESTART_STAGE"
 
 [node name="Settings" type="Button" parent="Centre/Card/Box/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
-disabled = true
 text = "UI_SETTINGS"
 
 [node name="Quit" type="Button" parent="Centre/Card/Box/Buttons"]
@@ -88,4 +88,5 @@ script = ExtResource("9_hb")
 
 [connection signal="pressed" from="Centre/Card/Box/Buttons/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Centre/Card/Box/Buttons/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Centre/Card/Box/Buttons/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Centre/Card/Box/Buttons/Quit" to="." method="_on_quit_pressed"]

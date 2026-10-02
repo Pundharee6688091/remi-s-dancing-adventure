@@ -1,0 +1,267 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/settings.gd" id="1_set"]
+[ext_resource type="Script" path="res://scenes/rhythm/bar.gd" id="2_bar"]
+[ext_resource type="Script" path="res://scenes/ui/parts/hint_bar.gd" id="3_hb"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_set")
+
+[node name="Header" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 32.0
+offset_top = 18.0
+offset_right = 1248.0
+offset_bottom = 68.0
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="Header"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 40
+text = "UI_SETTINGS"
+
+[node name="Note" type="Label" parent="Header"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+text = "UI_SETTINGS_NOTE"
+
+[node name="Rows" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 40.0
+offset_top = 88.0
+offset_right = 1240.0
+offset_bottom = 500.0
+theme_override_constants/separation = 10
+
+[node name="Music" type="PanelContainer" parent="Rows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+theme_type_variation = &"Row"
+
+[node name="Box" type="HBoxContainer" parent="Rows/Music"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Key" type="Label" parent="Rows/Music/Box"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 21
+text = "UI_SET_MUSIC"
+
+[node name="Bar" type="Control" parent="Rows/Music/Box"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+script = ExtResource("2_bar")
+fill_color = Color(0.169, 0.169, 0.169, 1)
+
+[node name="Value" type="Label" parent="Rows/Music/Box"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Hint" type="Label" parent="Rows/Music/Box"]
+custom_minimum_size = Vector2(84, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.7882353, 0.3137255, 0.18431373, 1)
+theme_override_font_sizes/font_size = 15
+
+[node name="Sfx" type="PanelContainer" parent="Rows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+theme_type_variation = &"Row"
+
+[node name="Box" type="HBoxContainer" parent="Rows/Sfx"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Key" type="Label" parent="Rows/Sfx/Box"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 21
+text = "UI_SET_SFX"
+
+[node name="Bar" type="Control" parent="Rows/Sfx/Box"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+script = ExtResource("2_bar")
+fill_color = Color(0.169, 0.169, 0.169, 1)
+
+[node name="Value" type="Label" parent="Rows/Sfx/Box"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Hint" type="Label" parent="Rows/Sfx/Box"]
+custom_minimum_size = Vector2(84, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.7882353, 0.3137255, 0.18431373, 1)
+theme_override_font_sizes/font_size = 15
+
+[node name="Speed" type="PanelContainer" parent="Rows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+theme_type_variation = &"Row"
+
+[node name="Box" type="HBoxContainer" parent="Rows/Speed"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Key" type="Label" parent="Rows/Speed/Box"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 21
+text = "UI_SET_SPEED"
+
+[node name="Bar" type="Control" parent="Rows/Speed/Box"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+script = ExtResource("2_bar")
+fill_color = Color(0.169, 0.169, 0.169, 1)
+
+[node name="Value" type="Label" parent="Rows/Speed/Box"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Hint" type="Label" parent="Rows/Speed/Box"]
+custom_minimum_size = Vector2(84, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.7882353, 0.3137255, 0.18431373, 1)
+theme_override_font_sizes/font_size = 15
+
+[node name="Language" type="PanelContainer" parent="Rows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+theme_type_variation = &"Row"
+
+[node name="Box" type="HBoxContainer" parent="Rows/Language"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Key" type="Label" parent="Rows/Language/Box"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 21
+text = "UI_LANGUAGE"
+
+[node name="Push" type="Control" parent="Rows/Language/Box"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OptA" type="Label" parent="Rows/Language/Box"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"Choice"
+text = "English"
+
+[node name="OptB" type="Label" parent="Rows/Language/Box"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"Choice"
+text = "ภาษาไทย"
+
+[node name="Hint" type="Label" parent="Rows/Language/Box"]
+custom_minimum_size = Vector2(84, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Fullscreen" type="PanelContainer" parent="Rows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+theme_type_variation = &"Row"
+
+[node name="Box" type="HBoxContainer" parent="Rows/Fullscreen"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Key" type="Label" parent="Rows/Fullscreen/Box"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 21
+text = "UI_SET_FULLSCREEN"
+
+[node name="Push" type="Control" parent="Rows/Fullscreen/Box"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OptA" type="Label" parent="Rows/Fullscreen/Box"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"Choice"
+text = "UI_ON"
+
+[node name="OptB" type="Label" parent="Rows/Fullscreen/Box"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"Choice"
+text = "UI_OFF"
+
+[node name="Hint" type="Label" parent="Rows/Fullscreen/Box"]
+custom_minimum_size = Vector2(84, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Controls" type="PanelContainer" parent="Rows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+theme_type_variation = &"Row"
+
+[node name="Box" type="HBoxContainer" parent="Rows/Controls"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Key" type="Label" parent="Rows/Controls/Box"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 21
+text = "UI_SET_CONTROLS"
+
+[node name="Push" type="Control" parent="Rows/Controls/Box"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Open" type="Label" parent="Rows/Controls/Box"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"Choice"
+text = "UI_OPEN_ARROW"
+
+[node name="Hint" type="Label" parent="Rows/Controls/Box"]
+custom_minimum_size = Vector2(84, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Hints" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+mouse_filter = 2
+script = ExtResource("3_hb")

@@ -28,6 +28,10 @@ func _on_story_pressed() -> void:
 	SceneRouter.goto(GameManager.WORLD_MAP)
 
 
+func _on_settings_pressed() -> void:
+	SceneRouter.goto(GameManager.SETTINGS)
+
+
 func _on_quit_pressed() -> void:
 	_confirm.ask(tr("UI_QUIT_CONFIRM"), "", tr("UI_QUIT"), tr("UI_CANCEL"))
 

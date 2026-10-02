@@ -4,6 +4,7 @@ const BATTLE := "res://scenes/rhythm/battle.tscn"
 const MAIN_MENU := "res://scenes/ui/main_menu.tscn"
 const WORLD_MAP := "res://scenes/ui/world_map.tscn"
 const VN_VIEW := "res://scenes/ui/vn_view.tscn"
+const SETTINGS := "res://scenes/ui/settings.tscn"
 
 var slot := 0
 var save: Dictionary = {}

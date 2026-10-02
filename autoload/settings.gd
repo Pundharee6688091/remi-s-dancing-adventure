@@ -1,11 +1,74 @@
 extends Node
+## The six settings from Settings.dc.html, saved to user://settings.cfg.
+## Changes apply and save immediately, so there is no Apply button.
+
+signal changed()
+
+const PATH := "user://settings.cfg"
+
+## Note speed is an index 1..10. 5 means the speed in gameRule.json, so a
+## player can go slower or faster without the data file being wrong.
+const SPEED_STEPS := 10
+const SPEED_DEFAULT := 5
+
+var music := 80
+var sfx := 70
+var note_speed := SPEED_DEFAULT
+var fullscreen := false
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	load_settings()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+## The multiplier gameplay should apply to the chart's base note speed.
+func speed_scale() -> float:
+	return float(note_speed) / float(SPEED_DEFAULT)
+
+
+func set_value(key: String, value: Variant) -> void:
+	match key:
+		"music":
+			music = clampi(int(value), 0, 100)
+		"sfx":
+			sfx = clampi(int(value), 0, 100)
+		"note_speed":
+			note_speed = clampi(int(value), 1, SPEED_STEPS)
+		"fullscreen":
+			fullscreen = bool(value)
+		_:
+			return
+	apply()
+	save_settings()
+	changed.emit()
+
+
+func apply() -> void:
+	var bus := AudioServer.get_bus_index("Master")
+	if bus >= 0:
+		AudioServer.set_bus_volume_db(bus, linear_to_db(music / 100.0))
+		AudioServer.set_bus_mute(bus, music == 0)
+
+	DisplayServer.window_set_mode(
+		DisplayServer.WINDOW_MODE_FULLSCREEN if fullscreen
+		else DisplayServer.WINDOW_MODE_WINDOWED)
+
+
+func save_settings() -> void:
+	var cfg := ConfigFile.new()
+	cfg.set_value("audio", "music", music)
+	cfg.set_value("audio", "sfx", sfx)
+	cfg.set_value("gameplay", "note_speed", note_speed)
+	cfg.set_value("display", "fullscreen", fullscreen)
+	cfg.save(PATH)
+
+
+func load_settings() -> void:
+	var cfg := ConfigFile.new()
+	if cfg.load(PATH) == OK:
+		music = clampi(int(cfg.get_value("audio", "music", music)), 0, 100)
+		sfx = clampi(int(cfg.get_value("audio", "sfx", sfx)), 0, 100)
+		note_speed = clampi(int(cfg.get_value("gameplay", "note_speed", note_speed)),
+			1, SPEED_STEPS)
+		fullscreen = bool(cfg.get_value("display", "fullscreen", fullscreen))
+	apply()

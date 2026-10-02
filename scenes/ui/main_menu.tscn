@@ -94,7 +94,6 @@ alignment = 0
 custom_minimum_size = Vector2(360, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-disabled = true
 text = "UI_SETTINGS"
 alignment = 0
 
@@ -130,4 +129,5 @@ script = ExtResource("3_hb")
 unique_name_in_owner = true
 
 [connection signal="pressed" from="Items/Story" to="." method="_on_story_pressed"]
+[connection signal="pressed" from="Items/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Items/Quit" to="." method="_on_quit_pressed"]

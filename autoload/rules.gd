@@ -35,8 +35,9 @@ func residual(judgement: String) -> float:
 func damage(judgement: String) -> float:
 	return 100.0 - residual(judgement)
 
+## The chart's base speed, scaled by the player's note speed setting.
 func note_speed() -> float:
-	return float(data.note_speed_px_per_ms)
+	return float(data.note_speed_px_per_ms) * Settings.speed_scale()
 
 func hp_display(hp: float) -> int:
 	return maxi(0, floori(hp))
