@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scenes/rhythm/result_overlay.gd" id="1_ro"]
 
 [node name="ResultOverlay" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

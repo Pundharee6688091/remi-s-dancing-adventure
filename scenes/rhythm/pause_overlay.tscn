@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://scenes/ui/parts/hint_bar.gd" id="9_hb"]
 
 [node name="PauseOverlay" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

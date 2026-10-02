@@ -13,7 +13,7 @@ UI_SLOTS_HINT,◀ ▶ Choose slot     Enter Select     Del Delete     Esc Back,�
 UI_EMPTY_SLOT,"New game
 empty slot","เกมใหม่
 ช่องว่าง"
-UI_DELETE_CONFIRM,"Delete profile ""%s""? This cannot be undone.","ลบโปรไฟล์ ""%s"" หรือไม่ การลบนี้ย้อนกลับไม่ได้"
+UI_DELETE_CONFIRM,"Delete profile ""%s""?","ลบโปรไฟล์ ""%s"" หรือไม่"
 UI_DELETE,Delete,ลบ
 UI_NAME_PROMPT,New game — what should we call you?,เกมใหม่ — อยากให้เราเรียกคุณว่าอะไร
 UI_YOUR_NAME,Your name,ชื่อของคุณ
@@ -87,3 +87,14 @@ UI_CHANGE_PROFILE,Change profile,เปลี่ยนโปรไฟล์
 UI_CHOOSE_SLOT,Choose slot,เลือกช่อง
 UI_BACK_TO_PROFILES,Back to profiles,กลับไปหน้าโปรไฟล์
 UI_ZONE,Zone %d,โซน %d
+UI_CHOOSE,Choose,เลือก
+UI_CONFIRM,Confirm,ยืนยัน
+UI_CLOSE,Close,ปิด
+UI_DELETE_BODY,All progress in this slot will be lost. This cannot be undone.,ความคืบหน้าทั้งหมดในช่องนี้จะหายไป และกู้คืนไม่ได้
+UI_LBL_SONG,Song,เพลง
+UI_LBL_DIFFICULTY,Difficulty,ความยาก
+UI_LBL_BEST,Best,ดีที่สุด
+UI_LBL_REWARD,Reward,รางวัล
+UI_SONG_TIME,%s · %d:%02d,%s · %d:%02d
+UI_NOT_CLEARED_DASH,— (not cleared),— (ยังไม่ผ่าน)
+UI_REWARD_JOINS,%s joins your party,%s เข้าร่วมทีมของคุณ

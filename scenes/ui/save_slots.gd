@@ -18,6 +18,8 @@ func _ready() -> void:
 		_cards[i].pressed.connect(func() -> void: _on_card_pressed(slot))
 
 	_confirm.answered.connect(_on_delete_answered)
+	_confirm.visibility_changed.connect(_sync_hints)
+	_name_panel.visibility_changed.connect(_sync_hints)
 	_name_edit.text_submitted.connect(func(_t: String) -> void: _start_new())
 	UIKit.trap_focus([_name_edit])
 	_name_panel.hide()
@@ -27,6 +29,10 @@ func _ready() -> void:
 
 	_refresh()
 	_cards[0].grab_focus()
+
+
+func _sync_hints() -> void:
+	%Hints.visible = not (_confirm.visible or _name_panel.visible)
 
 
 func _refresh() -> void:
@@ -67,8 +73,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		var slot := _focused_slot()
 		if slot > 0 and SaveManager.exists(slot):
 			_pending_slot = slot
-			_confirm.ask(tr("UI_DELETE_CONFIRM")
-				% SaveManager.summary(slot).name, tr("UI_DELETE"), tr("UI_CANCEL"))
+			_confirm.ask(tr("UI_DELETE_CONFIRM") % SaveManager.summary(slot).name,
+				tr("UI_DELETE_BODY"), tr("UI_DELETE"), tr("UI_CANCEL"))
 
 
 func _focused_slot() -> int:

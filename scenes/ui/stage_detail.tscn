@@ -1,8 +1,11 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scenes/ui/stage_detail.gd" id="1_sd"]
+[ext_resource type="StyleBox" path="res://themes/panel_fill.tres" id="2_fill"]
+[ext_resource type="Script" path="res://scenes/ui/parts/hint_bar.gd" id="3_hb"]
 
 [node name="StageDetail" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,36 +32,140 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Card" type="PanelContainer" parent="Centre"]
-custom_minimum_size = Vector2(440, 0)
+custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
 theme_type_variation = &"Card"
 
-[node name="Box" type="VBoxContainer" parent="Centre/Card"]
+[node name="Row" type="HBoxContainer" parent="Centre/Card"]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 28
 
-[node name="Title" type="Label" parent="Centre/Card/Box"]
+[node name="Portrait" type="PanelContainer" parent="Centre/Card/Row"]
+custom_minimum_size = Vector2(260, 380)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_fill")
+
+[node name="Art" type="TextureRect" parent="Centre/Card/Row/Portrait"]
 unique_name_in_owner = true
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Right" type="VBoxContainer" parent="Centre/Card/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="Centre/Card/Row/Right"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+
+[node name="Sub" type="Label" parent="Centre/Card/Row/Right"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+
+[node name="Gap" type="Control" parent="Centre/Card/Row/Right"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+
+[node name="Grid" type="GridContainer" parent="Centre/Card/Row/Right"]
+layout_mode = 2
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="SongCell" type="VBoxContainer" parent="Centre/Card/Row/Right/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Key" type="Label" parent="Centre/Card/Row/Right/Grid/SongCell"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_font_sizes/font_size = 16
+text = "UI_LBL_SONG"
+
+[node name="Value" type="Label" parent="Centre/Card/Row/Right/Grid/SongCell"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+
+[node name="DiffCell" type="VBoxContainer" parent="Centre/Card/Row/Right/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Key" type="Label" parent="Centre/Card/Row/Right/Grid/DiffCell"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_font_sizes/font_size = 16
+text = "UI_LBL_DIFFICULTY"
+
+[node name="ValueDiff" type="Label" parent="Centre/Card/Row/Right/Grid/DiffCell"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+
+[node name="BestCell" type="VBoxContainer" parent="Centre/Card/Row/Right/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Key" type="Label" parent="Centre/Card/Row/Right/Grid/BestCell"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_font_sizes/font_size = 16
+text = "UI_LBL_BEST"
+
+[node name="ValueBest" type="Label" parent="Centre/Card/Row/Right/Grid/BestCell"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+
+[node name="RewardCell" type="VBoxContainer" parent="Centre/Card/Row/Right/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Key" type="Label" parent="Centre/Card/Row/Right/Grid/RewardCell"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_font_sizes/font_size = 16
+text = "UI_LBL_REWARD"
+
+[node name="ValueReward" type="Label" parent="Centre/Card/Row/Right/Grid/RewardCell"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+
+[node name="Push" type="Control" parent="Centre/Card/Row/Right"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Buttons" type="HBoxContainer" parent="Centre/Card/Row/Right"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Fight" type="Button" parent="Centre/Card/Row/Right/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
-
-[node name="Info" type="Label" parent="Centre/Card/Box"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="Row" type="HBoxContainer" parent="Centre/Card/Box"]
-layout_mode = 2
-theme_override_constants/separation = 12
-
-[node name="Fight" type="Button" parent="Centre/Card/Box/Row"]
-unique_name_in_owner = true
-layout_mode = 2
 text = "UI_FIGHT"
 
-[node name="Back" type="Button" parent="Centre/Card/Box/Row"]
+[node name="Back" type="Button" parent="Centre/Card/Row/Right/Buttons"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 text = "UI_BACK"
 
-[connection signal="pressed" from="Centre/Card/Box/Row/Fight" to="." method="_on_fight_pressed"]
-[connection signal="pressed" from="Centre/Card/Box/Row/Back" to="." method="_on_back_pressed"]
+[node name="Hints" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+mouse_filter = 2
+script = ExtResource("3_hb")
+
+[connection signal="pressed" from="Centre/Card/Row/Right/Buttons/Fight" to="." method="_on_fight_pressed"]
+[connection signal="pressed" from="Centre/Card/Row/Right/Buttons/Back" to="." method="_on_back_pressed"]

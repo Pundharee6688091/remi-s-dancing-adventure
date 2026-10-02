@@ -10,6 +10,8 @@ extends Control
 
 func _ready() -> void:
 	_detail.fight_pressed.connect(GameManager.enter_node)
+	# An open popup carries its own hints, so the screen's would double up.
+	_detail.visibility_changed.connect(_sync_hints)
 	%Hints.set_hints([["< >", tr("UI_WALK")], ["Enter", tr("UI_OPEN")],
 		["Esc", tr("UI_MAIN_MENU")]])
 
@@ -39,6 +41,10 @@ func _gui_input(event: InputEvent) -> void:
 			_view.cursor = hit
 			_view.queue_redraw()
 			_confirm()
+
+
+func _sync_hints() -> void:
+	%Hints.visible = not _detail.visible
 
 
 func _unhandled_input(event: InputEvent) -> void:

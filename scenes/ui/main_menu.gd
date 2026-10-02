@@ -13,10 +13,15 @@ func _ready() -> void:
 	%Art.texture = UIKit.cropped_texture(KEY_ART)
 
 	_confirm.answered.connect(_on_quit_answered)
+	_confirm.visibility_changed.connect(_sync_hints)
 	%Hints.set_hints([["▲ ▼", tr("UI_MOVE")], ["Enter", tr("UI_SELECT")],
 		["Esc", tr("UI_BACK_TO_PROFILES")]])
 
 	_story.grab_focus()
+
+
+func _sync_hints() -> void:
+	%Hints.visible = not _confirm.visible
 
 
 func _on_story_pressed() -> void:
@@ -24,7 +29,7 @@ func _on_story_pressed() -> void:
 
 
 func _on_quit_pressed() -> void:
-	_confirm.ask(tr("UI_QUIT_CONFIRM"), tr("UI_QUIT"), tr("UI_CANCEL"))
+	_confirm.ask(tr("UI_QUIT_CONFIRM"), "", tr("UI_QUIT"), tr("UI_CANCEL"))
 
 
 func _on_quit_answered(yes: bool) -> void:
