@@ -40,39 +40,36 @@ func _ready() -> void:
 	add_child(_row)
 
 
-## hints is a list of [key, label] pairs, e.g. [["Enter", "Open"]]
-func set_hints(hints: Array) -> void:
+## hints is a list of [key, label] pairs, optionally with a Callable third.
+## Every bar ends with the language toggle, so it is reachable from any screen.
+func set_hints(hints: Array, with_language := true) -> void:
 	for c in _row.get_children():
 		c.queue_free()
 
 	for pair in hints:
-		var cell := HBoxContainer.new()
-		cell.add_theme_constant_override("separation", 7)
-
 		var cb := Callable()
 		if pair.size() > 2 and pair[2] is Callable:
 			cb = pair[2]
-		cell.add_child(_cap_node(str(pair[0]), cb))
+		_row.add_child(_cell(str(pair[0]), str(pair[1]), cb))
 
-		var word := Label.new()
-		word.text = str(pair[1])
-		word.add_theme_font_size_override("font_size", 17)
-		word.add_theme_color_override("font_color", Palette.INK)
-		word.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		cell.add_child(word)
-
-		_row.add_child(cell)
+	if with_language:
+		_row.add_child(_cell("F2", tr("UI_LANGUAGE"), Loc.toggle))
 
 
-func _cap_label(text: String) -> Label:
-	var l := Label.new()
-	l.text = text
-	l.add_theme_font_size_override("font_size", 14)
-	l.add_theme_color_override("font_color", Palette.INK)
-	return l
+func _cell(key: String, label: String, cb: Callable) -> HBoxContainer:
+	var cell := HBoxContainer.new()
+	cell.add_theme_constant_override("separation", 7)
+	cell.add_child(_cap_node(key, cb))
+
+	var word := Label.new()
+	word.text = label
+	word.add_theme_font_size_override("font_size", 17)
+	word.add_theme_color_override("font_color", Palette.INK)
+	word.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	cell.add_child(word)
+	return cell
 
 
-## A painted-on cap, or a real Button when the hint has something to run.
 func _cap_node(text: String, cb: Callable) -> Control:
 	if not cb.is_valid():
 		var box := PanelContainer.new()
@@ -92,6 +89,14 @@ func _cap_node(text: String, cb: Callable) -> Control:
 	b.add_theme_stylebox_override("pressed", _cap_down)
 	b.pressed.connect(cb)
 	return b
+
+
+func _cap_label(text: String) -> Label:
+	var l := Label.new()
+	l.text = text
+	l.add_theme_font_size_override("font_size", 14)
+	l.add_theme_color_override("font_color", Palette.INK)
+	return l
 
 
 func _draw() -> void:

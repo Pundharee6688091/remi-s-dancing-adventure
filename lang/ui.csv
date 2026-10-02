@@ -104,3 +104,5 @@ UI_CONTINUE,Continue,เล่นต่อ
 UI_RENAME,Rename,เปลี่ยนชื่อ
 UI_DELETE_PROFILE,Delete profile,ลบโปรไฟล์
 UI_RENAME_PROMPT,What should we call you instead?,อยากให้เราเรียกคุณว่าอะไรแทน
+UI_HIT_ON_GHOST,Hit on the ghost,กดตรงลูกศรจาง
+UI_PAUSE,Pause,หยุดชั่วคราว

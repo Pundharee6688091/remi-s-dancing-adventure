@@ -63,6 +63,11 @@ func _ready() -> void:
 	pause_overlay.quit_pressed.connect(GameManager.leave_stage)
 	
 	Events.note_judged.connect(_on_note_judged)
+
+	_set_hints()
+	Events.language_changed.connect(_set_hints)
+	for o in [pause_overlay, result_overlay]:
+		o.visibility_changed.connect(_sync_hints)
 	_restart()
 
 func setup(params: Dictionary) -> void:
@@ -262,3 +267,12 @@ func _on_note_judged(judgement: String, lane: int) -> void:
 ## them in place.
 func blocks_reload() -> bool:
 	return true
+
+
+func _set_hints() -> void:
+	%Hints.set_hints([["W A S D", tr("UI_HIT_ON_GHOST")], ["Esc", tr("UI_PAUSE")]])
+
+
+## An open overlay brings its own hints, so the battle's would double up.
+func _sync_hints() -> void:
+	%Hints.visible = not (pause_overlay.visible or result_overlay.visible)

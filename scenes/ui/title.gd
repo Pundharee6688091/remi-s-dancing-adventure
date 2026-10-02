@@ -15,7 +15,7 @@ func _ready() -> void:
 
 	var hints := HintBar.new()
 	add_child(hints)
-	hints.set_hints([["F2", tr("UI_LANGUAGE"), Loc.toggle]])
+	hints.set_hints([])
 
 
 func _unhandled_input(event: InputEvent) -> void:
