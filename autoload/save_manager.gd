@@ -61,7 +61,7 @@ func summary(slot: int) -> Dictionary:
 	return {
 		"name": s.get("name", "?"),
 		"line": tr("UI_SLOT_LINE") % [
-			_progress_label(s), _pretty_date(s.get("last_played", ""))],
+			progress_label(s), _pretty_date(s.get("last_played", ""))],
 	}
 
 
@@ -69,7 +69,7 @@ func _path(slot: int) -> String:
 	return "user://slot_%d.json" % slot
 
 
-func _progress_label(save: Dictionary) -> String:
+func progress_label(save: Dictionary) -> String:
 	var stars: Dictionary = save.get("stars", {})
 	var last := "1-1"
 	for id in Rules.node_order:

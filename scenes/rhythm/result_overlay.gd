@@ -1,25 +1,12 @@
 class_name ResultOverlay
 extends Control
+## Layout lives in result_overlay.tscn.
 
-var _title: Label
-var _lines: Label
+@onready var _title: Label = %Title
+@onready var _lines: Label = %Lines
+
 
 func _ready() -> void:
-	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	mouse_filter = Control.MOUSE_FILTER_IGNORE
-
-	UIKit.dim(self)
-	var box := UIKit.card(self, Vector2(440, 140), 400)
-
-	_title = Label.new()
-	_title.add_theme_font_size_override("font_size", 32)
-	_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	box.add_child(_title)
-
-	_lines = Label.new()
-	_lines.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	box.add_child(_lines)
-
 	hide()
 
 

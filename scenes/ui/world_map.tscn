@@ -1,12 +1,107 @@
-[gd_scene format=3 uid="uid://oykrrxn3acvw"]
+[gd_scene format=3]
 
-[ext_resource type="Script" uid="uid://ctiu1p84sq147" path="res://scenes/ui/world_map.gd" id="1_tnhtm"]
+[ext_resource type="Script" path="res://scenes/ui/world_map.gd" id="1_wm"]
+[ext_resource type="Script" path="res://scenes/ui/map_view.gd" id="2_mv"]
+[ext_resource type="Script" path="res://scenes/rhythm/bar.gd" id="3_bar"]
+[ext_resource type="Script" path="res://scenes/ui/parts/hint_bar.gd" id="4_hb"]
+[ext_resource type="PackedScene" path="res://scenes/ui/stage_detail.tscn" id="5_sd"]
 
-[node name="WorldMap" type="Control" unique_id=1891789011]
+[node name="WorldMap" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_tnhtm")
+script = ExtResource("1_wm")
+
+[node name="Map" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_mv")
+
+[node name="Strip" type="ColorRect" parent="."]
+layout_mode = 1
+offset_right = 1280.0
+offset_bottom = 82.0
+mouse_filter = 2
+color = Color(1, 1, 1, 1)
+
+[node name="Rule" type="ColorRect" parent="."]
+layout_mode = 1
+offset_top = 82.0
+offset_right = 1280.0
+offset_bottom = 84.0
+mouse_filter = 2
+color = Color(0.169, 0.169, 0.169, 1)
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 1
+offset_left = 40.0
+offset_top = 20.0
+offset_right = 360.0
+offset_bottom = 60.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 32
+text = "UI_WORLD_MAP"
+
+[node name="ProgressLabel" type="Label" parent="."]
+layout_mode = 1
+offset_left = 240.0
+offset_top = 36.0
+offset_right = 340.0
+offset_bottom = 58.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_font_sizes/font_size = 18
+text = "UI_PROGRESS"
+
+[node name="ProgressBar" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 340.0
+offset_top = 36.0
+offset_right = 640.0
+offset_bottom = 58.0
+mouse_filter = 2
+script = ExtResource("3_bar")
+value = 0.0
+fill_color = Color(0.9098039, 0.6392157, 0.23921569, 1)
+
+[node name="Steps" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 664.0
+offset_top = 36.0
+offset_right = 900.0
+offset_bottom = 58.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_font_sizes/font_size = 18
+
+[node name="Party" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 1020.0
+offset_top = 36.0
+offset_right = 1240.0
+offset_bottom = 62.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 2
+
+[node name="Hints" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+mouse_filter = 2
+script = ExtResource("4_hb")
+
+[node name="Detail" parent="." instance=ExtResource("5_sd")]
+unique_name_in_owner = true

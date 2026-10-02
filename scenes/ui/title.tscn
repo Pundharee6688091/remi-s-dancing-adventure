@@ -3,8 +3,6 @@
 [ext_resource type="Script" uid="uid://cnehdttykkqci" path="res://scenes/ui/title.gd" id="1_t6us6"]
 [ext_resource type="StyleBox" uid="uid://detwlqlh7ct7f" path="res://themes/panel_fill.tres" id="2_4v1qu"]
 [ext_resource type="Script" uid="uid://fo864rkagmm8" path="res://scenes/ui/parts/dashed_box.gd" id="3_s1drf"]
-[ext_resource type="StyleBox" uid="uid://1m06h7jbr8vj" path="res://themes/pill.tres" id="4_s1drf"]
-[ext_resource type="StyleBox" uid="uid://bm2sfxu4asgah" path="res://themes/pill_hover.tres" id="5_ve8eu"]
 
 [node name="Title" type="Control" unique_id=622938894]
 layout_mode = 3
@@ -107,7 +105,4 @@ grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
 mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = ExtResource("4_s1drf")
-theme_override_styles/pressed = ExtResource("5_ve8eu")
-theme_override_styles/hover = ExtResource("4_s1drf")
+theme_type_variation = &"Pill"

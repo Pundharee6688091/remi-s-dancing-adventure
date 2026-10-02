@@ -1,40 +1,37 @@
 class_name PauseOverlay
 extends Control
+## Layout lives in pause_overlay.tscn.
 
 signal resume_pressed
 signal restart_pressed
 signal quit_pressed
 
-var _first: Button
+@onready var _info: Label = %Info
+@onready var _resume: Button = %Resume
+
 
 func _ready() -> void:
-	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	UIKit.trap_focus([%Resume, %Restart, %Quit])
 
-	UIKit.dim(self)
-	var box := UIKit.card(self, Vector2(430, 190), 420)
+	%Hints.set_hints([["▲ ▼", tr("UI_MOVE")], ["Enter", tr("UI_SELECT")],
+		["Esc", tr("UI_RESUME")]])
 
-	var title := Label.new()
-	title.add_theme_font_size_override("font_size", 32)
-	title.text = tr("UI_PAUSED")
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	box.add_child(title)
-
-	_first = _button(box, tr("UI_RESUME"), func() -> void: resume_pressed.emit())
-	var restart := _button(box, tr("UI_RESTART_STAGE"), func() -> void: restart_pressed.emit())
-	var quit := _button(box, tr("UI_QUIT_STAGE"), func() -> void: quit_pressed.emit())
-
-	UIKit.trap_focus([_first, restart, quit])
 	hide()
 
 
-func open() -> void:
+func open(info := "") -> void:
+	_info.text = info
 	show()
-	_first.grab_focus()
+	_resume.grab_focus()
 
 
-func _button(parent: Node, text: String, cb: Callable) -> Button:
-	var b := Button.new()
-	b.text = text
-	b.pressed.connect(cb)
-	parent.add_child(b)
-	return b
+func _on_resume_pressed() -> void:
+	resume_pressed.emit()
+
+
+func _on_restart_pressed() -> void:
+	restart_pressed.emit()
+
+
+func _on_quit_pressed() -> void:
+	quit_pressed.emit()

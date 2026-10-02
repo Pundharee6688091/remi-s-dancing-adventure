@@ -54,7 +54,10 @@ UI_MONSTER_HP,MONSTER HP,พลังชีวิตศัตรู
 UI_PAUSED,PAUSED,หยุดชั่วคราว
 UI_RESUME,Resume,เล่นต่อ
 UI_RESTART_STAGE,Restart stage,เริ่มด่านใหม่
-UI_QUIT_STAGE,Quit stage,ออกจากด่าน
+UI_QUIT_STAGE,Quit to map,ออกไปที่แผนที่
+UI_PAUSE_INFO,%s · %d:%02d · %s HP %d%%,%s · %d:%02d · %s HP %d%%
+UI_MOVE,Move,เลื่อน
+UI_SELECT,Select,เลือก
 UI_STAGE_CLEAR_TITLE,STAGE CLEAR,ผ่านด่าน
 UI_STAGE_FAILED_TITLE,STAGE FAILED,ไม่ผ่านด่าน
 UI_MONSTER_HP_LEFT,Monster HP left   %d%%,พลังชีวิตศัตรูที่เหลือ   %d%%
@@ -80,3 +83,6 @@ UI_MON_10,Oct,ต.ค.
 UI_MON_11,Nov,พ.ย.
 UI_MON_12,Dec,ธ.ค.
 UI_LANGUAGE,Language,ภาษา
+UI_CHANGE_PROFILE,Change profile,เปลี่ยนโปรไฟล์
+UI_CHOOSE_SLOT,Choose slot,เลือกช่อง
+UI_BACK_TO_PROFILES,Back to profiles,กลับไปหน้าโปรไฟล์

@@ -1,48 +1,30 @@
 extends Control
+## Layout lives in main_menu.tscn.
 
-var _confirm: ConfirmBox
-var _story: Button
+const KEY_ART := "res://characters/remi/Remi_happy.png"
+
+@onready var _story: Button = %Story
+@onready var _confirm: ConfirmBox = %Confirm
 
 
 func _ready() -> void:
-	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	%Who.text = GameManager.save.get("name", "")
+	%Stage.text = SaveManager.progress_label(GameManager.save)
+	%Art.texture = UIKit.cropped_texture(KEY_ART)
 
-	var who := Label.new()
-	who.text = GameManager.save.get("name", "")
-	who.position = Vector2(1000, 50)
-	add_child(who)
-
-	var box := VBoxContainer.new()
-	box.position = Vector2(80, 200)
-	box.custom_minimum_size = Vector2(280, 0)
-	box.add_theme_constant_override("separation", 10)
-	add_child(box)
-
-	_story = _item(box, tr("UI_STORY"), func() -> void: SceneRouter.goto(GameManager.WORLD_MAP))
-	_item(box, tr("UI_COLLECTION"), Callable()).disabled = true
-	_item(box, tr("UI_ACHIEVEMENTS"), Callable()).disabled = true
-	_item(box, tr("UI_SETTINGS"), Callable()).disabled = true
-	_item(box, tr("UI_QUIT"), func() -> void: _confirm.ask(tr("UI_QUIT_CONFIRM"), tr("UI_QUIT"), tr("UI_CANCEL")))
-
-	var hint := Label.new()
-	hint.text = tr("UI_MENU_HINT")
-	hint.position = Vector2(80, 660)
-	add_child(hint)
-
-	_confirm = ConfirmBox.new()
 	_confirm.answered.connect(_on_quit_answered)
-	add_child(_confirm)
+	%Hints.set_hints([["▲ ▼", tr("UI_MOVE")], ["Enter", tr("UI_SELECT")],
+		["Esc", tr("UI_BACK_TO_PROFILES")]])
 
 	_story.grab_focus()
 
 
-func _item(parent: Node, text: String, cb: Callable) -> Button:
-	var b := Button.new()
-	b.text = text
-	if cb.is_valid():
-		b.pressed.connect(cb)
-	parent.add_child(b)
-	return b
+func _on_story_pressed() -> void:
+	SceneRouter.goto(GameManager.WORLD_MAP)
+
+
+func _on_quit_pressed() -> void:
+	_confirm.ask(tr("UI_QUIT_CONFIRM"), tr("UI_QUIT"), tr("UI_CANCEL"))
 
 
 func _on_quit_answered(yes: bool) -> void:

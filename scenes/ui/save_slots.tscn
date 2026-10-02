@@ -1,12 +1,107 @@
-[gd_scene format=3 uid="uid://clw12makep4jc"]
+[gd_scene format=3]
 
-[ext_resource type="Script" uid="uid://cc71rb3ax76hf" path="res://scenes/ui/save_slots.gd" id="1_s2pwt"]
+[ext_resource type="Script" path="res://scenes/ui/save_slots.gd" id="1_ss"]
+[ext_resource type="PackedScene" path="res://scenes/ui/parts/confirm_box.tscn" id="2_cf"]
+[ext_resource type="Script" path="res://scenes/ui/parts/hint_bar.gd" id="9_hb"]
 
-[node name="SaveSlots" type="Control" unique_id=233734634]
+[node name="SaveSlots" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_s2pwt")
+script = ExtResource("1_ss")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+offset_left = 60.0
+offset_top = 50.0
+offset_right = 500.0
+offset_bottom = 82.0
+text = "UI_SELECT_PROFILE"
+
+[node name="Row" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 60.0
+offset_top = 200.0
+offset_right = 1012.0
+offset_bottom = 420.0
+theme_override_constants/separation = 24
+
+[node name="Slot1" type="Button" parent="Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 220)
+layout_mode = 2
+
+[node name="Slot2" type="Button" parent="Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 220)
+layout_mode = 2
+
+[node name="Slot3" type="Button" parent="Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 220)
+layout_mode = 2
+
+[node name="NamePanel" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="NamePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.169, 0.169, 0.169, 0.35)
+
+[node name="Centre" type="CenterContainer" parent="NamePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Card" type="PanelContainer" parent="NamePanel/Centre"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_type_variation = &"Card"
+
+[node name="Box" type="VBoxContainer" parent="NamePanel/Centre/Card"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Prompt" type="Label" parent="NamePanel/Centre/Card/Box"]
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 3
+text = "UI_NAME_PROMPT"
+
+[node name="NameEdit" type="LineEdit" parent="NamePanel/Centre/Card/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "UI_YOUR_NAME"
+max_length = 16
+
+[node name="Hint" type="Label" parent="NamePanel/Centre/Card/Box"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+horizontal_alignment = 1
+text = "UI_NAME_HINT"
+
+[node name="Hints" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+mouse_filter = 2
+script = ExtResource("9_hb")
+
+[node name="Confirm" parent="." instance=ExtResource("2_cf")]
+unique_name_in_owner = true

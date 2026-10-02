@@ -1,41 +1,18 @@
 class_name StageDetail
 extends Control
+## Layout lives in stage_detail.tscn.
 
 signal fight_pressed(stage_id: String)
 
 var _stage_id := ""
-var _title: Label
-var _info: Label
-var _fight: Button
-var _back: Button
+
+@onready var _title: Label = %Title
+@onready var _info: Label = %Info
+@onready var _fight: Button = %Fight
+@onready var _back: Button = %Back
 
 
 func _ready() -> void:
-	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-
-	UIKit.dim(self)
-	var box := UIKit.card(self, Vector2(420, 160), 440)
-
-	_title = Label.new()
-	box.add_child(_title)
-
-	_info = Label.new()
-	box.add_child(_info)
-
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 12)
-	box.add_child(row)
-
-	_fight = Button.new()
-	_fight.text = tr("UI_FIGHT")
-	_fight.pressed.connect(_on_fight)
-	row.add_child(_fight)
-
-	_back = Button.new()
-	_back.text = tr("UI_BACK")
-	_back.pressed.connect(hide)
-	row.add_child(_back)
-
 	hide()
 
 
@@ -74,9 +51,13 @@ func open(stage_id: String) -> void:
 	(_fight if available else _back).grab_focus()
 
 
-func _on_fight() -> void:
+func _on_fight_pressed() -> void:
 	hide()
 	fight_pressed.emit(_stage_id)
+
+
+func _on_back_pressed() -> void:
+	hide()
 
 
 func _unhandled_input(event: InputEvent) -> void:

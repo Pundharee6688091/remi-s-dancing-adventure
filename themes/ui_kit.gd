@@ -38,3 +38,18 @@ static func trap_focus(controls: Array) -> void:
 		c.focus_neighbor_bottom = c.get_path_to(next)
 		c.focus_previous = c.get_path_to(prev)
 		c.focus_next = c.get_path_to(next)
+
+
+## Art often sits in a big transparent canvas. Crop to what is actually drawn
+## so a TextureRect can fit it without the padding throwing the scale off.
+static func cropped_texture(path: String) -> Texture2D:
+	if not ResourceLoader.exists(path):
+		return null
+	var tex: Texture2D = load(path)
+	var used := tex.get_image().get_used_rect()
+	if used.size.x <= 0 or used.size.y <= 0:
+		return tex
+	var atlas := AtlasTexture.new()
+	atlas.atlas = tex
+	atlas.region = Rect2(used)
+	return atlas

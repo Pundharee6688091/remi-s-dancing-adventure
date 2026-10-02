@@ -1,74 +1,21 @@
 extends Control
+## Layout lives in world_map.tscn. MapView still draws itself.
 
-var _view: MapView
-var _detail: StageDetail
-var _progress: Bar
-var _steps: Label
-var _party: Label
+@onready var _view: MapView = %Map
+@onready var _detail: StageDetail = %Detail
+@onready var _progress: Bar = %ProgressBar
+@onready var _steps: Label = %Steps
+@onready var _party: Label = %Party
 
 
 func _ready() -> void:
-	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-
-	_view = MapView.new()
-	_view.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	_view.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(_view)
-
-	_build_top_bar()
-
-	var hints := HintBar.new()
-	add_child(hints)
-	hints.set_hints([["< >", tr("UI_WALK")], ["Enter", tr("UI_OPEN")], ["Esc", tr("UI_MAIN_MENU")]])
-
-	_detail = StageDetail.new()
 	_detail.fight_pressed.connect(GameManager.enter_node)
-	add_child(_detail)
+	%Hints.set_hints([["< >", tr("UI_WALK")], ["Enter", tr("UI_OPEN")],
+		["Esc", tr("UI_MAIN_MENU")]])
 
 	Events.progress_changed.connect(_refresh)
 	_view.cursor = _start_cursor()
 	_refresh()
-
-
-func _build_top_bar() -> void:
-	var strip := ColorRect.new()
-	strip.color = Palette.WHITE
-	strip.size = Vector2(1280, 82)
-	strip.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(strip)
-
-	var rule := ColorRect.new()
-	rule.color = Palette.INK
-	rule.position = Vector2(0, 82)
-	rule.size = Vector2(1280, 2)
-	rule.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(rule)
-
-	_text(tr("UI_WORLD_MAP"), Vector2(40, 20), 32)
-	_text(tr("UI_PROGRESS"), Vector2(240, 36), 18, Palette.MUTED)
-
-	_progress = Bar.new()
-	_progress.position = Vector2(340, 36)
-	_progress.size = Vector2(300, 22)
-	_progress.fill_color = Palette.AMBER
-	add_child(_progress)
-
-	_steps = _text("", Vector2(664, 36), 18, Palette.MUTED)
-
-	_party = _text("", Vector2(1020, 36), 18, Palette.MUTED)
-	_party.size = Vector2(220, 26)
-	_party.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-
-
-func _text(value: String, pos: Vector2, size_px := 18, color := Palette.INK) -> Label:
-	var l := Label.new()
-	l.text = value
-	l.position = pos
-	l.add_theme_font_size_override("font_size", size_px)
-	l.add_theme_color_override("font_color", color)
-	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(l)
-	return l
 
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -11,7 +11,7 @@ const KEY_ART := "res://characters/remi/Remi_happy.png"
 func _ready() -> void:
 	_pill.text = Loc.current().to_upper()
 	_pill.pressed.connect(Loc.toggle)
-	_art.texture = _cropped(KEY_ART)
+	_art.texture = UIKit.cropped_texture(KEY_ART)
 
 	var hints := HintBar.new()
 	add_child(hints)
@@ -30,16 +30,3 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		SceneRouter.goto(SAVE_SLOTS)
 
-
-## The art sits in a big transparent canvas, so crop to what is drawn.
-func _cropped(path: String) -> Texture2D:
-	if not ResourceLoader.exists(path):
-		return null
-	var tex: Texture2D = load(path)
-	var used := tex.get_image().get_used_rect()
-	if used.size.x <= 0 or used.size.y <= 0:
-		return tex
-	var atlas := AtlasTexture.new()
-	atlas.atlas = tex
-	atlas.region = Rect2(used)
-	return atlas

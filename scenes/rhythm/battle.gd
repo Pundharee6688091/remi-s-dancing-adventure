@@ -19,6 +19,7 @@ var judge := Judge.new()
 var state := State.COUNTDOWN
 var _countdown_id := 0
 var stage_id := "s1_1"
+var _chart: Dictionary = {}
 
 ## Remi stands nearer the camera than the boss, so she is drawn bigger.
 const REMI_SCALE := 0.25
@@ -46,8 +47,8 @@ var _pose_time := 0.0
 func _ready() -> void:
 	var st := Rules.stage(stage_id)
 	var song_id: String = st.get("song", "song_tutorial")
-	var chart := ChartParser.parse(Rules.chart_path(song_id))
-	field.setup(chart.notes)
+	_chart = ChartParser.parse(Rules.chart_path(song_id))
+	field.setup(_chart.notes)
 
 	_setup_remi()
 	_show_enemy(song_id)
@@ -169,6 +170,13 @@ func _apply(sprite: Sprite2D, pose: Dictionary, x: float, scale: float) -> void:
 	sprite.show()
 
 
+func _pause_info() -> String:
+	var secs := int(conductor.song_time_ms() / 1000.0)
+	var opp: String = Rules.stage(stage_id).get("opponent", "")
+	return tr("UI_PAUSE_INFO") % [_chart.get("title", ""), secs / 60, secs % 60,
+		opp if opp != "" else "—", Rules.hp_display(judge.hp)]
+
+
 func _restart() -> void:
 	pause_overlay.hide()
 	result_overlay.hide()
@@ -194,7 +202,7 @@ func _pause() -> void:
 	state = State.PAUSED
 	song.stream_paused = true
 	countdown_label.modulate.a = 0.0
-	pause_overlay.open()
+	pause_overlay.open(_pause_info())
 
 
 func _resume() -> void:

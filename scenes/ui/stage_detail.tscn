@@ -1,0 +1,64 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/stage_detail.gd" id="1_sd"]
+
+[node name="StageDetail" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sd")
+
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.169, 0.169, 0.169, 0.35)
+
+[node name="Centre" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Card" type="PanelContainer" parent="Centre"]
+custom_minimum_size = Vector2(440, 0)
+layout_mode = 2
+theme_type_variation = &"Card"
+
+[node name="Box" type="VBoxContainer" parent="Centre/Card"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Centre/Card/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+
+[node name="Info" type="Label" parent="Centre/Card/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Row" type="HBoxContainer" parent="Centre/Card/Box"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Fight" type="Button" parent="Centre/Card/Box/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "UI_FIGHT"
+
+[node name="Back" type="Button" parent="Centre/Card/Box/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "UI_BACK"
+
+[connection signal="pressed" from="Centre/Card/Box/Row/Fight" to="." method="_on_fight_pressed"]
+[connection signal="pressed" from="Centre/Card/Box/Row/Back" to="." method="_on_back_pressed"]

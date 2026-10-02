@@ -1,0 +1,90 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/rhythm/pause_overlay.gd" id="1_po"]
+[ext_resource type="Script" path="res://scenes/ui/parts/hint_bar.gd" id="9_hb"]
+
+[node name="PauseOverlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_po")
+
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.169, 0.169, 0.169, 0.35)
+
+[node name="Centre" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Card" type="PanelContainer" parent="Centre"]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+theme_type_variation = &"Card"
+
+[node name="Box" type="VBoxContainer" parent="Centre/Card"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Header" type="VBoxContainer" parent="Centre/Card/Box"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="Centre/Card/Box/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "UI_PAUSED"
+horizontal_alignment = 1
+
+[node name="Info" type="Label" parent="Centre/Card/Box/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+horizontal_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="Centre/Card/Box"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Resume" type="Button" parent="Centre/Card/Box/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "UI_RESUME"
+
+[node name="Restart" type="Button" parent="Centre/Card/Box/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "UI_RESTART_STAGE"
+
+[node name="Settings" type="Button" parent="Centre/Card/Box/Buttons"]
+layout_mode = 2
+disabled = true
+text = "UI_SETTINGS"
+
+[node name="Quit" type="Button" parent="Centre/Card/Box/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Danger"
+text = "UI_QUIT_STAGE"
+
+[node name="Hints" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+mouse_filter = 2
+script = ExtResource("9_hb")
+
+[connection signal="pressed" from="Centre/Card/Box/Buttons/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Centre/Card/Box/Buttons/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Centre/Card/Box/Buttons/Quit" to="." method="_on_quit_pressed"]
