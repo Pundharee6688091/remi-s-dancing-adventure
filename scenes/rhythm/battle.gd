@@ -223,6 +223,7 @@ func _on_song_finished() -> void:
 	if state == State.RESULT:
 		return
 	state = State.RESULT
+	pause_overlay.hide()
 	judge.sweep_all()
 	conductor.stop()
 	Events.song_finished.emit()

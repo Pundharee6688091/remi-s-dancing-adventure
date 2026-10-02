@@ -1,6 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scenes/rhythm/result_overlay.gd" id="1_ro"]
+[ext_resource type="Script" path="res://scenes/ui/parts/hint_bar.gd" id="2_hb"]
 
 [node name="ResultOverlay" type="Control"]
 visible = false
@@ -53,3 +54,9 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 horizontal_alignment = 1
+
+[node name="Hints" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+mouse_filter = 2
+script = ExtResource("2_hb")

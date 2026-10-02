@@ -7,7 +7,15 @@ extends Control
 
 
 func _ready() -> void:
+	_set_hints()
+	Events.language_changed.connect(_set_hints)
 	hide()
+
+
+## Enter replays the stage, Esc goes back to the map. See battle.gd's
+## State.RESULT branch.
+func _set_hints() -> void:
+	%Hints.set_hints([["Enter", tr("UI_PLAY_AGAIN")], ["Esc", tr("UI_QUIT_STAGE")]])
 
 
 func show_result(r: Dictionary) -> void:
@@ -30,7 +38,5 @@ func show_result(r: Dictionary) -> void:
 		tr("UI_GREAT") % c.great,
 		tr("UI_GOOD") % c.good,
 		tr("UI_MISS") % c.miss,
-		"",
-		tr("UI_PLAY_AGAIN"),
 	])
 	show()

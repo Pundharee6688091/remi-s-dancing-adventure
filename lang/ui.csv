@@ -68,7 +68,7 @@ UI_PERFECT,Perfect  %d,Perfect  %d
 UI_GREAT,Great    %d,Great    %d
 UI_GOOD,Good     %d,Good     %d
 UI_MISS,Miss     %d,Miss     %d
-UI_PLAY_AGAIN,Enter to play again,กด Enter เพื่อเล่นอีกครั้ง
+UI_PLAY_AGAIN,Play again,เล่นอีกครั้ง
 UI_SLOT_LINE,%s · last played %s,%s · เล่นล่าสุด %s
 UI_MON_1,Jan,ม.ค.
 UI_MON_2,Feb,ก.พ.
