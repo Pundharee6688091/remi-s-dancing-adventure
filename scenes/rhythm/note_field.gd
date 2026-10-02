@@ -10,7 +10,11 @@ var _next_spawn := 0
 var _pool: Array[Note] = []
 
 func setup(chart_notes: Array) -> void:
-	speed = Rules.note_speed()
+	_refresh_speed()
+	# Changing note speed mid-song should be visible straight away, and the
+	# positions are recomputed every frame, so refreshing the value is enough.
+	if not Settings.changed.is_connected(_refresh_speed):
+		Settings.changed.connect(_refresh_speed)
 	notes.clear()
 	for n in chart_notes:
 		notes.append({
@@ -24,6 +28,10 @@ func setup(chart_notes: Array) -> void:
 	if _pool.is_empty():
 		for i in POOL_SIZE:
 			_pool.append(_new_note())
+
+
+func _refresh_speed() -> void:
+	speed = Rules.note_speed()
 
 
 func approach_ms() -> float:
