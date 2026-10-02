@@ -269,6 +269,58 @@ mouse_filter = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 15
 
+[node name="Detail" type="PanelContainer" parent="."]
+layout_mode = 1
+offset_left = 908.0
+offset_top = 88.0
+offset_right = 1240.0
+offset_bottom = 644.0
+
+[node name="Box" type="VBoxContainer" parent="Detail"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PName" type="Label" parent="Detail/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+
+[node name="PLine" type="Label" parent="Detail/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+autowrap_mode = 3
+
+[node name="Gap" type="Control" parent="Detail/Box"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Actions" type="VBoxContainer" parent="Detail/Box"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Continue" type="Button" parent="Detail/Box/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "UI_CONTINUE"
+
+[node name="Rename" type="Button" parent="Detail/Box/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "UI_RENAME"
+
+[node name="DeleteProfile" type="Button" parent="Detail/Box/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"Danger"
+text = "UI_DELETE_PROFILE"
+
 [node name="NamePanel" type="Control" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -306,6 +358,7 @@ layout_mode = 2
 theme_override_constants/separation = 16
 
 [node name="Prompt" type="Label" parent="NamePanel/Centre/Card/Box"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 horizontal_alignment = 1
@@ -332,3 +385,7 @@ script = ExtResource("4_hb")
 
 [node name="Confirm" parent="." instance=ExtResource("3_cf")]
 unique_name_in_owner = true
+
+[connection signal="pressed" from="Detail/Box/Actions/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="Detail/Box/Actions/Rename" to="." method="_on_rename_pressed"]
+[connection signal="pressed" from="Detail/Box/Actions/DeleteProfile" to="." method="_on_delete_profile_pressed"]

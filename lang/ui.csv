@@ -100,3 +100,7 @@ UI_NOT_CLEARED_DASH,— (not cleared),— (ยังไม่ผ่าน)
 UI_REWARD_JOINS,%s joins your party,%s เข้าร่วมทีมของคุณ
 UI_NEW_GAME,New game,เกมใหม่
 UI_EMPTY_SLOT_LINE,empty slot,ช่องว่าง
+UI_CONTINUE,Continue,เล่นต่อ
+UI_RENAME,Rename,เปลี่ยนชื่อ
+UI_DELETE_PROFILE,Delete profile,ลบโปรไฟล์
+UI_RENAME_PROMPT,What should we call you instead?,อยากให้เราเรียกคุณว่าอะไรแทน
