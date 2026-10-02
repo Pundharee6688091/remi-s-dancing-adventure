@@ -302,21 +302,18 @@ theme_override_constants/separation = 12
 [node name="Continue" type="Button" parent="Detail/Box/Actions"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_mode = 0
 mouse_default_cursor_shape = 2
 text = "UI_CONTINUE"
 
 [node name="Rename" type="Button" parent="Detail/Box/Actions"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_mode = 0
 mouse_default_cursor_shape = 2
 text = "UI_RENAME"
 
 [node name="DeleteProfile" type="Button" parent="Detail/Box/Actions"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_mode = 0
 mouse_default_cursor_shape = 2
 theme_type_variation = &"Danger"
 text = "UI_DELETE_PROFILE"

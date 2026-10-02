@@ -1,7 +1,7 @@
 extends Control
 ## Layout lives in save_slots.tscn. Three cards on the left, a detail panel on
-## the right for whichever card is highlighted. The panel's buttons are
-## mouse-only (focus_mode NONE) so left/right still means "choose slot".
+## the right for whichever card is highlighted. Left and right choose a slot,
+## Enter steps into the panel, Esc steps back out.
 
 const SLOTS := 3
 const PORTRAIT := "res://characters/remi/Remi_default.png"
@@ -22,11 +22,13 @@ func _ready() -> void:
 		var slot := i + 1
 		var card := _cards[i]
 		(card.get_node("Pad/Box/Art/Filled/Portrait") as TextureRect).texture = art
-		card.pressed.connect(func() -> void: _open_slot(slot))
+		# Enter picks the slot and steps into the panel rather than loading.
+		card.pressed.connect(func() -> void: _enter_panel(slot))
 		# Highlighting a card is what drives the panel, by keyboard or mouse.
 		card.focus_entered.connect(func() -> void: _select(slot))
 		card.mouse_entered.connect(card.grab_focus)
 
+	UIKit.trap_focus(_cards)
 	_confirm.answered.connect(_on_delete_answered)
 	_confirm.visibility_changed.connect(_sync_hints)
 	_name_panel.visibility_changed.connect(_sync_hints)
@@ -41,7 +43,7 @@ func _ready() -> void:
 
 
 func _set_hints() -> void:
-	%Hints.set_hints([["◀ ▶", tr("UI_CHOOSE_SLOT")], ["Enter", tr("UI_SELECT")],
+	%Hints.set_hints([[["←", "→"], tr("UI_CHOOSE_SLOT")], ["Enter", tr("UI_SELECT")],
 		["Del", tr("UI_DELETE")], ["Esc", tr("UI_BACK")]])
 
 
@@ -77,8 +79,24 @@ func _select(slot: int) -> void:
 	%Rename.disabled = not used
 	%DeleteProfile.disabled = not used
 
+	# A disabled button cannot hold focus, so keep it out of the cycle.
+	var live: Array = [%Continue]
+	if used:
+		live.append(%Rename)
+		live.append(%DeleteProfile)
+	UIKit.trap_focus(live)
+
 
 # ---------- actions ----------
+
+func _enter_panel(slot: int) -> void:
+	_pending_slot = slot
+	%Continue.grab_focus()
+
+
+func _panel_has_focus() -> bool:
+	return get_viewport().gui_get_focus_owner() in [%Continue, %Rename, %DeleteProfile]
+
 
 func _open_slot(slot: int) -> void:
 	_pending_slot = slot
@@ -160,11 +178,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if event.is_action_pressed("ui_cancel"):
-		SceneRouter.back()
+		if _panel_has_focus():
+			_cards[_pending_slot - 1].grab_focus()
+		else:
+			SceneRouter.back()
 	elif event.is_action_pressed("delete"):
-		_ask_delete(_focused_slot())
+		_ask_delete(_pending_slot)
 
-
-func _focused_slot() -> int:
-	var idx := _cards.find(get_viewport().gui_get_focus_owner())
-	return idx + 1 if idx >= 0 else 0

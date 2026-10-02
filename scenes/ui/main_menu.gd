@@ -14,7 +14,7 @@ func _ready() -> void:
 
 	_confirm.answered.connect(_on_quit_answered)
 	_confirm.visibility_changed.connect(_sync_hints)
-	%Hints.set_hints([["▲ ▼", tr("UI_MOVE")], ["Enter", tr("UI_SELECT")],
+	%Hints.set_hints([[["↑", "↓"], tr("UI_MOVE")], ["Enter", tr("UI_SELECT")],
 		["Esc", tr("UI_BACK_TO_PROFILES")]])
 
 	_story.grab_focus()

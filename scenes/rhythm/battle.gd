@@ -270,7 +270,8 @@ func blocks_reload() -> bool:
 
 
 func _set_hints() -> void:
-	%Hints.set_hints([["W A S D", tr("UI_HIT_ON_GHOST")], ["Esc", tr("UI_PAUSE")]])
+	%Hints.set_hints([[["W", "A", "S", "D", "↑", "←", "↓", "→"], tr("UI_HIT_ON_GHOST")],
+		["Esc", tr("UI_PAUSE")]])
 
 
 ## An open overlay brings its own hints, so the battle's would double up.

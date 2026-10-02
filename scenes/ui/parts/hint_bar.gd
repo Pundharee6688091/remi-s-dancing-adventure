@@ -41,6 +41,7 @@ func _ready() -> void:
 
 
 ## hints is a list of [key, label] pairs, optionally with a Callable third.
+## key is one cap, or an array of caps that share the one description.
 ## Every bar ends with the language toggle, so it is reachable from any screen.
 func set_hints(hints: Array, with_language := true) -> void:
 	for c in _row.get_children():
@@ -50,16 +51,17 @@ func set_hints(hints: Array, with_language := true) -> void:
 		var cb := Callable()
 		if pair.size() > 2 and pair[2] is Callable:
 			cb = pair[2]
-		_row.add_child(_cell(str(pair[0]), str(pair[1]), cb))
+		_row.add_child(_cell(pair[0], str(pair[1]), cb))
 
 	if with_language:
 		_row.add_child(_cell("F2", tr("UI_LANGUAGE"), Loc.toggle))
 
 
-func _cell(key: String, label: String, cb: Callable) -> HBoxContainer:
+func _cell(keys: Variant, label: String, cb: Callable) -> HBoxContainer:
 	var cell := HBoxContainer.new()
 	cell.add_theme_constant_override("separation", 7)
-	cell.add_child(_cap_node(key, cb))
+	for k in (keys if keys is Array else [keys]):
+		cell.add_child(_cap_node(str(k), cb))
 
 	var word := Label.new()
 	word.text = label

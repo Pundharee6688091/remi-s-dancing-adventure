@@ -20,7 +20,7 @@ func _ready() -> void:
 
 
 func _set_hints() -> void:
-	%Hints.set_hints([["▲ ▼", tr("UI_MOVE")], ["Enter", tr("UI_SELECT")],
+	%Hints.set_hints([[["↑", "↓"], tr("UI_MOVE")], ["Enter", tr("UI_SELECT")],
 		["Esc", tr("UI_RESUME")]])
 
 

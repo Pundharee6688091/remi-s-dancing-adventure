@@ -12,7 +12,7 @@ func _ready() -> void:
 	_detail.fight_pressed.connect(GameManager.enter_node)
 	# An open popup carries its own hints, so the screen's would double up.
 	_detail.visibility_changed.connect(_sync_hints)
-	%Hints.set_hints([["< >", tr("UI_WALK")], ["Enter", tr("UI_OPEN")],
+	%Hints.set_hints([[["←", "→"], tr("UI_WALK")], ["Enter", tr("UI_OPEN")],
 		["Esc", tr("UI_MAIN_MENU")]])
 
 	Events.progress_changed.connect(_refresh)

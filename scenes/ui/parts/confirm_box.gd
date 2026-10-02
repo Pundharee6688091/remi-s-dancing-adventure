@@ -33,7 +33,7 @@ func is_open() -> bool:
 
 
 func _set_hints() -> void:
-	%Hints.set_hints([["◀ ▶", tr("UI_CHOOSE")], ["Enter", tr("UI_CONFIRM")],
+	%Hints.set_hints([[["←", "→"], tr("UI_CHOOSE")], ["Enter", tr("UI_CONFIRM")],
 		["Esc", tr("UI_CANCEL")]])
 
 
