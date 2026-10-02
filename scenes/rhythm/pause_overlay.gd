@@ -5,6 +5,7 @@ extends Control
 signal resume_pressed
 signal restart_pressed
 signal quit_pressed
+signal settings_pressed
 
 @onready var _info: Label = %Info
 @onready var _resume: Button = %Resume
@@ -39,7 +40,7 @@ func _on_restart_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
-	SceneRouter.goto(GameManager.SETTINGS)
+	settings_pressed.emit()
 
 
 func _on_quit_pressed() -> void:

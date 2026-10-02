@@ -11,10 +11,16 @@ const PATH := "user://settings.cfg"
 const SPEED_STEPS := 10
 const SPEED_DEFAULT := 5
 
+## Audio offset in milliseconds. Positive means the chart is read later, for
+## headphones or a TV that lag behind.
+const OFFSET_RANGE := 200
+const OFFSET_STEP := 5
+
 var music := 80
 var sfx := 70
 var note_speed := SPEED_DEFAULT
 var fullscreen := false
+var offset := 0
 
 
 func _ready() -> void:
@@ -36,6 +42,8 @@ func set_value(key: String, value: Variant) -> void:
 			note_speed = clampi(int(value), 1, SPEED_STEPS)
 		"fullscreen":
 			fullscreen = bool(value)
+		"offset":
+			offset = clampi(int(value), -OFFSET_RANGE, OFFSET_RANGE)
 		_:
 			return
 	apply()
@@ -59,6 +67,7 @@ func save_settings() -> void:
 	cfg.set_value("audio", "music", music)
 	cfg.set_value("audio", "sfx", sfx)
 	cfg.set_value("gameplay", "note_speed", note_speed)
+	cfg.set_value("gameplay", "offset", offset)
 	cfg.set_value("display", "fullscreen", fullscreen)
 	cfg.save(PATH)
 
@@ -70,5 +79,7 @@ func load_settings() -> void:
 		sfx = clampi(int(cfg.get_value("audio", "sfx", sfx)), 0, 100)
 		note_speed = clampi(int(cfg.get_value("gameplay", "note_speed", note_speed)),
 			1, SPEED_STEPS)
+		offset = clampi(int(cfg.get_value("gameplay", "offset", offset)),
+			-OFFSET_RANGE, OFFSET_RANGE)
 		fullscreen = bool(cfg.get_value("display", "fullscreen", fullscreen))
 	apply()

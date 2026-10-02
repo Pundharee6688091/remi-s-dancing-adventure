@@ -12,6 +12,7 @@ enum State { COUNTDOWN, PLAYING, PAUSED, RESULT }
 @onready var hud: BattleHUD = $HUD
 @onready var pause_overlay: PauseOverlay = $Pause
 @onready var result_overlay: ResultOverlay = $Result
+@onready var settings_overlay: Control = $Settings
 @onready var debug: Label = $Debug
 
 
@@ -61,6 +62,10 @@ func _ready() -> void:
 	pause_overlay.resume_pressed.connect(_resume)
 	pause_overlay.restart_pressed.connect(_restart)
 	pause_overlay.quit_pressed.connect(GameManager.leave_stage)
+	pause_overlay.settings_pressed.connect(_open_settings)
+	settings_overlay.routed = false
+	settings_overlay.closed.connect(_close_settings)
+	settings_overlay.visibility_changed.connect(_sync_hints)
 	result_overlay.continue_pressed.connect(GameManager.leave_stage)
 	result_overlay.retry_pressed.connect(_restart)
 	
@@ -90,6 +95,9 @@ func _process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	# Settings is a full overlay and owns every key while it is up.
+	if settings_overlay.visible:
+		return
 	match state:
 		State.PLAYING:
 			if event.is_action_pressed("ui_cancel"):
@@ -284,4 +292,17 @@ func _set_hints() -> void:
 
 ## An open overlay brings its own hints, so the battle's would double up.
 func _sync_hints() -> void:
-	%Hints.visible = not (pause_overlay.visible or result_overlay.visible)
+	%Hints.visible = not (pause_overlay.visible or result_overlay.visible
+		or settings_overlay.visible)
+
+
+## Settings opens over the paused song rather than routing away, so the stage
+## is still here when it closes. Routing would rebuild battle.tscn and the
+## song would start again from the top.
+func _open_settings() -> void:
+	pause_overlay.hide()
+	settings_overlay.show()
+
+
+func _close_settings() -> void:
+	pause_overlay.open(_pause_info())

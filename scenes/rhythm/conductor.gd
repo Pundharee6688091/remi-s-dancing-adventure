@@ -8,7 +8,8 @@ var _running := false
 
 func setup(song: AudioStreamPlayer) -> void:
 	_song = song
-	offset_ms = float(Rules.data.get("user_offset_ms", 0))
+	# The data file sets the baseline; the player's setting shifts it.
+	offset_ms = float(Rules.data.get("user_offset_ms", 0)) + float(Settings.offset)
 
 func start() -> void:
 	_song.play()

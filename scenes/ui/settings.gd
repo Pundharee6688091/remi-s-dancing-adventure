@@ -3,10 +3,16 @@ extends Control
 ## tabs. Up and down move between rows, left and right adjust the focused one,
 ## and every change applies and saves the moment it happens.
 
-const ROWS := ["Music", "Sfx", "Speed", "Language", "Fullscreen", "Controls"]
+const ROWS := ["Music", "Sfx", "Speed", "Offset", "Language", "Fullscreen", "Controls"]
 const STEP := 5          # volume rows move in fives
 
 var _row := 0
+
+## True when SceneRouter owns this screen. False when it is an overlay inside
+## another screen, which closes itself instead of popping the stack.
+var routed := true
+
+signal closed()
 
 
 func _ready() -> void:
@@ -39,12 +45,15 @@ func _refresh() -> void:
 		row.theme_type_variation = &"RowOn" if i == _row else &"Row"
 		var hint := row.get_node("Box/Hint") as Label
 		if hint != null:
-			hint.text = tr("UI_ADJUST_HINT") if i == _row and i < 3 else ""
+			hint.text = tr("UI_ADJUST_HINT") if i == _row and i < 4 else ""
 
 	_slider("Music", Settings.music, 100, str(Settings.music))
 	_slider("Sfx", Settings.sfx, 100, str(Settings.sfx))
 	_slider("Speed", Settings.note_speed, Settings.SPEED_STEPS,
 		"%d / %d" % [Settings.note_speed, Settings.SPEED_STEPS])
+	# The bar runs from -200 to +200, so zero sits in the middle.
+	_slider("Offset", Settings.offset + Settings.OFFSET_RANGE,
+		Settings.OFFSET_RANGE * 2, tr("UI_MS") % Settings.offset)
 
 	_choice("Language", Loc.current() == "en")
 	_choice("Fullscreen", Settings.fullscreen)
@@ -62,7 +71,17 @@ func _choice(name: String, first: bool) -> void:
 	box.get_node("OptB").theme_type_variation = &"Choice" if first else &"ChoiceOn"
 
 
+func close() -> void:
+	if routed:
+		SceneRouter.back()
+	else:
+		hide()
+		closed.emit()
+
+
 func _unhandled_input(event: InputEvent) -> void:
+	if not visible:
+		return
 	if event.is_action_pressed("ui_down"):
 		_move(1)
 	elif event.is_action_pressed("ui_up"):
@@ -75,7 +94,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_activate()
 	elif event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
-		SceneRouter.back()
+		close()
 
 
 func _move(step: int) -> void:
@@ -91,6 +110,8 @@ func _adjust(dir: int) -> void:
 			Settings.set_value("sfx", Settings.sfx + dir * STEP)
 		"Speed":
 			Settings.set_value("note_speed", Settings.note_speed + dir)
+		"Offset":
+			Settings.set_value("offset", Settings.offset + dir * Settings.OFFSET_STEP)
 		"Language":
 			Loc.apply("en" if dir < 0 else "th")
 			return          # _on_language_changed refreshes

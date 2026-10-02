@@ -13,6 +13,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_set")
 
+[node name="Bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.96862745, 0.9607843, 0.9411765, 1)
+
 [node name="Header" type="HBoxContainer" parent="."]
 layout_mode = 1
 offset_left = 32.0
@@ -38,7 +47,7 @@ layout_mode = 1
 offset_left = 40.0
 offset_top = 88.0
 offset_right = 1240.0
-offset_bottom = 500.0
+offset_bottom = 560.0
 theme_override_constants/separation = 10
 
 [node name="Music" type="PanelContainer" parent="Rows"]
@@ -146,6 +155,43 @@ layout_mode = 2
 size_flags_vertical = 4
 
 [node name="Hint" type="Label" parent="Rows/Speed/Box"]
+custom_minimum_size = Vector2(84, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.7882353, 0.3137255, 0.18431373, 1)
+theme_override_font_sizes/font_size = 15
+
+[node name="Offset" type="PanelContainer" parent="Rows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+theme_type_variation = &"Row"
+
+[node name="Box" type="HBoxContainer" parent="Rows/Offset"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Key" type="Label" parent="Rows/Offset/Box"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 21
+text = "UI_SET_OFFSET"
+
+[node name="Bar" type="Control" parent="Rows/Offset/Box"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+script = ExtResource("2_bar")
+fill_color = Color(0.169, 0.169, 0.169, 1)
+
+[node name="Value" type="Label" parent="Rows/Offset/Box"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Hint" type="Label" parent="Rows/Offset/Box"]
 custom_minimum_size = Vector2(84, 0)
 layout_mode = 2
 size_flags_vertical = 4

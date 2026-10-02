@@ -138,3 +138,5 @@ UI_OFF,OFF,ปิด
 UI_OPEN_ARROW,Open ›,เปิด ›
 UI_ADJUST,Adjust,ปรับ
 UI_ADJUST_HINT,adjust,ปรับ
+UI_SET_OFFSET,Audio offset,ชดเชยเสียง
+UI_MS,%+d ms,%+d ms

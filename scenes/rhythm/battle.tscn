@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://c7pnl0i2n3nsa" path="res://scenes/rhythm/note_field.gd" id="4_sasum"]
 [ext_resource type="PackedScene" path="res://scenes/rhythm/hud.tscn" id="5_yecsb"]
 [ext_resource type="PackedScene" path="res://scenes/rhythm/result_overlay.tscn" id="6_st8th"]
+[ext_resource type="PackedScene" path="res://scenes/ui/settings.tscn" id="11_set"]
 [ext_resource type="PackedScene" path="res://scenes/rhythm/pause_overlay.tscn" id="8_nbtlf"]
 [ext_resource type="Texture2D" uid="uid://bv76h1qsueb8w" path="res://songs/song_theo/Enemy.png" id="9_tb7li"]
 
@@ -72,3 +73,6 @@ script = ExtResource("10_hb")
 [node name="Pause" parent="." instance=ExtResource("8_nbtlf")]
 
 [node name="Result" parent="." instance=ExtResource("6_st8th")]
+
+[node name="Settings" parent="." instance=ExtResource("11_set")]
+visible = false
