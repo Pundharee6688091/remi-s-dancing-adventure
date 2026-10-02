@@ -13,6 +13,7 @@ const ROAD := Color("#efe9dc")
 
 var cursor := 0
 var _shake := 0.0
+var _song_cache := {}
 
 
 func shake() -> void:
@@ -34,8 +35,54 @@ func _draw() -> void:
 	for i in Rules.node_order.size():
 		_draw_node(Rules.node_order[i], i == cursor, font)
 
+	_draw_zones(font)
 	_draw_info_card(font)
 	_draw_legend(font)
+
+## Nodes grouped by their "zone" field. Nodes without one are skipped,
+## so the headers disappear entirely until the data asks for them.
+func _zones() -> Dictionary:
+	var out := {}
+	for id in Rules.node_order:
+		var z: int = int(Rules.stage(id).get("zone", 0))
+		if z <= 0:
+			continue
+		if not out.has(z):
+			out[z] = []
+		out[z].append(id)
+	return out
+
+
+func _draw_zones(font: Font) -> void:
+	for z in _zones():
+		var ids: Array = _zones()[z]
+		var left := INF
+		var done := 0
+		for id in ids:
+			left = minf(left, _pos(id).x)
+			if GameManager.is_cleared(id):
+				done += 1
+		var x: float = left - FIGHT_R
+		draw_string(font, Vector2(x, TOP + 36.0), tr("UI_ZONE") % z,
+			HORIZONTAL_ALIGNMENT_LEFT, -1, 20, Palette.INK)
+		draw_string(font, Vector2(x, TOP + 58.0), "%d / %d" % [done, ids.size()],
+			HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Palette.MUTED)
+
+
+## Chart title and audio length, looked up once per song.
+func _song_info(song_id: String) -> Dictionary:
+	if _song_cache.has(song_id):
+		return _song_cache[song_id]
+	var info := {"title": song_id, "length": 0.0}
+	if FileAccess.file_exists(Rules.chart_path(song_id)):
+		info.title = ChartParser.parse(Rules.chart_path(song_id)).title
+	if ResourceLoader.exists(Rules.song_path(song_id)):
+		var stream: AudioStream = load(Rules.song_path(song_id))
+		if stream != null:
+			info.length = stream.get_length()
+	_song_cache[song_id] = info
+	return info
+
 
 func _road_nodes() -> Array:
 	var linked := {}
@@ -160,7 +207,9 @@ func _draw_info_card(font: Font) -> void:
 		line = tr("UI_LOCKED")
 	elif fight:
 		var stars := GameManager.stars_for(id)
-		line = "%s · %s" % [n.get("song", "?"),
+		var si := _song_info(n.get("song", ""))
+		var secs := int(si.length)
+		line = "%s · %d:%02d · %s" % [si.title, secs / 60, secs % 60,
 			tr("UI_CLEARED") if stars > 0 else tr("UI_NOT_CLEARED")]
 	else:
 		line = tr("UI_SEEN") if GameManager.is_cleared(id) else tr("UI_NOT_SEEN")
@@ -239,6 +288,20 @@ func _draw_pin(font: Font, bottom: Vector2) -> void:
 		Vector2(bottom.x, bottom.y + 2.0)]), Palette.AMBER)
 	draw_string(font, Vector2(box.position.x, box.position.y + 24.0), "Remi",
 		HORIZONTAL_ALIGNMENT_CENTER, w, 18, Palette.INK)
+
+
+## Index of the map node under a point, or -1. Used for mouse clicks.
+func node_at(point: Vector2) -> int:
+	var best := -1
+	var best_d := INF
+	for i in Rules.node_order.size():
+		var id: String = Rules.node_order[i]
+		var r: float = FIGHT_R if Rules.stage(id).get("type") == "fight" else STORY_R
+		var d := _pos(id).distance_to(point)
+		if d <= r + 6.0 and d < best_d:
+			best_d = d
+			best = i
+	return best
 
 
 func _pos(id: String) -> Vector2:

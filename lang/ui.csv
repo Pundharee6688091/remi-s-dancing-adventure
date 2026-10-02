@@ -86,3 +86,4 @@ UI_LANGUAGE,Language,ภาษา
 UI_CHANGE_PROFILE,Change profile,เปลี่ยนโปรไฟล์
 UI_CHOOSE_SLOT,Choose slot,เลือกช่อง
 UI_BACK_TO_PROFILES,Back to profiles,กลับไปหน้าโปรไฟล์
+UI_ZONE,Zone %d,โซน %d

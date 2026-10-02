@@ -18,6 +18,29 @@ func _ready() -> void:
 	_refresh()
 
 
+## Click a node to walk there and open it; hovering moves the cursor.
+func _gui_input(event: InputEvent) -> void:
+	if _detail.visible:
+		return
+
+	if event is InputEventMouseMotion:
+		var over := _view.node_at(event.position)
+		mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND if over >= 0 \
+			else Control.CURSOR_ARROW
+		if over >= 0 and over != _view.cursor:
+			_view.cursor = over
+			_view.queue_redraw()
+
+	elif event is InputEventMouseButton and event.pressed \
+			and event.button_index == MOUSE_BUTTON_LEFT:
+		var hit := _view.node_at(event.position)
+		if hit >= 0:
+			accept_event()
+			_view.cursor = hit
+			_view.queue_redraw()
+			_confirm()
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if _detail.visible:
 		return

@@ -62,5 +62,9 @@ func _swap(path: String, params: Dictionary) -> void:
 
 
 func reload() -> void:
-	if _current_path != "":
-		_swap(_current_path, _current_params)
+	if _current_path == "":
+		return
+	# A screen mid-song or mid-timeline would lose its place if rebuilt.
+	if _current != null and _current.has_method("blocks_reload") and _current.blocks_reload():
+		return
+	_swap(_current_path, _current_params)

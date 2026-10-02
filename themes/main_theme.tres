@@ -1,24 +1,40 @@
 [gd_resource type="Theme" format=3 uid="uid://bljpekktpig0h"]
 
 [ext_resource type="FontFile" uid="uid://c4p2iurlnihdj" path="res://fonts/PatrickHand-Regular.ttf" id="1_rjgu6"]
-[ext_resource type="StyleBox" path="res://themes/pill.tres" id="2_pill"]
-[ext_resource type="StyleBox" path="res://themes/pill_hover.tres" id="3_pillhv"]
+[ext_resource type="StyleBox" uid="uid://1m06h7jbr8vj" path="res://themes/pill.tres" id="2_pill"]
+[ext_resource type="StyleBox" uid="uid://bm2sfxu4asgah" path="res://themes/pill_hover.tres" id="3_pillhv"]
+[ext_resource type="StyleBox" uid="uid://b3suydexhe3wf" path="res://themes/btn_danger.tres" id="4_dang"]
+[ext_resource type="StyleBox" uid="uid://rsdgb7qsrwsq" path="res://themes/btn_danger_hover.tres" id="5_danghv"]
+[ext_resource type="StyleBox" uid="uid://cca650cn8lmpn" path="res://themes/btn_danger_focus.tres" id="6_dangfc"]
+[ext_resource type="StyleBox" uid="uid://dymi3kr062ynh" path="res://themes/card_panel.tres" id="7_card"]
 [ext_resource type="StyleBox" path="res://themes/pill_pressed.tres" id="8_pillpr"]
-[ext_resource type="StyleBox" path="res://themes/btn_danger.tres" id="4_dang"]
-[ext_resource type="StyleBox" path="res://themes/btn_danger_hover.tres" id="5_danghv"]
-[ext_resource type="StyleBox" path="res://themes/btn_danger_focus.tres" id="6_dangfc"]
-[ext_resource type="StyleBox" path="res://themes/card_panel.tres" id="7_card"]
 
-[sub_resource type="StyleBoxFlat" id="btn_normal"]
+[sub_resource type="StyleBoxFlat" id="btn_disabled"]
 content_margin_left = 18.0
 content_margin_top = 8.0
 content_margin_right = 18.0
 content_margin_bottom = 8.0
-bg_color = Color(1, 1, 1, 1)
+bg_color = Color(0.9019608, 0.8901961, 0.8627451, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
+border_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="btn_focus"]
+content_margin_left = 18.0
+content_margin_top = 8.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 0.953, 0.867, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
 border_color = Color(0.169, 0.169, 0.169, 1)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
@@ -41,55 +57,11 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[sub_resource type="StyleBoxFlat" id="btn_focus"]
+[sub_resource type="StyleBoxFlat" id="btn_normal"]
 content_margin_left = 18.0
 content_margin_top = 8.0
 content_margin_right = 18.0
 content_margin_bottom = 8.0
-bg_color = Color(1, 0.953, 0.867, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.169, 0.169, 0.169, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="StyleBoxFlat" id="btn_disabled"]
-content_margin_left = 18.0
-content_margin_top = 8.0
-content_margin_right = 18.0
-content_margin_bottom = 8.0
-bg_color = Color(0.9019608, 0.8901961, 0.8627451, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="StyleBoxFlat" id="panel_box"]
-content_margin_left = 20.0
-content_margin_top = 20.0
-content_margin_right = 20.0
-content_margin_bottom = 20.0
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.169, 0.169, 0.169, 1)
-
-[sub_resource type="StyleBoxFlat" id="edit_normal"]
-content_margin_left = 12.0
-content_margin_top = 6.0
-content_margin_right = 12.0
-content_margin_bottom = 6.0
 bg_color = Color(1, 1, 1, 1)
 border_width_left = 2
 border_width_top = 2
@@ -117,6 +89,34 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
+[sub_resource type="StyleBoxFlat" id="edit_normal"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.169, 0.169, 0.169, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="panel_box"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.169, 0.169, 0.169, 1)
+
 [sub_resource type="StyleBoxEmpty" id="empty"]
 
 [resource]
@@ -133,14 +133,6 @@ Button/styles/focus = SubResource("btn_focus")
 Button/styles/hover = SubResource("btn_hover")
 Button/styles/normal = SubResource("btn_normal")
 Button/styles/pressed = SubResource("btn_focus")
-Label/colors/font_color = Color(0.169, 0.169, 0.169, 1)
-LineEdit/colors/caret_color = Color(0.169, 0.169, 0.169, 1)
-LineEdit/colors/font_color = Color(0.169, 0.169, 0.169, 1)
-LineEdit/colors/font_placeholder_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
-LineEdit/font_sizes/font_size = 20
-LineEdit/styles/focus = SubResource("edit_focus")
-LineEdit/styles/normal = SubResource("edit_normal")
-PanelContainer/styles/panel = SubResource("panel_box")
 Card/base_type = &"PanelContainer"
 Card/styles/panel = ExtResource("7_card")
 Danger/base_type = &"Button"
@@ -152,6 +144,14 @@ Danger/styles/focus = ExtResource("6_dangfc")
 Danger/styles/hover = ExtResource("5_danghv")
 Danger/styles/normal = ExtResource("4_dang")
 Danger/styles/pressed = ExtResource("6_dangfc")
+Label/colors/font_color = Color(0.169, 0.169, 0.169, 1)
+LineEdit/colors/caret_color = Color(0.169, 0.169, 0.169, 1)
+LineEdit/colors/font_color = Color(0.169, 0.169, 0.169, 1)
+LineEdit/colors/font_placeholder_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+LineEdit/font_sizes/font_size = 20
+LineEdit/styles/focus = SubResource("edit_focus")
+LineEdit/styles/normal = SubResource("edit_normal")
+PanelContainer/styles/panel = SubResource("panel_box")
 Pill/base_type = &"Button"
 Pill/font_sizes/font_size = 18
 Pill/styles/focus = SubResource("empty")

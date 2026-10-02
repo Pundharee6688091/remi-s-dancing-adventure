@@ -255,3 +255,9 @@ func _countdown() -> bool:
 
 func _on_note_judged(judgement: String, lane: int) -> void:
 	track.pop_judgement(lane, judgement)
+
+## Rebuilding this mid-song would restart the stage, so a language change
+## leaves it alone. Its labels hold translation keys, so Godot re-translates
+## them in place.
+func blocks_reload() -> bool:
+	return true

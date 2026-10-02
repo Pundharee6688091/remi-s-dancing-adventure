@@ -29,4 +29,3 @@ func _unhandled_input(event: InputEvent) -> void:
 	if is_button and event.is_pressed() and not event.is_echo():
 		get_viewport().set_input_as_handled()
 		SceneRouter.goto(SAVE_SLOTS)
-

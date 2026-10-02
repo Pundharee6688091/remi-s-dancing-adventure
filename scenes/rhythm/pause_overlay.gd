@@ -13,10 +13,15 @@ signal quit_pressed
 func _ready() -> void:
 	UIKit.trap_focus([%Resume, %Restart, %Quit])
 
-	%Hints.set_hints([["▲ ▼", tr("UI_MOVE")], ["Enter", tr("UI_SELECT")],
-		["Esc", tr("UI_RESUME")]])
+	_set_hints()
+	Events.language_changed.connect(_set_hints)
 
 	hide()
+
+
+func _set_hints() -> void:
+	%Hints.set_hints([["▲ ▼", tr("UI_MOVE")], ["Enter", tr("UI_SELECT")],
+		["Esc", tr("UI_RESUME")]])
 
 
 func open(info := "") -> void:

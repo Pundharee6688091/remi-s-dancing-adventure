@@ -28,3 +28,9 @@ func _exit_tree() -> void:
 		Dialogic.timeline_ended.disconnect(_on_timeline_ended)
 	if Dialogic.current_timeline != null:
 		Dialogic.end_timeline()
+
+## Rebuilding this mid-song would restart the stage, so a language change
+## leaves it alone. Its labels hold translation keys, so Godot re-translates
+## them in place.
+func blocks_reload() -> bool:
+	return true
