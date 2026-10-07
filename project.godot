@@ -31,8 +31,6 @@ Audio="*res://autoload/audio.gd"
 
 [dialogic]
 
-audio/type_sound_bus="SFX"
-
 directories/dch_directory={
 "Theo": "res://characters/Theo/theo.dch",
 "cassia": "res://characters/Cassia/cassia.dch",
@@ -101,6 +99,7 @@ translation/save_mode=0
 translation/add_separator=false
 translation/locales=[]
 translation/id_counter=16
+audio/type_sound_bus="SFX"
 
 [display]
 
