@@ -31,6 +31,8 @@ Audio="*res://autoload/audio.gd"
 
 [dialogic]
 
+audio/type_sound_bus="SFX"
+
 directories/dch_directory={
 "Theo": "res://characters/Theo/theo.dch",
 "cassia": "res://characters/Cassia/cassia.dch",
@@ -43,6 +45,7 @@ directories/dtl_directory={
 "ch2_meet_theo": "res://story/ch2_meet_theo.dtl",
 "ch3_meet_cassia": "res://story/ch3_meet_cassia.dtl",
 "ch4_to_be_continue": "res://story/ch4_to_be_continue.dtl",
+"ch4_to_be_continued": "res://story/ch4_to_be_continued.dtl",
 "tutorial": "res://story/tutorial.dtl"
 }
 layout/style_directory={
