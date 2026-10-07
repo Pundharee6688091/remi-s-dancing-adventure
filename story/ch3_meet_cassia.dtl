@@ -1,0 +1,137 @@
+# Reset the reveal so the scene plays correctly on a replay or a reloaded save.
+set {elion_name} = "Elion"
+set {theo_name} = "Theo"
+set {cassia_name} = "???"
+
+narrator: Once again, Remi finished his dance beautifully, this time under Theo's amazed gaze.
+narrator: Theo stared at him in disbelief, clearly impressed by what he had just witnessed.
+
+join theo (Surprised) leftmost
+theo (Surprised): Whoa-
+theo (Thinking): I must admit, I had my doubts at first... but you really are good at this, Mr. Remi.
+join elion (Default) right
+elion (Default): Just as I expected from Sir Remi! Another wonderful performance!
+join remi (Please) left
+remi (Please): Squeak!
+theo (Default): Then it's settled. Count me in as another member of your team.
+theo (Smile): I hope we'll get along well.
+elion (Smile): Thank you very much!
+remi (Happy): Squeak! Squeak!!
+theo (Default): So… what now?
+elion (Determined): We have three members now, so we are nearly there! Let us go find the final member of our group!
+theo (Thinking): Hmm…
+theo (Default): And do you have any idea who that last person might be?
+elion (Default): From the bottom of my heart, I can confidently say…
+elion (Smile): I have absolutely no idea!
+remi (Sad): …squeak…
+theo (Crashout): …I see.
+
+narrator: The three of them stood there in silence, staring at one another without a single idea coming to mind.
+narrator: After a long moment, Theo was the first to speak.
+
+theo (Thinking): ...Actually, I think I might know someone.
+remi (Confused): Squeak...?
+theo (Default): Before I ran into you two, I saw someone wandering around nearby.
+theo (Thinking): She's incredibly quick on her feet, with sharp reflexes, perfect balance, and precise movements... Honestly, those skills would be perfect for dancing.
+theo (Default): If we can convince her to join us, I think we would have a pretty good chance of winning this contest.
+elion (Determined): Oh! Then we must find her at once!
+theo (Thinking): Yeah... but, uh... we should probably be a little careful when we approach her.
+elion (Confused): Careful?
+theo (Default): Well, she can be... uhh…
+theo (Crashout): Intense…?
+
+narrator: And so, the three of them set off in search of the mysterious woman Theo had spoken of.
+narrator: They searched around the nearby streets, following the direction Theo had last seen her heading.
+narrator: After a short while, Theo suddenly slowed his pace and looked ahead.
+
+theo (Default): ...There.
+
+narrator: A red-skinned tiefling stood with her back to them, white hair shifting above a dark scarf draped like a short cloak as she quietly searched the area.
+narrator: With her back turned to them, none of them could see her face.
+narrator: While the group stood there in silence, Theo cautiously stepped forward.
+
+theo: Hey, Cas-
+
+narrator: Suddenly, in an instant, she vanished from sight.
+
+theo (Surprised): Huh-?!
+
+narrator: Before anyone could react, that tiefling was already behind him, a black dagger resting against his neck.
+
+elion (Surprised): Sir Theo!!!
+remi (Surprised): Squeak!!!
+theo (Shocked): !!!
+
+narrator: The mysterious tiefling paused at Theo's terrified reaction before immediately lowering her weapon.
+
+join cassia (Intimidate) rightmost 
+
+cassia (Intimidate): Oh- it's just you.
+
+narrator: As if nothing had happened, the dagger vanished from sight just as quickly as it had appeared.
+narrator: Standing before them now was an intimidating-looking tiefling, her eyes hidden beneath a dark blindfold.
+
+theo (Crashout): …!!!
+elion (Smile): Ah! Lady Cassia! So it really is you. We meet again!
+
+# Elion says her name here, so the name box stops saying ??? from this point on.
+set {cassia_name} = "Cassia"
+
+remi: Squeak?!
+
+narrator: Somehow, it seemed Elion knew this intimidating tiefling as well.
+narrator: At this point, Remi was beginning to wonder just how many people Elion knew.
+
+theo (Shocked): Uh- Umm… Ahem-!
+theo (Default): Um, Mr. Remi, this is [b]Cassia[/b]. She is- well… a [b]rogue[/b] I and Elion have met from our earlier missio-
+cassia (Default): State your purpose.
+theo (Shocked): …!
+elion (Determined): We heard that this festival is hosting a dancing contest, so we have been searching for another member to join our team!
+elion (Default): There are three of us so far. If you joined us, our team would finally be complete.
+cassia: Three?
+elion (Smile): Yes! Sir Theo, myself, and of course, Sir Remi!
+cassia (Confused): …
+cassia: Who the hell is Remi?
+elion (Surprised): Oh! Pardon me. I completely forgot to introduce him.
+
+narrator: Elion enthusiastically knelt beside Remi and gestured toward him.
+
+elion (Smile): This is Sir Remi, the finest dancer I have ever had the honor of witnessing!
+remi (Happy): Squeak!
+cassia (Disapproved): …
+cassia (Default): I am going to ignore the fact that you can apparently talk to a rat and move on.
+theo (Crashout): (!!! Thank god. I'm not the only one wondering how the hell Elion can understand a rat!!!)
+cassia: So you came all this way just to ask if I would join a dancing contest?
+theo (Default): ...Exactly.
+elion (Default): With your remarkable speed and precision, I am certain you would be a great addition to our-
+cassia: I refuse.
+remi (Surprised): Squeak?!!
+cassia: I have no interest in wasting my time on some dancing contest.
+cassia (Mocking): Besides, a team led by a rat? You cannot be serious.
+remi (Sad): Squeak…
+elion (Sad): Lady Cassia! There is no need to speak of Sir Remi that way.
+cassia (Intimidate): I'll speak however I please, don't tell me what to do.
+elion: Lady Cassia, please reconsider.
+elion: Sir Remi has worked very hard for this opportunity. I truly believe he deserves a chance.
+remi (Please): Squeak…
+cassia (Surprised): And why should that matter to me?
+theo (Thinking): U-Um... maybe…
+theo (Default): Maybe you could watch him dance first…?
+cassia (Intimidate): …What?
+theo (Shocked): J-Just once! Then you can decide after that.
+theo (Crashout): (Please…! For my research fund…!)
+cassia (Disapproved): Hm…
+elion: Please, Lady Cassia.
+theo (Default): Y- Yes! Please…
+remi (Please): Squeak!
+cassia (Default): …
+cassia: If this rat is really as good as you two claim, then prove it to me.
+cassia: Impress me, and I might reconsider joining this little team of yours.
+remi (Happy): Squeak!
+
+narrator: Remi stepped forward without hesitation, determined to prove himself once again.
+narrator: Cassia folded her arms and stood silently, waiting to see if it was truly worth her time.
+
+cassia (Intimidate): Go on, rat. Show me what you can do.
+
+narrator: With Elion and Theo watching closely behind him, Remi took his place and prepared to dance.

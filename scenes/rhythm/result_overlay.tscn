@@ -1,11 +1,11 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://d352sfjqmxc5w"]
 
-[ext_resource type="Script" path="res://scenes/rhythm/result_overlay.gd" id="1_ro"]
-[ext_resource type="Script" path="res://scenes/ui/parts/hint_bar.gd" id="2_hb"]
-[ext_resource type="Script" path="res://scenes/rhythm/bar.gd" id="3_bar"]
-[ext_resource type="StyleBox" path="res://themes/panel_fill.tres" id="4_fill"]
+[ext_resource type="Script" uid="uid://d3u3ywbqu2yr3" path="res://scenes/rhythm/result_overlay.gd" id="1_ro"]
+[ext_resource type="Script" uid="uid://batawi1qqiibp" path="res://scenes/ui/parts/hint_bar.gd" id="2_hb"]
+[ext_resource type="Script" uid="uid://bxoedpfs1ey4h" path="res://scenes/rhythm/bar.gd" id="3_bar"]
+[ext_resource type="StyleBox" uid="uid://detwlqlh7ct7f" path="res://themes/panel_fill.tres" id="4_fill"]
 
-[node name="ResultOverlay" type="Control"]
+[node name="ResultOverlay" type="Control" unique_id=210010231]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -15,7 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ro")
 
-[node name="Bg" type="ColorRect" parent="."]
+[node name="Bg" type="ColorRect" parent="." unique_id=939527302]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,29 +24,28 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.96862745, 0.9607843, 0.9411765, 1)
 
-[node name="Header" type="HBoxContainer" parent="."]
+[node name="Header" type="HBoxContainer" parent="." unique_id=653505345]
 layout_mode = 1
 offset_left = 40.0
 offset_top = 18.0
 offset_right = 1240.0
 offset_bottom = 74.0
 theme_override_constants/separation = 28
-alignment = 0
 
-[node name="Title" type="Label" parent="Header"]
+[node name="Title" type="Label" parent="Header" unique_id=1815268653]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 52
 
-[node name="Sub" type="Label" parent="Header"]
+[node name="Sub" type="Label" parent="Header" unique_id=1254176572]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 22
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_font_sizes/font_size = 22
 
-[node name="Left" type="VBoxContainer" parent="."]
+[node name="Left" type="VBoxContainer" parent="." unique_id=918482096]
 layout_mode = 1
 offset_left = 40.0
 offset_top = 88.0
@@ -54,54 +53,53 @@ offset_right = 460.0
 offset_bottom = 644.0
 theme_override_constants/separation = 0
 
-[node name="Art" type="PanelContainer" parent="Left"]
+[node name="Art" type="PanelContainer" parent="Left" unique_id=941125138]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(420, 300)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_fill")
 
-[node name="Portrait" type="TextureRect" parent="Left/Art"]
+[node name="Portrait" type="TextureRect" parent="Left/Art" unique_id=1482886162]
 unique_name_in_owner = true
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Gap1" type="Control" parent="Left"]
+[node name="Gap1" type="Control" parent="Left" unique_id=644378285]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="Flavour" type="Label" parent="Left"]
+[node name="Flavour" type="Label" parent="Left" unique_id=1886270106]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 autowrap_mode = 3
 
-[node name="Reason" type="Label" parent="Left"]
+[node name="Reason" type="Label" parent="Left" unique_id=996251996]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7882353, 0.3137255, 0.18431373, 1)
 autowrap_mode = 3
 
-[node name="Gap2" type="Control" parent="Left"]
+[node name="Gap2" type="Control" parent="Left" unique_id=1193723228]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="Join" type="HBoxContainer" parent="Left"]
+[node name="Join" type="HBoxContainer" parent="Left" unique_id=1673168724]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Icon" type="PanelContainer" parent="Left/Join"]
+[node name="Icon" type="PanelContainer" parent="Left/Join" unique_id=725649467]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_fill")
 
-[node name="JoinText" type="Label" parent="Left/Join"]
+[node name="JoinText" type="Label" parent="Left/Join" unique_id=421102755]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 4
 
-[node name="Right" type="VBoxContainer" parent="."]
+[node name="Right" type="VBoxContainer" parent="." unique_id=2133260545]
 layout_mode = 1
 offset_left = 500.0
 offset_top = 88.0
@@ -109,69 +107,69 @@ offset_right = 1240.0
 offset_bottom = 644.0
 theme_override_constants/separation = 14
 
-[node name="Hp" type="PanelContainer" parent="Right"]
+[node name="Hp" type="PanelContainer" parent="Right" unique_id=738629119]
 layout_mode = 2
 
-[node name="Box" type="VBoxContainer" parent="Right/Hp"]
+[node name="Box" type="VBoxContainer" parent="Right/Hp" unique_id=951309014]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Row" type="HBoxContainer" parent="Right/Hp/Box"]
+[node name="Row" type="HBoxContainer" parent="Right/Hp/Box" unique_id=1430009536]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="Key" type="Label" parent="Right/Hp/Box/Row"]
+[node name="Key" type="Label" parent="Right/Hp/Box/Row" unique_id=388055466]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 text = "UI_LBL_MONSTER_HP"
 
-[node name="HpValue" type="Label" parent="Right/Hp/Box/Row"]
+[node name="HpValue" type="Label" parent="Right/Hp/Box/Row" unique_id=425121831]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 48
 
-[node name="WinLine" type="Label" parent="Right/Hp/Box/Row"]
+[node name="WinLine" type="Label" parent="Right/Hp/Box/Row" unique_id=111804509]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 14
 
-[node name="Gap" type="Control" parent="Right/Hp/Box"]
+[node name="Gap" type="Control" parent="Right/Hp/Box" unique_id=1858319420]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 
-[node name="HpBar" type="Control" parent="Right/Hp/Box"]
+[node name="HpBar" type="Control" parent="Right/Hp/Box" unique_id=1838245273]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
 script = ExtResource("3_bar")
 fill_color = Color(0.7882353, 0.3137255, 0.18431373, 1)
 
-[node name="Stats" type="PanelContainer" parent="Right"]
+[node name="Stats" type="PanelContainer" parent="Right" unique_id=575720906]
 layout_mode = 2
 
-[node name="Box" type="HBoxContainer" parent="Right/Stats"]
+[node name="Box" type="HBoxContainer" parent="Right/Stats" unique_id=340993300]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Judge" type="VBoxContainer" parent="Right/Stats/Box"]
+[node name="Judge" type="VBoxContainer" parent="Right/Stats/Box" unique_id=1404722879]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
 
-[node name="Perfect" type="HBoxContainer" parent="Right/Stats/Box/Judge"]
+[node name="Perfect" type="HBoxContainer" parent="Right/Stats/Box/Judge" unique_id=1139024855]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Key" type="Label" parent="Right/Stats/Box/Judge/Perfect"]
+[node name="Key" type="Label" parent="Right/Stats/Box/Judge/Perfect" unique_id=2025188772]
 custom_minimum_size = Vector2(72, 0)
 layout_mode = 2
 text = "UI_J_PERFECT"
 
-[node name="BarPerfect" type="Control" parent="Right/Stats/Box/Judge/Perfect"]
+[node name="BarPerfect" type="Control" parent="Right/Stats/Box/Judge/Perfect" unique_id=1071634306]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
@@ -181,22 +179,22 @@ script = ExtResource("3_bar")
 value = 0.0
 fill_color = Color(0.9098039, 0.6392157, 0.23921569, 1)
 
-[node name="CountPerfect" type="Label" parent="Right/Stats/Box/Judge/Perfect"]
+[node name="CountPerfect" type="Label" parent="Right/Stats/Box/Judge/Perfect" unique_id=643810295]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(46, 0)
 layout_mode = 2
 horizontal_alignment = 2
 
-[node name="Great" type="HBoxContainer" parent="Right/Stats/Box/Judge"]
+[node name="Great" type="HBoxContainer" parent="Right/Stats/Box/Judge" unique_id=382236461]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Key" type="Label" parent="Right/Stats/Box/Judge/Great"]
+[node name="Key" type="Label" parent="Right/Stats/Box/Judge/Great" unique_id=1063036298]
 custom_minimum_size = Vector2(72, 0)
 layout_mode = 2
 text = "UI_J_GREAT"
 
-[node name="BarGreat" type="Control" parent="Right/Stats/Box/Judge/Great"]
+[node name="BarGreat" type="Control" parent="Right/Stats/Box/Judge/Great" unique_id=1073641514]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
@@ -206,22 +204,22 @@ script = ExtResource("3_bar")
 value = 0.0
 fill_color = Color(0.56078434, 0.7490196, 0.41568628, 1)
 
-[node name="CountGreat" type="Label" parent="Right/Stats/Box/Judge/Great"]
+[node name="CountGreat" type="Label" parent="Right/Stats/Box/Judge/Great" unique_id=1955308059]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(46, 0)
 layout_mode = 2
 horizontal_alignment = 2
 
-[node name="Good" type="HBoxContainer" parent="Right/Stats/Box/Judge"]
+[node name="Good" type="HBoxContainer" parent="Right/Stats/Box/Judge" unique_id=1306071311]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Key" type="Label" parent="Right/Stats/Box/Judge/Good"]
+[node name="Key" type="Label" parent="Right/Stats/Box/Judge/Good" unique_id=509371195]
 custom_minimum_size = Vector2(72, 0)
 layout_mode = 2
 text = "UI_J_GOOD"
 
-[node name="BarGood" type="Control" parent="Right/Stats/Box/Judge/Good"]
+[node name="BarGood" type="Control" parent="Right/Stats/Box/Judge/Good" unique_id=849562258]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
@@ -231,22 +229,22 @@ script = ExtResource("3_bar")
 value = 0.0
 fill_color = Color(0.6117647, 0.76862746, 0.84705883, 1)
 
-[node name="CountGood" type="Label" parent="Right/Stats/Box/Judge/Good"]
+[node name="CountGood" type="Label" parent="Right/Stats/Box/Judge/Good" unique_id=891885358]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(46, 0)
 layout_mode = 2
 horizontal_alignment = 2
 
-[node name="Miss" type="HBoxContainer" parent="Right/Stats/Box/Judge"]
+[node name="Miss" type="HBoxContainer" parent="Right/Stats/Box/Judge" unique_id=1804945707]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Key" type="Label" parent="Right/Stats/Box/Judge/Miss"]
+[node name="Key" type="Label" parent="Right/Stats/Box/Judge/Miss" unique_id=1939428954]
 custom_minimum_size = Vector2(72, 0)
 layout_mode = 2
 text = "UI_J_MISS"
 
-[node name="BarMiss" type="Control" parent="Right/Stats/Box/Judge/Miss"]
+[node name="BarMiss" type="Control" parent="Right/Stats/Box/Judge/Miss" unique_id=1039748792]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
@@ -256,88 +254,89 @@ script = ExtResource("3_bar")
 value = 0.0
 fill_color = Color(0.7882353, 0.3137255, 0.18431373, 1)
 
-[node name="CountMiss" type="Label" parent="Right/Stats/Box/Judge/Miss"]
+[node name="CountMiss" type="Label" parent="Right/Stats/Box/Judge/Miss" unique_id=540434688]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(46, 0)
 layout_mode = 2
 horizontal_alignment = 2
 
-[node name="Side" type="VBoxContainer" parent="Right/Stats/Box"]
+[node name="Side" type="VBoxContainer" parent="Right/Stats/Box" unique_id=724208931]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_constants/separation = 18
 
-[node name="Notes" type="VBoxContainer" parent="Right/Stats/Box/Side"]
+[node name="Notes" type="VBoxContainer" parent="Right/Stats/Box/Side" unique_id=1331242399]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="NotesKey" type="Label" parent="Right/Stats/Box/Side/Notes"]
+[node name="NotesKey" type="Label" parent="Right/Stats/Box/Side/Notes" unique_id=108664170]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 text = "UI_NOTES_HIT"
 
-[node name="NotesValue" type="Label" parent="Right/Stats/Box/Side/Notes"]
+[node name="NotesValue" type="Label" parent="Right/Stats/Box/Side/Notes" unique_id=870284411]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 
-[node name="Stars" type="VBoxContainer" parent="Right/Stats/Box/Side"]
+[node name="Stars" type="VBoxContainer" parent="Right/Stats/Box/Side" unique_id=1222502303]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="StarsKey" type="Label" parent="Right/Stats/Box/Side/Stars"]
+[node name="StarsKey" type="Label" parent="Right/Stats/Box/Side/Stars" unique_id=76891936]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 text = "UI_LBL_STARS"
 
-[node name="StarsValue" type="Label" parent="Right/Stats/Box/Side/Stars"]
+[node name="StarsValue" type="Label" parent="Right/Stats/Box/Side/Stars" unique_id=862410076]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9098039, 0.6392157, 0.23921569, 1)
 theme_override_font_sizes/font_size = 30
 
-[node name="Reward" type="PanelContainer" parent="Right"]
+[node name="Reward" type="PanelContainer" parent="Right" unique_id=887782690]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Row" type="HBoxContainer" parent="Right/Reward"]
+[node name="Row" type="HBoxContainer" parent="Right/Reward" unique_id=296719274]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="Key" type="Label" parent="Right/Reward/Row"]
+[node name="Key" type="Label" parent="Right/Reward/Row" unique_id=1588108805]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 text = "UI_REWARDS"
 
-[node name="RewardText" type="Label" parent="Right/Reward/Row"]
+[node name="RewardText" type="Label" parent="Right/Reward/Row" unique_id=1319870160]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Push" type="Control" parent="Right"]
+[node name="Push" type="Control" parent="Right" unique_id=150470320]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Buttons" type="HBoxContainer" parent="Right"]
+[node name="Buttons" type="HBoxContainer" parent="Right" unique_id=1320187656]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Continue" type="Button" parent="Right/Buttons"]
+[node name="Continue" type="Button" parent="Right/Buttons" unique_id=310388684]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "UI_CONTINUE"
 
-[node name="Retry" type="Button" parent="Right/Buttons"]
+[node name="Retry" type="Button" parent="Right/Buttons" unique_id=316943495]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
 text = "UI_RETRY"
 
-[node name="Hints" type="Control" parent="."]
+[node name="Hints" type="Control" parent="." unique_id=2130633605]
 unique_name_in_owner = true
 layout_mode = 1
+anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("2_hb")
 

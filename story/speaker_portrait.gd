@@ -9,7 +9,8 @@ const DIM := Color(0.60, 0.60, 0.62)
 const FADE := 0.15
 
 var _art: CanvasItem = null
-
+var _tween: Tween = null
+var _lit := true
 
 func _update_portrait(passed_character: DialogicCharacter, passed_portrait: String) -> void:
 	apply_character_and_portrait(passed_character, passed_portrait)
@@ -17,10 +18,24 @@ func _update_portrait(passed_character: DialogicCharacter, passed_portrait: Stri
 	if Engine.is_editor_hint():
 		_tint(LIT)
 		return
-	_tint(LIT if Dialogic.Text.get_current_speaker() == character else DIM)
+	print("[portrait] UPDATE  ", _who(), "  portrait=", passed_portrait, "  node=", get_instance_id())
+	_tint(LIT if _lit else DIM)
+	_sync_to_speaker.call_deferred()
 
+func _sync_to_speaker() -> void:
+	var speaker = Dialogic.Text.get_current_speaker()
+	if speaker == null:
+		return  # narrator line: keep the current state
+	_lit = (speaker == character)
+	_tint(LIT if _lit else DIM)
+	if _lit:
+		var holder := get_parent()
+		if holder != null and holder.get_parent() != null:
+			holder.get_parent().move_child(holder, -1)
 
 func _highlight() -> void:
+	print("[portrait] HIGHLIGHT  ", _who(), "  node=", get_instance_id(), "  art=", _art_node())
+	_lit = true
 	_fade_to(LIT)
 	var holder := get_parent()
 	if holder != null and holder.get_parent() != null:
@@ -28,6 +43,8 @@ func _highlight() -> void:
 
 
 func _unhighlight() -> void:
+	print("[portrait] DIM  ", _who(), "  node=", get_instance_id())
+	_lit = false
 	_fade_to(DIM)
 
 
@@ -43,12 +60,18 @@ func _tint(target: Color) -> void:
 	if art != null:
 		art.modulate = target
 
+func _who() -> String:
+	return character.display_name if character != null else "<no character>"
 
 func _fade_to(target: Color) -> void:
 	var art := _art_node()
 	if art == null:
 		return
+	if _tween != null and _tween.is_valid():
+		_tween.kill()
 	if Engine.is_editor_hint():
 		art.modulate = target
 		return
-	create_tween().tween_property(art, "modulate", target, FADE)
+	#create_tween().tween_property(art, "modulate", target, FADE)
+	_tween = create_tween()
+	_tween.tween_property(art, "modulate", target, FADE)

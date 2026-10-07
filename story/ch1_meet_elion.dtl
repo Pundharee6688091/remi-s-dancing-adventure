@@ -29,36 +29,37 @@ remi: Squeak... Squeak squeak.
 elion (Sad): Oh, my lord... So that is what happened.
 elion: I am sorry you had to go through that, you must have felt terribly alone.
 remi (Confused): Squeak... Squeak?
-elion (surprised): Ah! Forgive me. I have been speaking to you without even introducing myself.
+elion (Surprised): Ah! Forgive me. I have been speaking to you without even introducing myself.
+remi (Default): Squeak!
 
 # He introduces himself here, so the name box stops saying ??? from this point on.
 set {elion_name} = "Elion"
 
-elion (Default): <Empty Text Event>
-elion (confused): It is an honor to meet you, Sir...?
-remi (happy): Squeak!
-elion (smile): Remi, is it? A pleasure to meet you, Sir Remi!
-elion (default): Now then, Sir Remi. What brought you all the way out here?
-remi (please): Squeak... Squeak squeak squeak.
-elion (confused): A dancing contest? And you require companions to form a team?
-elion (thinking): I see…
-elion (smile): Then I shall accompany you!
-remi (surprised): Squeak?!
-elion (default): Of course. You are searching for help, and I am standing right here. It would be rather strange of me to refuse, would it not?
-elion (determined): Besides, as a paladin, lending a hand to those in need is simply the right thing to do!
-remi (happy): Squeak! Squeak squeak!
-elion (confused): Ah, yes! You mentioned that you were a dancer.
-elion (determined): I must confess, I have never seen a rat dance before.
-elion (thinking): ...Though I suppose I have never asked one to.
+elion (Default): [b]Elion Theran[/b], youngest of the Theran family of Silvermoon!
+elion (Confused): It is an honor to meet you, Sir...?
+remi (Happy): Squeak!
+elion (Smile): Remi, is it? A pleasure to meet you, Sir Remi!
+elion (Default): Now then, Sir Remi. What brought you all the way out here?
+remi (Please): Squeak... Squeak squeak squeak.
+elion (Confused): A dancing contest? And you require companions to form a team?
+elion (Thinking): I see…
+elion (Smile): Then I shall accompany you!
+remi (Surprised): Squeak?!
+elion (Default): Of course. You are searching for help, and I am standing right here. It would be rather strange of me to refuse, would it not?
+elion (Determined): Besides, as a [b]paladin[/b], lending a hand to those in need is simply the right thing to do!
+remi (Happy): Squeak! Squeak squeak!
+elion (Confused): Ah, yes! You mentioned that you were a dancer.
+elion (Determined): I must confess, I have never seen a rat dance before.
+elion (Thinking): ...Though I suppose I have never asked one to.
 
 narrator: For someone who looked so dignified, Elion seemed completely serious.
 
-elion (determined): Now you have made me curious, Sir Remi.
-elion (smile): Before we set off, would you honor me with a performance?
-remi (happy): Squeak!
+elion (Determined): Now you have made me curious, Sir Remi.
+elion (Smile): Before we set off, would you honor me with a performance?
+remi (Happy): Squeak!
 
 narrator: Remi quickly jumped back onto his feet. After searching all day, he had finally found someone willing to believe in him.
 
-elion (default): The stage is yours, Sir Remi!
+elion (Default): The stage is yours, Sir Remi!
 
 narrator: And so, with his very first companion watching, Remi's first performance began…
