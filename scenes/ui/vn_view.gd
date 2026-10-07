@@ -1,6 +1,8 @@
 class_name VnView
 extends Control
 
+const BGM := "res://music/vn_bgm1.wav"
+
 var timeline := ""
 
 
@@ -14,11 +16,23 @@ func _ready() -> void:
 		push_warning("Story node has no timeline")
 		Events.story_finished.emit()
 		return
+	_start_bgm()
 	Dialogic.timeline_ended.connect(_on_timeline_ended)
 	Dialogic.start(timeline)
 
 
+## The track is shorter than a chapter, so it restarts when it ends rather
+## than relying on a loop point baked into the import.
+func _start_bgm() -> void:
+	if not ResourceLoader.exists(BGM):
+		return
+	%Bgm.stream = load(BGM)
+	%Bgm.finished.connect(%Bgm.play)
+	%Bgm.play()
+
+
 func _on_timeline_ended() -> void:
+	%Bgm.stop()
 	Dialogic.timeline_ended.disconnect(_on_timeline_ended)
 	Events.story_finished.emit()
 

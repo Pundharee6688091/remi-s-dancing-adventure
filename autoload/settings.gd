@@ -52,14 +52,23 @@ func set_value(key: String, value: Variant) -> void:
 
 
 func apply() -> void:
-	var bus := AudioServer.get_bus_index("Master")
-	if bus >= 0:
-		AudioServer.set_bus_volume_db(bus, linear_to_db(music / 100.0))
-		AudioServer.set_bus_mute(bus, music == 0)
+	_set_bus("Music", music)
+	_set_bus("SFX", sfx)
 
 	DisplayServer.window_set_mode(
 		DisplayServer.WINDOW_MODE_FULLSCREEN if fullscreen
 		else DisplayServer.WINDOW_MODE_WINDOWED)
+
+
+## Silence is -inf dB, not 0, so a zero slider mutes rather than playing
+## very quietly.
+func _set_bus(name: String, percent: int) -> void:
+	var bus := AudioServer.get_bus_index(name)
+	if bus < 0:
+		return
+	AudioServer.set_bus_mute(bus, percent == 0)
+	if percent > 0:
+		AudioServer.set_bus_volume_db(bus, linear_to_db(percent / 100.0))
 
 
 func save_settings() -> void:

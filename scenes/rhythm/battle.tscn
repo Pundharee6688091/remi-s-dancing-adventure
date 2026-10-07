@@ -22,6 +22,7 @@ grow_vertical = 2
 script = ExtResource("1_efdsi")
 
 [node name="Song" type="AudioStreamPlayer" parent="." unique_id=1753628390]
+bus = &"Music"
 
 [node name="Conductor" type="Node" parent="." unique_id=76721395]
 script = ExtResource("2_o0565")

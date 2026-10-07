@@ -92,6 +92,7 @@ func _pill_input(idx: int, dir: int, event: InputEvent) -> void:
 			and event.pressed):
 		return
 	_hover(idx)
+	Audio.play("click")
 	_adjust(dir)
 
 
@@ -99,6 +100,7 @@ func _open_input(idx: int, event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT \
 			and event.pressed:
 		_hover(idx)
+		Audio.play("click")
 		_activate()
 
 
