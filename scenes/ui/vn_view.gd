@@ -5,6 +5,9 @@ const BGM := "res://music/vn_bgm1.wav"
 
 var timeline := ""
 
+## Only offered on a re-read, so a first time through cannot be jumped.
+var _can_skip_chapter := false
+
 
 func setup(params: Dictionary) -> void:
 	timeline = String(params.get("timeline", ""))
@@ -16,6 +19,7 @@ func _ready() -> void:
 		push_warning("Story node has no timeline")
 		Events.story_finished.emit()
 		return
+	_can_skip_chapter = GameManager.save.get("seen", []).has(GameManager.current_stage_id)
 	%Settings.routed = false
 	%Settings.closed.connect(_close_settings)
 	_set_hints()
@@ -27,18 +31,12 @@ func _ready() -> void:
 
 
 func _set_hints() -> void:
-	%Hints.set_hints([["Enter", tr("UI_NEXT")], ["Ctrl", tr("UI_SKIP")],
-		["Esc", tr("UI_SETTINGS")]])
+	var hints: Array = [["Enter", tr("UI_NEXT")]]
+	if _can_skip_chapter:
+		hints.append(["Tab", tr("UI_SKIP_CHAPTER")])
+	hints.append(["Esc", tr("UI_SETTINGS")])
+	%Hints.set_hints(hints)
 
-
-## Hold Ctrl to fast-forward. Dialogic's auto-skip runs each event at its own
-## pace rather than jumping, so nothing is missed, it just goes quickly.
-func _process(_delta: float) -> void:
-	if %Settings.visible:
-		return
-	var want := Input.is_physical_key_pressed(KEY_CTRL)
-	if want != Dialogic.Inputs.auto_skip.enabled:
-		Dialogic.Inputs.auto_skip.enabled = want
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -47,12 +45,19 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
 		_open_settings()
+	elif _can_skip_chapter and event.is_action_pressed("skip_chapter"):
+		# Ending the timeline runs the normal finish path, so the node is
+		# still marked seen and the map still gets the player back.
+		# skip_ending, because otherwise end_timeline() starts Dialogic's
+		# built-in "[clear]" ending timeline and waits to be advanced through
+		# it, so timeline_ended never fires and the chapter never leaves.
+		get_viewport().set_input_as_handled()
+		Dialogic.end_timeline(true)
 
 
 ## Pausing Dialogic is what stops the chapter advancing underneath, since
 ## handle_input() bails while paused.
 func _open_settings() -> void:
-	Dialogic.Inputs.auto_skip.enabled = false
 	Dialogic.paused = true
 	%Hints.hide()
 	%Settings.show()
@@ -74,19 +79,17 @@ func _start_bgm() -> void:
 
 
 func _on_timeline_ended() -> void:
-	Dialogic.Inputs.auto_skip.enabled = false
 	%Bgm.stop()
 	Dialogic.timeline_ended.disconnect(_on_timeline_ended)
 	Events.story_finished.emit()
 
 
 func _exit_tree() -> void:
-	Dialogic.Inputs.auto_skip.enabled = false
 	Dialogic.paused = false
 	if Dialogic.timeline_ended.is_connected(_on_timeline_ended):
 		Dialogic.timeline_ended.disconnect(_on_timeline_ended)
 	if Dialogic.current_timeline != null:
-		Dialogic.end_timeline()
+		Dialogic.end_timeline(true)
 
 ## Rebuilding this mid-song would restart the stage, so a language change
 ## leaves it alone. Its labels hold translation keys, so Godot re-translates
