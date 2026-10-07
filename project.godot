@@ -26,8 +26,8 @@ SaveManager="*uid://d2eexnmirhp2j"
 SceneRouter="*uid://biecopqxvkdyi"
 Achivements="*uid://ja0j62sx00pp"
 GameManager="*uid://cdex5h8vlh7wk"
-Audio="*res://autoload/audio.gd"
 Dialogic="*uid://ds2q0uclmolvu"
+Audio="*res://autoload/audio.gd"
 
 [dialogic]
 
