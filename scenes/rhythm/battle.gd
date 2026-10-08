@@ -51,6 +51,7 @@ func _ready() -> void:
 	_chart = ChartParser.parse(Rules.chart_path(song_id))
 	field.setup(_chart.notes)
 
+	%Bg.texture = Rules.background("fight", stage_id)
 	_setup_remi()
 	_show_enemy(song_id)
 	

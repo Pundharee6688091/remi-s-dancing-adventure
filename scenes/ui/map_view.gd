@@ -12,13 +12,37 @@ const GOLD := Color("#f7e3b4")
 const LOCKED := Color("#d6d2c8")
 const ROAD := Color("#efe9dc")
 
+const PIN_ART := "res://sprite/Remi/Remi_pin.webp"
+
 var cursor := 0
 var _shake := 0.0
 var _song_cache := {}
+var _bg: Texture2D = null
+var _pin_art: Texture2D = null
+var _art_loaded := false
 
 
 func shake() -> void:
 	_shake = 1.0
+
+
+## _draw runs on every redraw, so the art is fetched once and kept.
+func _load_art() -> void:
+	if _art_loaded:
+		return
+	_art_loaded = true
+	_bg = Rules.background("map")
+	if ResourceLoader.exists(PIN_ART):
+		_pin_art = load(PIN_ART)
+
+
+## Fills [param rect] without distorting the art, cropping whatever overflows,
+## since the map strip is far wider than the 16:9 the backgrounds are drawn at.
+func _draw_cover(tex: Texture2D, rect: Rect2) -> void:
+	var whole := Vector2(tex.get_width(), tex.get_height())
+	var zoom := maxf(rect.size.x / whole.x, rect.size.y / whole.y)
+	var src := rect.size / zoom
+	draw_texture_rect_region(tex, rect, Rect2((whole - src) / 2.0, src))
 
 
 func _process(delta: float) -> void:
@@ -30,7 +54,12 @@ func _process(delta: float) -> void:
 func _draw() -> void:
 	var font := get_theme_default_font()
 
-	draw_rect(Rect2(0, TOP, size.x, BOTTOM - TOP), Palette.FILL)
+	var ground := Rect2(0, TOP, size.x, BOTTOM - TOP)
+	_load_art()
+	if _bg != null:
+		_draw_cover(_bg, ground)
+	else:
+		draw_rect(ground, Palette.FILL)
 
 	_draw_road()
 	for i in Rules.node_order.size():
@@ -286,9 +315,19 @@ func _draw_bubble(p: Vector2, s: float) -> void:
 		Vector2(p.x - s * 0.1, p.y + s * 1.1), Palette.INK, 2.5)
 
 
+## Remi rides the tag next to his name. The box grows around the art rather
+## than the art being squeezed into a fixed box.
 func _draw_pin(font: Font, bottom: Vector2) -> void:
-	var w := 92.0
-	var h := 34.0
+	var pad := 8.0
+	var art_h := 34.0
+	var art_w := 0.0
+	if _pin_art != null:
+		art_w = art_h * _pin_art.get_width() / float(_pin_art.get_height())
+	var gap := 6.0 if _pin_art != null else 0.0
+	var name_w := font.get_string_size("Remi", HORIZONTAL_ALIGNMENT_LEFT, -1, 18).x
+
+	var w := pad + art_w + gap + name_w + pad
+	var h := art_h + 12.0
 	var box := Rect2(bottom.x - w / 2.0, bottom.y - h - 10.0, w, h)
 	draw_rect(box, Palette.WHITE, true)
 	draw_rect(box, Palette.INK, false, 2.5)
@@ -296,8 +335,13 @@ func _draw_pin(font: Font, bottom: Vector2) -> void:
 		Vector2(bottom.x - 9.0, box.position.y + h),
 		Vector2(bottom.x + 9.0, box.position.y + h),
 		Vector2(bottom.x, bottom.y + 2.0)]), Palette.AMBER)
-	draw_string(font, Vector2(box.position.x, box.position.y + 24.0), "Remi",
-		HORIZONTAL_ALIGNMENT_CENTER, w, 18, Palette.INK)
+
+	if _pin_art != null:
+		draw_texture_rect(_pin_art,
+			Rect2(box.position + Vector2(pad, 6.0), Vector2(art_w, art_h)), false)
+	draw_string(font, Vector2(box.position.x + pad + art_w + gap,
+		box.position.y + h - 14.0), "Remi",
+		HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Palette.INK)
 
 
 ## Index of the map node under a point, or -1. Used for mouse clicks.

@@ -26,6 +26,25 @@ func chart_path(song_id: String) -> String:
 func enemy_path(song_id: String) -> String:
 	return "res://songs/%s/Enemy.png" % song_id
 
+## Backgrounds are named rather than pathed, so stages.json stays readable and
+## the art can be renamed or moved without the data following it around.
+func bg_path(bg_id: String) -> String:
+	return "res://backgrounds/%s.webp" % bg_id
+
+## The background a node asked for, or the default for whatever kind of node
+## it is. "map" is a kind too, since the map screen has no node of its own.
+func background(kind: String, stage_id := "") -> Texture2D:
+	var named := String(stage(stage_id).get("bg", ""))
+	if named == "":
+		named = String(data.get("backgrounds", {}).get(kind, ""))
+	if named == "":
+		return null
+	var path := bg_path(named)
+	if not ResourceLoader.exists(path):
+		push_warning("No background art at " + path)
+		return null
+	return load(path)
+
 func window(judgement: String) -> float:
 	return float(data.windows_ms[judgement])
 
