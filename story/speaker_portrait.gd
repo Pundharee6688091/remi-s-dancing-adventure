@@ -18,9 +18,26 @@ func _update_portrait(passed_character: DialogicCharacter, passed_portrait: Stri
 	if Engine.is_editor_hint():
 		_tint(LIT)
 		return
-	print("[portrait] UPDATE  ", _who(), "  portrait=", passed_portrait, "  node=", get_instance_id())
 	_tint(LIT if _lit else DIM)
 	_sync_to_speaker.call_deferred()
+
+
+## Dialogic nests a portrait as container -> character node -> portrait, and
+## draw order is sibling order. Moving the character node inside its own
+## container does nothing, since it is the only thing in there; it is the
+## container that has to come last among the containers.
+func _bring_to_front() -> void:
+	var holder := get_parent()
+	if holder == null:
+		return
+	var container := holder.get_parent()
+	if container == null:
+		return
+	container.move_child(holder, -1)
+	var layer := container.get_parent()
+	if layer != null:
+		layer.move_child(container, -1)
+
 
 func _sync_to_speaker() -> void:
 	var speaker = Dialogic.Text.get_current_speaker()
@@ -29,21 +46,16 @@ func _sync_to_speaker() -> void:
 	_lit = (speaker == character)
 	_tint(LIT if _lit else DIM)
 	if _lit:
-		var holder := get_parent()
-		if holder != null and holder.get_parent() != null:
-			holder.get_parent().move_child(holder, -1)
+		_bring_to_front()
+
 
 func _highlight() -> void:
-	print("[portrait] HIGHLIGHT  ", _who(), "  node=", get_instance_id(), "  art=", _art_node())
 	_lit = true
 	_fade_to(LIT)
-	var holder := get_parent()
-	if holder != null and holder.get_parent() != null:
-		holder.get_parent().move_child(holder, -1)
+	_bring_to_front()
 
 
 func _unhighlight() -> void:
-	print("[portrait] DIM  ", _who(), "  node=", get_instance_id())
 	_lit = false
 	_fade_to(DIM)
 
