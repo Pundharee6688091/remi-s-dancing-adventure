@@ -8,6 +8,7 @@ const TOP := 84.0
 const BOTTOM := 664.0
 
 const GREEN := Color("#d7ead7")
+const GOLD := Color("#f7e3b4")
 const LOCKED := Color("#d6d2c8")
 const ROAD := Color("#efe9dc")
 
@@ -138,14 +139,23 @@ func _draw_node(id: String, focused: bool, font: Font) -> void:
 	var fight: bool = n.get("type") == "fight"
 	var r := FIGHT_R if fight else STORY_R
 
+	var stars: int = GameManager.stars_for(id) if fight else 0
+	var mastered := done and stars >= 3
+
 	var fill := LOCKED
-	if done:
+	if mastered:
+		fill = GOLD
+	elif done:
 		fill = GREEN
 	elif open:
 		fill = Palette.WHITE
 
 	draw_circle(p, r, fill)
 	draw_arc(p, r, 0.0, TAU, 48, Palette.INK, 3.0)
+	# A perfect clear gets a second ring, drawn inside the outline so it never
+	# reads as the focus ring, which sits outside it.
+	if mastered:
+		draw_arc(p, r - 7.0, 0.0, TAU, 40, Palette.AMBER, 2.5)
 	if focused:
 		draw_arc(p, r + 9.0, 0.0, TAU, 48, Palette.AMBER, 5.0)
 
@@ -164,7 +174,7 @@ func _draw_node(id: String, focused: bool, font: Font) -> void:
 	if fight:
 		if label != "":
 			_boxed_label(font, label, Vector2(p.x, p.y + r + 32.0))
-		_draw_stars(font, Vector2(p.x, p.y + r + 60.0), GameManager.stars_for(id))
+		_draw_stars(font, Vector2(p.x, p.y + r + 60.0), stars)
 	elif label != "":
 		draw_string(font, Vector2(p.x - 80.0, p.y - r - 14.0), label,
 			HORIZONTAL_ALIGNMENT_CENTER, 160.0, 15, Palette.MUTED)

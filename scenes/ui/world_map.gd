@@ -6,15 +6,23 @@ extends Control
 @onready var _progress: Bar = %ProgressBar
 @onready var _steps: Label = %Steps
 @onready var _party: Label = %Party
+@onready var _settings: Control = %Settings
 
 
 func _ready() -> void:
 	_detail.fight_pressed.connect(GameManager.enter_node)
 	# An open popup carries its own hints, so the screen's would double up.
 	_detail.visibility_changed.connect(_sync_hints)
-	%Hints.set_hints([[["←", "→"], tr("UI_WALK")], ["Enter", tr("UI_OPEN")],
-		["Esc", tr("UI_MAIN_MENU")]])
 
+	# Opened over the map rather than routed to, so walking back does not
+	# lose the cursor the player left on a node.
+	_settings.routed = false
+	_settings.closed.connect(_sync_hints)
+	_settings.visibility_changed.connect(_sync_hints)
+	%Gear.pressed.connect(_settings.show)
+
+	_set_hints()
+	Events.language_changed.connect(_on_language_changed)
 	Events.progress_changed.connect(_refresh)
 	_view.cursor = _start_cursor()
 	_refresh()
@@ -22,7 +30,7 @@ func _ready() -> void:
 
 ## Click a node to walk there and open it; hovering moves the cursor.
 func _gui_input(event: InputEvent) -> void:
-	if _detail.visible:
+	if _busy():
 		return
 
 	if event is InputEventMouseMotion:
@@ -41,12 +49,35 @@ func _gui_input(event: InputEvent) -> void:
 			_confirm()
 
 
+func _set_hints() -> void:
+	%Hints.set_hints([[["←", "→"], tr("UI_WALK")], ["Enter", tr("UI_OPEN")],
+		["Esc", tr("UI_MAIN_MENU")]])
+
+
 func _sync_hints() -> void:
-	%Hints.visible = not _detail.visible
+	%Hints.visible = not _busy()
+
+
+## True while something sits over the map and should have the input to itself.
+func _busy() -> bool:
+	return _detail.visible or _settings.visible
+
+
+## The language can be changed from the overlay, and blocking the rebuild that
+## normally follows means the header and hints have to catch up themselves.
+func _on_language_changed() -> void:
+	_set_hints()
+	_refresh()
+
+
+## Rebuilding the map underneath its own settings overlay would throw the
+## player out of it mid-change.
+func blocks_reload() -> bool:
+	return _settings.visible
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if _detail.visible:
+	if _busy():
 		return
 	if event.is_action_pressed("ui_right") or event.is_action_pressed("ui_down"):
 		_move(1)
