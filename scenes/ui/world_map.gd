@@ -29,17 +29,15 @@ func _gui_input(event: InputEvent) -> void:
 		var over := _view.node_at(event.position)
 		mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND if over >= 0 \
 			else Control.CURSOR_ARROW
-		if over >= 0 and over != _view.cursor:
-			_view.cursor = over
-			_view.queue_redraw()
+		if over >= 0:
+			_set_cursor(over)
 
 	elif event is InputEventMouseButton and event.pressed \
 			and event.button_index == MOUSE_BUTTON_LEFT:
 		var hit := _view.node_at(event.position)
 		if hit >= 0:
 			accept_event()
-			_view.cursor = hit
-			_view.queue_redraw()
+			_set_cursor(hit)
 			_confirm()
 
 
@@ -61,15 +59,26 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _move(step: int) -> void:
-	_view.cursor = clampi(_view.cursor + step, 0, Rules.node_order.size() - 1)
+	_set_cursor(clampi(_view.cursor + step, 0, Rules.node_order.size() - 1))
+
+
+## The one place the cursor moves, so walking with the arrow keys sounds the
+## same as sweeping the mouse over the map.
+func _set_cursor(i: int) -> void:
+	if _view.cursor == i:
+		return
+	_view.cursor = i
+	Audio.play("hover")
 	_view.queue_redraw()
 
 
 func _confirm() -> void:
 	var id: String = Rules.node_order[_view.cursor]
 	if not GameManager.is_unlocked(id):
+		# The shake is the answer here; a locked node is not a selection.
 		_view.shake()
 		return
+	Audio.play("click")
 	if Rules.stage(id).get("type") == "fight":
 		_detail.open(id)
 	else:

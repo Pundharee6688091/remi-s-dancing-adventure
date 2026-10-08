@@ -54,9 +54,12 @@ func _wire_mouse() -> void:
 			open.gui_input.connect(func(e: InputEvent) -> void: _open_input(idx, e))
 
 
+## The one place the selected row changes, so the arrow keys and the mouse
+## both sound the same.
 func _hover(idx: int) -> void:
 	if _row != idx:
 		_row = idx
+		Audio.play("hover")
 		_refresh()
 
 
@@ -195,8 +198,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _move(step: int) -> void:
-	_row = wrapi(_row + step, 0, ROWS.size())
-	_refresh()
+	_hover(wrapi(_row + step, 0, ROWS.size()))
 
 
 func _adjust(dir: int) -> void:

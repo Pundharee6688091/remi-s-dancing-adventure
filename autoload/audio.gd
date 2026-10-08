@@ -13,9 +13,16 @@ const SOUNDS := {
 ## Overlapping notes need more than one player or each hit cuts the last off.
 const VOICES := 8
 
+## The presses that count as moving a selection, keyboard or d-pad.
+const NAV_ACTIONS := ["ui_up", "ui_down", "ui_left", "ui_right"]
+
 var _players: Array[AudioStreamPlayer] = []
 var _next := 0
 var _cache := {}
+
+## Set while a directional press is being dispatched. Focus that moves because
+## of it sounds; a screen grabbing focus as it opens stays silent.
+var _navigating := false
 
 
 func _ready() -> void:
@@ -45,12 +52,32 @@ func play(sound: String) -> void:
 	p.play()
 
 
+## Input is dispatched before _process every frame, so any focus the press
+## moved has already been reported by the time this clears the flag.
+func _input(event: InputEvent) -> void:
+	for action in NAV_ACTIONS:
+		if event.is_action_pressed(action):
+			_navigating = true
+			return
+
+
+func _process(_delta: float) -> void:
+	_navigating = false
+
+
 ## Any button anywhere, including ones built at runtime like the hint bar caps.
 func _on_node_added(n: Node) -> void:
 	if not (n is BaseButton):
 		return
 	n.pressed.connect(play.bind("click"))
 	n.mouse_entered.connect(play.bind("hover"))
+	n.focus_entered.connect(_on_focus_entered)
+
+
+## Clicking a button focuses it too, so this only fires for the arrow keys.
+func _on_focus_entered() -> void:
+	if _navigating:
+		play("hover")
 
 
 func _on_note_judged(judgement: String, _lane: int) -> void:
