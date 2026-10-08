@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7o37d1fa8o8"
-path="res://.godot/imported/Right.png-8c3bb8d25ff85f95d335b761e50f6703.ctex"
+uid="uid://g7tesp1ukqwy"
+path="res://.godot/imported/Remi_down.png-8bac722bc0e697b2ad20e6e961d042dd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/Remi/Right.png"
-dest_files=["res://.godot/imported/Right.png-8c3bb8d25ff85f95d335b761e50f6703.ctex"]
+source_file="res://sprite/Remi/Remi_down.png"
+dest_files=["res://.godot/imported/Remi_down.png-8bac722bc0e697b2ad20e6e961d042dd.ctex"]
 
 [params]
 

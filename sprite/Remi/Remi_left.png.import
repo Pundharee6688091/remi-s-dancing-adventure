@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cyvms3fn8ss28"
-path="res://.godot/imported/Remi_happy.png-4d633cadf19ac22ec1fe91951a140a7e.ctex"
+uid="uid://cva2joqx1qp8s"
+path="res://.godot/imported/Remi_left.png-fe64cfe746a0980de1478b9294a05056.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/Remi/Remi_happy.png"
-dest_files=["res://.godot/imported/Remi_happy.png-4d633cadf19ac22ec1fe91951a140a7e.ctex"]
+source_file="res://sprite/Remi/Remi_left.png"
+dest_files=["res://.godot/imported/Remi_left.png-fe64cfe746a0980de1478b9294a05056.ctex"]
 
 [params]
 

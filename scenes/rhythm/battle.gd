@@ -23,7 +23,7 @@ var stage_id := "s1_1"
 var _chart: Dictionary = {}
 
 ## Remi stands nearer the camera than the boss, so she is drawn bigger.
-const REMI_SCALE := 0.25
+const REMI_SCALE := 0.15
 const ENEMY_SCALE := 0.20
 ## Nearer things sit lower on the screen.
 const REMI_FLOOR := 400.0
@@ -31,14 +31,14 @@ const ENEMY_FLOOR := 360.0
 const REMI_X := 210.0
 const ENEMY_X := 1060.0
 
-const POSE_HOLD := 0.25
+const POSE_HOLD := 0.5
 const REMI_POSES := [
-	"res://sprite/Remi/Up.png",
-	"res://sprite/Remi/Left.png",
-	"res://sprite/Remi/Right.png",
-	"res://sprite/Remi/Down.png",
+	"res://sprite/Remi/Remi_up.png",
+	"res://sprite/Remi/Remi_left.png",
+	"res://sprite/Remi/Remi_right.png",
+	"res://sprite/Remi/Remi_down.png",
 ]
-const REMI_IDLE := "res://sprite/Remi/Remi.png"
+const REMI_IDLE := "res://sprite/Remi/Remi_middle.png"
 const IDLE := 4
 
 var _poses: Array = []

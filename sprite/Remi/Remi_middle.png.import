@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qlr5x4afqvqs"
-path="res://.godot/imported/Left.png-8c064780caad08b856e2ba0d15a85ae2.ctex"
+uid="uid://i5173hhqyms"
+path="res://.godot/imported/Remi_middle.png-f3ecbbb9bb3b52e7f365cbd89d5a241e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/Remi/Left.png"
-dest_files=["res://.godot/imported/Left.png-8c064780caad08b856e2ba0d15a85ae2.ctex"]
+source_file="res://sprite/Remi/Remi_middle.png"
+dest_files=["res://.godot/imported/Remi_middle.png-f3ecbbb9bb3b52e7f365cbd89d5a241e.ctex"]
 
 [params]
 
