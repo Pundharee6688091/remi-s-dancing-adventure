@@ -1,5 +1,9 @@
 extends Control
-## Layout lives in world_map.tscn. MapView still draws itself.
+## Layout lives in world_map.tscn. MapView draws only the road and the nodes
+## on it; the grass, the zone headers, the info card and the legend are all
+## nodes in the scene, filled in from the data here.
+
+const ZONE_HEADER := preload("res://scenes/ui/parts/zone_header.tscn")
 
 @onready var _view: MapView = %Map
 @onready var _detail: StageDetail = %Detail
@@ -7,6 +11,8 @@ extends Control
 @onready var _steps: Label = %Steps
 @onready var _party: Label = %Party
 @onready var _settings: Control = %Settings
+
+var _song_cache := {}
 
 
 func _ready() -> void:
@@ -21,11 +27,94 @@ func _ready() -> void:
 	_settings.visibility_changed.connect(_sync_hints)
 	%Gear.pressed.connect(_settings.show)
 
+	%Bg.texture = Rules.background("map")
+
 	_set_hints()
 	Events.language_changed.connect(_on_language_changed)
 	Events.progress_changed.connect(_refresh)
 	_view.cursor = _start_cursor()
 	_refresh()
+
+
+## Zone headers come and go with the data, so they are built rather than placed.
+func _sync_zones() -> void:
+	for old in %Zones.get_children():
+		%Zones.remove_child(old)
+		old.queue_free()
+
+	var zones := _zones()
+	for z in zones:
+		var ids: Array = zones[z]
+		var left := INF
+		var done := 0
+		for id in ids:
+			left = minf(left, _node_x(id))
+			if GameManager.is_cleared(id):
+				done += 1
+
+		var head := ZONE_HEADER.instantiate()
+		%Zones.add_child(head)
+		head.position = Vector2(left - MapView.FIGHT_R, MapView.TOP + 14.0)
+		head.get_node("%Title").text = tr("UI_ZONE") % z
+		head.get_node("%Count").text = "%d / %d" % [done, ids.size()]
+
+
+## Nodes grouped by their "zone" field. Nodes without one are skipped, so the
+## headers disappear entirely until the data asks for them.
+func _zones() -> Dictionary:
+	var out := {}
+	for id in Rules.node_order:
+		var z: int = int(Rules.stage(id).get("zone", 0))
+		if z <= 0:
+			continue
+		if not out.has(z):
+			out[z] = []
+		out[z].append(id)
+	return out
+
+
+func _node_x(id: String) -> float:
+	var a: Array = Rules.stage(id).get("pos", [0, 0])
+	return float(a[0])
+
+
+## The card at the bottom left, describing whatever the cursor is on.
+func _sync_card() -> void:
+	if _view.cursor >= Rules.node_order.size():
+		return
+	var id: String = Rules.node_order[_view.cursor]
+	var n := Rules.stage(id)
+	var fight: bool = n.get("type") == "fight"
+
+	var who: String = n.get("opponent", "")
+	%Who.text = who if who != "" else "[art]"
+	%Title.text = String(n.get("label", tr("UI_STORY")))
+	%Kind.text = tr("UI_DOT_FIGHT") if fight else tr("UI_DOT_STORY")
+
+	if not GameManager.is_unlocked(id):
+		%Line.text = tr("UI_LOCKED")
+	elif fight:
+		var si := _song_info(String(n.get("song", "")))
+		var secs := int(si.length)
+		%Line.text = "%s · %d:%02d · %s" % [si.title, secs / 60, secs % 60,
+			tr("UI_CLEARED") if GameManager.stars_for(id) > 0 else tr("UI_NOT_CLEARED")]
+	else:
+		%Line.text = tr("UI_SEEN") if GameManager.is_cleared(id) else tr("UI_NOT_SEEN")
+
+
+## Chart title and audio length, looked up once per song.
+func _song_info(song_id: String) -> Dictionary:
+	if _song_cache.has(song_id):
+		return _song_cache[song_id]
+	var info := {"title": song_id, "length": 0.0}
+	if FileAccess.file_exists(Rules.chart_path(song_id)):
+		info.title = ChartParser.parse(Rules.chart_path(song_id)).title
+	if ResourceLoader.exists(Rules.song_path(song_id)):
+		var stream: AudioStream = load(Rules.song_path(song_id))
+		if stream != null:
+			info.length = stream.get_length()
+	_song_cache[song_id] = info
+	return info
 
 
 ## Click a node to walk there and open it; hovering moves the cursor.
@@ -100,6 +189,7 @@ func _set_cursor(i: int) -> void:
 		return
 	_view.cursor = i
 	Audio.play("hover")
+	_sync_card()
 	_view.queue_redraw()
 
 
@@ -155,4 +245,16 @@ func _refresh() -> void:
 	var party: Array = GameManager.save.get("party", [])
 	_party.text = tr("UI_PARTY") % (party.size() + 1)
 
+	var fights := 0
+	var fights_done := 0
+	for id in Rules.node_order:
+		if Rules.stage(id).get("type") != "fight":
+			continue
+		fights += 1
+		if GameManager.is_cleared(id):
+			fights_done += 1
+	%ClearCount.text = tr("UI_STAGE_CLEAR_COUNT") % [fights_done, fights]
+
+	_sync_zones()
+	_sync_card()
 	_view.queue_redraw()

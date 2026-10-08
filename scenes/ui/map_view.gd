@@ -16,8 +16,6 @@ const PIN_ART := "res://sprite/Remi/Remi_pin.webp"
 
 var cursor := 0
 var _shake := 0.0
-var _song_cache := {}
-var _bg: Texture2D = null
 var _pin_art: Texture2D = null
 var _art_loaded := false
 
@@ -31,18 +29,8 @@ func _load_art() -> void:
 	if _art_loaded:
 		return
 	_art_loaded = true
-	_bg = Rules.background("map")
 	if ResourceLoader.exists(PIN_ART):
 		_pin_art = load(PIN_ART)
-
-
-## Fills [param rect] without distorting the art, cropping whatever overflows,
-## since the map strip is far wider than the 16:9 the backgrounds are drawn at.
-func _draw_cover(tex: Texture2D, rect: Rect2) -> void:
-	var whole := Vector2(tex.get_width(), tex.get_height())
-	var zoom := maxf(rect.size.x / whole.x, rect.size.y / whole.y)
-	var src := rect.size / zoom
-	draw_texture_rect_region(tex, rect, Rect2((whole - src) / 2.0, src))
 
 
 func _process(delta: float) -> void:
@@ -51,68 +39,13 @@ func _process(delta: float) -> void:
 		queue_redraw()
 
 
+## The road and the nodes on it. Everything else on this screen, the grass
+## behind it and the chrome in front, is laid out in world_map.tscn.
 func _draw() -> void:
-	var font := get_theme_default_font()
-
-	var ground := Rect2(0, TOP, size.x, BOTTOM - TOP)
 	_load_art()
-	if _bg != null:
-		_draw_cover(_bg, ground)
-	else:
-		draw_rect(ground, Palette.FILL)
-
 	_draw_road()
 	for i in Rules.node_order.size():
-		_draw_node(Rules.node_order[i], i == cursor, font)
-
-	_draw_zones(font)
-	_draw_info_card(font)
-	_draw_legend(font)
-
-## Nodes grouped by their "zone" field. Nodes without one are skipped,
-## so the headers disappear entirely until the data asks for them.
-func _zones() -> Dictionary:
-	var out := {}
-	for id in Rules.node_order:
-		var z: int = int(Rules.stage(id).get("zone", 0))
-		if z <= 0:
-			continue
-		if not out.has(z):
-			out[z] = []
-		out[z].append(id)
-	return out
-
-
-func _draw_zones(font: Font) -> void:
-	for z in _zones():
-		var ids: Array = _zones()[z]
-		var left := INF
-		var done := 0
-		for id in ids:
-			left = minf(left, _pos(id).x)
-			if GameManager.is_cleared(id):
-				done += 1
-		var x: float = left - FIGHT_R
-		draw_string(font, Vector2(x, TOP + 36.0), tr("UI_ZONE") % z,
-			HORIZONTAL_ALIGNMENT_LEFT, -1, 20, Palette.INK)
-		draw_string(font, Vector2(x, TOP + 58.0), "%d / %d" % [done, ids.size()],
-			HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Palette.MUTED)
-
-
-## Chart title and audio length, looked up once per song.
-func _song_info(song_id: String) -> Dictionary:
-	if _song_cache.has(song_id):
-		return _song_cache[song_id]
-	var info := {"title": song_id, "length": 0.0}
-	if FileAccess.file_exists(Rules.chart_path(song_id)):
-		info.title = ChartParser.parse(Rules.chart_path(song_id)).title
-	if ResourceLoader.exists(Rules.song_path(song_id)):
-		var stream: AudioStream = load(Rules.song_path(song_id))
-		if stream != null:
-			info.length = stream.get_length()
-	_song_cache[song_id] = info
-	return info
-
+		_draw_node(Rules.node_order[i], i == cursor, get_theme_default_font())
 
 func _road_nodes() -> Array:
 	var linked := {}
@@ -210,80 +143,6 @@ func _draw_node(id: String, focused: bool, font: Font) -> void:
 
 	if focused:
 		_draw_pin(font, Vector2(p.x, p.y - r - 40.0))
-
-
-## The card at the bottom left, describing whatever the cursor is on.
-func _draw_info_card(font: Font) -> void:
-	if cursor >= Rules.node_order.size():
-		return
-	var id: String = Rules.node_order[cursor]
-	var n := Rules.stage(id)
-
-	var card := Rect2(50, 536, 560, 104)
-	draw_rect(card, Palette.WHITE, true)
-	draw_rect(card, Palette.INK, false, 2.0)
-
-	var ph := Rect2(card.position + Vector2(14, 14), Vector2(110, 76))
-	draw_rect(ph, Palette.FILL, true)
-	draw_rect(ph, Palette.INK, false, 2.0)
-	var who: String = n.get("opponent", "")
-	draw_string(font, Vector2(ph.position.x, ph.position.y + 46),
-		who if who != "" else "[art]",
-		HORIZONTAL_ALIGNMENT_CENTER, ph.size.x, 15, Palette.MUTED)
-
-	var fight: bool = n.get("type") == "fight"
-	var title: String = n.get("label", tr("UI_STORY"))
-	var x := card.position.x + 144
-	draw_string(font, Vector2(x, card.position.y + 46), title,
-		HORIZONTAL_ALIGNMENT_LEFT, -1, 26, Palette.INK)
-	var tw := font.get_string_size(title, HORIZONTAL_ALIGNMENT_LEFT, -1, 26).x
-	draw_string(font, Vector2(x + tw + 10, card.position.y + 46),
-		tr("UI_DOT_FIGHT") if fight else tr("UI_DOT_STORY"),
-		HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Palette.MUTED)
-
-	var line := ""
-	if not GameManager.is_unlocked(id):
-		line = tr("UI_LOCKED")
-	elif fight:
-		var stars := GameManager.stars_for(id)
-		var si := _song_info(n.get("song", ""))
-		var secs := int(si.length)
-		line = "%s · %d:%02d · %s" % [si.title, secs / 60, secs % 60,
-			tr("UI_CLEARED") if stars > 0 else tr("UI_NOT_CLEARED")]
-	else:
-		line = tr("UI_SEEN") if GameManager.is_cleared(id) else tr("UI_NOT_SEEN")
-	draw_string(font, Vector2(x, card.position.y + 78), line,
-		HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Palette.MUTED)
-
-
-## Stage count and the key to the node shapes, bottom right.
-func _draw_legend(font: Font) -> void:
-	var fights := 0
-	var cleared := 0
-	for id in Rules.node_order:
-		if Rules.stage(id).get("type") != "fight":
-			continue
-		fights += 1
-		if GameManager.is_cleared(id):
-			cleared += 1
-
-	draw_string(font, Vector2(900, 588), tr("UI_STAGE_CLEAR_COUNT") % [cleared, fights],
-		HORIZONTAL_ALIGNMENT_RIGHT, 330, 18, Palette.MUTED)
-
-	var box := Rect2(900, 600, 330, 44)
-	draw_rect(box, Palette.WHITE, true)
-	draw_rect(box, Palette.INK, false, 2.0)
-
-	var y := box.position.y + box.size.y / 2.0
-	var x := box.position.x + 22.0
-	for item in [[tr("UI_LEGEND_STORY"), Palette.WHITE, 7.0], [tr("UI_LEGEND_FIGHT"), Palette.WHITE, 11.0],
-			[tr("UI_LEGEND_DONE"), GREEN, 9.0]]:
-		var radius: float = item[2]
-		draw_circle(Vector2(x, y), radius, item[1])
-		draw_arc(Vector2(x, y), radius, 0.0, TAU, 24, Palette.INK, 2.0)
-		draw_string(font, Vector2(x + 16.0, y + 6.0), item[0],
-			HORIZONTAL_ALIGNMENT_LEFT, -1, 15, Palette.INK)
-		x += 16.0 + font.get_string_size(item[0], HORIZONTAL_ALIGNMENT_LEFT, -1, 15).x + 28.0
 
 
 func _boxed_label(font: Font, text: String, centre: Vector2) -> void:
