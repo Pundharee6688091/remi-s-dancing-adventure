@@ -196,8 +196,10 @@ func _draw_pin(font: Font, bottom: Vector2) -> void:
 		Vector2(bottom.x, bottom.y + 2.0)]), Palette.AMBER)
 
 	if _pin_art != null:
-		draw_texture_rect(_pin_art,
-			Rect2(box.position + Vector2(pad, 6.0), Vector2(art_w, art_h)), false)
+		# Mirrored, so he faces his own name rather than away off the tag.
+		# A negative width is how draw_texture_rect flips.
+		var at := box.position + Vector2(pad, 6.0)
+		draw_texture_rect(_pin_art, Rect2(at, Vector2(-art_w, art_h)), false)
 	draw_string(font, Vector2(box.position.x + pad + art_w + gap,
 		box.position.y + h - 14.0), "Remi",
 		HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Palette.INK)
