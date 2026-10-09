@@ -13,20 +13,20 @@ join Theo (Default) leftmost
 Theo (Shocked): (Oh no... Is that good or bad?) #id:15
 join elion (Default) right
 elion (Smile): Another magnificent performance, Sir Remi! #id:16
-theo (Crashout): (Ah! Elion, please... at least try to read the room!) #id:17
+Theo (Crashout): (Ah! Elion, please... at least try to read the room!) #id:17
 join cassia (Default) rightmost
 cassia (Default): … #id:18
 cassia (Surprised): Hmph. #id:19
 cassia: You're better than I expected. #id:1a
 remi (Happy): Squeak! #id:1b
 cassia (Default): Don't look so proud. I said you were good, not perfect. #id:1c
-theo (Thinking): (Uhh… That means she … accepts Mr. Remi? That's probably the nicest thing we're going to get out of her, I think…) #id:1d
+Theo (Thinking): (Uhh… That means she … accepts Mr. Remi? That's probably the nicest thing we're going to get out of her, I think…) #id:1d
 elion (Default): Then, Lady Cassia... does this mean you will join us? #id:1e
 cassia (Disapproved): You really are not going to let this go, are you? #id:1f
 cassia (Default): Fine. I'll join your team. #id:20
 remi (Please): Squeak! Squeak!! #id:21
 elion (Smile): Wonderful! Then our group is finally complete! #id:22
-theo (Default): Somehow... we actually did it. #id:23
+Theo (Default): Somehow... we actually did it. #id:23
 cassia (Disapproved): Save the excitement for when we actually win. #id:24
 elion (Determined): Of course! Then let us make sure we do! #id:25
 remi (Happy): Squeak! #id:26
@@ -38,7 +38,7 @@ narrator: And Cassia, the fierce rogue who was definitely not going to admit she
 
 cassia (Default): Enough wasting time. If we're going, then move. #id:2b
 elion (Smile): She is right! We should make our way to the festival at once! #id:2c
-theo (Smile): Uh-huh…! #id:2d
+Theo (Smile): Uh-huh…! #id:2d
 remi: Squeak! #id:2e
 
 narrator: With his new team gathered at last, Remi set off toward the festival. #id:2f

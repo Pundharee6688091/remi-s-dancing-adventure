@@ -1,8 +1,8 @@
 keys,en,th
-Character/10b/name,Theo,Theo
+Character/10b/name,{theo_name},Theo
 Character/10b/nicknames,,
-Character/10c/name,{elion_name},{elion_name}
-Character/10c/nicknames,,
+Character/11/name,{elion_name},{elion_name}
+Character/11/nicknames,,
 Character/10d/name,Remi,Remi
 Character/10d/nicknames,,
 Character/10e/name,Narrator,Narrator

@@ -16,6 +16,18 @@ const VOICES := 8
 ## The presses that count as moving a selection, keyboard or d-pad.
 const NAV_ACTIONS := ["ui_up", "ui_down", "ui_left", "ui_right"]
 
+## The bed that runs under the menus, the map and anywhere else that has no
+## music of its own.
+const MUSIC := "res://songs/Bg music/The Bard\u2019s Proclamation.mp3"
+
+## Trim, measured against the track: it peaks at -0.1 dBFS over a -15.1 dBFS
+## body, which is a finished master rather than something meant to sit under a
+## menu. This puts the bed near -32 dBFS at the default music slider, the same
+## level the chapter music was tuned to.
+const MUSIC_DB := -9.0
+const SILENT_DB := -60.0
+const FADE := 1.5
+
 var _players: Array[AudioStreamPlayer] = []
 var _next := 0
 var _cache := {}
@@ -24,6 +36,13 @@ var _cache := {}
 ## of it sounds; a screen grabbing focus as it opens stays silent.
 var _navigating := false
 
+var _music: AudioStreamPlayer
+var _music_fade: Tween
+
+## Other players on the Music bus: a stage song, or a chapter's own track.
+var _rival_music: Array[AudioStreamPlayer] = []
+var _ducked := false
+
 
 func _ready() -> void:
 	for i in VOICES:
@@ -31,6 +50,12 @@ func _ready() -> void:
 		p.bus = &"SFX"
 		add_child(p)
 		_players.append(p)
+
+	_music = AudioStreamPlayer.new()
+	_music.bus = &"Music"
+	_music.volume_db = SILENT_DB
+	add_child(_music)
+	_start_music()
 
 	get_tree().node_added.connect(_on_node_added)
 	Events.note_judged.connect(_on_note_judged)
@@ -64,9 +89,53 @@ func _input(event: InputEvent) -> void:
 func _process(_delta: float) -> void:
 	_navigating = false
 
+	var busy := false
+	var i := _rival_music.size()
+	while i > 0:
+		i -= 1
+		var p := _rival_music[i]
+		if not is_instance_valid(p):
+			_rival_music.remove_at(i)
+		elif p.playing:
+			busy = true
+	if busy != _ducked:
+		_ducked = busy
+		_fade_music(SILENT_DB if busy else MUSIC_DB)
+
+
+## Loops, so it carries a menu for as long as the player sits there.
+func _start_music() -> void:
+	if not ResourceLoader.exists(MUSIC):
+		push_warning("No background music at " + MUSIC)
+		return
+	var stream: AudioStream = load(MUSIC)
+	if "loop" in stream:
+		stream.loop = true
+	_music.stream = stream
+	_music.play()
+	_fade_music(MUSIC_DB)
+
+
+## Fading rather than cutting, and paused once it is silent so it holds its
+## place instead of running on under a whole stage.
+func _fade_music(target_db: float) -> void:
+	if _music.stream == null:
+		return
+	if _music_fade != null and _music_fade.is_valid():
+		_music_fade.kill()
+	if target_db > SILENT_DB:
+		_music.stream_paused = false
+	_music_fade = create_tween()
+	_music_fade.tween_property(_music, "volume_db", target_db, FADE)
+	if target_db <= SILENT_DB:
+		_music_fade.finished.connect(func() -> void: _music.stream_paused = true)
+
 
 ## Any button anywhere, including ones built at runtime like the hint bar caps.
 func _on_node_added(n: Node) -> void:
+	if n is AudioStreamPlayer and n != _music and n.bus == &"Music":
+		_rival_music.append(n)
+		return
 	if not (n is BaseButton):
 		return
 	n.pressed.connect(play.bind("click"))

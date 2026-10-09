@@ -97,8 +97,11 @@ translation/translation_folder="res://lang"
 translation/save_mode=0
 translation/add_separator=false
 translation/locales=["en", "th"]
-translation/id_counter=16
+translation/id_counter=17
 audio/type_sound_bus="SFX"
+translation/intern/save_mode=0
+translation/intern/file_mode=1
+translation/intern/translation_folder="res://lang"
 
 [display]
 
