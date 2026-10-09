@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://choin45eo6uqf"
+
+[deps]
+
+files=["res://lang/dialogic_ch3_meet_cassia_translation.en.translation", "res://lang/dialogic_ch3_meet_cassia_translation.th.translation"]
+
+source_file="res://lang/dialogic_ch3_meet_cassia_translation.csv"
+dest_files=["res://lang/dialogic_ch3_meet_cassia_translation.en.translation", "res://lang/dialogic_ch3_meet_cassia_translation.th.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

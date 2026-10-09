@@ -3,44 +3,44 @@ set {elion_name} = "Elion"
 set {theo_name} = "Theo"
 set {cassia_name} = "Cassia"
 
-narrator: Remi finished his performance with one final step before taking a proud bow.
-narrator: Elion and Theo looked pleased, but Cassia remained completely silent, her arms still folded.
-narrator: For a few long seconds, no one could tell what she was thinking.
+narrator: Remi finished his performance with one final step before taking a proud bow. #id:11
+narrator: Elion and Theo looked pleased, but Cassia remained completely silent, her arms still folded. #id:12
+narrator: For a few long seconds, no one could tell what she was thinking. #id:13
 
 join remi (Happy) left
-remi (Confused): ...Squeak?
+remi (Confused): ...Squeak? #id:14
 join theo (Default) leftmost
-theo (Shocked): (Oh no... Is that good or bad?)
+theo (Shocked): (Oh no... Is that good or bad?) #id:15
 join elion (Default) right
-elion (Smile): Another magnificent performance, Sir Remi!
-theo (Crashout): (Ah! Elion, please... at least try to read the room!)
+elion (Smile): Another magnificent performance, Sir Remi! #id:16
+theo (Crashout): (Ah! Elion, please... at least try to read the room!) #id:17
 join cassia (Default) rightmost
-cassia (Default): …
-cassia (Surprised): Hmph.
-cassia: You're better than I expected.
-remi (Happy): Squeak!
-cassia (Default): Don't look so proud. I said you were good, not perfect.
-theo (Thinking): (Uhh… That means she … accepts Mr. Remi? That's probably the nicest thing we're going to get out of her, I think…)
-elion (Default): Then, Lady Cassia... does this mean you will join us?
-cassia (Disapproved): You really are not going to let this go, are you?
-cassia (Default): Fine. I'll join your team.
-remi (Please): Squeak! Squeak!!
-elion (Smile): Wonderful! Then our group is finally complete!
-theo (Default): Somehow... we actually did it.
-cassia (Disapproved): Save the excitement for when we actually win.
-elion (Determined): Of course! Then let us make sure we do!
-remi (Happy): Squeak!
+cassia (Default): … #id:18
+cassia (Surprised): Hmph. #id:19
+cassia: You're better than I expected. #id:1a
+remi (Happy): Squeak! #id:1b
+cassia (Default): Don't look so proud. I said you were good, not perfect. #id:1c
+theo (Thinking): (Uhh… That means she … accepts Mr. Remi? That's probably the nicest thing we're going to get out of her, I think…) #id:1d
+elion (Default): Then, Lady Cassia... does this mean you will join us? #id:1e
+cassia (Disapproved): You really are not going to let this go, are you? #id:1f
+cassia (Default): Fine. I'll join your team. #id:20
+remi (Please): Squeak! Squeak!! #id:21
+elion (Smile): Wonderful! Then our group is finally complete! #id:22
+theo (Default): Somehow... we actually did it. #id:23
+cassia (Disapproved): Save the excitement for when we actually win. #id:24
+elion (Determined): Of course! Then let us make sure we do! #id:25
+remi (Happy): Squeak! #id:26
 
-narrator: And just like that, Remi had finally found all three companions he needed.
-narrator: Elion, the kind-hearted paladin.
-narrator: Theo, the thoughtful mage.
-narrator: And Cassia, the fierce rogue who was definitely not going to admit she enjoyed Remi's performance.
+narrator: And just like that, Remi had finally found all three companions he needed. #id:27
+narrator: Elion, the kind-hearted paladin. #id:28
+narrator: Theo, the thoughtful mage. #id:29
+narrator: And Cassia, the fierce rogue who was definitely not going to admit she enjoyed Remi's performance. #id:2a
 
-cassia (Default): Enough wasting time. If we're going, then move.
-elion (Smile): She is right! We should make our way to the festival at once!
-theo (Smile): Uh-huh…!
-remi: Squeak!
+cassia (Default): Enough wasting time. If we're going, then move. #id:2b
+elion (Smile): She is right! We should make our way to the festival at once! #id:2c
+theo (Smile): Uh-huh…! #id:2d
+remi: Squeak! #id:2e
 
-narrator: With his new team gathered at last, Remi set off toward the festival.
-narrator: The dancing contest, and perhaps the beginning of something much greater, was waiting for them.
-narrator: And so, their journey to the stage began.
+narrator: With his new team gathered at last, Remi set off toward the festival. #id:2f
+narrator: The dancing contest, and perhaps the beginning of something much greater, was waiting for them. #id:30
+narrator: And so, their journey to the stage began. #id:31

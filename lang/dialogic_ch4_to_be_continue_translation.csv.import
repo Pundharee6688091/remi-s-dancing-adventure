@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://caj7du80ryjka"
+
+[deps]
+
+files=["res://lang/dialogic_ch4_to_be_continue_translation.en.translation", "res://lang/dialogic_ch4_to_be_continue_translation.th.translation"]
+
+source_file="res://lang/dialogic_ch4_to_be_continue_translation.csv"
+dest_files=["res://lang/dialogic_ch4_to_be_continue_translation.en.translation", "res://lang/dialogic_ch4_to_be_continue_translation.th.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

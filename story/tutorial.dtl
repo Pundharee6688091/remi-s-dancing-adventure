@@ -1,14 +1,14 @@
 # Opening narration, before the tutorial fight.
 
-narrator: Once upon a time, in a faraway land hidden within a forgotten realm...
-narrator: There lived a very small rat with a very big heart.
+narrator: Once upon a time, in a faraway land hidden within a forgotten realm... #id:97
+narrator: There lived a very small rat with a very big heart. #id:98
 
 join remi center
 
-narrator: This is Remi, a small rat with an even bigger dream.
-narrator: More than anything in the world, Remi dreamed of becoming the greatest dancer anyone had ever seen.
-narrator: Every day, he practiced his steps, improved his moves, and imagined the day he would finally perform in front of everyone.
-narrator: But there was only one small problem... Remi was, well... a rat.
-narrator: Still, Remi kept practicing, hoping that one day he would get the chance to prove himself.
-narrator: And now, that chance has finally arrived.
-narrator: You, my friend, will guide Remi on his journey and help him achieve his dream.
+narrator: This is Remi, a small rat with an even bigger dream. #id:99
+narrator: More than anything in the world, Remi dreamed of becoming the greatest dancer anyone had ever seen. #id:9a
+narrator: Every day, he practiced his steps, improved his moves, and imagined the day he would finally perform in front of everyone. #id:9b
+narrator: But there was only one small problem... Remi was, well... a rat. #id:9c
+narrator: Still, Remi kept practicing, hoping that one day he would get the chance to prove himself. #id:9d
+narrator: And now, that chance has finally arrived. #id:9e
+narrator: You, my friend, will guide Remi on his journey and help him achieve his dream. #id:9f

@@ -43,7 +43,6 @@ directories/dtl_directory={
 "ch2_meet_theo": "res://story/ch2_meet_theo.dtl",
 "ch3_meet_cassia": "res://story/ch3_meet_cassia.dtl",
 "ch4_to_be_continue": "res://story/ch4_to_be_continue.dtl",
-"ch4_to_be_continued": "res://story/ch4_to_be_continued.dtl",
 "tutorial": "res://story/tutorial.dtl"
 }
 layout/style_directory={
@@ -97,7 +96,7 @@ translation/file_mode=1
 translation/translation_folder="res://lang"
 translation/save_mode=0
 translation/add_separator=false
-translation/locales=[]
+translation/locales=["en", "th"]
 translation/id_counter=16
 audio/type_sound_bus="SFX"
 
@@ -129,7 +128,7 @@ dialogic_default_action={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://lang/ui.en.translation", "res://lang/ui.th.translation")
+locale/translations=PackedStringArray("res://lang/dialogic_ch1_meet_elion_translation.en.translation", "res://lang/dialogic_ch1_meet_elion_translation.th.translation", "res://lang/dialogic_ch2_meet_theo_translation.en.translation", "res://lang/dialogic_ch2_meet_theo_translation.th.translation", "res://lang/dialogic_ch3_meet_cassia_translation.en.translation", "res://lang/dialogic_ch3_meet_cassia_translation.th.translation", "res://lang/dialogic_ch4_to_be_continue_translation.en.translation", "res://lang/dialogic_ch4_to_be_continue_translation.th.translation", "res://lang/dialogic_character_translations.en.translation", "res://lang/dialogic_character_translations.th.translation", "res://lang/dialogic_tutorial_translation.en.translation", "res://lang/dialogic_tutorial_translation.th.translation", "res://lang/ui.en.translation", "res://lang/ui.th.translation")
 
 [physics]
 

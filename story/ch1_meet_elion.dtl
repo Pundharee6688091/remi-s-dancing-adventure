@@ -1,65 +1,65 @@
 # Reset the reveal so the scene plays correctly on a replay or a reloaded save.
 set {elion_name} = "???"
 
-narrator: One fateful day, Remi heard that a nearby festival was holding a dancing contest.
-narrator: The grand prize was 100 gold... and a chance to perform in the capital city.
-narrator: It was the perfect opportunity for Remi to finally show everyone what he could do.
-narrator: But there was one problem... the contest only allowed group performances with at least four members.
-narrator: If Remi wanted to enter, he would need to find some teammates and convince them to join his group.
-narrator: And so, his search for the perfect dance team began.
+narrator: One fateful day, Remi heard that a nearby festival was holding a dancing contest. #id:df
+narrator: The grand prize was 100 gold... and a chance to perform in the capital city. #id:e0
+narrator: It was the perfect opportunity for Remi to finally show everyone what he could do. #id:e1
+narrator: But there was one problem... the contest only allowed group performances with at least four members. #id:e2
+narrator: If Remi wanted to enter, he would need to find some teammates and convince them to join his group. #id:e3
+narrator: And so, his search for the perfect dance team began. #id:e4
 
 join remi (Sad) left
 
-remi: Squeak…
+remi: Squeak… #id:e5
 
-narrator: Remi searched high and low, looking for anyone who was alone and wouldn't be afraid of him just because he was a rat.
-narrator: But no matter where he looked, no one seemed to notice the small rat wandering around.
-narrator: After searching for so long, Remi began to feel tired and discouraged.
-narrator: Just as he was about to give up, he noticed someone approaching him...
+narrator: Remi searched high and low, looking for anyone who was alone and wouldn't be afraid of him just because he was a rat. #id:e6
+narrator: But no matter where he looked, no one seemed to notice the small rat wandering around. #id:e7
+narrator: After searching for so long, Remi began to feel tired and discouraged. #id:e8
+narrator: Just as he was about to give up, he noticed someone approaching him... #id:e9
 
 join elion (Confused) right
 
-elion: Eh?
+elion: Eh? #id:ea
 
-narrator: The one who found Remi was a tall young elf with long, straight blonde hair. He carried himself like a trained warrior, calm, confident, and composed, yet there was an unmistakable kindness in his eyes.
-narrator: Unlike everyone else, he did not hesitate or look down on Remi. Instead, he approached with a gentle smile and greeted him in a deep, calm voice.
+narrator: The one who found Remi was a tall young elf with long, straight blonde hair. He carried himself like a trained warrior, calm, confident, and composed, yet there was an unmistakable kindness in his eyes. #id:eb
+narrator: Unlike everyone else, he did not hesitate or look down on Remi. Instead, he approached with a gentle smile and greeted him in a deep, calm voice. #id:ec
 
-elion: Sir, may I ask why you are lying here on the ground? Are you injured?
-remi: Squeak... Squeak squeak.
-elion (Sad): Oh, my lord... So that is what happened.
-elion: I am sorry you had to go through that, you must have felt terribly alone.
-remi (Confused): Squeak... Squeak?
-elion (Surprised): Ah! Forgive me. I have been speaking to you without even introducing myself.
-remi (Default): Squeak!
+elion: Sir, may I ask why you are lying here on the ground? Are you injured? #id:ed
+remi: Squeak... Squeak squeak. #id:ee
+elion (Sad): Oh, my lord... So that is what happened. #id:ef
+elion: I am sorry you had to go through that, you must have felt terribly alone. #id:f0
+remi (Confused): Squeak... Squeak? #id:f1
+elion (Surprised): Ah! Forgive me. I have been speaking to you without even introducing myself. #id:f2
+remi (Default): Squeak! #id:f3
 
 # He introduces himself here, so the name box stops saying ??? from this point on.
 set {elion_name} = "Elion"
 
-elion (Default): [b]Elion Theran[/b], youngest of the Theran family of Silvermoon!
-elion (Confused): It is an honor to meet you, Sir...?
-remi (Happy): Squeak!
-elion (Smile): Remi, is it? A pleasure to meet you, Sir Remi!
-elion (Default): Now then, Sir Remi. What brought you all the way out here?
-remi (Please): Squeak... Squeak squeak squeak.
-elion (Confused): A dancing contest? And you require companions to form a team?
-elion (Thinking): I see…
-elion (Smile): Then I shall accompany you!
-remi (Surprised): Squeak?!
-elion (Default): Of course. You are searching for help, and I am standing right here. It would be rather strange of me to refuse, would it not?
-elion (Determined): Besides, as a [b]paladin[/b], lending a hand to those in need is simply the right thing to do!
-remi (Happy): Squeak! Squeak squeak!
-elion (Confused): Ah, yes! You mentioned that you were a dancer.
-elion (Determined): I must confess, I have never seen a rat dance before.
-elion (Thinking): ...Though I suppose I have never asked one to.
+elion (Default): [b]Elion Theran[/b], youngest of the Theran family of Silvermoon! #id:f4
+elion (Confused): It is an honor to meet you, Sir...? #id:f5
+remi (Happy): Squeak! #id:f6
+elion (Smile): Remi, is it? A pleasure to meet you, Sir Remi! #id:f7
+elion (Default): Now then, Sir Remi. What brought you all the way out here? #id:f8
+remi (Please): Squeak... Squeak squeak squeak. #id:f9
+elion (Confused): A dancing contest? And you require companions to form a team? #id:fa
+elion (Thinking): I see… #id:fb
+elion (Smile): Then I shall accompany you! #id:fc
+remi (Surprised): Squeak?! #id:fd
+elion (Default): Of course. You are searching for help, and I am standing right here. It would be rather strange of me to refuse, would it not? #id:fe
+elion (Determined): Besides, as a [b]paladin[/b], lending a hand to those in need is simply the right thing to do! #id:ff
+remi (Happy): Squeak! Squeak squeak! #id:100
+elion (Confused): Ah, yes! You mentioned that you were a dancer. #id:101
+elion (Determined): I must confess, I have never seen a rat dance before. #id:102
+elion (Thinking): ...Though I suppose I have never asked one to. #id:103
 
-narrator: For someone who looked so dignified, Elion seemed completely serious.
+narrator: For someone who looked so dignified, Elion seemed completely serious. #id:104
 
-elion (Determined): Now you have made me curious, Sir Remi.
-elion (Smile): Before we set off, would you honor me with a performance?
-remi (Happy): Squeak!
+elion (Determined): Now you have made me curious, Sir Remi. #id:105
+elion (Smile): Before we set off, would you honor me with a performance? #id:106
+remi (Happy): Squeak! #id:107
 
-narrator: Remi quickly jumped back onto his feet. After searching all day, he had finally found someone willing to believe in him.
+narrator: Remi quickly jumped back onto his feet. After searching all day, he had finally found someone willing to believe in him. #id:108
 
-elion (Default): The stage is yours, Sir Remi!
+elion (Default): The stage is yours, Sir Remi! #id:109
 
-narrator: And so, with his very first companion watching, Remi's first performance began…
+narrator: And so, with his very first companion watching, Remi's first performance began… #id:10a

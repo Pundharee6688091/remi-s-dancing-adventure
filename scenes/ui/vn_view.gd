@@ -24,11 +24,30 @@ func _ready() -> void:
 	%Settings.routed = false
 	%Settings.closed.connect(_close_settings)
 	_set_hints()
-	Events.language_changed.connect(_set_hints)
+	Events.language_changed.connect(_on_language_changed)
 
 	_start_bgm()
 	Dialogic.timeline_ended.connect(_on_timeline_ended)
 	Dialogic.start(timeline)
+
+
+## Dialogic draws a line once and leaves it there, so switching language has to
+## redraw whatever is already on screen. Lines after this one come through
+## translated on their own.
+func _on_language_changed() -> void:
+	_set_hints()
+	var timeline := Dialogic.current_timeline
+	if timeline == null:
+		return
+	var idx: int = Dialogic.current_event_idx
+	if idx < 0 or idx >= timeline.events.size():
+		return
+	var event = timeline.events[idx]
+	if not (event is DialogicTextEvent):
+		return
+	if event.character != null:
+		Dialogic.Text.update_name_label(event.character, true)
+	Dialogic.Text.update_dialog_text(event.get_property_translated("text"), true)
 
 
 func _set_hints() -> void:

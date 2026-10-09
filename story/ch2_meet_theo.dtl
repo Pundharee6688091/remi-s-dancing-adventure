@@ -2,88 +2,88 @@
 set {elion_name} = "Elion"
 set {theo_name} = "???"
 
-narrator: Remi finished his dance with a proud bow as Elion applauded enthusiastically.
+narrator: Remi finished his dance with a proud bow as Elion applauded enthusiastically. #id:a0
 
 join elion (Smile) right
-elion (Smile): Fantastic! Just as I expected from such a talented dancer!
+elion (Smile): Fantastic! Just as I expected from such a talented dancer! #id:a1
 join remi (Happy) left
-remi (Happy): Squeak!
-elion (Smile): Your moves were wonderful, Sir Remi. I can see how much effort you have put into them.
-elion (Default): You truly have worked hard for this dream.
-elion (Smile): Then it is settled. As promised, I shall accompany you as your teammate.
-elion (Determined): Together, we shall enter this contest and claim that grand prize!
-elion (Confused): Although... that reminds me. You said we require a group of four, correct?
-remi (Sad): Squeak…
-elion (Thinking): Hmm... Then we still need two more companions.
-elion (Default): I wonder who might be willing to join us-
+remi (Happy): Squeak! #id:a2
+elion (Smile): Your moves were wonderful, Sir Remi. I can see how much effort you have put into them. #id:a3
+elion (Default): You truly have worked hard for this dream. #id:a4
+elion (Smile): Then it is settled. As promised, I shall accompany you as your teammate. #id:a5
+elion (Determined): Together, we shall enter this contest and claim that grand prize! #id:a6
+elion (Confused): Although... that reminds me. You said we require a group of four, correct? #id:a7
+remi (Sad): Squeak… #id:a8
+elion (Thinking): Hmm... Then we still need two more companions. #id:a9
+elion (Default): I wonder who might be willing to join us- #id:aa
 
-narrator: Before Elion could finish his sentence, someone suddenly crashed straight into him.
+narrator: Before Elion could finish his sentence, someone suddenly crashed straight into him. #id:ab
 
-elion (Surprised): Whoa-!
+elion (Surprised): Whoa-! #id:ac
 
-narrator: It was a young elf boy who seemed to have been in a rush to go somewhere.
+narrator: It was a young elf boy who seemed to have been in a rush to go somewhere. #id:ad
 
 join theo (Surprised) leftmost
 
-theo: Ah-!
+theo: Ah-! #id:ae
 
-narrator: A young boy with green hair and a charming face stumbled into view. From the wand in his hand, he appeared to be some kind of spellcaster.
-narrator: He fell to the ground, his green hair dropping over his face as the wand slipped from his hand.
-narrator: Looking dazed and confused, he slowly raised his head toward Elion, who was already kneeling beside him to help.
+narrator: A young boy with green hair and a charming face stumbled into view. From the wand in his hand, he appeared to be some kind of spellcaster. #id:af
+narrator: He fell to the ground, his green hair dropping over his face as the wand slipped from his hand. #id:b0
+narrator: Looking dazed and confused, he slowly raised his head toward Elion, who was already kneeling beside him to help. #id:b1
 
-elion (Surprised): I am terribly sorry! Are you alright-
-elion (Confused): Oh! It is you!
-theo: Eh...? Isn't it Elion? What are the odds of running into you here…!
+elion (Surprised): I am terribly sorry! Are you alright- #id:b2
+elion (Confused): Oh! It is you! #id:b3
+theo: Eh...? Isn't it Elion? What are the odds of running into you here…! #id:b4
 
-narrator: It seemed that Elion and the mysterious boy already knew each other somehow.
-narrator: Elion helped him back onto his feet before picking up the fallen wand and handing it back to him.
+narrator: It seemed that Elion and the mysterious boy already knew each other somehow. #id:b5
+narrator: Elion helped him back onto his feet before picking up the fallen wand and handing it back to him. #id:b6
 
-elion (Default): Well, I am currently looking for members to join a dancing contest at the festival.
-elion (Smile): We need a group of four, so I am helping gather enough people to enter.
-theo (Surprised): Ah! The dance contest!
-theo (Smile): I'm actually going to sign up for it! They promise quite a lot of gold as a reward. I really need those for my research fund…!
-theo (Default): Sorry, Elion…! I have to part with you now. Hope we meet again…!
+elion (Default): Well, I am currently looking for members to join a dancing contest at the festival. #id:b7
+elion (Smile): We need a group of four, so I am helping gather enough people to enter. #id:b8
+theo (Surprised): Ah! The dance contest! #id:b9
+theo (Smile): I'm actually going to sign up for it! They promise quite a lot of gold as a reward. I really need those for my research fund…! #id:ba
+theo (Default): Sorry, Elion…! I have to part with you now. Hope we meet again…! #id:bb
 
 update remi (Surprised)
 update elion (Surprised)
 
-narrator: As the boy was about to sprint off, Elion and Remi stopped him from rushing forward!
+narrator: As the boy was about to sprint off, Elion and Remi stopped him from rushing forward! #id:bc
 
-elion (Determined): Sir Theo! We are also going to participate in the contest too! Could you hear us out for a while? We need two more members for our party right now…!
+elion (Determined): Sir Theo! We are also going to participate in the contest too! Could you hear us out for a while? We need two more members for our party right now…! #id:bd
 
 # Elion says his name here, so the name box stops saying ??? from this point on.
 set {theo_name} = "Theo"
 
-remi (Please): Squeak! Squeak squeak!! Squeak—!
-theo (Surprised): !!!
-theo (Confused): …
-elion: …!!!
-remi: …!!!
-theo (Thinking): …
-theo (Default): …Alright. I could team up with you. However, you said you needed two more members. So it's Elion and…?
-elion (Default): Pardon me, Sir Theo. This is my companion and reliable teammate, Sir Remi!
-remi (Happy): Squeak!
-elion (Smile): And Sir Remi, this is Sir [b]Theo[/b], a wonderful [b]mage[/b] companion of mine.
-theo (Smile): Nice to meet you, Mr. Remi.
-elion (Determined): Sir Theo, Sir Remi here is an exquisite and determined dancer. He is a pure soul who follows his dream despite the segregation and discrimination of his kind in the performing industry. I guarantee Sir Remi is a promising member of our team.
-remi (Please): Squeak…
-theo (Surprised): …!
-theo (Thinking): …
-theo: (Elion is talking with a rat…? Since when could he do that…?)
-theo (Confused): (Ah… The rat… Remi was it…? Mister Remi is also a dancer…? And he was discriminated against in the industry because he is a rat? Wait— A rat can dance?! I have never seen one dance before. They can dance???)
-theo (Thinking): (No, no, no. That is a prejudice that rats can't dance, is it? Isn't that the same thing as what Mr. Remi faced? I'm… a bad person?)
-theo (Crashout): (From the first place, performing industry…? Rat language? Dancing rats? What is this information?! Why is Elion so normal about this??? Is this normal??? I guess this is normal???)
-elion (Confused): Theo, sir?
-remi (Confused): Squeak…?
-theo (Surprised): Ah— Um…! Sorry…!
-theo (Thinking): I get the situation now. If that's the case, I can join your party!...
-theo (Default): However, I really aim to win this competition. I need to see your capability first. Excuse my formalistic procedure, but would you mind showing your skills to me?
-remi (Surprised): !!!
-elion (Determined): This is an amazing opportunity, Sir Remi! Let's show him what you are made of.
-theo (Smile): I do know Elion and his style, so I must admit I am a little bit curious about you, new fella. I would appreciate it if you would be so kind as to dance to my tune?
-remi (Happy): Squeak! Squeak squeak!
-elion (Smile): Now that's the spirit! Let's dance right away!
-theo: Thank you, Mr. Remi.
-theo: (I'm glad my confusion didn't offend him.)
-theo (Thinking): (And also, thank the universe I didn't ask Elion if Mr. Remi was his midday snack at first when I saw him holding a rat.)
-theo (Crashout): (That would be so much more awkward...)
+remi (Please): Squeak! Squeak squeak!! Squeak—! #id:be
+theo (Surprised): !!! #id:bf
+theo (Confused): … #id:c0
+elion: …!!! #id:c1
+remi: …!!! #id:c2
+theo (Thinking): … #id:c3
+theo (Default): …Alright. I could team up with you. However, you said you needed two more members. So it's Elion and…? #id:c4
+elion (Default): Pardon me, Sir Theo. This is my companion and reliable teammate, Sir Remi! #id:c5
+remi (Happy): Squeak! #id:c6
+elion (Smile): And Sir Remi, this is Sir [b]Theo[/b], a wonderful [b]mage[/b] companion of mine. #id:c7
+theo (Smile): Nice to meet you, Mr. Remi. #id:c8
+elion (Determined): Sir Theo, Sir Remi here is an exquisite and determined dancer. He is a pure soul who follows his dream despite the segregation and discrimination of his kind in the performing industry. I guarantee Sir Remi is a promising member of our team. #id:c9
+remi (Please): Squeak… #id:ca
+theo (Surprised): …! #id:cb
+theo (Thinking): … #id:cc
+theo: (Elion is talking with a rat…? Since when could he do that…?) #id:cd
+theo (Confused): (Ah… The rat… Remi was it…? Mister Remi is also a dancer…? And he was discriminated against in the industry because he is a rat? Wait— A rat can dance?! I have never seen one dance before. They can dance???) #id:ce
+theo (Thinking): (No, no, no. That is a prejudice that rats can't dance, is it? Isn't that the same thing as what Mr. Remi faced? I'm… a bad person?) #id:cf
+theo (Crashout): (From the first place, performing industry…? Rat language? Dancing rats? What is this information?! Why is Elion so normal about this??? Is this normal??? I guess this is normal???) #id:d0
+elion (Confused): Theo, sir? #id:d1
+remi (Confused): Squeak…? #id:d2
+theo (Surprised): Ah— Um…! Sorry…! #id:d3
+theo (Thinking): I get the situation now. If that's the case, I can join your party!... #id:d4
+theo (Default): However, I really aim to win this competition. I need to see your capability first. Excuse my formalistic procedure, but would you mind showing your skills to me? #id:d5
+remi (Surprised): !!! #id:d6
+elion (Determined): This is an amazing opportunity, Sir Remi! Let's show him what you are made of. #id:d7
+theo (Smile): I do know Elion and his style, so I must admit I am a little bit curious about you, new fella. I would appreciate it if you would be so kind as to dance to my tune? #id:d8
+remi (Happy): Squeak! Squeak squeak! #id:d9
+elion (Smile): Now that's the spirit! Let's dance right away! #id:da
+theo: Thank you, Mr. Remi. #id:db
+theo: (I'm glad my confusion didn't offend him.) #id:dc
+theo (Thinking): (And also, thank the universe I didn't ask Elion if Mr. Remi was his midday snack at first when I saw him holding a rat.) #id:dd
+theo (Crashout): (That would be so much more awkward...) #id:de

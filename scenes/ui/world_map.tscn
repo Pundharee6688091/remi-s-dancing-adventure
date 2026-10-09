@@ -1,21 +1,12 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cuxubecouwvg"]
 
-[ext_resource type="Script" path="res://scenes/ui/world_map.gd" id="1_wm"]
-[ext_resource type="Script" path="res://scenes/ui/map_view.gd" id="2_mv"]
-[ext_resource type="Script" path="res://scenes/rhythm/bar.gd" id="3_bar"]
-[ext_resource type="Script" path="res://scenes/ui/parts/hint_bar.gd" id="4_hb"]
+[ext_resource type="Script" uid="uid://ctiu1p84sq147" path="res://scenes/ui/world_map.gd" id="1_wm"]
+[ext_resource type="Script" uid="uid://ckxi82468krt2" path="res://scenes/ui/map_view.gd" id="2_mv"]
+[ext_resource type="Script" uid="uid://bxoedpfs1ey4h" path="res://scenes/rhythm/bar.gd" id="3_bar"]
+[ext_resource type="Script" uid="uid://batawi1qqiibp" path="res://scenes/ui/parts/hint_bar.gd" id="4_hb"]
 [ext_resource type="PackedScene" path="res://scenes/ui/stage_detail.tscn" id="5_sd"]
-[ext_resource type="Script" path="res://scenes/ui/parts/gear_icon.gd" id="6_gear"]
+[ext_resource type="Script" uid="uid://diybsjmk6s61x" path="res://scenes/ui/parts/gear_icon.gd" id="6_gear"]
 [ext_resource type="PackedScene" path="res://scenes/ui/settings.tscn" id="7_set"]
-[ext_resource type="PackedScene" path="res://scenes/ui/parts/zone_header.tscn" id="8_zone"]
-
-[sub_resource type="StyleBoxFlat" id="slot"]
-bg_color = Color(0.9019608, 0.8901961, 0.8627451, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.16862746, 0.16862746, 0.16862746, 1)
 
 [sub_resource type="StyleBoxFlat" id="info_box"]
 content_margin_left = 14.0
@@ -23,6 +14,14 @@ content_margin_top = 14.0
 content_margin_right = 14.0
 content_margin_bottom = 14.0
 bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.16862746, 0.16862746, 0.16862746, 1)
+
+[sub_resource type="StyleBoxFlat" id="slot"]
+bg_color = Color(0.9019608, 0.8901961, 0.8627451, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -65,7 +64,7 @@ corner_radius_top_right = 99
 corner_radius_bottom_right = 99
 corner_radius_bottom_left = 99
 
-[node name="WorldMap" type="Control"]
+[node name="WorldMap" type="Control" unique_id=1676635880]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -74,7 +73,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wm")
 
-[node name="Bg" type="TextureRect" parent="."]
+[node name="Bg" type="TextureRect" parent="." unique_id=1663451188]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -88,7 +87,7 @@ mouse_filter = 2
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Map" type="Control" parent="."]
+[node name="Map" type="Control" parent="." unique_id=1433093342]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -99,7 +98,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_mv")
 
-[node name="Zones" type="Control" parent="."]
+[node name="Zones" type="Control" parent="." unique_id=1829479173]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -109,14 +108,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Strip" type="ColorRect" parent="."]
+[node name="Strip" type="ColorRect" parent="." unique_id=1363645327]
 layout_mode = 1
 offset_right = 1280.0
 offset_bottom = 82.0
 mouse_filter = 2
-color = Color(1, 1, 1, 1)
 
-[node name="Rule" type="ColorRect" parent="."]
+[node name="Rule" type="ColorRect" parent="." unique_id=1051024126]
 layout_mode = 1
 offset_top = 82.0
 offset_right = 1280.0
@@ -124,30 +122,29 @@ offset_bottom = 84.0
 mouse_filter = 2
 color = Color(0.169, 0.169, 0.169, 1)
 
-[node name="TitleLabel" type="Label" parent="."]
+[node name="TitleLabel" type="Label" parent="." unique_id=454543700]
 layout_mode = 1
 offset_left = 40.0
 offset_top = 20.0
 offset_right = 360.0
 offset_bottom = 60.0
-mouse_filter = 2
 theme_override_font_sizes/font_size = 32
 text = "UI_WORLD_MAP"
 
-[node name="ProgressLabel" type="Label" parent="."]
+[node name="ProgressLabel" type="Label" parent="." unique_id=790394993]
 layout_mode = 1
 offset_left = 240.0
 offset_top = 36.0
 offset_right = 340.0
 offset_bottom = 58.0
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 18
 text = "UI_PROGRESS"
 
-[node name="ProgressBar" type="Control" parent="."]
+[node name="ProgressBar" type="Control" parent="." unique_id=921008568]
 unique_name_in_owner = true
 layout_mode = 1
+anchors_preset = 0
 offset_left = 340.0
 offset_top = 36.0
 offset_right = 640.0
@@ -157,40 +154,38 @@ script = ExtResource("3_bar")
 value = 0.0
 fill_color = Color(0.9098039, 0.6392157, 0.23921569, 1)
 
-[node name="Steps" type="Label" parent="."]
+[node name="Steps" type="Label" parent="." unique_id=632581090]
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = 664.0
 offset_top = 36.0
 offset_right = 900.0
 offset_bottom = 58.0
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 18
 
-[node name="Party" type="Label" parent="."]
+[node name="Party" type="Label" parent="." unique_id=430376987]
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = 960.0
 offset_top = 36.0
 offset_right = 1186.0
 offset_bottom = 62.0
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 18
 horizontal_alignment = 2
 
-[node name="Gear" type="Button" parent="."]
+[node name="Gear" type="Button" parent="." unique_id=1463360885]
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = 1196.0
 offset_top = 20.0
 offset_right = 1240.0
 offset_bottom = 64.0
-focus_mode = 0
 tooltip_text = "UI_SETTINGS"
+focus_mode = 0
 
-[node name="Cog" type="Control" parent="Gear"]
+[node name="Cog" type="Control" parent="Gear" unique_id=351741795]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -200,7 +195,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("6_gear")
 
-[node name="InfoCard" type="PanelContainer" parent="."]
+[node name="InfoCard" type="PanelContainer" parent="." unique_id=1838950247]
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = 50.0
@@ -210,76 +205,70 @@ offset_bottom = 640.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("info_box")
 
-[node name="Row" type="HBoxContainer" parent="InfoCard"]
+[node name="Row" type="HBoxContainer" parent="InfoCard" unique_id=1515704361]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 20
 
-[node name="Art" type="PanelContainer" parent="InfoCard/Row"]
+[node name="Art" type="PanelContainer" parent="InfoCard/Row" unique_id=1734557316]
 custom_minimum_size = Vector2(110, 76)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_styles/panel = SubResource("slot")
 
-[node name="Who" type="Label" parent="InfoCard/Row/Art"]
+[node name="Who" type="Label" parent="InfoCard/Row/Art" unique_id=1733547526]
 unique_name_in_owner = true
 layout_mode = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 15
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Text" type="VBoxContainer" parent="InfoCard/Row"]
+[node name="Text" type="VBoxContainer" parent="InfoCard/Row" unique_id=1277641419]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_constants/separation = 8
 
-[node name="TitleRow" type="HBoxContainer" parent="InfoCard/Row/Text"]
+[node name="TitleRow" type="HBoxContainer" parent="InfoCard/Row/Text" unique_id=633214965]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 10
 
-[node name="Title" type="Label" parent="InfoCard/Row/Text/TitleRow"]
+[node name="Title" type="Label" parent="InfoCard/Row/Text/TitleRow" unique_id=662322171]
 unique_name_in_owner = true
 layout_mode = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.16862746, 0.16862746, 0.16862746, 1)
 theme_override_font_sizes/font_size = 26
 
-[node name="Kind" type="Label" parent="InfoCard/Row/Text/TitleRow"]
+[node name="Kind" type="Label" parent="InfoCard/Row/Text/TitleRow" unique_id=1554385348]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 17
 
-[node name="Line" type="Label" parent="InfoCard/Row/Text"]
+[node name="Line" type="Label" parent="InfoCard/Row/Text" unique_id=68726800]
 unique_name_in_owner = true
 layout_mode = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 17
 
-[node name="ClearCount" type="Label" parent="."]
+[node name="ClearCount" type="Label" parent="." unique_id=1752084900]
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = 900.0
 offset_top = 572.0
 offset_right = 1230.0
 offset_bottom = 594.0
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 18
 horizontal_alignment = 2
 
-[node name="Legend" type="PanelContainer" parent="."]
+[node name="Legend" type="PanelContainer" parent="." unique_id=1132806384]
 layout_mode = 1
-anchors_preset = 0
 offset_left = 900.0
 offset_top = 600.0
 offset_right = 1230.0
@@ -287,81 +276,81 @@ offset_bottom = 644.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("legend_box")
 
-[node name="Items" type="HBoxContainer" parent="Legend"]
+[node name="Items" type="HBoxContainer" parent="Legend" unique_id=691942223]
 layout_mode = 2
-alignment = 1
 mouse_filter = 2
 theme_override_constants/separation = 28
+alignment = 1
 
-[node name="Story" type="HBoxContainer" parent="Legend/Items"]
+[node name="Story" type="HBoxContainer" parent="Legend/Items" unique_id=1218525089]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 8
 
-[node name="Dot" type="Panel" parent="Legend/Items/Story"]
+[node name="Dot" type="Panel" parent="Legend/Items/Story" unique_id=1705748117]
 custom_minimum_size = Vector2(14, 14)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_styles/panel = SubResource("dot_white")
 
-[node name="Name" type="Label" parent="Legend/Items/Story"]
+[node name="Name" type="Label" parent="Legend/Items/Story" unique_id=2138625926]
 layout_mode = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.16862746, 0.16862746, 0.16862746, 1)
 theme_override_font_sizes/font_size = 15
-vertical_alignment = 1
 text = "UI_LEGEND_STORY"
+vertical_alignment = 1
 
-[node name="Fight" type="HBoxContainer" parent="Legend/Items"]
+[node name="Fight" type="HBoxContainer" parent="Legend/Items" unique_id=390276120]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 8
 
-[node name="Dot" type="Panel" parent="Legend/Items/Fight"]
+[node name="Dot" type="Panel" parent="Legend/Items/Fight" unique_id=603331448]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_styles/panel = SubResource("dot_white")
 
-[node name="Name" type="Label" parent="Legend/Items/Fight"]
+[node name="Name" type="Label" parent="Legend/Items/Fight" unique_id=997476060]
 layout_mode = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.16862746, 0.16862746, 0.16862746, 1)
 theme_override_font_sizes/font_size = 15
-vertical_alignment = 1
 text = "UI_LEGEND_FIGHT"
+vertical_alignment = 1
 
-[node name="Done" type="HBoxContainer" parent="Legend/Items"]
+[node name="Done" type="HBoxContainer" parent="Legend/Items" unique_id=1703230129]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 8
 
-[node name="Dot" type="Panel" parent="Legend/Items/Done"]
+[node name="Dot" type="Panel" parent="Legend/Items/Done" unique_id=777964090]
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_styles/panel = SubResource("dot_done")
 
-[node name="Name" type="Label" parent="Legend/Items/Done"]
+[node name="Name" type="Label" parent="Legend/Items/Done" unique_id=1089316267]
 layout_mode = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.16862746, 0.16862746, 0.16862746, 1)
 theme_override_font_sizes/font_size = 15
-vertical_alignment = 1
 text = "UI_LEGEND_DONE"
+vertical_alignment = 1
 
-[node name="Hints" type="Control" parent="."]
+[node name="Hints" type="Control" parent="." unique_id=1816853220]
 unique_name_in_owner = true
 layout_mode = 1
+anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("4_hb")
 
-[node name="Detail" parent="." instance=ExtResource("5_sd")]
+[node name="Detail" parent="." unique_id=169354355 instance=ExtResource("5_sd")]
 unique_name_in_owner = true
+layout_mode = 1
 
-[node name="Settings" parent="." instance=ExtResource("7_set")]
+[node name="Settings" parent="." unique_id=844503447 instance=ExtResource("7_set")]
 unique_name_in_owner = true
 visible = false
+layout_mode = 1

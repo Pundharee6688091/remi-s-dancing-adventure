@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bu36um8qe68ud"
+
+[deps]
+
+files=["res://lang/dialogic_ch2_meet_theo_translation.en.translation", "res://lang/dialogic_ch2_meet_theo_translation.th.translation"]
+
+source_file="res://lang/dialogic_ch2_meet_theo_translation.csv"
+dest_files=["res://lang/dialogic_ch2_meet_theo_translation.en.translation", "res://lang/dialogic_ch2_meet_theo_translation.th.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true
