@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d3ntucmx5vokt"
-path="res://.godot/imported/Theo_crashout.png-9448f2eff6e01e53d890b782e805bbd9.ctex"
+path="res://.godot/imported/Theo_crashout.png-e4c64d833e365793587ffef004a38456.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/Theo/Theo_crashout.png"
-dest_files=["res://.godot/imported/Theo_crashout.png-9448f2eff6e01e53d890b782e805bbd9.ctex"]
+source_file="res://characters/theo/Theo_crashout.png"
+dest_files=["res://.godot/imported/Theo_crashout.png-e4c64d833e365793587ffef004a38456.ctex"]
 
 [params]
 

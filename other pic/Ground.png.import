@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlvwlucxgwg7"
-path="res://.godot/imported/Enemy.png-27bc24bb62302c7ed394e6cb77fb1f53.ctex"
+uid="uid://dtyj1c46sknc"
+path="res://.godot/imported/Ground.png-50b934c126ab8d40650a8d2316997c5a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://songs/song_elion/Enemy.png"
-dest_files=["res://.godot/imported/Enemy.png-27bc24bb62302c7ed394e6cb77fb1f53.ctex"]
+source_file="res://other pic/Ground.png"
+dest_files=["res://.godot/imported/Ground.png-50b934c126ab8d40650a8d2316997c5a.ctex"]
 
 [params]
 

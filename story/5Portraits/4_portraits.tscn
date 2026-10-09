@@ -25,10 +25,11 @@ mouse_filter = 2
 
 [node name="DialogicNode_PortraitContainer1" type="Control" parent="Portraits" unique_id=611092113]
 layout_mode = 1
-anchor_left = 0.1
-anchor_right = 0.3
+anchor_left = 0.08125
+anchor_right = 0.28125
 anchor_bottom = 1.0
-offset_right = -1.52588e-05
+offset_right = 51.200012
+offset_bottom = 144.0
 grow_vertical = 2
 pivot_offset = Vector2(115.2, 648)
 mouse_filter = 2
@@ -38,9 +39,11 @@ metadata/_edit_use_anchors_ = true
 
 [node name="DialogicNode_PortraitContainer2" type="Control" parent="Portraits" unique_id=1072242295]
 layout_mode = 1
-anchor_left = 0.3
-anchor_right = 0.5
+anchor_left = 0.25
+anchor_right = 0.45
 anchor_bottom = 1.0
+offset_right = 51.200012
+offset_bottom = 144.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -50,9 +53,11 @@ metadata/_edit_use_anchors_ = true
 
 [node name="DialogicNode_PortraitContainer3" type="Control" parent="Portraits" unique_id=702871890]
 layout_mode = 1
-anchor_left = 0.5
-anchor_right = 0.7
+anchor_left = 0.45625
+anchor_right = 0.65625
 anchor_bottom = 1.0
+offset_right = 51.200012
+offset_bottom = 144.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -62,9 +67,11 @@ metadata/_edit_use_anchors_ = true
 
 [node name="DialogicNode_PortraitContainer4" type="Control" parent="Portraits" unique_id=1438118579]
 layout_mode = 1
-anchor_left = 0.7
-anchor_right = 0.9
+anchor_left = 0.7046875
+anchor_right = 0.9046875
 anchor_bottom = 1.0
+offset_right = 51.19995
+offset_bottom = 144.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -77,6 +84,8 @@ layout_mode = 1
 anchor_left = 0.4
 anchor_right = 0.6
 anchor_bottom = 1.0
+offset_right = 51.200012
+offset_bottom = 144.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2

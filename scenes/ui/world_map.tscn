@@ -350,6 +350,9 @@ script = ExtResource("4_hb")
 unique_name_in_owner = true
 layout_mode = 1
 
+[node name="Detail" parent="Detail" unique_id=769357095 instance=ExtResource("5_sd")]
+layout_mode = 1
+
 [node name="Settings" parent="." unique_id=844503447 instance=ExtResource("7_set")]
 unique_name_in_owner = true
 visible = false

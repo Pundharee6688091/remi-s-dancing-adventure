@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsbep4ob7lsn3"
-path="res://.godot/imported/Enemy.png-3bbf2e850108ac03a33a67610da6b334.ctex"
+uid="uid://c2u6qpbgd3my"
+path="res://.godot/imported/Enemy.png-ba6cea405cf86fd9f032a53b90174942.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://songs/song_cassia/Enemy.png"
-dest_files=["res://.godot/imported/Enemy.png-3bbf2e850108ac03a33a67610da6b334.ctex"]
+source_file="res://songs/Remi's Song/Enemy.png"
+dest_files=["res://.godot/imported/Enemy.png-ba6cea405cf86fd9f032a53b90174942.ctex"]
 
 [params]
 

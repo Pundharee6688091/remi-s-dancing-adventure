@@ -50,7 +50,7 @@ UI_LEGEND_FIGHT,fight,ต่อสู้
 UI_LEGEND_DONE,done,ผ่านแล้ว
 UI_SONG_LABEL,SONG,เพลง
 UI_COMBO,COMBO,คอมโบ
-UI_MONSTER_HP,MONSTER HP,พลังชีวิตศัตรู
+UI_MONSTER_HP,SKEPTICAL METER,ความกังขา
 UI_PAUSED,PAUSED,หยุดชั่วคราว
 UI_RESUME,Resume,เล่นต่อ
 UI_RESTART_STAGE,Restart stage,เริ่มด่านใหม่

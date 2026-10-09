@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b1j34buqqwdao"
+path="res://.godot/imported/song.mp3-a9357c3999a9d0996a51c3c20039a49c.mp3str"
+
+[deps]
+
+source_file="res://songs/Hellborn Crimson/song.mp3"
+dest_files=["res://.godot/imported/song.mp3-a9357c3999a9d0996a51c3c20039a49c.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

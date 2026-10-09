@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dnnre63u3fmal"
+path="res://.godot/imported/song.mp3-a4571a6c33c32b596a6c047e89075608.mp3str"
+
+[deps]
+
+source_file="res://songs/Remi's Song/song.mp3"
+dest_files=["res://.godot/imported/song.mp3-a4571a6c33c32b596a6c047e89075608.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -73,6 +73,30 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
+[sub_resource type="StyleBoxFlat" id="choice_box"]
+content_margin_left = 12.0
+content_margin_top = 2.0
+content_margin_right = 12.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.169, 0.169, 0.169, 1)
+
+[sub_resource type="StyleBoxFlat" id="choice_box_on"]
+content_margin_left = 12.0
+content_margin_top = 2.0
+content_margin_right = 12.0
+content_margin_bottom = 2.0
+bg_color = Color(0.9098039, 0.6392157, 0.23921569, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.169, 0.169, 0.169, 1)
+
 [sub_resource type="StyleBoxFlat" id="edit_focus"]
 content_margin_left = 12.0
 content_margin_top = 6.0
@@ -117,6 +141,8 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.169, 0.169, 0.169, 1)
 
+[sub_resource type="StyleBoxEmpty" id="empty"]
+
 [sub_resource type="StyleBoxFlat" id="row_box"]
 content_margin_left = 16.0
 content_margin_top = 0.0
@@ -141,32 +167,6 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.169, 0.169, 0.169, 1)
 
-[sub_resource type="StyleBoxFlat" id="choice_box"]
-content_margin_left = 12.0
-content_margin_top = 2.0
-content_margin_right = 12.0
-content_margin_bottom = 2.0
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.169, 0.169, 0.169, 1)
-
-[sub_resource type="StyleBoxFlat" id="choice_box_on"]
-content_margin_left = 12.0
-content_margin_top = 2.0
-content_margin_right = 12.0
-content_margin_bottom = 2.0
-bg_color = Color(0.9098039, 0.6392157, 0.23921569, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.169, 0.169, 0.169, 1)
-
-[sub_resource type="StyleBoxEmpty" id="empty"]
-
 [resource]
 default_font = ExtResource("1_rjgu6")
 default_font_size = 18
@@ -183,6 +183,10 @@ Button/styles/normal = SubResource("btn_normal")
 Button/styles/pressed = SubResource("btn_focus")
 Card/base_type = &"PanelContainer"
 Card/styles/panel = ExtResource("7_card")
+Choice/base_type = &"Label"
+Choice/styles/normal = SubResource("choice_box")
+ChoiceOn/base_type = &"Label"
+ChoiceOn/styles/normal = SubResource("choice_box_on")
 Danger/base_type = &"Button"
 Danger/colors/font_color = Color(0.7882353, 0.3137255, 0.18431373, 1)
 Danger/colors/font_focus_color = Color(0.7882353, 0.3137255, 0.18431373, 1)
@@ -210,7 +214,3 @@ Row/base_type = &"PanelContainer"
 Row/styles/panel = SubResource("row_box")
 RowOn/base_type = &"PanelContainer"
 RowOn/styles/panel = SubResource("row_box_on")
-Choice/base_type = &"Label"
-Choice/styles/normal = SubResource("choice_box")
-ChoiceOn/base_type = &"Label"
-ChoiceOn/styles/normal = SubResource("choice_box_on")

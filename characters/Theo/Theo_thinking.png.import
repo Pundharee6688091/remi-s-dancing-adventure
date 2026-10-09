@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d3axwvcf868yp"
-path="res://.godot/imported/Theo_thinking.png-0b48c7dce16ab4129e157429e1f26dc5.ctex"
+path="res://.godot/imported/Theo_thinking.png-bed4591dcdbae777f9421bb19d4a995c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/Theo/Theo_thinking.png"
-dest_files=["res://.godot/imported/Theo_thinking.png-0b48c7dce16ab4129e157429e1f26dc5.ctex"]
+source_file="res://characters/theo/Theo_thinking.png"
+dest_files=["res://.godot/imported/Theo_thinking.png-bed4591dcdbae777f9421bb19d4a995c.ctex"]
 
 [params]
 
