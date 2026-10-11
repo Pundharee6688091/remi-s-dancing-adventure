@@ -5,12 +5,16 @@ const BGM := "res://music/vn_bgm1.wav"
 
 var timeline := ""
 
+## Whose backdrop to wear. Empty for a stage's intro, which is not the stage.
+var bg_stage := ""
+
 ## Only offered on a re-read, so a first time through cannot be jumped.
 var _can_skip_chapter := false
 
 
 func setup(params: Dictionary) -> void:
 	timeline = String(params.get("timeline", ""))
+	bg_stage = String(params.get("stage", ""))
 
 
 func _ready() -> void:
@@ -19,7 +23,7 @@ func _ready() -> void:
 		push_warning("Story node has no timeline")
 		Events.story_finished.emit()
 		return
-	%Bg.texture = Rules.background("story", GameManager.current_stage_id)
+	%Bg.texture = Rules.background("story", bg_stage)
 	_can_skip_chapter = GameManager.save.get("seen", []).has(GameManager.current_stage_id)
 	%Settings.routed = false
 	%Settings.closed.connect(_close_settings)

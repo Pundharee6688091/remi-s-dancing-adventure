@@ -86,7 +86,9 @@ func intro_key(stage_id: String) -> String:
 func _play_intro(stage_id: String, timeline: String) -> void:
 	current_stage_id = stage_id
 	_intro_for = stage_id
-	SceneRouter.goto(VN_VIEW, {"timeline": timeline})
+	# No stage id: the chapter takes the ordinary story backdrop rather than
+	# the battle one belonging to the stage it is introducing.
+	SceneRouter.goto(VN_VIEW, {"timeline": timeline, "stage": ""})
 
 # ------------ Battle ----------------
 func start_stage(stage_id: String) -> void:
@@ -132,7 +134,7 @@ func _on_stage_failed(_stage_id: String) -> void:
 # ------------ Visual Novel -------------
 func _play_story(id: String) -> void:
 	current_stage_id = id
-	SceneRouter.goto(VN_VIEW, {"timeline": Rules.stage(id).get("timeline", "")})
+	SceneRouter.goto(VN_VIEW, {"timeline": Rules.stage(id).get("timeline", ""), "stage": id})
 
 
 func _on_story_finished() -> void:

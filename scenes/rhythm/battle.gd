@@ -411,8 +411,8 @@ func _tip_target(point: String) -> Rect2:
 			return Rect2(TrackPanel.HIT_X - 34.0, track.global_position.y,
 				68.0, lanes)
 		"lanes":
-			return Rect2(track.global_position.x + 40.0, track.global_position.y,
-				520.0, TrackPanel.ROW_H * TrackPanel.LANE_COUNT)
+			return Rect2(420.0, track.global_position.y,
+				480.0, TrackPanel.ROW_H * TrackPanel.LANE_COUNT)
 	return Rect2()
 
 

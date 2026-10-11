@@ -6,6 +6,7 @@ extends Control
 const WIDTH := 540.0
 const GAP := 22.0          # between the card and the thing it points at
 const EDGE := 24.0         # kept this far inside the screen
+const PADDING := 44.0      # the panel's own margins, left plus right
 const FADE := 0.3
 
 var _target := Rect2()
@@ -20,6 +21,10 @@ func _ready() -> void:
 	modulate.a = 0.0
 	visible = false
 	_card.custom_minimum_size.x = WIDTH
+	# Without this the label wraps against an unknown width when it is first
+	# measured, every word lands on its own line, and the card comes out the
+	# height of the screen.
+	_text.custom_minimum_size.x = WIDTH - PADDING
 
 
 ## [param target] is in screen coordinates; an empty rect just centres the card
@@ -47,7 +52,8 @@ func hide_tip() -> void:
 
 ## Below the target if it fits, otherwise above, and never off the screen.
 func _place() -> void:
-	var h: float = _card.get_combined_minimum_size().y
+	_card.size = Vector2(WIDTH, 0.0)
+	var h: float = maxf(_card.get_combined_minimum_size().y, 60.0)
 	_card.size = Vector2(WIDTH, h)
 
 	if _target.size == Vector2.ZERO:
