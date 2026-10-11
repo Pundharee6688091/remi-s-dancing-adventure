@@ -24,10 +24,10 @@ Settings="*uid://crwlsembxgjkv"
 InputManager="*uid://b2rdf6ube34w7"
 SaveManager="*uid://d2eexnmirhp2j"
 SceneRouter="*uid://biecopqxvkdyi"
-Achievements="*res://autoload/achievements.gd"
 GameManager="*uid://cdex5h8vlh7wk"
 Dialogic="*uid://ds2q0uclmolvu"
 Audio="*res://autoload/audio.gd"
+Achievements="*res://autoload/achievements.gd"
 
 [dialogic]
 
