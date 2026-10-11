@@ -23,8 +23,8 @@ var _count_tween: Tween = null
 
 ## Windows of empty track where a tip is shown, worked out from the chart.
 var _tips: Array[Dictionary] = []
+var _before_tips: Array[Dictionary] = []
 var _tip_showing := -1
-var _tip_tween: Tween = null
 var stage_id := "s1_1"
 var _chart: Dictionary = {}
 
@@ -90,6 +90,12 @@ func _ready() -> void:
 	Events.language_changed.connect(_set_hints)
 	for o in [pause_overlay, result_overlay]:
 		o.visibility_changed.connect(_sync_hints)
+
+	# The opening lines come before anything moves. Retrying skips them: by
+	# then the player has read them once.
+	await _show_before_tips()
+	if not is_inside_tree():
+		return
 	_restart()
 
 func setup(params: Dictionary) -> void:
@@ -315,16 +321,25 @@ func _flash_count() -> void:
 	_count_tween.tween_property(l, "modulate:a", 0.0, 0.22)
 	
 
-## Finds the quiet stretches in the chart and hands one to each tip the stage
-## asked for. Working it out from the notes rather than from written-down times
-## means the tips follow the chart if it is ever re-written.
+## Splits what the stage wants to say into the lines that come before the song
+## and the lines that go in the chart's quiet stretches. Working the gaps out
+## from the notes means the tips follow the chart if it is ever rewritten.
 func _plan_tips(stage: Dictionary) -> void:
 	_tips.clear()
+	_before_tips.clear()
 	_tip_showing = -1
-	%Tip.visible = false
+	%Tip.hide_tip()
 	var wanted: Array = stage.get("tips", [])
-	if wanted.is_empty() or _chart.notes.is_empty():
+	if wanted.is_empty():
 		return
+
+	var in_gaps: Array = []
+	for raw in wanted:
+		var tip: Dictionary = raw if raw is Dictionary else {"text": String(raw)}
+		if String(tip.get("at", "gap")) == "before":
+			_before_tips.append(tip)
+		else:
+			in_gaps.append(tip)
 
 	const MIN_GAP := 2500.0
 	const LEAD := 250.0        # let the last arrow clear the line first
@@ -336,8 +351,23 @@ func _plan_tips(stage: Dictionary) -> void:
 		if to - from > MIN_GAP:
 			gaps.append(Vector2(from + LEAD, to - TAIL))
 
-	for i in mini(wanted.size(), gaps.size()):
-		_tips.append({"key": String(wanted[i]), "window": gaps[i]})
+	for i in mini(in_gaps.size(), gaps.size()):
+		var tip: Dictionary = in_gaps[i].duplicate()
+		tip["window"] = gaps[i]
+		_tips.append(tip)
+
+
+## Shown one after another before anything starts, so the player reads them
+## with nothing moving. Awaited by the opening, so the song waits for them.
+func _show_before_tips() -> void:
+	if _before_tips.is_empty():
+		return
+	await get_tree().process_frame        # let the hud lay out before pointing at it
+	for tip in _before_tips:
+		%Tip.show_tip(tr(String(tip.text)), _tip_target(String(tip.get("point", ""))))
+		await get_tree().create_timer(3.4).timeout
+		%Tip.hide_tip()
+		await get_tree().create_timer(0.35).timeout
 
 
 ## No pausing: a tip fades in over the empty track and fades out again as the
@@ -351,21 +381,39 @@ func _run_tips(now: float) -> void:
 			break
 	if wanted == _tip_showing:
 		return
-	_tip_showing = wanted
 
-	if _tip_tween != null and _tip_tween.is_valid():
-		_tip_tween.kill()
+	var was: int = _tip_showing
+	_tip_showing = wanted
+	if was != -1 and String(_tips[was].get("point", "")) == "monster_bar" and not _has_enemy:
+		hud.ghost_monster(false)
+
 	if wanted == -1:
-		_tip_tween = create_tween()
-		_tip_tween.tween_property(%Tip, "modulate:a", 0.0, 0.3)
-		_tip_tween.tween_callback(func() -> void: %Tip.visible = false)
+		%Tip.hide_tip()
 		return
 
-	%Text.text = tr(String(_tips[wanted].key))
-	%Tip.modulate.a = 0.0
-	%Tip.visible = true
-	_tip_tween = create_tween()
-	_tip_tween.tween_property(%Tip, "modulate:a", 1.0, 0.3)
+	var point := String(_tips[wanted].get("point", ""))
+	if point == "monster_bar" and not _has_enemy:
+		hud.ghost_monster(true)
+	%Tip.show_tip(tr(String(_tips[wanted].text)), _tip_target(point))
+
+
+## Where on screen each thing a tip can point at actually is.
+func _tip_target(point: String) -> Rect2:
+	match point:
+		"song_bar":
+			return hud.song_bar.get_global_rect()
+		"monster_bar":
+			return hud.monster_bar.get_global_rect()
+		"combo":
+			return hud.combo_value.get_global_rect()
+		"hit_line":
+			var lanes := TrackPanel.ROW_H * TrackPanel.LANE_COUNT
+			return Rect2(TrackPanel.HIT_X - 34.0, track.global_position.y,
+				68.0, lanes)
+		"lanes":
+			return Rect2(track.global_position.x + 40.0, track.global_position.y,
+				520.0, TrackPanel.ROW_H * TrackPanel.LANE_COUNT)
+	return Rect2()
 
 
 func _on_note_judged(judgement: String, lane: int) -> void:

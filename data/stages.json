@@ -7,9 +7,31 @@
       "bg": "Fight_bg",
       "intro": "tutorial",
       "tips": [
-        "UI_TIP_LANES",
-        "UI_TIP_TIMING",
-        "UI_TIP_COMBO"
+        {
+          "text": "UI_TIP_LANES",
+          "point": "lanes",
+          "at": "before"
+        },
+        {
+          "text": "UI_TIP_TIMING",
+          "point": "hit_line",
+          "at": "before"
+        },
+        {
+          "text": "UI_TIP_SONGBAR",
+          "point": "song_bar",
+          "at": "gap"
+        },
+        {
+          "text": "UI_TIP_HEALTH",
+          "point": "monster_bar",
+          "at": "gap"
+        },
+        {
+          "text": "UI_TIP_COMBO",
+          "point": "combo",
+          "at": "gap"
+        }
       ],
       "requires": [],
       "pos": [

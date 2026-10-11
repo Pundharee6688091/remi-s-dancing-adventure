@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dx7v202gr0o6u" path="res://songs/A Mage's Foehn/Enemy.png" id="9_tb7li"]
 [ext_resource type="Script" uid="uid://batawi1qqiibp" path="res://scenes/ui/parts/hint_bar.gd" id="10_hb"]
 [ext_resource type="PackedScene" path="res://scenes/ui/settings.tscn" id="11_set"]
+[ext_resource type="PackedScene" path="res://scenes/rhythm/tip_card.tscn" id="12_tip"]
 
 [node name="Battle" type="Control" unique_id=1101702470]
 layout_mode = 3
@@ -80,25 +81,8 @@ theme_override_font_sizes/font_size = 170
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Tip" type="PanelContainer" parent="."]
+[node name="Tip" parent="." instance=ExtResource("12_tip")]
 unique_name_in_owner = true
-visible = false
-layout_mode = 0
-offset_left = 290.0
-offset_top = 150.0
-offset_right = 990.0
-offset_bottom = 244.0
-mouse_filter = 2
-
-[node name="Text" type="Label" parent="Tip"]
-unique_name_in_owner = true
-layout_mode = 2
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.16862746, 0.16862746, 0.16862746, 1)
-theme_override_font_sizes/font_size = 24
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
 
 [node name="HUD" parent="." unique_id=1104815572 instance=ExtResource("5_yecsb")]
 layout_mode = 1

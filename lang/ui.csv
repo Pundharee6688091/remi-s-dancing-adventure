@@ -149,3 +149,5 @@ UI_TIP_LANES,Arrows slide towards the line on the right. Press the matching key 
 UI_TIP_TIMING,"The closer to the line you press, the better the hit counts.",ยิ่งกดตอนลูกศรใกล้เส้นมากเท่าไร ผลที่ได้ก็ยิ่งดีมากเท่านั้น
 UI_TIP_COMBO,Keep hitting without missing to build the combo beside the line.,กดให้ติดต่อกันโดยไม่พลาด เพื่อสะสมคอมโบที่แสดงอยู่ข้างเส้น
 UI_LBL_BEST_COMBO,Best combo,คอมโบสูงสุด
+UI_TIP_SONGBAR,"This bar fills as the song plays, so you can see how far through you are.",แถบนี้จะเต็มขึ้นเรื่อย ๆ ตามเพลงที่เล่น ทำให้รู้ว่าเหลืออีกไกลแค่ไหน
+UI_TIP_HEALTH,In a real stage this is how much fight your opponent has left. Hitting arrows wears it down past the line.,ในด่านจริง แถบนี้คือกำลังใจที่เหลืออยู่ของคู่แข่ง การกดลูกศรให้ถูกจะลดมันลงจนต่ำกว่าเส้น

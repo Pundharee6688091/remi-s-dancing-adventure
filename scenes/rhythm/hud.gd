@@ -9,6 +9,7 @@ const COMBO_HOT := Color("#e86a2f")
 
 var _length_ms := 1.0
 var _combo_tween: Tween = null
+var _ghost_tween: Tween = null
 
 @onready var song_bar: Bar = %SongBar
 @onready var monster_bar: Bar = %MonsterBar
@@ -35,6 +36,27 @@ func show_monster(shown: bool) -> void:
 	monster_bar.visible = shown
 	monster_pct.visible = shown
 	monster_label.visible = shown
+	for n in [monster_bar, monster_pct, monster_label]:
+		n.modulate.a = 1.0
+
+
+## Shown faintly and breathing, so the tutorial can point at the health bar and
+## say what it is for without pretending there is a monster behind it.
+func ghost_monster(on: bool) -> void:
+	if _ghost_tween != null and _ghost_tween.is_valid():
+		_ghost_tween.kill()
+	for n in [monster_bar, monster_pct, monster_label]:
+		n.visible = on
+		n.modulate.a = 0.0
+	if not on:
+		return
+	monster_bar.value = 1.0
+	monster_pct.text = "100%"
+	_ghost_tween = create_tween().set_loops()
+	for n in [monster_bar, monster_pct, monster_label]:
+		_ghost_tween.parallel().tween_property(n, "modulate:a", 0.55, 0.7)
+	for n in [monster_bar, monster_pct, monster_label]:
+		_ghost_tween.parallel().tween_property(n, "modulate:a", 0.18, 0.7).set_delay(0.7)
 
 
 func update_progress(now_ms: float) -> void:
