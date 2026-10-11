@@ -47,6 +47,20 @@ func is_unlocked(id: String) -> bool:
 func best_hp_for(id: String) -> int:
 	return int(save.get("best_hp", {}).get(id, 100))
 
+func best_combo_for(id: String) -> int:
+	return int(save.get("best_combo", {}).get(id, 0))
+
+
+## Kept whether the stage was won or lost: a run of hits is a run of hits.
+func record_combo(id: String, combo: int) -> void:
+	if combo <= best_combo_for(id):
+		return
+	if not save.has("best_combo"):
+		save["best_combo"] = {}
+	save.best_combo[id] = combo
+	SaveManager.write(slot, save)
+
+
 func stars_for(id: String) -> int:
 	return int(save.get("stars", {}).get(id, 0))
 	

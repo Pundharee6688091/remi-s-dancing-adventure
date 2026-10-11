@@ -148,3 +148,4 @@ UI_SKIP_CHAPTER,Skip chapter,ข้ามบท
 UI_TIP_LANES,Arrows slide towards the line on the right. Press the matching key as they arrive.,ลูกศรจะเลื่อนไปทางเส้นด้านขวา กดปุ่มให้ตรงทิศตอนที่ลูกศรมาถึงเส้น
 UI_TIP_TIMING,"The closer to the line you press, the better the hit counts.",ยิ่งกดตอนลูกศรใกล้เส้นมากเท่าไร ผลที่ได้ก็ยิ่งดีมากเท่านั้น
 UI_TIP_COMBO,Keep hitting without missing to build the combo beside the line.,กดให้ติดต่อกันโดยไม่พลาด เพื่อสะสมคอมโบที่แสดงอยู่ข้างเส้น
+UI_LBL_BEST_COMBO,Best combo,คอมโบสูงสุด

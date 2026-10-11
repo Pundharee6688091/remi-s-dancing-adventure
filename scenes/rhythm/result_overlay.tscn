@@ -108,6 +108,7 @@ offset_bottom = 644.0
 theme_override_constants/separation = 14
 
 [node name="Hp" type="PanelContainer" parent="Right" unique_id=738629119]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Box" type="VBoxContainer" parent="Right/Hp" unique_id=951309014]
@@ -260,10 +261,12 @@ custom_minimum_size = Vector2(46, 0)
 layout_mode = 2
 horizontal_alignment = 2
 
-[node name="Side" type="VBoxContainer" parent="Right/Stats/Box" unique_id=724208931]
-custom_minimum_size = Vector2(200, 0)
+[node name="Side" type="GridContainer" parent="Right/Stats/Box" unique_id=724208931]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-theme_override_constants/separation = 18
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 18
+columns = 2
 
 [node name="Notes" type="VBoxContainer" parent="Right/Stats/Box/Side" unique_id=1331242399]
 layout_mode = 2
@@ -289,6 +292,37 @@ theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 text = "UI_LBL_STARS"
 
 [node name="StarsValue" type="Label" parent="Right/Stats/Box/Side/Stars" unique_id=862410076]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9098039, 0.6392157, 0.23921569, 1)
+theme_override_font_sizes/font_size = 30
+
+[node name="Best" type="VBoxContainer" parent="Right/Stats/Box/Side"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="BestKey" type="Label" parent="Right/Stats/Box/Side/Best"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+text = "UI_LBL_BEST"
+
+[node name="BestValue" type="Label" parent="Right/Stats/Box/Side/Best"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+
+[node name="BestCombo" type="VBoxContainer" parent="Right/Stats/Box/Side"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="BestComboKey" type="Label" parent="Right/Stats/Box/Side/BestCombo"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+text = "UI_LBL_BEST_COMBO"
+
+[node name="BestComboValue" type="Label" parent="Right/Stats/Box/Side/BestCombo"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9098039, 0.6392157, 0.23921569, 1)

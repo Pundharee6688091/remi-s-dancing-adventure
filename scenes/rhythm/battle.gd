@@ -267,12 +267,18 @@ func _on_song_finished() -> void:
 	r.opponent = st.get("opponent", "")
 	r.win_at = int(st.get("win", {}).get("value", 30))
 	r.previous_best = GameManager.best_hp_for(stage_id)
-	result_overlay.show_result(r)
 
+	# Banked before the screen is built, so what it shows as the record
+	# already counts this run.
+	GameManager.record_combo(stage_id, int(r.get("max_combo", 0)))
 	if r.won:
 		Events.stage_cleared.emit(stage_id, r.hp)
 	else:
 		Events.stage_failed.emit(stage_id)
+
+	r.best_hp = GameManager.best_hp_for(stage_id)
+	r.best_combo = GameManager.best_combo_for(stage_id)
+	result_overlay.show_result(r)
 
 
 func _countdown() -> bool:

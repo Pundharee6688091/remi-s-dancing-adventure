@@ -2,7 +2,7 @@ extends Node
 
 const SLOTS := 3
 const VERSION := 1
-const DEFAULTS := {"stars": {}, "best_hp": {}, "seen": [], "party": []}
+const DEFAULTS := {"stars": {}, "best_hp": {}, "best_combo": {}, "seen": [], "party": []}
 
 
 func exists(slot: int) -> bool:

@@ -48,10 +48,22 @@ func show_result(r: Dictionary) -> void:
 	%RewardText.text = tr("UI_JOINED") % opponent if won and opponent != "" \
 		else tr("UI_NO_REWARD")
 
-	%HpValue.text = "%d%%" % r.hp
-	%WinLine.text = tr("UI_WIN_LINE") % win_at
-	%HpBar.value = r.hp / 100.0
-	%HpBar.marker = win_at / 100.0
+	# Nothing to beat means nothing to pass or fail, so the health panel and
+	# the reward line would both be answering a question nobody asked.
+	var judged := opponent != ""
+	%Hp.visible = judged
+	%Reward.visible = judged
+	if judged:
+		%HpValue.text = "%d%%" % r.hp
+		%WinLine.text = tr("UI_WIN_LINE") % win_at
+		%HpBar.value = r.hp / 100.0
+		%HpBar.marker = win_at / 100.0
+
+	# The records, already counting this run.
+	%Best.visible = judged
+	%BestValue.text = "%d%%" % int(r.get("best_hp", r.hp))
+	%BestCombo.visible = true
+	%BestComboValue.text = str(int(r.get("best_combo", r.get("max_combo", 0))))
 
 	var c: Dictionary = r.counts
 	var total := 0
