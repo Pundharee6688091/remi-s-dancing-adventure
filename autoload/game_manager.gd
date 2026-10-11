@@ -94,6 +94,7 @@ func _play_intro(stage_id: String, timeline: String) -> void:
 
 # ------------ Battle ----------------
 func start_stage(stage_id: String) -> void:
+	_intro_for = ""
 	current_stage_id = stage_id
 	SceneRouter.goto(BATTLE, {"stage_id": stage_id})
 
@@ -135,6 +136,9 @@ func _on_stage_failed(_stage_id: String) -> void:
 
 # ------------ Visual Novel -------------
 func _play_story(id: String) -> void:
+	# Anything started since is stale: an intro walked away from must not hand
+	# this chapter over to the stage it was introducing.
+	_intro_for = ""
 	current_stage_id = id
 	SceneRouter.goto(VN_VIEW,
 		{"timeline": Rules.stage(id).get("timeline", ""), "stage": id, "seen_key": id})

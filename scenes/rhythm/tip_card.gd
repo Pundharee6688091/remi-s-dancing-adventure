@@ -44,6 +44,15 @@ func show_tip(body: String, target: Rect2) -> void:
 	_tween.tween_property(self, "modulate:a", 1.0, FADE)
 
 
+## Same tip, new wording. The card is measured again because the translation
+## is a different length.
+func set_body(body: String) -> void:
+	if not visible:
+		return
+	_text.text = body
+	_place()
+
+
 func hide_tip() -> void:
 	if not visible:
 		return

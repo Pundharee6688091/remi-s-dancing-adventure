@@ -25,6 +25,7 @@ var _count_tween: Tween = null
 var _tips: Array[Dictionary] = []
 var _before_tips: Array[Dictionary] = []
 var _tip_showing := -1
+var _tip_key := ""
 var stage_id := "s1_1"
 var _chart: Dictionary = {}
 
@@ -87,7 +88,7 @@ func _ready() -> void:
 	Events.note_judged.connect(_on_note_judged)
 
 	_set_hints()
-	Events.language_changed.connect(_set_hints)
+	Events.language_changed.connect(_on_language_changed)
 	for o in [pause_overlay, result_overlay]:
 		o.visibility_changed.connect(_sync_hints)
 
@@ -366,7 +367,8 @@ func _show_before_tips() -> void:
 		return
 	await get_tree().process_frame        # let the hud lay out before pointing at it
 	for tip in _before_tips:
-		%Tip.show_tip(tr(String(tip.text)), _tip_target(String(tip.get("point", ""))))
+		_tip_key = String(tip.text)
+		%Tip.show_tip(tr(_tip_key), _tip_target(String(tip.get("point", ""))))
 		await get_tree().create_timer(3.4).timeout
 		%Tip.hide_tip()
 		await get_tree().create_timer(0.35).timeout
@@ -390,13 +392,15 @@ func _run_tips(now: float) -> void:
 		hud.ghost_monster(false)
 
 	if wanted == -1:
+		_tip_key = ""
 		%Tip.hide_tip()
 		return
 
 	var point := String(_tips[wanted].get("point", ""))
 	if point == "monster_bar" and not _has_enemy:
 		hud.ghost_monster(true)
-	%Tip.show_tip(tr(String(_tips[wanted].text)), _tip_target(point))
+	_tip_key = String(_tips[wanted].text)
+	%Tip.show_tip(tr(_tip_key), _tip_target(point))
 
 
 ## Where on screen each thing a tip can point at actually is.
@@ -426,6 +430,14 @@ func _on_note_judged(judgement: String, lane: int) -> void:
 ## them in place.
 func blocks_reload() -> bool:
 	return true
+
+
+## The hints and whatever tip is on screen both hold wording rather than keys,
+## so both have to be redone when the language changes.
+func _on_language_changed() -> void:
+	_set_hints()
+	if _tip_key != "":
+		%Tip.set_body(tr(_tip_key))
 
 
 func _set_hints() -> void:
