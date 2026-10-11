@@ -18,6 +18,11 @@
           "at": "before"
         },
         {
+          "text": "UI_TIP_COMBO",
+          "point": "combo",
+          "at": "gap"
+        },
+        {
           "text": "UI_TIP_SONGBAR",
           "point": "song_bar",
           "at": "gap"
@@ -25,11 +30,6 @@
         {
           "text": "UI_TIP_HEALTH",
           "point": "monster_bar",
-          "at": "gap"
-        },
-        {
-          "text": "UI_TIP_COMBO",
-          "point": "combo",
           "at": "gap"
         }
       ],

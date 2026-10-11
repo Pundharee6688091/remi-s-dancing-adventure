@@ -9,6 +9,10 @@ const EDGE := 24.0         # kept this far inside the screen
 const PADDING := 44.0      # the panel's own margins, left plus right
 const FADE := 0.3
 
+## The strip the arrows travel down. The card stays out of it whatever it is
+## pointing at, so nothing is ever read through a card.
+var keep_clear := Rect2()
+
 var _target := Rect2()
 var _tween: Tween = null
 
@@ -50,7 +54,8 @@ func hide_tip() -> void:
 	_tween.tween_callback(func() -> void: visible = false)
 
 
-## Below the target if it fits, otherwise above, and never off the screen.
+## Below the target if that works, otherwise above. "Works" means on screen
+## and clear of the lane strip; failing both, it parks just above the strip.
 func _place() -> void:
 	_card.size = Vector2(WIDTH, 0.0)
 	var h: float = maxf(_card.get_combined_minimum_size().y, 60.0)
@@ -61,13 +66,26 @@ func _place() -> void:
 		_pointer.queue_redraw()
 		return
 
-	var below := _target.end.y + GAP
-	var above := _target.position.y - GAP - h
-	var y := below if below + h <= size.y - EDGE else above
-	y = clampf(y, EDGE, size.y - EDGE - h)
 	var x := clampf(_target.get_center().x - WIDTH / 2.0, EDGE, size.x - EDGE - WIDTH)
+	var y := INF
+	for option in [_target.end.y + GAP, _target.position.y - GAP - h]:
+		if option < EDGE or option + h > size.y - EDGE:
+			continue
+		if _hits_lanes(option, h):
+			continue
+		y = option
+		break
+	if y == INF:
+		y = clampf(keep_clear.position.y - GAP - h, EDGE, size.y - EDGE - h)
+
 	_card.position = Vector2(x, y)
 	_pointer.queue_redraw()
+
+
+func _hits_lanes(y: float, h: float) -> bool:
+	if keep_clear.size == Vector2.ZERO:
+		return false
+	return y < keep_clear.end.y and y + h > keep_clear.position.y
 
 
 ## Drawn by the Pointer child so it sits under the card rather than across it.

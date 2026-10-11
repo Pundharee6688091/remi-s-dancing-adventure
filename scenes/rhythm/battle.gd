@@ -329,6 +329,8 @@ func _plan_tips(stage: Dictionary) -> void:
 	_before_tips.clear()
 	_tip_showing = -1
 	%Tip.hide_tip()
+	%Tip.keep_clear = Rect2(0.0, track.global_position.y, TrackPanel.SCREEN_W,
+		TrackPanel.ROW_H * TrackPanel.LANE_COUNT)
 	var wanted: Array = stage.get("tips", [])
 	if wanted.is_empty():
 		return
