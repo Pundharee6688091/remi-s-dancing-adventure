@@ -41,6 +41,7 @@ const REMI_POSES := [
 const REMI_IDLE := "res://sprite/Remi/Remi_middle.png"
 const IDLE := 4
 
+var _has_enemy := true
 var _poses: Array = []
 var _pose_time := 0.0
 
@@ -53,12 +54,18 @@ func _ready() -> void:
 
 	%Bg.texture = Rules.background("fight", stage_id)
 	_setup_remi()
-	_show_enemy(song_id)
+	_has_enemy = String(st.get("opponent", "")) != ""
+	enemy.visible = _has_enemy
+	if _has_enemy:
+		_show_enemy(song_id)
 	
 	song.stream = load(Rules.song_path(song_id))
 	song.finished.connect(_on_song_finished)
 	conductor.setup(song)
-	hud.setup(conductor.song_length_ms())
+	var win_rule: Dictionary = st.get("win", {})
+	hud.setup(conductor.song_length_ms(),
+		float(win_rule.get("value", Rules.data.get("win_hp_percent", 30))))
+	hud.show_monster(_has_enemy)
 
 	pause_overlay.resume_pressed.connect(_resume)
 	pause_overlay.restart_pressed.connect(_restart)

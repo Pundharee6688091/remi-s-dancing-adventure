@@ -8,6 +8,8 @@ const PORTRAIT := "res://characters/remi/Remi_default.png"
 
 var _cards: Array[Button] = []
 var _pending_slot := 1
+## Which question the shared confirm box is currently asking.
+var _pending := ""
 var _renaming := false
 
 @onready var _confirm: ConfirmBox = %Confirm
@@ -29,7 +31,10 @@ func _ready() -> void:
 		card.mouse_entered.connect(card.grab_focus)
 
 	UIKit.trap_focus(_cards)
-	_confirm.answered.connect(_on_delete_answered)
+	_confirm.answered.connect(_on_confirmed)
+	# Focus stays trapped on the slot cards, so this one is for the mouse; the
+	# keyboard way out is Esc back to the main menu, which has its own Quit.
+	%ExitGame.pressed.connect(_ask_quit)
 	_confirm.visibility_changed.connect(_sync_hints)
 	_name_panel.visibility_changed.connect(_sync_hints)
 	_name_edit.text_submitted.connect(func(_t: String) -> void: _submit_name())
@@ -170,7 +175,21 @@ func _ask_delete(slot: int) -> void:
 		tr("UI_DELETE_BODY"), tr("UI_DELETE"), tr("UI_CANCEL"))
 
 
-func _on_delete_answered(yes: bool) -> void:
+func _ask_quit() -> void:
+	_pending = "quit"
+	_confirm.ask(tr("UI_QUIT_CONFIRM"), "", tr("UI_QUIT"), tr("UI_CANCEL"))
+
+
+## One confirm box serves both questions, so it has to know which was asked.
+func _on_confirmed(yes: bool) -> void:
+	if _pending == "quit":
+		_pending = ""
+		if yes:
+			get_tree().quit()
+			return
+		_cards[maxi(_pending_slot - 1, 0)].grab_focus()
+		return
+
 	if yes:
 		SaveManager.delete(_pending_slot)
 		_refresh()

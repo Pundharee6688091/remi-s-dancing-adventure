@@ -174,20 +174,26 @@ func _draw_bubble(p: Vector2, s: float) -> void:
 		Vector2(p.x - s * 0.1, p.y + s * 1.1), Palette.INK, 2.5)
 
 
-## Remi rides the tag next to his name. The box grows around the art rather
-## than the art being squeezed into a fixed box.
+## Remi stands above his own name on the tag. The box grows around whichever
+## of the two is wider rather than the art being squeezed into a fixed size.
 func _draw_pin(font: Font, bottom: Vector2) -> void:
 	var pad := 8.0
+	var gap := 2.0
 	var art_h := 34.0
 	var art_w := 0.0
 	if _pin_art != null:
 		art_w = art_h * _pin_art.get_width() / float(_pin_art.get_height())
-	var gap := 6.0 if _pin_art != null else 0.0
+	else:
+		art_h = 0.0
+		gap = 0.0
+	var name_h := 22.0
 	var name_w := font.get_string_size("Remi", HORIZONTAL_ALIGNMENT_LEFT, -1, 18).x
 
-	var w := pad + art_w + gap + name_w + pad
-	var h := art_h + 12.0
-	var box := Rect2(bottom.x - w / 2.0, bottom.y - h - 10.0, w, h)
+	var w := maxf(art_w, name_w) + pad * 2.0
+	var h := art_h + gap + name_h + pad * 2.0
+	# Never let the tag ride up into the header strip, however high the node is.
+	var top := maxf(bottom.y - h - 10.0, TOP + 6.0)
+	var box := Rect2(bottom.x - w / 2.0, top, w, h)
 	draw_rect(box, Palette.WHITE, true)
 	draw_rect(box, Palette.INK, false, 2.5)
 	draw_colored_polygon(PackedVector2Array([
@@ -196,13 +202,11 @@ func _draw_pin(font: Font, bottom: Vector2) -> void:
 		Vector2(bottom.x, bottom.y + 2.0)]), Palette.AMBER)
 
 	if _pin_art != null:
-		# Mirrored, so he faces his own name rather than away off the tag.
-		# A negative width is how draw_texture_rect flips.
-		var at := box.position + Vector2(pad, 6.0)
+		# Mirrored, so he looks into the map rather than off the edge of it.
+		var at := Vector2(bottom.x - art_w / 2.0, box.position.y + pad)
 		draw_texture_rect(_pin_art, Rect2(at, Vector2(-art_w, art_h)), false)
-	draw_string(font, Vector2(box.position.x + pad + art_w + gap,
-		box.position.y + h - 14.0), "Remi",
-		HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Palette.INK)
+	draw_string(font, Vector2(box.position.x, box.position.y + pad + art_h + gap + 17.0),
+		"Remi", HORIZONTAL_ALIGNMENT_CENTER, w, 18, Palette.INK)
 
 
 ## Index of the map node under a point, or -1. Used for mouse clicks.

@@ -56,6 +56,7 @@ theme_override_font_sizes/font_size = 16
 text = "UI_COMBO"
 
 [node name="MonsterLabel" type="Label" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 offset_left = 700.0
 offset_top = 356.0
@@ -85,3 +86,4 @@ offset_right = 1240.0
 offset_bottom = 406.0
 script = ExtResource("2_bar")
 fill_color = Color(0.7882353, 0.3137255, 0.18431373, 1)
+marker_color = Color(0.16862746, 0.16862746, 0.16862746, 1)

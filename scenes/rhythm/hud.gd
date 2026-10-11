@@ -9,6 +9,7 @@ var _length_ms := 1.0
 @onready var monster_pct: Label = %MonsterPct
 @onready var combo_value: Label = %ComboValue
 @onready var combo_word: Label = %ComboWord
+@onready var monster_label: Label = %MonsterLabel
 
 
 func _ready() -> void:
@@ -16,8 +17,18 @@ func _ready() -> void:
 	Events.combo_changed.connect(_on_combo_changed)
 
 
-func setup(song_length_ms: float) -> void:
+func setup(song_length_ms: float, win_percent: float) -> void:
 	_length_ms = maxf(song_length_ms, 1.0)
+	# The line the monster's health has to fall below to clear the stage.
+	monster_bar.marker = clampf(win_percent / 100.0, 0.0, 1.0)
+
+
+## A stage with nobody to fight has no health to show, so the whole monster
+## side of the hud goes away rather than sitting there reading 100%.
+func show_monster(shown: bool) -> void:
+	monster_bar.visible = shown
+	monster_pct.visible = shown
+	monster_label.visible = shown
 
 
 func update_progress(now_ms: float) -> void:
