@@ -5,6 +5,7 @@ const MAIN_MENU := "res://scenes/ui/main_menu.tscn"
 const WORLD_MAP := "res://scenes/ui/world_map.tscn"
 const VN_VIEW := "res://scenes/ui/vn_view.tscn"
 const SETTINGS := "res://scenes/ui/settings.tscn"
+const ACHIEVEMENTS := "res://scenes/ui/achievements.tscn"
 
 var slot := 0
 var save: Dictionary = {}
@@ -30,6 +31,8 @@ func start_new_game(new_slot: int, player_name: String) -> void:
 func load_slot(chosen: int) -> void:
 	slot = chosen
 	save = SaveManager.load_slot(slot)
+	# Catches up a profile made before an achievement existed.
+	Achievements.refresh()
 	SceneRouter.goto(MAIN_MENU)
 
 # ------------ World Map ---------------

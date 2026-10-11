@@ -151,3 +151,22 @@ UI_TIP_COMBO,Keep hitting without missing to build the combo beside the line.,�
 UI_LBL_BEST_COMBO,Best combo,คอมโบสูงสุด
 UI_TIP_SONGBAR,"This bar fills as the song plays, so you can see how far through you are.",แถบนี้จะเต็มขึ้นเรื่อย ๆ ตามเพลงที่เล่น ทำให้รู้ว่าเหลืออีกไกลแค่ไหน
 UI_TIP_HEALTH,In a real stage this is how much fight your opponent has left. Hitting arrows wears it down past the line.,ในด่านจริง แถบนี้คือกำลังใจที่เหลืออยู่ของคู่แข่ง การกดลูกศรให้ถูกจะลดมันลงจนต่ำกว่าเส้น
+UI_ACH_FIRST_STEP,First step,ก้าวแรก
+UI_ACH_FIRST_STEP_D,Overall stars 4,ได้ดาวรวม 4 ดวง
+UI_ACH_HALF_WAY,Half way through,มาได้ครึ่งทางแล้ว
+UI_ACH_HALF_WAY_D,Overall stars 8,ได้ดาวรวม 8 ดวง
+UI_ACH_RISING_STAR,The rising star,ดาวรุ่งพุ่งแรง
+UI_ACH_RISING_STAR_D,Earn three stars for all stages.,ได้สามดาวครบทุกด่าน
+UI_ACH_SHARP_EARS,Sharp ears,หูไว
+UI_ACH_SHARP_EARS_D,Got more than 30 combo in any song,ทำคอมโบเกิน 30 ในเพลงใดก็ได้
+UI_ACH_CUT_A_RUG,Cut a rug!,ลีลาเด็ด!
+UI_ACH_CUT_A_RUG_D,Didn't get MISS or GOOD in any song,จบเพลงโดยไม่มี MISS หรือ GOOD เลย
+UI_ACH_ELION,"Fantastic, Sir Remi!",ยอดเยี่ยมมาก ท่านเรมี่!
+UI_ACH_ELION_D,You got approved by Elion!,เอลิออนยอมรับคุณแล้ว!
+UI_ACH_THEO,Woah…!,ว้าว…!
+UI_ACH_THEO_D,You got approved by Theo...!,ธีโอยอมรับคุณแล้ว...!
+UI_ACH_CASSIA,...Not bad.,...ก็ไม่เลวนี่
+UI_ACH_CASSIA_D,You got... approved? by Cassia.,แคสเซียยอมรับคุณ... มั้งนะ
+UI_ACH_UNLOCKED,Unlocked · %s,ปลดล็อกแล้ว · %s
+UI_ACH_COUNT,%d / %d,%d / %d
+UI_SCROLL,Scroll,เลื่อน

@@ -28,6 +28,10 @@ func _on_story_pressed() -> void:
 	SceneRouter.goto(GameManager.WORLD_MAP)
 
 
+func _on_achievements_pressed() -> void:
+	SceneRouter.goto(GameManager.ACHIEVEMENTS)
+
+
 func _on_settings_pressed() -> void:
 	SceneRouter.goto(GameManager.SETTINGS)
 

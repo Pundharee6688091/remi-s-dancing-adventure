@@ -129,5 +129,6 @@ script = ExtResource("3_hb")
 unique_name_in_owner = true
 
 [connection signal="pressed" from="Items/Story" to="." method="_on_story_pressed"]
+[connection signal="pressed" from="Items/Achievements" to="." method="_on_achievements_pressed"]
 [connection signal="pressed" from="Items/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Items/Quit" to="." method="_on_quit_pressed"]

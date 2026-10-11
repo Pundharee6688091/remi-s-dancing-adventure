@@ -1,0 +1,27 @@
+{
+  "achievements": [
+	{ "id": "first_step", "name": "UI_ACH_FIRST_STEP", "desc": "UI_ACH_FIRST_STEP_D",
+	  "rule": { "type": "total_stars", "value": 4 } },
+
+	{ "id": "half_way", "name": "UI_ACH_HALF_WAY", "desc": "UI_ACH_HALF_WAY_D",
+	  "rule": { "type": "total_stars", "value": 8 } },
+
+	{ "id": "rising_star", "name": "UI_ACH_RISING_STAR", "desc": "UI_ACH_RISING_STAR_D",
+	  "rule": { "type": "total_stars", "value": 12 } },
+
+	{ "id": "sharp_ears", "name": "UI_ACH_SHARP_EARS", "desc": "UI_ACH_SHARP_EARS_D",
+	  "rule": { "type": "best_combo", "value": 30 } },
+
+	{ "id": "cut_a_rug", "name": "UI_ACH_CUT_A_RUG", "desc": "UI_ACH_CUT_A_RUG_D",
+	  "rule": { "type": "full_combo" } },
+
+	{ "id": "elion", "name": "UI_ACH_ELION", "desc": "UI_ACH_ELION_D",
+	  "rule": { "type": "stars_for", "stage": "s1_1", "value": 3 } },
+
+	{ "id": "theo", "name": "UI_ACH_THEO", "desc": "UI_ACH_THEO_D",
+	  "rule": { "type": "stars_for", "stage": "s1_2", "value": 3 } },
+
+	{ "id": "cassia", "name": "UI_ACH_CASSIA", "desc": "UI_ACH_CASSIA_D",
+	  "rule": { "type": "stars_for", "stage": "s1_3", "value": 3 } }
+  ]
+}

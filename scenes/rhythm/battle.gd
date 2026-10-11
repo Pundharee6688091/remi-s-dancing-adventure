@@ -283,6 +283,8 @@ func _on_song_finished() -> void:
 	else:
 		Events.stage_failed.emit(stage_id)
 
+	Achievements.record_run(stage_id, r.counts)
+
 	r.best_hp = GameManager.best_hp_for(stage_id)
 	r.best_combo = GameManager.best_combo_for(stage_id)
 	result_overlay.show_result(r)
