@@ -70,15 +70,16 @@ func enter_node(id: String) -> void:
 			_play_story(id)
 		"fight":
 			var intro := String(Rules.stage(id).get("intro", ""))
-			if intro != "" and not save.get("seen", []).has(intro_key(id)):
+			if intro != "":
 				_play_intro(id, intro)
 			else:
 				start_stage(id)
 
 
 ## A stage can carry its own opening chapter rather than needing a node of its
-## own on the map. It plays once, the first time the stage is entered, and is
-## remembered under its own key so it never shadows the stage being cleared.
+## own on the map. It plays every time the stage is walked into, but once it
+## has been watched through it can be skipped, which is remembered under its
+## own key so it never shadows the stage being cleared.
 func intro_key(stage_id: String) -> String:
 	return "intro:" + stage_id
 
@@ -88,7 +89,8 @@ func _play_intro(stage_id: String, timeline: String) -> void:
 	_intro_for = stage_id
 	# No stage id: the chapter takes the ordinary story backdrop rather than
 	# the battle one belonging to the stage it is introducing.
-	SceneRouter.goto(VN_VIEW, {"timeline": timeline, "stage": ""})
+	SceneRouter.goto(VN_VIEW,
+		{"timeline": timeline, "stage": "", "seen_key": intro_key(stage_id)})
 
 # ------------ Battle ----------------
 func start_stage(stage_id: String) -> void:
@@ -134,7 +136,8 @@ func _on_stage_failed(_stage_id: String) -> void:
 # ------------ Visual Novel -------------
 func _play_story(id: String) -> void:
 	current_stage_id = id
-	SceneRouter.goto(VN_VIEW, {"timeline": Rules.stage(id).get("timeline", ""), "stage": id})
+	SceneRouter.goto(VN_VIEW,
+		{"timeline": Rules.stage(id).get("timeline", ""), "stage": id, "seen_key": id})
 
 
 func _on_story_finished() -> void:
