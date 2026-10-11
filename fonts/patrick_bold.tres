@@ -1,0 +1,9 @@
+[gd_resource type="FontVariation" load_steps=3 format=3]
+
+[ext_resource type="FontFile" uid="uid://c4p2iurlnihdj" path="res://fonts/PatrickHand-Regular.ttf" id="1_base"]
+[ext_resource type="FontFile" uid="uid://b24ax5te2hinu" path="res://fonts/Mali-Bold.ttf" id="2_thai"]
+
+[resource]
+base_font = ExtResource("1_base")
+fallbacks = Array[Font]([ExtResource("2_thai")])
+variation_embolden = 0.6
