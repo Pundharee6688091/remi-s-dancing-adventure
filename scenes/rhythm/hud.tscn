@@ -37,22 +37,25 @@ fill_color = Color(0.169, 0.169, 0.169, 1)
 [node name="ComboValue" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
-offset_left = 40.0
-offset_top = 330.0
-offset_right = 240.0
-offset_bottom = 386.0
+offset_left = 1146.0
+offset_top = 468.0
+offset_right = 1278.0
+offset_bottom = 534.0
 theme_override_font_sizes/font_size = 46
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ComboWord" type="Label" parent="."]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
-offset_left = 44.0
-offset_top = 392.0
-offset_right = 200.0
-offset_bottom = 412.0
+offset_left = 1146.0
+offset_top = 536.0
+offset_right = 1278.0
+offset_bottom = 558.0
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
 text = "UI_COMBO"
 
 [node name="MonsterLabel" type="Label" parent="."]

@@ -85,6 +85,11 @@ func leave_stage() -> void:
 
 
 func evaluate_win(stage_id: String, hp: float) -> bool:
+	# Nobody to fight means nothing to beat down, and the bar that would have
+	# explained a loss is not even on screen, so the stage cannot be failed.
+	if String(Rules.stage(stage_id).get("opponent", "")) == "":
+		return true
+
 	var rule: Dictionary = Rules.stage(stage_id).get(
 		"win", {"type": "hp_below", "value": 30})
 	match String(rule.get("type", "hp_below")):

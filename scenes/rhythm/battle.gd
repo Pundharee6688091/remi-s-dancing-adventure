@@ -19,6 +19,7 @@ enum State { COUNTDOWN, PLAYING, PAUSED, RESULT }
 var judge := Judge.new()
 var state := State.COUNTDOWN
 var _countdown_id := 0
+var _count_tween: Tween = null
 var stage_id := "s1_1"
 var _chart: Dictionary = {}
 
@@ -273,13 +274,32 @@ func _countdown() -> bool:
 
 	for n in [3, 2, 1]:
 		countdown_label.text = str(n)
-		countdown_label.modulate.a = 1.0
+		_flash_count()
 		await get_tree().create_timer(0.6).timeout
 		if my_id != _countdown_id:
 			return false          # something superseded us
 
 	countdown_label.modulate.a = 0.0
 	return true
+
+
+## Each number lands rather than appearing: it drops in oversized, snaps to
+## size, holds, then fades out before the next one.
+func _flash_count() -> void:
+	var l := countdown_label
+	l.pivot_offset = l.size / 2.0
+	l.scale = Vector2.ONE * 1.7
+	l.modulate.a = 0.0
+	if _count_tween != null and _count_tween.is_valid():
+		_count_tween.kill()
+	_count_tween = create_tween()
+	_count_tween.set_parallel(true)
+	_count_tween.tween_property(l, "scale", Vector2.ONE, 0.24) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	_count_tween.tween_property(l, "modulate:a", 1.0, 0.1)
+	_count_tween.set_parallel(false)
+	_count_tween.tween_interval(0.2)
+	_count_tween.tween_property(l, "modulate:a", 0.0, 0.22)
 	
 
 func _on_note_judged(judgement: String, lane: int) -> void:
