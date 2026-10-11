@@ -20,6 +20,11 @@ var judge := Judge.new()
 var state := State.COUNTDOWN
 var _countdown_id := 0
 var _count_tween: Tween = null
+
+## Windows of empty track where a tip is shown, worked out from the chart.
+var _tips: Array[Dictionary] = []
+var _tip_showing := -1
+var _tip_tween: Tween = null
 var stage_id := "s1_1"
 var _chart: Dictionary = {}
 
@@ -67,6 +72,7 @@ func _ready() -> void:
 	hud.setup(conductor.song_length_ms(),
 		float(win_rule.get("value", Rules.data.get("win_hp_percent", 30))))
 	hud.show_monster(_has_enemy)
+	_plan_tips(st)
 
 	pause_overlay.resume_pressed.connect(_resume)
 	pause_overlay.restart_pressed.connect(_restart)
@@ -101,6 +107,7 @@ func _process(delta: float) -> void:
 	field.update(now)
 	judge.sweep(now)
 	hud.update_progress(now)
+	_run_tips(now)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -301,6 +308,59 @@ func _flash_count() -> void:
 	_count_tween.tween_interval(0.2)
 	_count_tween.tween_property(l, "modulate:a", 0.0, 0.22)
 	
+
+## Finds the quiet stretches in the chart and hands one to each tip the stage
+## asked for. Working it out from the notes rather than from written-down times
+## means the tips follow the chart if it is ever re-written.
+func _plan_tips(stage: Dictionary) -> void:
+	_tips.clear()
+	_tip_showing = -1
+	%Tip.visible = false
+	var wanted: Array = stage.get("tips", [])
+	if wanted.is_empty() or _chart.notes.is_empty():
+		return
+
+	const MIN_GAP := 2500.0
+	const LEAD := 250.0        # let the last arrow clear the line first
+	const TAIL := 500.0        # and be gone before the next one is due
+	var gaps: Array[Vector2] = []
+	for i in range(1, _chart.notes.size()):
+		var from: float = _chart.notes[i - 1].t_ms
+		var to: float = _chart.notes[i].t_ms
+		if to - from > MIN_GAP:
+			gaps.append(Vector2(from + LEAD, to - TAIL))
+
+	for i in mini(wanted.size(), gaps.size()):
+		_tips.append({"key": String(wanted[i]), "window": gaps[i]})
+
+
+## No pausing: a tip fades in over the empty track and fades out again as the
+## next run of arrows comes up.
+func _run_tips(now: float) -> void:
+	var wanted := -1
+	for i in _tips.size():
+		var w: Vector2 = _tips[i].window
+		if now >= w.x and now <= w.y:
+			wanted = i
+			break
+	if wanted == _tip_showing:
+		return
+	_tip_showing = wanted
+
+	if _tip_tween != null and _tip_tween.is_valid():
+		_tip_tween.kill()
+	if wanted == -1:
+		_tip_tween = create_tween()
+		_tip_tween.tween_property(%Tip, "modulate:a", 0.0, 0.3)
+		_tip_tween.tween_callback(func() -> void: %Tip.visible = false)
+		return
+
+	%Text.text = tr(String(_tips[wanted].key))
+	%Tip.modulate.a = 0.0
+	%Tip.visible = true
+	_tip_tween = create_tween()
+	_tip_tween.tween_property(%Tip, "modulate:a", 1.0, 0.3)
+
 
 func _on_note_judged(judgement: String, lane: int) -> void:
 	track.pop_judgement(lane, judgement)

@@ -2,7 +2,13 @@ class_name BattleHUD
 extends Control
 ## Layout lives in hud.tscn. This only moves the live values.
 
+const COMBO_COLOUR := Palette.AMBER
+## Every tenth hit is worth making more of than the nine before it.
+const COMBO_MILESTONE := 10
+const COMBO_HOT := Color("#e86a2f")
+
 var _length_ms := 1.0
+var _combo_tween: Tween = null
 
 @onready var song_bar: Bar = %SongBar
 @onready var monster_bar: Bar = %MonsterBar
@@ -41,5 +47,27 @@ func _on_hp_changed(hp: float) -> void:
 
 
 func _on_combo_changed(combo: int) -> void:
+	var had := combo_value.text
 	combo_value.text = str(combo) if combo >= 2 else ""
 	combo_word.visible = combo >= 2
+	if combo >= 2 and combo_value.text != had:
+		_punch_combo(combo)
+
+
+## The number kicks on every hit and kicks harder on a round number, so a run
+## building up reads as something happening rather than a counter ticking.
+func _punch_combo(combo: int) -> void:
+	combo_value.pivot_offset = combo_value.size / 2.0
+	var big := combo % COMBO_MILESTONE == 0
+	combo_value.scale = Vector2.ONE * (1.55 if big else 1.25)
+	combo_value.add_theme_color_override("font_color", COMBO_HOT if big else COMBO_COLOUR)
+
+	if _combo_tween != null and _combo_tween.is_valid():
+		_combo_tween.kill()
+	_combo_tween = create_tween()
+	_combo_tween.set_parallel(true)
+	_combo_tween.tween_property(combo_value, "scale", Vector2.ONE, 0.26 if big else 0.16) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	if big:
+		_combo_tween.tween_property(combo_value, "theme_override_colors/font_color",
+			COMBO_COLOUR, 0.4)

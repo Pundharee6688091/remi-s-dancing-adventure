@@ -6,6 +6,11 @@
       "label": "Tutorial",
       "bg": "Fight_bg",
       "intro": "tutorial",
+      "tips": [
+        "UI_TIP_LANES",
+        "UI_TIP_TIMING",
+        "UI_TIP_COMBO"
+      ],
       "requires": [],
       "pos": [
         130,
