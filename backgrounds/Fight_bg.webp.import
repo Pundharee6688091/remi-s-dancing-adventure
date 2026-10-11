@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtyj1c46sknc"
-path="res://.godot/imported/Ground.png-50b934c126ab8d40650a8d2316997c5a.ctex"
+uid="uid://brijokhptjq2"
+path="res://.godot/imported/Fight_bg.webp-9fb86c9f3425849b561b90b453940f09.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://other pic/Ground.png"
-dest_files=["res://.godot/imported/Ground.png-50b934c126ab8d40650a8d2316997c5a.ctex"]
+source_file="res://backgrounds/Fight_bg.webp"
+dest_files=["res://.godot/imported/Fight_bg.webp-9fb86c9f3425849b561b90b453940f09.ctex"]
 
 [params]
 

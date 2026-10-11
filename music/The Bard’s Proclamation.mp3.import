@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://c06dl5iiyilp7"
-path="res://.godot/imported/The Bard’s Proclamation.mp3-4674c9e3313cdf1111188490881e21be.mp3str"
+path="res://.godot/imported/The Bard’s Proclamation.mp3-3f7de4ddbef4c993423ac77d9a7352a1.mp3str"
 
 [deps]
 
-source_file="res://songs/Bg music/The Bard’s Proclamation.mp3"
-dest_files=["res://.godot/imported/The Bard’s Proclamation.mp3-4674c9e3313cdf1111188490881e21be.mp3str"]
+source_file="res://music/The Bard’s Proclamation.mp3"
+dest_files=["res://.godot/imported/The Bard’s Proclamation.mp3-3f7de4ddbef4c993423ac77d9a7352a1.mp3str"]
 
 [params]
 
