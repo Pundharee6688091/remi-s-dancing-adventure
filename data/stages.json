@@ -1,25 +1,12 @@
 {
   "nodes": [
     {
-      "id": "v0_1",
-      "type": "story",
-      "label": "Opening",
-      "bg": "meadow",
-      "timeline": "tutorial",
-      "requires": [],
-      "pos": [
-        60,
-        400
-      ]
-    },
-    {
       "id": "s0_1",
       "type": "fight",
       "label": "Tutorial",
       "bg": "Fight_bg",
-      "requires": [
-        "v0_1"
-      ],
+      "intro": "tutorial",
+      "requires": [],
       "pos": [
         130,
         260

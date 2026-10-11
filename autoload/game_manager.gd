@@ -10,6 +10,10 @@ var slot := 0
 var save: Dictionary = {}
 var current_stage_id := ""
 
+## Set while a stage's own intro chapter is playing, so the chapter hands over
+## to that stage instead of walking back to the map the way a story node does.
+var _intro_for := ""
+
 
 func _ready() -> void:
 	Events.stage_cleared.connect(_on_stage_cleared)
@@ -51,7 +55,24 @@ func enter_node(id: String) -> void:
 		"story":
 			_play_story(id)
 		"fight":
-			start_stage(id)
+			var intro := String(Rules.stage(id).get("intro", ""))
+			if intro != "" and not save.get("seen", []).has(intro_key(id)):
+				_play_intro(id, intro)
+			else:
+				start_stage(id)
+
+
+## A stage can carry its own opening chapter rather than needing a node of its
+## own on the map. It plays once, the first time the stage is entered, and is
+## remembered under its own key so it never shadows the stage being cleared.
+func intro_key(stage_id: String) -> String:
+	return "intro:" + stage_id
+
+
+func _play_intro(stage_id: String, timeline: String) -> void:
+	current_stage_id = stage_id
+	_intro_for = stage_id
+	SceneRouter.goto(VN_VIEW, {"timeline": timeline})
 
 # ------------ Battle ----------------
 func start_stage(stage_id: String) -> void:
@@ -96,6 +117,18 @@ func _play_story(id: String) -> void:
 
 
 func _on_story_finished() -> void:
+	if _intro_for != "":
+		var stage := _intro_for
+		_intro_for = ""
+		if not save.seen.has(intro_key(stage)):
+			save.seen.append(intro_key(stage))
+			SaveManager.write(slot, save)
+		# Replacing rather than pushing, so leaving the stage goes back to the
+		# map rather than back into the chapter that introduced it.
+		current_stage_id = stage
+		SceneRouter.replace(BATTLE, {"stage_id": stage})
+		return
+
 	if not save.seen.has(current_stage_id):
 		save.seen.append(current_stage_id)
 		SaveManager.write(slot, save)
