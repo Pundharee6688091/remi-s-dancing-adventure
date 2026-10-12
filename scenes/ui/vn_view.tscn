@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dhg3qdhb64xb6"]
 
 [ext_resource type="Script" uid="uid://blg2jndl314li" path="res://scenes/ui/vn_view.gd" id="1_2sygn"]
-[ext_resource type="Script" path="res://scenes/ui/parts/hint_bar.gd" id="2_hb"]
+[ext_resource type="Script" uid="uid://batawi1qqiibp" path="res://scenes/ui/parts/hint_bar.gd" id="2_hb"]
 [ext_resource type="PackedScene" path="res://scenes/ui/settings.tscn" id="3_set"]
 
 [node name="VnView" type="Control" unique_id=1255231983]
@@ -9,32 +9,21 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_2sygn")
 
-[node name="Bg" type="TextureRect" parent="."]
+[node name="Bgm" type="AudioStreamPlayer" parent="." unique_id=321258454]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 6
-
-[node name="Bgm" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-volume_db = -6.0
+volume_db = -14.0
 bus = &"Music"
 
-[node name="Overlay" type="CanvasLayer" parent="."]
+[node name="Overlay" type="CanvasLayer" parent="." unique_id=592011508]
 layer = 2
 
-[node name="Hints" type="Control" parent="Overlay"]
+[node name="Hints" type="Control" parent="Overlay" unique_id=1354224821]
 unique_name_in_owner = true
-layout_mode = 1
+layout_mode = 3
+anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("2_hb")
 
-[node name="Settings" parent="Overlay" instance=ExtResource("3_set")]
+[node name="Settings" parent="Overlay" unique_id=610677985 instance=ExtResource("3_set")]
 unique_name_in_owner = true
 visible = false
