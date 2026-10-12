@@ -303,6 +303,8 @@ func _countdown() -> bool:
 	var my_id := _countdown_id
 
 	for n in [3, 2, 1]:
+		if not is_inside_tree():
+			return false          # the stage was left during the count-in
 		countdown_label.text = str(n)
 		_flash_count()
 		await get_tree().create_timer(0.6).timeout
@@ -377,6 +379,8 @@ func _show_before_tips() -> void:
 		return
 	await get_tree().process_frame        # let the hud lay out before pointing at it
 	for tip in _before_tips:
+		if not is_inside_tree():
+			return            # the stage was left while the opening was running
 		_tip_key = String(tip.text)
 		%Tip.show_tip(tr(_tip_key), _tip_target(String(tip.get("point", ""))))
 		await get_tree().create_timer(3.4).timeout

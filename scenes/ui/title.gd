@@ -2,7 +2,7 @@ extends Control
 ## Layout lives in title.tscn. This only handles input and the art crop.
 
 const SAVE_SLOTS := "res://scenes/ui/save_slots.tscn"
-const KEY_ART := "res://characters/remi/Remi_happy.png"
+const KEY_ART := "res://characters/Remi/Remi_happy.png"
 
 ## How far Remi rises, and how long each half of the hop takes.
 const HOP := 14.0

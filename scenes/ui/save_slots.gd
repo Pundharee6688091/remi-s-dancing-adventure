@@ -4,7 +4,7 @@ extends Control
 ## Enter steps into the panel, Esc steps back out.
 
 const SLOTS := 3
-const PORTRAIT := "res://characters/remi/Remi_default.png"
+const PORTRAIT := "res://characters/Remi/Remi_default.png"
 
 var _cards: Array[Button] = []
 var _pending_slot := 1

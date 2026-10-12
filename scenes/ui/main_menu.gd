@@ -1,7 +1,7 @@
 extends Control
 ## Layout lives in main_menu.tscn.
 
-const KEY_ART := "res://characters/remi/Remi_happy.png"
+const KEY_ART := "res://characters/Remi/Remi_happy.png"
 
 @onready var _story: Button = %Story
 @onready var _confirm: ConfirmBox = %Confirm
@@ -10,7 +10,6 @@ const KEY_ART := "res://characters/remi/Remi_happy.png"
 func _ready() -> void:
 	%Who.text = GameManager.save.get("name", "")
 	%Stage.text = SaveManager.progress_label(GameManager.save)
-	%Art.texture = UIKit.cropped_texture(KEY_ART)
 
 	_confirm.answered.connect(_on_quit_answered)
 	_confirm.visibility_changed.connect(_sync_hints)
