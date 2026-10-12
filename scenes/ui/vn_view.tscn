@@ -11,7 +11,7 @@ script = ExtResource("1_2sygn")
 
 [node name="Bgm" type="AudioStreamPlayer" parent="." unique_id=321258454]
 unique_name_in_owner = true
-volume_db = -14.0
+volume_db = -20.0
 bus = &"Music"
 
 [node name="Overlay" type="CanvasLayer" parent="." unique_id=592011508]
