@@ -43,6 +43,11 @@ var _music_fade: Tween
 var _rival_music: Array[AudioStreamPlayer] = []
 var _ducked := false
 
+## Held down for as long as a stage wants the floor, rather than only while
+## its song happens to be sounding. A paused song is not playing, so watching
+## the bus alone would let the bed back in over a pause menu.
+var _held := false
+
 
 func _ready() -> void:
 	for i in VOICES:
@@ -89,7 +94,7 @@ func _input(event: InputEvent) -> void:
 func _process(_delta: float) -> void:
 	_navigating = false
 
-	var busy := false
+	var busy := _held
 	var i := _rival_music.size()
 	while i > 0:
 		i -= 1
@@ -101,6 +106,16 @@ func _process(_delta: float) -> void:
 	if busy != _ducked:
 		_ducked = busy
 		_fade_music(SILENT_DB if busy else MUSIC_DB)
+
+
+## Keeps the bed down until it is let go, whatever the bus is doing.
+func hold(on: bool) -> void:
+	if _held == on:
+		return
+	_held = on
+	if on and not _ducked:
+		_ducked = true
+		_fade_music(SILENT_DB)
 
 
 ## Loops, so it carries a menu for as long as the player sits there.

@@ -92,6 +92,9 @@ func _ready() -> void:
 	for o in [pause_overlay, result_overlay]:
 		o.visibility_changed.connect(_sync_hints)
 
+	# The stage has the floor from here until it is over, pauses included.
+	Audio.hold(true)
+
 	# The opening lines come before anything moves. Retrying skips them: by
 	# then the player has read them once.
 	await _show_before_tips()
@@ -169,7 +172,10 @@ func _show_enemy(song_id: String) -> void:
 func _setup_remi() -> void:
 	_poses.clear()
 	for path in REMI_POSES:
-		_poses.append(_pose(path, REMI_SCALE, REMI_FLOOR))
+		if path == "res://sprite/Remi/Remi_up.png":
+			_poses.append(_pose(path, REMI_SCALE, REMI_FLOOR - 75))
+		else:
+			_poses.append(_pose(path, REMI_SCALE, REMI_FLOOR))
 	_poses.append(_pose(REMI_IDLE, REMI_SCALE, REMI_FLOOR))
 	_show_pose(IDLE)
 
@@ -283,6 +289,8 @@ func _on_song_finished() -> void:
 	else:
 		Events.stage_failed.emit(stage_id)
 
+	# Over now, so the bed comes back under the result.
+	Audio.hold(false)
 	Achievements.record_run(stage_id, r.counts)
 
 	r.best_hp = GameManager.best_hp_for(stage_id)
@@ -348,7 +356,7 @@ func _plan_tips(stage: Dictionary) -> void:
 
 	const MIN_GAP := 2500.0
 	const LEAD := 250.0        # let the last arrow clear the line first
-	const TAIL := 500.0        # and be gone before the next one is due
+	const TAIL := 250.0        # and be gone before the next one is due
 	var gaps: Array[Vector2] = []
 	for i in range(1, _chart.notes.size()):
 		var from: float = _chart.notes[i - 1].t_ms
@@ -430,6 +438,11 @@ func _on_note_judged(judgement: String, lane: int) -> void:
 ## Rebuilding this mid-song would restart the stage, so a language change
 ## leaves it alone. Its labels hold translation keys, so Godot re-translates
 ## them in place.
+## Quitting part way through gives the floor back too.
+func _exit_tree() -> void:
+	Audio.hold(false)
+
+
 func blocks_reload() -> bool:
 	return true
 
