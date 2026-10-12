@@ -1,4 +1,5 @@
 extends Control
+
 ## Layout lives in save_slots.tscn. Three cards on the left, a detail panel on
 ## the right for whichever card is highlighted. Left and right choose a slot,
 ## Enter steps into the panel, Esc steps back out.
@@ -7,6 +8,7 @@ const SLOTS := 3
 const PORTRAIT := "res://characters/Remi/Remi_default.png"
 
 var _cards: Array[Button] = []
+var _partys: Array[Party] = []
 var _pending_slot := 1
 ## Which question the shared confirm box is currently asking.
 var _pending := ""
@@ -19,10 +21,13 @@ var _renaming := false
 
 func _ready() -> void:
 	_cards = [%Slot1, %Slot2, %Slot3]
+	_partys = [%party1, %party2, %party3]
 	var art := UIKit.cropped_texture(PORTRAIT)
 	for i in SLOTS:
 		var slot := i + 1
 		var card := _cards[i]
+		var party := _partys[i]
+		party.set_slot(slot)
 		(card.get_node("Pad/Box/Art/Filled/Portrait") as TextureRect).texture = art
 		# Enter picks the slot and steps into the panel rather than loading.
 		card.pressed.connect(func() -> void: _enter_panel(slot))
@@ -72,6 +77,7 @@ func _refresh() -> void:
 			info.name if used else tr("UI_NEW_GAME")
 		(card.get_node("Pad/Box/Line") as Label).text = \
 			info.line if used else tr("UI_EMPTY_SLOT_LINE")
+		_partys[i].set_slot(i + 1)
 	_select(_pending_slot)
 
 

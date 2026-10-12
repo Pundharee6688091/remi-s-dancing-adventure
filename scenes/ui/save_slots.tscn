@@ -1,14 +1,15 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://d2lwnjgnj2x6t"]
 
-[ext_resource type="Script" path="res://scenes/ui/save_slots.gd" id="1_ss"]
-[ext_resource type="StyleBox" path="res://themes/panel_fill.tres" id="2_fill"]
+[ext_resource type="Script" uid="uid://cc71rb3ax76hf" path="res://scenes/ui/save_slots.gd" id="1_ss"]
+[ext_resource type="StyleBox" uid="uid://detwlqlh7ct7f" path="res://themes/panel_fill.tres" id="2_fill"]
 [ext_resource type="PackedScene" path="res://scenes/ui/parts/confirm_box.tscn" id="3_cf"]
-[ext_resource type="Script" path="res://scenes/ui/parts/hint_bar.gd" id="4_hb"]
-[ext_resource type="Script" path="res://scenes/ui/parts/dashed_box.gd" id="5_dash"]
+[ext_resource type="Script" uid="uid://batawi1qqiibp" path="res://scenes/ui/parts/hint_bar.gd" id="4_hb"]
+[ext_resource type="Script" uid="uid://fo864rkagmm8" path="res://scenes/ui/parts/dashed_box.gd" id="5_dash"]
 [ext_resource type="StyleBox" path="res://themes/field_box.tres" id="6_field"]
 [ext_resource type="StyleBox" path="res://themes/flat.tres" id="7_flat"]
+[ext_resource type="PackedScene" uid="uid://iwxwyv8yb2st" path="res://scenes/ui/parts/party.tscn" id="8_3ykmy"]
 
-[node name="SaveSlots" type="Control"]
+[node name="SaveSlots" type="Control" unique_id=89533245]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,7 +18,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ss")
 
-[node name="Title" type="Label" parent="."]
+[node name="Title" type="Label" parent="." unique_id=324419421]
 layout_mode = 1
 offset_left = 32.0
 offset_top = 18.0
@@ -26,20 +27,20 @@ offset_bottom = 68.0
 theme_override_font_sizes/font_size = 40
 text = "UI_SELECT_PROFILE"
 
-[node name="Row" type="HBoxContainer" parent="."]
+[node name="Row" type="HBoxContainer" parent="." unique_id=932078841]
 layout_mode = 1
 offset_left = 40.0
-offset_top = 240.0
+offset_top = 196.0
 offset_right = 868.0
-offset_bottom = 492.0
+offset_bottom = 548.0
 theme_override_constants/separation = 24
 
-[node name="Slot1" type="Button" parent="Row"]
+[node name="Slot1" type="Button" parent="Row" unique_id=1826808008]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(260, 252)
+custom_minimum_size = Vector2(260, 352)
 layout_mode = 2
 
-[node name="Pad" type="MarginContainer" parent="Row/Slot1"]
+[node name="Pad" type="MarginContainer" parent="Row/Slot1" unique_id=899219254]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -52,17 +53,17 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Box" type="VBoxContainer" parent="Row/Slot1/Pad"]
+[node name="Box" type="VBoxContainer" parent="Row/Slot1/Pad" unique_id=934519360]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="Art" type="Control" parent="Row/Slot1/Pad/Box"]
-custom_minimum_size = Vector2(0, 150)
+[node name="Art" type="Control" parent="Row/Slot1/Pad/Box" unique_id=977228936]
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Filled" type="PanelContainer" parent="Row/Slot1/Pad/Box/Art"]
+[node name="Filled" type="PanelContainer" parent="Row/Slot1/Pad/Box/Art" unique_id=1900364345]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -72,13 +73,18 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_fill")
 
-[node name="Portrait" type="TextureRect" parent="Row/Slot1/Pad/Box/Art/Filled"]
+[node name="party1" parent="Row/Slot1/Pad/Box/Art/Filled" unique_id=1034103788 instance=ExtResource("8_3ykmy")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Portrait" type="TextureRect" parent="Row/Slot1/Pad/Box/Art/Filled" unique_id=429623450]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Empty" type="MarginContainer" parent="Row/Slot1/Pad/Box/Art"]
+[node name="Empty" type="MarginContainer" parent="Row/Slot1/Pad/Box/Art" unique_id=1755251533]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -88,37 +94,34 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("5_dash")
 
-[node name="Plus" type="Label" parent="Row/Slot1/Pad/Box/Art/Empty"]
+[node name="Plus" type="Label" parent="Row/Slot1/Pad/Box/Art/Empty" unique_id=1347197627]
 layout_mode = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 40
 text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Gap" type="Control" parent="Row/Slot1/Pad/Box"]
+[node name="Gap" type="Control" parent="Row/Slot1/Pad/Box" unique_id=990238614]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Name" type="Label" parent="Row/Slot1/Pad/Box"]
+[node name="Name" type="Label" parent="Row/Slot1/Pad/Box" unique_id=94132740]
 layout_mode = 2
-mouse_filter = 2
 theme_override_font_sizes/font_size = 26
 
-[node name="Line" type="Label" parent="Row/Slot1/Pad/Box"]
+[node name="Line" type="Label" parent="Row/Slot1/Pad/Box" unique_id=1175168434]
 layout_mode = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 15
 
-[node name="Slot2" type="Button" parent="Row"]
+[node name="Slot2" type="Button" parent="Row" unique_id=346870352]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(260, 252)
+custom_minimum_size = Vector2(260, 352)
 layout_mode = 2
 
-[node name="Pad" type="MarginContainer" parent="Row/Slot2"]
+[node name="Pad" type="MarginContainer" parent="Row/Slot2" unique_id=382352737]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,17 +134,17 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Box" type="VBoxContainer" parent="Row/Slot2/Pad"]
+[node name="Box" type="VBoxContainer" parent="Row/Slot2/Pad" unique_id=1709589189]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="Art" type="Control" parent="Row/Slot2/Pad/Box"]
-custom_minimum_size = Vector2(0, 150)
+[node name="Art" type="Control" parent="Row/Slot2/Pad/Box" unique_id=414977180]
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Filled" type="PanelContainer" parent="Row/Slot2/Pad/Box/Art"]
+[node name="Filled" type="PanelContainer" parent="Row/Slot2/Pad/Box/Art" unique_id=320485858]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -151,13 +154,18 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_fill")
 
-[node name="Portrait" type="TextureRect" parent="Row/Slot2/Pad/Box/Art/Filled"]
+[node name="party2" parent="Row/Slot2/Pad/Box/Art/Filled" unique_id=1223807237 instance=ExtResource("8_3ykmy")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Portrait" type="TextureRect" parent="Row/Slot2/Pad/Box/Art/Filled" unique_id=1127791653]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Empty" type="MarginContainer" parent="Row/Slot2/Pad/Box/Art"]
+[node name="Empty" type="MarginContainer" parent="Row/Slot2/Pad/Box/Art" unique_id=1203569597]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -167,37 +175,34 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("5_dash")
 
-[node name="Plus" type="Label" parent="Row/Slot2/Pad/Box/Art/Empty"]
+[node name="Plus" type="Label" parent="Row/Slot2/Pad/Box/Art/Empty" unique_id=1347799037]
 layout_mode = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 40
 text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Gap" type="Control" parent="Row/Slot2/Pad/Box"]
+[node name="Gap" type="Control" parent="Row/Slot2/Pad/Box" unique_id=1324782987]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Name" type="Label" parent="Row/Slot2/Pad/Box"]
+[node name="Name" type="Label" parent="Row/Slot2/Pad/Box" unique_id=1860741888]
 layout_mode = 2
-mouse_filter = 2
 theme_override_font_sizes/font_size = 26
 
-[node name="Line" type="Label" parent="Row/Slot2/Pad/Box"]
+[node name="Line" type="Label" parent="Row/Slot2/Pad/Box" unique_id=1108080572]
 layout_mode = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 15
 
-[node name="Slot3" type="Button" parent="Row"]
+[node name="Slot3" type="Button" parent="Row" unique_id=266482549]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(260, 252)
+custom_minimum_size = Vector2(260, 352)
 layout_mode = 2
 
-[node name="Pad" type="MarginContainer" parent="Row/Slot3"]
+[node name="Pad" type="MarginContainer" parent="Row/Slot3" unique_id=1613631823]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -210,17 +215,17 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Box" type="VBoxContainer" parent="Row/Slot3/Pad"]
+[node name="Box" type="VBoxContainer" parent="Row/Slot3/Pad" unique_id=886405625]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="Art" type="Control" parent="Row/Slot3/Pad/Box"]
-custom_minimum_size = Vector2(0, 150)
+[node name="Art" type="Control" parent="Row/Slot3/Pad/Box" unique_id=1025412270]
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Filled" type="PanelContainer" parent="Row/Slot3/Pad/Box/Art"]
+[node name="Filled" type="PanelContainer" parent="Row/Slot3/Pad/Box/Art" unique_id=319063628]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -230,13 +235,18 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_fill")
 
-[node name="Portrait" type="TextureRect" parent="Row/Slot3/Pad/Box/Art/Filled"]
+[node name="Portrait" type="TextureRect" parent="Row/Slot3/Pad/Box/Art/Filled" unique_id=640030356]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Empty" type="MarginContainer" parent="Row/Slot3/Pad/Box/Art"]
+[node name="party3" parent="Row/Slot3/Pad/Box/Art/Filled" unique_id=701214161 instance=ExtResource("8_3ykmy")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Empty" type="MarginContainer" parent="Row/Slot3/Pad/Box/Art" unique_id=392308629]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -246,81 +256,78 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("5_dash")
 
-[node name="Plus" type="Label" parent="Row/Slot3/Pad/Box/Art/Empty"]
+[node name="Plus" type="Label" parent="Row/Slot3/Pad/Box/Art/Empty" unique_id=20964240]
 layout_mode = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 40
 text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Gap" type="Control" parent="Row/Slot3/Pad/Box"]
+[node name="Gap" type="Control" parent="Row/Slot3/Pad/Box" unique_id=289950298]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Name" type="Label" parent="Row/Slot3/Pad/Box"]
+[node name="Name" type="Label" parent="Row/Slot3/Pad/Box" unique_id=618338364]
 layout_mode = 2
-mouse_filter = 2
 theme_override_font_sizes/font_size = 26
 
-[node name="Line" type="Label" parent="Row/Slot3/Pad/Box"]
+[node name="Line" type="Label" parent="Row/Slot3/Pad/Box" unique_id=464247277]
 layout_mode = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 15
 
-[node name="Detail" type="PanelContainer" parent="."]
+[node name="Detail" type="PanelContainer" parent="." unique_id=1871377763]
 layout_mode = 1
 offset_left = 908.0
 offset_top = 88.0
 offset_right = 1240.0
 offset_bottom = 644.0
 
-[node name="Box" type="VBoxContainer" parent="Detail"]
+[node name="Box" type="VBoxContainer" parent="Detail" unique_id=1946151881]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PName" type="Label" parent="Detail/Box"]
+[node name="PName" type="Label" parent="Detail/Box" unique_id=914143694]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 
-[node name="PLine" type="Label" parent="Detail/Box"]
+[node name="PLine" type="Label" parent="Detail/Box" unique_id=1937051739]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 autowrap_mode = 3
 
-[node name="Gap" type="Control" parent="Detail/Box"]
+[node name="Gap" type="Control" parent="Detail/Box" unique_id=1655795241]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Actions" type="VBoxContainer" parent="Detail/Box"]
+[node name="Actions" type="VBoxContainer" parent="Detail/Box" unique_id=937705202]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Continue" type="Button" parent="Detail/Box/Actions"]
+[node name="Continue" type="Button" parent="Detail/Box/Actions" unique_id=1213634803]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "UI_CONTINUE"
 
-[node name="Rename" type="Button" parent="Detail/Box/Actions"]
+[node name="Rename" type="Button" parent="Detail/Box/Actions" unique_id=611137381]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "UI_RENAME"
 
-[node name="DeleteProfile" type="Button" parent="Detail/Box/Actions"]
+[node name="DeleteProfile" type="Button" parent="Detail/Box/Actions" unique_id=281627357]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"Danger"
 text = "UI_DELETE_PROFILE"
 
-[node name="NamePanel" type="Control" parent="."]
+[node name="NamePanel" type="Control" parent="." unique_id=420199284]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -330,7 +337,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Dim" type="ColorRect" parent="NamePanel"]
+[node name="Dim" type="ColorRect" parent="NamePanel" unique_id=252921774]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -339,7 +346,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.169, 0.169, 0.169, 0.35)
 
-[node name="Centre" type="CenterContainer" parent="NamePanel"]
+[node name="Centre" type="CenterContainer" parent="NamePanel" unique_id=1639719606]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -347,40 +354,40 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Card" type="PanelContainer" parent="NamePanel/Centre"]
+[node name="Card" type="PanelContainer" parent="NamePanel/Centre" unique_id=1076540562]
 custom_minimum_size = Vector2(560, 0)
 layout_mode = 2
 theme_type_variation = &"Card"
 
-[node name="Box" type="VBoxContainer" parent="NamePanel/Centre/Card"]
+[node name="Box" type="VBoxContainer" parent="NamePanel/Centre/Card" unique_id=1920110009]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="NameTitle" type="Label" parent="NamePanel/Centre/Card/Box"]
+[node name="NameTitle" type="Label" parent="NamePanel/Centre/Card/Box" unique_id=429912908]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 34
 
-[node name="Prompt" type="Label" parent="NamePanel/Centre/Card/Box"]
+[node name="Prompt" type="Label" parent="NamePanel/Centre/Card/Box" unique_id=1573590080]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 
-[node name="Gap1" type="Control" parent="NamePanel/Centre/Card/Box"]
+[node name="Gap1" type="Control" parent="NamePanel/Centre/Card/Box" unique_id=156896608]
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
 
-[node name="Field" type="PanelContainer" parent="NamePanel/Centre/Card/Box"]
+[node name="Field" type="PanelContainer" parent="NamePanel/Centre/Card/Box" unique_id=19111864]
 custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = ExtResource("6_field")
 
-[node name="Row" type="HBoxContainer" parent="NamePanel/Centre/Card/Box/Field"]
+[node name="Row" type="HBoxContainer" parent="NamePanel/Centre/Card/Box/Field" unique_id=1580589612]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="NameEdit" type="LineEdit" parent="NamePanel/Centre/Card/Box/Field/Row"]
+[node name="NameEdit" type="LineEdit" parent="NamePanel/Centre/Card/Box/Field/Row" unique_id=1186348327]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -390,34 +397,34 @@ theme_override_styles/focus = ExtResource("7_flat")
 placeholder_text = "UI_YOUR_NAME"
 max_length = 12
 
-[node name="Counter" type="Label" parent="NamePanel/Centre/Card/Box/Field/Row"]
+[node name="Counter" type="Label" parent="NamePanel/Centre/Card/Box/Field/Row" unique_id=633747819]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 14
 vertical_alignment = 1
 
-[node name="Gap2" type="Control" parent="NamePanel/Centre/Card/Box"]
+[node name="Gap2" type="Control" parent="NamePanel/Centre/Card/Box" unique_id=213320545]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="Note" type="Label" parent="NamePanel/Centre/Card/Box"]
+[node name="Note" type="Label" parent="NamePanel/Centre/Card/Box" unique_id=1183333145]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 14
 autowrap_mode = 3
 
-[node name="Gap3" type="Control" parent="NamePanel/Centre/Card/Box"]
+[node name="Gap3" type="Control" parent="NamePanel/Centre/Card/Box" unique_id=1247094767]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 
-[node name="Buttons" type="HBoxContainer" parent="NamePanel/Centre/Card/Box"]
+[node name="Buttons" type="HBoxContainer" parent="NamePanel/Centre/Card/Box" unique_id=56278015]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Start" type="Button" parent="NamePanel/Centre/Card/Box/Buttons"]
+[node name="Start" type="Button" parent="NamePanel/Centre/Card/Box/Buttons" unique_id=1845328092]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
@@ -425,7 +432,7 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 text = "UI_START"
 
-[node name="Cancel" type="Button" parent="NamePanel/Centre/Card/Box/Buttons"]
+[node name="Cancel" type="Button" parent="NamePanel/Centre/Card/Box/Buttons" unique_id=189107257]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
@@ -433,13 +440,14 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 text = "UI_CANCEL"
 
-[node name="NameHints" type="Control" parent="NamePanel"]
+[node name="NameHints" type="Control" parent="NamePanel" unique_id=104511911]
 unique_name_in_owner = true
 layout_mode = 1
+anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("4_hb")
 
-[node name="ExitGame" type="Button" parent="."]
+[node name="ExitGame" type="Button" parent="." unique_id=568734459]
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = 700.0
@@ -450,18 +458,19 @@ focus_mode = 0
 theme_type_variation = &"Danger"
 text = "UI_QUIT"
 
-[node name="Hints" type="Control" parent="."]
+[node name="Hints" type="Control" parent="." unique_id=2111902106]
 unique_name_in_owner = true
 layout_mode = 1
+anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("4_hb")
 
-[node name="Confirm" parent="." instance=ExtResource("3_cf")]
+[node name="Confirm" parent="." unique_id=1994284576 instance=ExtResource("3_cf")]
 unique_name_in_owner = true
+layout_mode = 1
 
 [connection signal="pressed" from="Detail/Box/Actions/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="Detail/Box/Actions/Rename" to="." method="_on_rename_pressed"]
 [connection signal="pressed" from="Detail/Box/Actions/DeleteProfile" to="." method="_on_delete_profile_pressed"]
-
 [connection signal="pressed" from="NamePanel/Centre/Card/Box/Buttons/Start" to="." method="_submit_name"]
 [connection signal="pressed" from="NamePanel/Centre/Card/Box/Buttons/Cancel" to="." method="_close_name_panel"]
