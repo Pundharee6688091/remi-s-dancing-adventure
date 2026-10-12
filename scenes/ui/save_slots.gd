@@ -13,8 +13,6 @@ var _pending := ""
 var _renaming := false
 
 @onready var _confirm: ConfirmBox = %Confirm
-
-const PARTY_FACE := preload("res://scenes/ui/parts/party_face.tscn")
 @onready var _name_panel: Control = %NamePanel
 @onready var _name_edit: LineEdit = %NameEdit
 
@@ -74,26 +72,7 @@ func _refresh() -> void:
 			info.name if used else tr("UI_NEW_GAME")
 		(card.get_node("Pad/Box/Line") as Label).text = \
 			info.line if used else tr("UI_EMPTY_SLOT_LINE")
-		_show_party(card, info.get("party", []) if used else [])
 	_select(_pending_slot)
-
-
-## Who has been recruited into this profile, as the faces the battle uses.
-## An empty party leaves the row out rather than leaving a gap behind.
-func _show_party(card: Button, party: Array) -> void:
-	var row: HBoxContainer = card.get_node("Pad/Box/Party")
-	for old in row.get_children():
-		row.remove_child(old)
-		old.queue_free()
-	row.visible = not party.is_empty()
-	for who in party:
-		var art := UIKit.cropped_texture(Rules.opponent_art(String(who)))
-		if art == null:
-			continue
-		var face := PARTY_FACE.instantiate()
-		face.get_node("%Face").texture = art
-		face.tooltip_text = String(who)
-		row.add_child(face)
 
 
 func _select(slot: int) -> void:

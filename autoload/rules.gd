@@ -45,19 +45,6 @@ func background(kind: String, stage_id := "") -> Texture2D:
 		return null
 	return load(path)
 
-## The picture for a character, reached through the stage they are fought on,
-## so a party face is the same art the battle and the result screen use rather
-## than a second path that could go stale on its own.
-func opponent_art(opponent: String) -> String:
-	if opponent == "":
-		return ""
-	for id in node_order:
-		var n := stage(id)
-		if String(n.get("opponent", "")) == opponent:
-			return enemy_path(String(n.get("song", "")))
-	return ""
-
-
 func window(judgement: String) -> float:
 	return float(data.windows_ms[judgement])
 
