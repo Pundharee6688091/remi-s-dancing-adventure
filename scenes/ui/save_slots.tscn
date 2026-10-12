@@ -113,6 +113,12 @@ mouse_filter = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 15
 
+[node name="Party" type="HBoxContainer" parent="Row/Slot1/Pad/Box"]
+unique_name_in_owner = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
 [node name="Slot2" type="Button" parent="Row"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(260, 252)
@@ -192,6 +198,12 @@ mouse_filter = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 15
 
+[node name="Party" type="HBoxContainer" parent="Row/Slot2/Pad/Box"]
+unique_name_in_owner = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
 [node name="Slot3" type="Button" parent="Row"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(260, 252)
@@ -270,6 +282,12 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 15
+
+[node name="Party" type="HBoxContainer" parent="Row/Slot3/Pad/Box"]
+unique_name_in_owner = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
 
 [node name="Detail" type="PanelContainer" parent="."]
 layout_mode = 1

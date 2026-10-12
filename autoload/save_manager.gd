@@ -63,6 +63,7 @@ func summary(slot: int) -> Dictionary:
 		"name": s.get("name", "?"),
 		"line": tr("UI_SLOT_LINE") % [
 			progress_label(s), _pretty_date(s.get("last_played", ""))],
+		"party": s.get("party", []),
 	}
 
 
