@@ -37,6 +37,9 @@ func show_result(r: Dictionary) -> void:
 
 	if opponent == "":
 		%Flavour.text = ""
+	elif r.get("last_quote", "") != "":
+		# What they actually said this run beats anything written about them.
+		%Flavour.text = tr("UI_QUOTED") % tr(r.last_quote)
 	elif won:
 		%Flavour.text = tr("UI_TOO_TIRED") % opponent
 	else:

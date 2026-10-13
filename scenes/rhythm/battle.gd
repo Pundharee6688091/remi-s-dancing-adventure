@@ -25,6 +25,12 @@ var judge := Judge.new()
 ## back up without the line repeating.
 var _quotes: Array = []
 var _quoted := {}
+
+## The last thing the opponent said this run, for the result screen to show.
+## Kept rather than worked out again from the final HP, because the bar can
+## climb back up: a run that dipped to 25 and recovered to 45 did hear the
+## 30 line, and reading it off the final 45 would claim it did not.
+var _last_quote := ""
 var state := State.COUNTDOWN
 var _countdown_id := 0
 var countdownSong = "res://sfx/Countdown.wav"
@@ -193,6 +199,7 @@ func _lane_input(event: InputEvent, judging: bool) -> void:
 func _read_quotes(st: Dictionary) -> void:
 	_quotes.clear()
 	_quoted.clear()
+	_last_quote = ""
 	bubble.clear()
 	if not _has_enemy:
 		return
@@ -213,6 +220,7 @@ func _on_hp_changed(hp: float) -> void:
 		_quoted[at] = true
 		line = String(Rules.stage(stage_id).get("quotes", {}).get(_quote_key(at), ""))
 	if line != "":
+		_last_quote = line
 		bubble.say(line, _bubble_target())
 
 
@@ -229,7 +237,7 @@ func _bubble_target() -> Vector2:
 	var rect := enemy.get_rect()
 	var left := enemy.position.x + rect.position.x * enemy.scale.x
 	var top := enemy.position.y + rect.position.y * enemy.scale.y
-	return Vector2(left + 40.0, top + 70.0)
+	return Vector2(left - 40.0, top + 70.0)
 
 
 ## Put this stage's opponent on screen. No art means no opponent.
@@ -305,6 +313,7 @@ func _restart() -> void:
 	field.reset()
 	judge.setup(field)
 	_quoted.clear()
+	_last_quote = ""
 	bubble.clear()
 	Events.hp_changed.emit(judge.hp)
 	hud.update_progress(0.0)
@@ -359,6 +368,7 @@ func _on_song_finished() -> void:
 	r.opponent = st.get("opponent", "")
 	r.win_at = int(st.get("win", {}).get("value", 30))
 	r.previous_best = GameManager.best_hp_for(stage_id)
+	r.last_quote = _last_quote
 
 	# Banked before the screen is built, so what it shows as the record
 	# already counts this run.
