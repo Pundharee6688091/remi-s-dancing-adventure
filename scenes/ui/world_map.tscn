@@ -126,14 +126,14 @@ color = Color(0.169, 0.169, 0.169, 1)
 layout_mode = 1
 offset_left = 40.0
 offset_top = 20.0
-offset_right = 360.0
+offset_right = 184.0
 offset_bottom = 62.0
 theme_override_font_sizes/font_size = 32
 text = "UI_WORLD_MAP"
 vertical_alignment = 1
 [node name="ProgressLabel" type="Label" parent="." unique_id=790394993]
 layout_mode = 1
-offset_left = 150.0
+offset_left = 190.0
 offset_top = 28.0
 offset_right = 332.0
 offset_bottom = 54.0
