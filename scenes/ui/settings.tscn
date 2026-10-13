@@ -33,13 +33,15 @@ theme_override_constants/separation = 20
 
 [node name="Title" type="Label" parent="Header"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 4
+vertical_alignment = 1
 theme_override_font_sizes/font_size = 40
 text = "UI_SETTINGS"
 
 [node name="Note" type="Label" parent="Header"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 4
+vertical_alignment = 1
 theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 text = "UI_SETTINGS_NOTE"
 
