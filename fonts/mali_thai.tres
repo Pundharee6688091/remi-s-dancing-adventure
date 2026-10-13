@@ -1,0 +1,7 @@
+[gd_resource type="FontVariation" format=3 uid="uid://bufh3mudbsy0c"]
+
+[ext_resource type="FontFile" uid="uid://bcyk1f71tr4n1" path="res://fonts/Mali-Regular.ttf" id="1_mali"]
+
+[resource]
+base_font = ExtResource("1_mali")
+variation_transform = Transform2D(0.92, 0, 0, 0.92, 0, 0)
