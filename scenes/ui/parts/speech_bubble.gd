@@ -34,26 +34,50 @@ const FADE := 0.3
 
 var _tween: Tween
 
+## The key behind the line on screen, so a language change mid-line can set
+## it again. The label holds a finished sentence, which cannot be translated
+## a second time.
+var _key := ""
+
+## Where the tail was aimed, so a re-layout can aim it there again.
+var _target := Vector2.ZERO
+
 
 func _ready() -> void:
 	modulate.a = 0.0
 	hide()
+	Events.language_changed.connect(_on_language_changed)
+
+
+func _on_language_changed() -> void:
+	# The label holds a finished sentence, which cannot be translated twice,
+	# and the other language is a different width. Lay the line out again
+	# without restarting the pop, so it does not jump back to the start.
+	if visible and _key != "":
+		_draw_line()
 
 
 ## key is a translation key rather than prose, so the line follows the
 ## language like everything else on screen. target is the point the tail
 ## should aim at, in this node's parent's coordinates.
 func say(key: String, target: Vector2) -> void:
-	var line := tr(key)
-	if line == key:
+	if tr(key) == key:
 		# A stage can name a line before anyone has written it. Say nothing
 		# rather than showing the player a raw key.
 		push_warning("No line written for " + key)
 		return
+	_key = key
+	_target = target
+	_draw_line()
+	_play()
 
+
+## The line, the oval around it, and where that oval hangs. Separate from
+## say() so a language change can redo all three without starting over.
+func _draw_line() -> void:
 	var label: Label = %Text
 	label.autowrap_mode = TextServer.AUTOWRAP_OFF
-	label.text = line
+	label.text = tr(_key)
 
 	# The text gets a fixed share of the oval, so the bubble has to be wide
 	# enough that its share still fits the line. A line past the cap folds
@@ -69,9 +93,8 @@ func say(key: String, target: Vector2) -> void:
 	# however far it moved, which is better than losing half the line.
 	var tail := size * TIP
 	var room := get_viewport_rect().size - size - Vector2(MARGIN, MARGIN)
-	position = (target - tail).clamp(Vector2(MARGIN, MARGIN), room)
+	position = (_target - tail).clamp(Vector2(MARGIN, MARGIN), room)
 	pivot_offset = tail           # it grows out of the tail, not out of the middle
-	_play()
 
 
 ## The text's share of the oval. Set here rather than left to anchors, because
@@ -108,6 +131,7 @@ func hold_time() -> float:
 
 ## Nothing should still be fading while the next stage builds itself.
 func clear() -> void:
+	_key = ""
 	if _tween != null and _tween.is_valid():
 		_tween.kill()
 	modulate.a = 0.0

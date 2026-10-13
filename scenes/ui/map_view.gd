@@ -132,7 +132,7 @@ func _draw_node(id: String, focused: bool, font: Font) -> void:
 	else:
 		_draw_bubble(p, r * 0.55)
 
-	var label: String = n.get("label", "")
+	var label: String = tr(String(n.get("label", "")))
 	if fight:
 		if label != "":
 			_boxed_label(font, label, Vector2(p.x, p.y + r + 32.0))

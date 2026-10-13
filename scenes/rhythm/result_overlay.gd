@@ -9,11 +9,28 @@ signal retry_pressed
 
 const JUDGEMENTS := ["perfect", "great", "good", "miss"]
 
+## The run this screen is showing. Kept because the battle refuses to be
+## rebuilt, so switching language here has to redraw the page from the same
+## numbers rather than waiting for a rebuild that never comes.
+var _shown := {}
+
 
 func _ready() -> void:
 	_set_hints()
-	Events.language_changed.connect(_set_hints)
+	Events.language_changed.connect(_on_language_changed)
 	hide()
+
+
+func _on_language_changed() -> void:
+	_set_hints()
+	if not visible or _shown.is_empty():
+		return
+	# Whichever button the player was on stays the one they are on.
+	var had: Control = get_viewport().gui_get_focus_owner()
+	_fill(_shown)
+	_set_buttons(_shown.won)          # the button labels are translated too
+	if had != null and is_instance_valid(had):
+		had.grab_focus()
 
 
 func _set_hints() -> void:
@@ -21,6 +38,15 @@ func _set_hints() -> void:
 
 
 func show_result(r: Dictionary) -> void:
+	_shown = r
+	_fill(r)
+	_set_buttons(r.won)
+	show()
+
+
+## Everything the page says, from the run alone. Separate from show_result so
+## a language change can run it again without re-opening the screen.
+func _fill(r: Dictionary) -> void:
 	var won: bool = r.won
 	var opponent: String = r.get("opponent", "")
 	var win_at: int = r.get("win_at", 30)
@@ -79,9 +105,6 @@ func show_result(r: Dictionary) -> void:
 
 	%NotesValue.text = "%d / %d" % [total - int(c.miss), total]
 	%StarsValue.text = "★".repeat(r.stars) + "☆".repeat(3 - r.stars)
-
-	_set_buttons(won)
-	show()
 
 
 ## A cleared stage offers Continue first. A failed one offers Retry first and

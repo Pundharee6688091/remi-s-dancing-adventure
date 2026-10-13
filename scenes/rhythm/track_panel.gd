@@ -61,7 +61,9 @@ func _draw() -> void:
 ## Flash the judgement in its own lane, right next to the hit line.
 func pop_judgement(lane: int, judgement: String) -> void:
 	var l := _pops[lane]
-	l.text = judgement.to_upper()
+	# The id upper-cased reads as English whatever the language is, so the
+	# word comes from the same rows the result screen uses.
+	l.text = tr("UI_J_" + judgement.to_upper())
 	l.add_theme_color_override("font_color", Palette.judgement_color(judgement))
 	_fade[lane] = 1.0
 	l.modulate.a = 1.0

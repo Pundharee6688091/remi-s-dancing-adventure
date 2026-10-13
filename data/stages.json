@@ -3,7 +3,7 @@
 	{
 	  "id": "s0_1",
 	  "type": "fight",
-	  "label": "Tutorial",
+	  "label": "UI_NODE_TUTORIAL",
 	  "bg": "Fight_bg",
 	  "intro": "tutorial",
 	  "tips": [
@@ -50,7 +50,7 @@
 	  "zone": 1,
 	  "id": "v1_1",
 	  "type": "story",
-	  "label": "Story 1",
+	  "label": "UI_NODE_STORY_1",
 	  "timeline": "ch1_meet_elion",
 	  "requires": [
         "s0_1"
@@ -91,7 +91,7 @@
 	  "zone": 1,
 	  "id": "v1_2",
 	  "type": "story",
-	  "label": "Story 2",
+	  "label": "UI_NODE_STORY_2",
 	  "timeline": "ch2_meet_theo",
 	  "requires": [
         "s1_1"
@@ -132,7 +132,7 @@
 	  "zone": 1,
 	  "id": "v1_3",
 	  "type": "story",
-	  "label": "Story 3",
+	  "label": "UI_NODE_STORY_3",
 	  "timeline": "ch3_meet_cassia",
 	  "requires": [
         "s1_2"
@@ -173,7 +173,7 @@
 	  "zone": 1,
 	  "id": "v1_4",
 	  "type": "story",
-	  "label": "Story 4",
+	  "label": "UI_NODE_STORY_4",
 	  "timeline": "ch4_to_be_continue",
 	  "requires": [
         "s1_3"

@@ -77,7 +77,7 @@ func progress_label(save: Dictionary) -> String:
 		var n := Rules.stage(id)
 		if n.get("type") != "fight":
 			continue
-		last = n.get("label", id)
+		last = tr(String(n.get("label", id)))
 		if not stars.has(id):
 			break
 	return tr("UI_STAGE") % last

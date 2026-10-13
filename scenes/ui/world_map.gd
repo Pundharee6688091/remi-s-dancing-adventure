@@ -87,8 +87,8 @@ func _sync_card() -> void:
 	var fight: bool = n.get("type") == "fight"
 
 	var who: String = n.get("opponent", "")
-	%Who.text = who if who != "" else "[art]"
-	%Title.text = String(n.get("label", tr("UI_STORY")))
+	%Who.text = who
+	%Title.text = tr(String(n.get("label", "UI_STORY")))
 	%Kind.text = tr("UI_DOT_FIGHT") if fight else tr("UI_DOT_STORY")
 
 	if not GameManager.is_unlocked(id):

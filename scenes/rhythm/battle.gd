@@ -362,7 +362,7 @@ func _on_song_finished() -> void:
 	var st := Rules.stage(stage_id)
 	var r := judge.result()
 	r.won = GameManager.evaluate_win(stage_id, judge.hp)
-	r.stage = st.get("label", "")
+	r.stage = tr(String(st.get("label", "")))
 	r.song = _chart.get("title", "")
 	r.song_id = st.get("song", "")
 	r.opponent = st.get("opponent", "")
@@ -391,7 +391,7 @@ func _countdown() -> bool:
 	_countdown_id += 1
 	var my_id := _countdown_id
 	countdown.play()
-	for n in [3, 2, 1, "GO!"]:
+	for n in [3, 2, 1, tr("UI_GO")]:
 		if not is_inside_tree():
 			countdown.stop()
 			return false          # the stage was left during the count-in
@@ -548,6 +548,10 @@ func _on_language_changed() -> void:
 	_set_hints()
 	if _tip_key != "":
 		%Tip.set_body(tr(_tip_key))
+	# This screen refuses a rebuild, so anything already drawn has to be
+	# drawn again. The pause card's line was built when the pause opened.
+	if pause_overlay.visible:
+		pause_overlay.open(_pause_info())
 
 
 func _set_hints() -> void:

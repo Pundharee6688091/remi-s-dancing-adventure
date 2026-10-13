@@ -118,10 +118,10 @@ UI_NOTES_HIT,Notes hit,โน้ตที่กดถูก
 UI_LBL_STARS,Stars,ดาว
 UI_REWARDS,Rewards,รางวัล
 UI_RETRY,Retry for a better run,ลองใหม่ให้ดีกว่าเดิม
-UI_J_PERFECT,Perfect,Perfect
-UI_J_GREAT,Great,Great
-UI_J_GOOD,Good,Good
-UI_J_MISS,Miss,Miss
+UI_J_PERFECT,Perfect,เป๊ะ
+UI_J_GREAT,Great,เยี่ยม
+UI_J_GOOD,Good,ดี
+UI_J_MISS,Miss,พลาด
 UI_BACK_TO_MAP,Back to map,กลับไปที่แผนที่
 UI_RETRY_SHORT,Retry,ลองใหม่
 UI_STILL_FIGHT,%s can still fight. Try again!,%s ยังสู้ไหว ลองใหม่อีกครั้ง!
@@ -186,3 +186,9 @@ UI_S1_3_50, Still immature, เจ้ายังอ่อนหัดนัก
 UI_S1_3_30, Hmph…?, หืม…?
 UI_S1_3_0, …Not bad, …ก็ไม่เลวนี่
 UI_QUOTED,“%s”,“%s”
+UI_GO,GO!,ไปเลย!
+UI_NODE_TUTORIAL,Tutorial,บทฝึกหัด
+UI_NODE_STORY_1,Story 1,เนื้อเรื่อง 1
+UI_NODE_STORY_2,Story 2,เนื้อเรื่อง 2
+UI_NODE_STORY_3,Story 3,เนื้อเรื่อง 3
+UI_NODE_STORY_4,Story 4,เนื้อเรื่อง 4
