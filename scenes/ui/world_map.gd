@@ -87,7 +87,7 @@ func _sync_card() -> void:
 	var fight: bool = n.get("type") == "fight"
 
 	var who: String = n.get("opponent", "")
-	%Who.text = who
+	%Who.text = Rules.character_name(who)
 	%Title.text = tr(String(n.get("label", "UI_STORY")))
 	%Kind.text = tr("UI_DOT_FIGHT") if fight else tr("UI_DOT_STORY")
 

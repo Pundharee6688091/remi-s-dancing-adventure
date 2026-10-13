@@ -26,7 +26,8 @@ func open(stage_id: String) -> void:
 	var available := ResourceLoader.exists(Rules.song_path(song_id)) \
 		and FileAccess.file_exists(Rules.chart_path(song_id))
 
-	%Title.text = opp if opp != "" else tr(String(n.get("label", "")))
+	%Title.text = Rules.character_name(opp) if opp != "" \
+		else tr(String(n.get("label", "")))
 	%Sub.text = tr("UI_STAGE") % tr(String(n.get("label", "")))
 	%Art.texture = UIKit.cropped_texture(Rules.enemy_path(song_id))
 

@@ -49,6 +49,7 @@ func show_result(r: Dictionary) -> void:
 func _fill(r: Dictionary) -> void:
 	var won: bool = r.won
 	var opponent: String = r.get("opponent", "")
+	var named := Rules.character_name(opponent)
 	var win_at: int = r.get("win_at", 30)
 
 	%Title.text = tr("UI_STAGE_CLEAR_TITLE") if won else tr("UI_STAGE_FAILED_TITLE")
@@ -67,14 +68,14 @@ func _fill(r: Dictionary) -> void:
 		# What they actually said this run beats anything written about them.
 		%Flavour.text = tr("UI_QUOTED") % tr(r.last_quote)
 	elif won:
-		%Flavour.text = tr("UI_TOO_TIRED") % opponent
+		%Flavour.text = tr("UI_TOO_TIRED") % named
 	else:
-		%Flavour.text = tr("UI_STILL_FIGHT") % opponent
+		%Flavour.text = tr("UI_STILL_FIGHT") % named
 	%Reason.text = "" if won else tr("UI_FAIL_REASON") % [r.hp, win_at]
 
 	%Join.visible = won and opponent != ""
-	%JoinText.text = tr("UI_JOINED") % opponent
-	%RewardText.text = tr("UI_JOINED") % opponent if won and opponent != "" \
+	%JoinText.text = tr("UI_JOINED") % named
+	%RewardText.text = tr("UI_JOINED") % named if won and opponent != "" \
 		else tr("UI_NO_REWARD")
 
 	# Nothing to beat means nothing to pass or fail, so the health panel and

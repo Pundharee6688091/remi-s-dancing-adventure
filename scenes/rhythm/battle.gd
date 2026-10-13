@@ -297,7 +297,7 @@ func _pause_info() -> String:
 	var secs := int(conductor.song_time_ms() / 1000.0)
 	var opp: String = Rules.stage(stage_id).get("opponent", "")
 	return tr("UI_PAUSE_INFO") % [_chart.get("title", ""), secs / 60, secs % 60,
-		opp if opp != "" else "—", Rules.hp_display(judge.hp)]
+		Rules.character_name(opp) if opp != "" else "—", Rules.hp_display(judge.hp)]
 
 
 func _restart() -> void:

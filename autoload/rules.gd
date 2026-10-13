@@ -14,6 +14,18 @@ func _load_stages() -> void:
 		stages[n.id] = n
 		node_order.append(n.id)
 		
+## A character is held by their English name everywhere it has to stay put:
+## stages.json, the save file's party list, and which sprite to draw. Only
+## what the player reads goes through here. A name nobody has written a row
+## for comes back unchanged rather than as a raw key.
+func character_name(who: String) -> String:
+	if who == "":
+		return ""
+	var key := "UI_NAME_" + who.to_upper()
+	var named := tr(key)
+	return who if named == key else named
+
+
 func stage(id: String) -> Dictionary:
 	return stages.get(id, {})
 	

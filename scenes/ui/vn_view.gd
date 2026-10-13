@@ -37,8 +37,48 @@ func _ready() -> void:
 	Events.language_changed.connect(_on_language_changed)
 
 	_start_bgm()
+	# A name revealed in an earlier chapter is still sitting in the variable
+	# in whatever language it was revealed in.
+	_sync_names()
+	Dialogic.VAR.variable_was_set.connect(_on_variable_set)
 	Dialogic.timeline_ended.connect(_on_timeline_ended)
 	Dialogic.start(timeline)
+
+
+## Dialogic keeps a character's name in a variable so it can read "???" until
+## they give it, and the timelines set that variable to the English name. The
+## name is translated before the variable is put into it, never after, so the
+## variable itself has to hold the right language. Each one is named after its
+## character, so the row to read comes from the variable's own name rather
+## than from a second list that could drift away from it.
+func _sync_names() -> void:
+	var defaults: Dictionary = ProjectSettings.get_setting("dialogic/variables", {})
+	for v in defaults:
+		var var_name := String(v)
+		if not var_name.ends_with("_name"):
+			continue
+		var key := "UI_NAME_" + var_name.trim_suffix("_name").to_upper()
+		var want := tr(key)
+		if want == key:
+			continue                      # nobody wrote a name under that row
+		# The value the variable starts at is the hidden one, so anything
+		# else means the character has given their name and it can be swapped.
+		# A character still hiding behind "???" is left alone.
+		var now := String(Dialogic.VAR.get_variable(var_name, ""))
+		if now == "" or now == String(defaults[v]) or now == want:
+			continue
+		Dialogic.VAR.set_variable(var_name, want)
+
+
+## A name given mid-chapter arrives in English from the timeline, so it is
+## swapped as it lands and the box is redrawn with it.
+func _on_variable_set(info: Dictionary) -> void:
+	if not String(info.get("variable", "")).ends_with("_name"):
+		return
+	_sync_names()
+	var speaker := Dialogic.Text.get_current_speaker()
+	if speaker != null:
+		Dialogic.Text.update_name_label(speaker, true)
 
 
 ## Dialogic draws a line once and leaves it there, so switching language has to
@@ -46,6 +86,7 @@ func _ready() -> void:
 ## translated on their own.
 func _on_language_changed() -> void:
 	_set_hints()
+	_sync_names()
 	var timeline := Dialogic.current_timeline
 	if timeline == null:
 		return
