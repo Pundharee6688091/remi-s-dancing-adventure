@@ -43,14 +43,14 @@
 	  "win": {
 		"type": "hp_below",
 		"value": 30
-	  }
+	  },
+	  "squish": 1.0
 	},
 	{
 	  "zone": 1,
 	  "id": "v1_1",
 	  "type": "story",
 	  "label": "Story 1",
-	  "bg": "meadow",
 	  "timeline": "ch1_meet_elion",
 	  "requires": [
         "s0_1"
@@ -78,7 +78,8 @@
 	  "win": {
 		"type": "hp_below",
 		"value": 30
-	  }
+	  },
+	  "squish": 2.0
 	},
 	{
 	  "zone": 1,
@@ -113,7 +114,8 @@
 	  "win": {
 		"type": "hp_below",
 		"value": 30
-	  }
+	  },
+	  "squish": 1.0
 	},
 	{
 	  "zone": 1,
@@ -148,7 +150,8 @@
 	  "win": {
 		"type": "hp_below",
 		"value": 30
-	  }
+	  },
+	  "squish": 1.0
 	},
 	{
 	  "zone": 1,

@@ -19,7 +19,7 @@
 &"portraits": {
 "Confused": {
 "export_overrides": {
-"image": "\"res://characters/remi/Remi_confused.png\""
+"image": "\"res://characters/Remi/Remi_confused.png\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),
@@ -28,7 +28,7 @@
 },
 "Default": {
 "export_overrides": {
-"image": "\"res://characters/remi/Remi_default.png\""
+"image": "\"res://characters/Remi/Remi_default.png\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),
@@ -37,7 +37,7 @@
 },
 "Happy": {
 "export_overrides": {
-"image": "\"res://characters/remi/Remi_happy.png\""
+"image": "\"res://characters/Remi/Remi_happy.png\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),
@@ -46,7 +46,7 @@
 },
 "Please": {
 "export_overrides": {
-"image": "\"res://characters/remi/Remi_please.png\""
+"image": "\"res://characters/Remi/Remi_please.png\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),
@@ -55,7 +55,7 @@
 },
 "Sad": {
 "export_overrides": {
-"image": "\"res://characters/remi/Remi_sad.png\""
+"image": "\"res://characters/Remi/Remi_sad.png\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),
@@ -64,7 +64,7 @@
 },
 "Surprised": {
 "export_overrides": {
-"image": "\"res://characters/remi/Remi_surprised.png\""
+"image": "\"res://characters/Remi/Remi_surprised.png\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),

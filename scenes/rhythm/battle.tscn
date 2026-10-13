@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://c7pnl0i2n3nsa" path="res://scenes/rhythm/note_field.gd" id="4_sasum"]
 [ext_resource type="PackedScene" path="res://scenes/rhythm/hud.tscn" id="5_yecsb"]
 [ext_resource type="PackedScene" uid="uid://d352sfjqmxc5w" path="res://scenes/rhythm/result_overlay.tscn" id="6_st8th"]
-[ext_resource type="PackedScene" path="res://scenes/rhythm/pause_overlay.tscn" id="8_nbtlf"]
+[ext_resource type="PackedScene" uid="uid://cq4lhgw3ba01v" path="res://scenes/rhythm/pause_overlay.tscn" id="8_nbtlf"]
 [ext_resource type="Texture2D" uid="uid://dx7v202gr0o6u" path="res://songs/A Mage's Foehn/Enemy.png" id="9_tb7li"]
 [ext_resource type="Script" uid="uid://batawi1qqiibp" path="res://scenes/ui/parts/hint_bar.gd" id="10_hb"]
 [ext_resource type="PackedScene" path="res://scenes/ui/settings.tscn" id="11_set"]
@@ -35,6 +35,9 @@ expand_mode = 1
 stretch_mode = 6
 
 [node name="Song" type="AudioStreamPlayer" parent="." unique_id=1753628390]
+bus = &"Music"
+
+[node name="Countdown" type="AudioStreamPlayer" parent="." unique_id=1634337636]
 bus = &"Music"
 
 [node name="Conductor" type="Node" parent="." unique_id=76721395]
@@ -73,7 +76,6 @@ layout_mode = 0
 offset_top = 180.0
 offset_right = 1280.0
 offset_bottom = 400.0
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.9098039, 0.6392157, 0.23921569, 1)
 theme_override_colors/font_outline_color = Color(0.16862746, 0.16862746, 0.16862746, 1)
 theme_override_constants/outline_size = 12
@@ -81,8 +83,9 @@ theme_override_font_sizes/font_size = 170
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Tip" parent="." instance=ExtResource("12_tip")]
+[node name="Tip" parent="." unique_id=1727381944 instance=ExtResource("12_tip")]
 unique_name_in_owner = true
+layout_mode = 1
 
 [node name="HUD" parent="." unique_id=1104815572 instance=ExtResource("5_yecsb")]
 layout_mode = 1

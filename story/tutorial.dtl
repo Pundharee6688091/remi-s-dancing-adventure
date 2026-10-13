@@ -1,3 +1,4 @@
+[background arg="res://backgrounds/meadow.webp" fade="0.0"]
 # Opening narration, before the tutorial fight.
 
 narrator: Once upon a time, in a faraway land hidden within a forgotten realm... #id:97

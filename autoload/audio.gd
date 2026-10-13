@@ -18,7 +18,7 @@ const NAV_ACTIONS := ["ui_up", "ui_down", "ui_left", "ui_right"]
 
 ## The bed that runs under the menus, the map and anywhere else that has no
 ## music of its own.
-const MUSIC := "res://music/The Bard\u2019s Proclamation.mp3"
+const MUSIC := "res://music/The Bard\u2019s Proclamation.wav"
 
 ## Trim, measured against the track: it peaks at -0.1 dBFS over a -15.1 dBFS
 ## body, which is a finished master rather than something meant to sit under a

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b184fws7aoy8e"
-path="res://.godot/imported/Remi_confused.png-1eb889226ed107539e753cdd8c4400b3.ctex"
+path="res://.godot/imported/Remi_confused.png-20cad304f03332a001e9c820155c6201.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/remi/Remi_confused.png"
-dest_files=["res://.godot/imported/Remi_confused.png-1eb889226ed107539e753cdd8c4400b3.ctex"]
+source_file="res://characters/Remi/Remi_confused.png"
+dest_files=["res://.godot/imported/Remi_confused.png-20cad304f03332a001e9c820155c6201.ctex"]
 
 [params]
 

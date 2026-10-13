@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c8f5m7qpqsx1r"
-path="res://.godot/imported/Theo_NotUsed.png-c2598ae7dfec86043b644a9665ff47d0.ctex"
+path="res://.godot/imported/Theo_NotUsed.png-b4e3f48918c57b76b77117e8d4847402.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/theo/Extra/Theo_NotUsed.png"
-dest_files=["res://.godot/imported/Theo_NotUsed.png-c2598ae7dfec86043b644a9665ff47d0.ctex"]
+source_file="res://characters/Theo/Extra/Theo_NotUsed.png"
+dest_files=["res://.godot/imported/Theo_NotUsed.png-b4e3f48918c57b76b77117e8d4847402.ctex"]
 
 [params]
 

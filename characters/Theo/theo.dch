@@ -19,7 +19,7 @@
 &"portraits": {
 "Confused": {
 "export_overrides": {
-"image": "\"res://characters/theo/Theo_confused.png\""
+"image": "\"res://characters/Theo/Theo_confused.png\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),
@@ -28,7 +28,7 @@
 },
 "Crashout": {
 "export_overrides": {
-"image": "\"res://characters/theo/Theo_crashout.png\""
+"image": "\"res://characters/Theo/Theo_crashout.png\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),
@@ -37,7 +37,7 @@
 },
 "Default": {
 "export_overrides": {
-"image": "\"res://characters/theo/Theo_default.png\""
+"image": "\"res://characters/Theo/Theo_default.png\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),
@@ -46,7 +46,7 @@
 },
 "Shocked": {
 "export_overrides": {
-"image": "\"res://characters/theo/Theo_shocked.png\""
+"image": "\"res://characters/Theo/Theo_shocked.png\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),
@@ -55,7 +55,7 @@
 },
 "Smile": {
 "export_overrides": {
-"image": "\"res://characters/theo/Theo_smile.png\""
+"image": "\"res://characters/Theo/Theo_smile.png\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),
@@ -64,7 +64,7 @@
 },
 "Surprised": {
 "export_overrides": {
-"image": "\"res://characters/theo/Theo_surprised.png\""
+"image": "\"res://characters/Theo/Theo_surprised.png\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),
@@ -73,7 +73,7 @@
 },
 "Thinking": {
 "export_overrides": {
-"image": "\"res://characters/theo/Theo_thinking.png\""
+"image": "\"res://characters/Theo/Theo_thinking.png\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),

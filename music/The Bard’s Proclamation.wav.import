@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://w713gvmiqe08"
+path="res://.godot/imported/The Bard’s Proclamation.wav-a06c3baf4c72c3659d4c873bf3c3d245.sample"
+
+[deps]
+
+source_file="res://music/The Bard’s Proclamation.wav"
+dest_files=["res://.godot/imported/The Bard’s Proclamation.wav-a06c3baf4c72c3659d4c873bf3c3d245.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

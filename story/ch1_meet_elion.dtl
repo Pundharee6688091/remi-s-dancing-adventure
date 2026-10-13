@@ -1,3 +1,5 @@
+[background arg="res://backgrounds/Town.png" fade="1.0"]
+
 # Reset the reveal so the scene plays correctly on a replay or a reloaded save.
 set {elion_name} = "???"
 

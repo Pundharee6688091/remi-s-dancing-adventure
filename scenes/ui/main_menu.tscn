@@ -1,11 +1,12 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bgrxvifd08y1d"]
 
-[ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_mm"]
-[ext_resource type="StyleBox" path="res://themes/panel_fill.tres" id="2_fill"]
-[ext_resource type="Script" path="res://scenes/ui/parts/hint_bar.gd" id="3_hb"]
+[ext_resource type="Script" uid="uid://cltsds4fdf3hn" path="res://scenes/ui/main_menu.gd" id="1_mm"]
+[ext_resource type="StyleBox" uid="uid://detwlqlh7ct7f" path="res://themes/panel_fill.tres" id="2_fill"]
+[ext_resource type="Script" uid="uid://batawi1qqiibp" path="res://scenes/ui/parts/hint_bar.gd" id="3_hb"]
 [ext_resource type="PackedScene" path="res://scenes/ui/parts/confirm_box.tscn" id="4_cf"]
+[ext_resource type="PackedScene" uid="uid://iwxwyv8yb2st" path="res://scenes/ui/parts/party.tscn" id="5_x2yvf"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=829162530]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mm")
 
-[node name="Logo" type="PanelContainer" parent="."]
+[node name="Logo" type="PanelContainer" parent="." unique_id=870070794]
 layout_mode = 1
 offset_left = 32.0
 offset_top = 18.0
@@ -22,7 +23,7 @@ offset_right = 232.0
 offset_bottom = 78.0
 theme_override_styles/panel = ExtResource("2_fill")
 
-[node name="Profile" type="PanelContainer" parent="."]
+[node name="Profile" type="PanelContainer" parent="." unique_id=290978728]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -33,32 +34,32 @@ offset_right = -32.0
 offset_bottom = 78.0
 grow_horizontal = 0
 
-[node name="Row" type="HBoxContainer" parent="Profile"]
+[node name="Row" type="HBoxContainer" parent="Profile" unique_id=1624931196]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="Avatar" type="PanelContainer" parent="Profile/Row"]
+[node name="Avatar" type="PanelContainer" parent="Profile/Row" unique_id=810535535]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("2_fill")
 
-[node name="Text" type="VBoxContainer" parent="Profile/Row"]
+[node name="Text" type="VBoxContainer" parent="Profile/Row" unique_id=993342281]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="Who" type="Label" parent="Profile/Row/Text"]
+[node name="Who" type="Label" parent="Profile/Row/Text" unique_id=246165356]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Stage" type="Label" parent="Profile/Row/Text"]
+[node name="Stage" type="Label" parent="Profile/Row/Text" unique_id=1985359379]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
 theme_override_font_sizes/font_size = 14
 
-[node name="Items" type="VBoxContainer" parent="."]
+[node name="Items" type="VBoxContainer" parent="." unique_id=1753535277]
 layout_mode = 1
 offset_left = 80.0
 offset_top = 212.0
@@ -66,7 +67,7 @@ offset_right = 440.0
 offset_bottom = 568.0
 theme_override_constants/separation = 14
 
-[node name="Story" type="Button" parent="Items"]
+[node name="Story" type="Button" parent="Items" unique_id=921272401]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(360, 60)
 layout_mode = 2
@@ -74,7 +75,7 @@ theme_override_font_sizes/font_size = 30
 text = "UI_STORY"
 alignment = 0
 
-[node name="Collection" type="Button" parent="Items"]
+[node name="Collection" type="Button" parent="Items" unique_id=531579768]
 custom_minimum_size = Vector2(360, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
@@ -82,30 +83,30 @@ disabled = true
 text = "UI_COLLECTION"
 alignment = 0
 
-[node name="Achievements" type="Button" parent="Items"]
+[node name="Achievements" type="Button" parent="Items" unique_id=557558795]
 custom_minimum_size = Vector2(360, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-disabled = true
 text = "UI_ACHIEVEMENTS"
 alignment = 0
 
-[node name="Settings" type="Button" parent="Items"]
+[node name="Settings" type="Button" parent="Items" unique_id=1704456284]
 custom_minimum_size = Vector2(360, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "UI_SETTINGS"
 alignment = 0
 
-[node name="Quit" type="Button" parent="Items"]
+[node name="Quit" type="Button" parent="Items" unique_id=173471163]
 custom_minimum_size = Vector2(360, 60)
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
 theme_type_variation = &"Danger"
+theme_override_font_sizes/font_size = 30
 text = "UI_QUIT"
 alignment = 0
 
-[node name="KeyArt" type="PanelContainer" parent="."]
+[node name="KeyArt" type="PanelContainer" parent="." unique_id=944309938]
+clip_contents = true
 layout_mode = 1
 offset_left = 680.0
 offset_top = 160.0
@@ -113,20 +114,19 @@ offset_right = 1200.0
 offset_bottom = 620.0
 theme_override_styles/panel = ExtResource("2_fill")
 
-[node name="Art" type="TextureRect" parent="KeyArt"]
-unique_name_in_owner = true
+[node name="party" parent="KeyArt" unique_id=1034103788 instance=ExtResource("5_x2yvf")]
 layout_mode = 2
-expand_mode = 1
-stretch_mode = 5
 
-[node name="Hints" type="Control" parent="."]
+[node name="Hints" type="Control" parent="." unique_id=1736244771]
 unique_name_in_owner = true
 layout_mode = 1
+anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("3_hb")
 
-[node name="Confirm" parent="." instance=ExtResource("4_cf")]
+[node name="Confirm" parent="." unique_id=2030401867 instance=ExtResource("4_cf")]
 unique_name_in_owner = true
+layout_mode = 1
 
 [connection signal="pressed" from="Items/Story" to="." method="_on_story_pressed"]
 [connection signal="pressed" from="Items/Achievements" to="." method="_on_achievements_pressed"]

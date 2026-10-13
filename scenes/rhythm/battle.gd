@@ -3,6 +3,7 @@ extends Control
 enum State { COUNTDOWN, PLAYING, PAUSED, RESULT }
 
 @onready var song: AudioStreamPlayer = $Song
+@onready var countdown: AudioStreamPlayer = $Countdown
 @onready var conductor: Conductor = $Conductor
 @onready var remi: Sprite2D = $Remi
 @onready var enemy: Sprite2D = $Enemy
@@ -19,6 +20,7 @@ enum State { COUNTDOWN, PLAYING, PAUSED, RESULT }
 var judge := Judge.new()
 var state := State.COUNTDOWN
 var _countdown_id := 0
+var countdownSong = "res://sfx/Countdown.wav"
 var _count_tween: Tween = null
 
 ## Windows of empty track where a tip is shown, worked out from the chart.
@@ -48,6 +50,16 @@ const REMI_POSES := [
 const REMI_IDLE := "res://sprite/Remi/Remi_middle.png"
 const IDLE := 4
 
+## How far he squashes on the beat, as a fraction of his height.
+const SQUISH := 0.08
+## Beats per squash. 1.0 is every beat; 2.0 for every other one.
+var beats_per_squish := 1.0
+
+const ENEMY_BEAT_SHIFT := 0
+
+var _pose_now := IDLE
+var _enemy_pose: Dictionary = {}
+
 var _has_enemy := true
 var _poses: Array = []
 var _pose_time := 0.0
@@ -58,6 +70,7 @@ func _ready() -> void:
 	var song_id: String = st.get("song", "song_tutorial")
 	_chart = ChartParser.parse(Rules.chart_path(song_id))
 	field.setup(_chart.notes)
+	beats_per_squish = int(st.get("squish"))
 
 	%Bg.texture = Rules.background("fight", stage_id)
 	_setup_remi()
@@ -118,6 +131,8 @@ func _process(delta: float) -> void:
 	judge.sweep(now)
 	hud.update_progress(now)
 	_run_tips(now)
+	_squish(remi, _poses[_pose_now], REMI_SCALE, _beat_pulse(now))
+	_squish(enemy, _enemy_pose, ENEMY_SCALE, _beat_pulse(now, ENEMY_BEAT_SHIFT))
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -164,8 +179,8 @@ func _lane_input(event: InputEvent, judging: bool) -> void:
 
 ## Put this stage's opponent on screen. No art means no opponent.
 func _show_enemy(song_id: String) -> void:
-	_apply(enemy, _pose(Rules.enemy_path(song_id), ENEMY_SCALE, ENEMY_FLOOR),
-		ENEMY_X, ENEMY_SCALE)
+	_enemy_pose = _pose(Rules.enemy_path(song_id), ENEMY_SCALE, ENEMY_FLOOR)
+	_apply(enemy, _enemy_pose, ENEMY_X, ENEMY_SCALE)
 
 
 ## Measure each of Remi's pictures once, so changing pose later costs nothing.
@@ -180,12 +195,14 @@ func _setup_remi() -> void:
 	_show_pose(IDLE)
 
 
-## Show the dance pose for a lane. Missing art falls back to idle.
 func _show_pose(which: int) -> void:
 	var pose: Dictionary = _poses[which]
 	if pose.is_empty():
 		pose = _poses[IDLE]
+		which = IDLE
+	_pose_now = which
 	_apply(remi, pose, REMI_X, REMI_SCALE)
+
 
 
 ## Measure a picture once: the part actually drawn, and the y that stands it on
@@ -301,7 +318,7 @@ func _on_song_finished() -> void:
 func _countdown() -> bool:
 	_countdown_id += 1
 	var my_id := _countdown_id
-
+	countdown.stream = load(countdownSong)
 	for n in [3, 2, 1]:
 		if not is_inside_tree():
 			return false          # the stage was left during the count-in
@@ -480,3 +497,25 @@ func _open_settings() -> void:
 
 func _close_settings() -> void:
 	pause_overlay.open(_pause_info())
+	
+
+func _beat_pulse(now_ms: float, shift := 0.0) -> float:
+	var bpm: float = maxf(float(_chart.get("bpm", 120.0)), 1.0)
+	var beat_ms := 60000.0 / bpm * beats_per_squish
+	# From the chart's own start, not the file's, or a chart with an offset
+	# would put the squash between the beats.
+	var since := now_ms - float(_chart.get("offset_ms", 0.0))
+	var phase := fposmod(since / beat_ms - shift, 1.0)
+	return pow(1.0 - phase, 4.0)
+
+
+## Keeps whoever it is on the floor; only their shape moves.
+func _squish(sprite: Sprite2D, pose: Dictionary, base: float, pulse: float) -> void:
+	if pose.is_empty() or not sprite.visible:
+		return
+	sprite.scale = Vector2(base * (1.0 + SQUISH * pulse),
+		base * (1.0 - SQUISH * pulse))
+	# A centred sprite shrinks towards its middle, so half the height it loses
+	# has to come back off the position or it floats off the floor.
+	var half: float = pose.region.size.y * 0.5
+	sprite.position.y = pose.y + half * (base - sprite.scale.y)

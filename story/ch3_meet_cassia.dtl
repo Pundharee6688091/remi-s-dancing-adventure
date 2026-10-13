@@ -1,3 +1,4 @@
+[background arg="res://backgrounds/Town.png" fade="0.0"]
 # Reset the reveal so the scene plays correctly on a replay or a reloaded save.
 set {elion_name} = "Elion"
 set {theo_name} = "Theo"
@@ -41,9 +42,17 @@ Theo (Default): Well, she can be... uhh… #id:4e
 Theo (Crashout): Intense…? #id:4f
 
 narrator: And so, the three of them set off in search of the mysterious woman Theo had spoken of. #id:50
+
+leave --All-- 
+
+[background arg="res://backgrounds/meadow.webp" fade="1.0"]
+
 narrator: They searched around the nearby streets, following the direction Theo had last seen her heading. #id:51
 narrator: After a short while, Theo suddenly slowed his pace and looked ahead. #id:52
 
+join elion right
+join remi left 
+join Theo leftmost 
 Theo (Default): ...There. #id:53
 
 narrator: A red-skinned tiefling stood with her back to them, white hair shifting above a dark scarf draped like a short cloak as she quietly searched the area. #id:54

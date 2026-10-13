@@ -28,7 +28,6 @@ func _ready() -> void:
 		push_warning("Story node has no timeline")
 		Events.story_finished.emit()
 		return
-	%Bg.texture = Rules.background("story", bg_stage)
 	_can_skip_chapter = GameManager.save.get("seen", []).has(seen_key)
 	%Settings.routed = false
 	%Settings.closed.connect(_close_settings)

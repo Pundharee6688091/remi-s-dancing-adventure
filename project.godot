@@ -32,11 +32,11 @@ Achievements="*res://autoload/achievements.gd"
 [dialogic]
 
 directories/dch_directory={
-"Theo": "res://characters/theo/theo.dch",
+"Theo": "res://characters/Theo/theo.dch",
 "cassia": "res://characters/Cassia/cassia.dch",
 "elion": "res://characters/Elion/elion.dch",
 "narrator": "res://characters/Narrator/narrator.dch",
-"remi": "res://characters/remi/remi.dch"
+"remi": "res://characters/Remi/remi.dch"
 }
 directories/dtl_directory={
 "ch1_meet_elion": "res://story/ch1_meet_elion.dtl",

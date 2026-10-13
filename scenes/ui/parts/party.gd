@@ -46,6 +46,8 @@ func _apply() -> void:
 	var party: Array = []
 	if _slot > 0:
 		party = SaveManager.load_slot(_slot).get("party", [])
+	else:
+		party = GameManager.save.get("party", [])
 	for who in _parts:
 		var lit: bool = party.has(who)
 		for part in _parts[who]:
