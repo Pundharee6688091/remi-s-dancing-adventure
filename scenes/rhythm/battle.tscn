@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/settings.tscn" id="11_set"]
 [ext_resource type="PackedScene" path="res://scenes/rhythm/tip_card.tscn" id="12_tip"]
 
+[ext_resource type="PackedScene" path="res://scenes/ui/parts/speech_bubble.tscn" id="13_bub"]
+
 [node name="Battle" type="Control" unique_id=1101702470]
 layout_mode = 3
 anchors_preset = 15
@@ -84,6 +86,10 @@ theme_override_constants/outline_size = 12
 theme_override_font_sizes/font_size = 170
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Bubble" parent="." instance=ExtResource("13_bub")]
+unique_name_in_owner = true
+visible = false
 
 [node name="Tip" parent="." unique_id=1727381944 instance=ExtResource("12_tip")]
 unique_name_in_owner = true

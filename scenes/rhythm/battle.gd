@@ -15,9 +15,16 @@ enum State { COUNTDOWN, PLAYING, PAUSED, RESULT }
 @onready var result_overlay: ResultOverlay = $Result
 @onready var settings_overlay: Control = $Settings
 @onready var debug: Label = $Debug
+@onready var bubble: SpeechBubble = %Bubble
 
 
 var judge := Judge.new()
+
+## The opponent's HP marks this stage carries a line for, highest first, and
+## the ones already said. Crossing a mark is a one-off: the HP bar can wobble
+## back up without the line repeating.
+var _quotes: Array = []
+var _quoted := {}
 var state := State.COUNTDOWN
 var _countdown_id := 0
 var countdownSong = "res://sfx/Countdown.wav"
@@ -86,8 +93,10 @@ func _ready() -> void:
 	hud.setup(conductor.song_length_ms(),
 		float(win_rule.get("value", Rules.data.get("win_hp_percent", 30))))
 	hud.show_monster(_has_enemy)
+	_read_quotes(st)
 	_plan_tips(st)
 
+	Events.hp_changed.connect(_on_hp_changed)
 	pause_overlay.resume_pressed.connect(_resume)
 	pause_overlay.restart_pressed.connect(_restart)
 	pause_overlay.quit_pressed.connect(GameManager.leave_stage)
@@ -177,6 +186,52 @@ func _lane_input(event: InputEvent, judging: bool) -> void:
 			judge.press(lane, conductor.song_time_ms())
 
 
+## stages.json keys the lines by the HP they are said at, which JSON can only
+## write as strings. Sorting them high to low means a single pass finds the
+## lowest mark the bar has just dropped past, so a big hit that skips a mark
+## still says the right line rather than the one it flew by.
+func _read_quotes(st: Dictionary) -> void:
+	_quotes.clear()
+	_quoted.clear()
+	bubble.clear()
+	if not _has_enemy:
+		return
+	for at in st.get("quotes", {}):
+		_quotes.append(float(at))
+	_quotes.sort()
+	_quotes.reverse()
+
+
+func _on_hp_changed(hp: float) -> void:
+	var line := ""
+	for at in _quotes:
+		if hp > at or _quoted.has(at):
+			continue
+		# Every mark the bar has passed counts as said, so a big hit that
+		# clears two of them does not say the second one on the next note.
+		# The loop runs high to low, so what is left is the lowest.
+		_quoted[at] = true
+		line = String(Rules.stage(stage_id).get("quotes", {}).get(_quote_key(at), ""))
+	if line != "":
+		bubble.say(line, _bubble_target())
+
+
+## JSON wrote the mark as a string, and 0.0 has to come back out as "0" rather
+## than "0.0" to find it again.
+func _quote_key(at: float) -> String:
+	return str(int(at))
+
+
+## The tail aims just inside the opponent's shoulder, so the line reads as
+## coming from them. Measured off the sprite rather than written down, so
+## moving the opponent moves the bubble with them.
+func _bubble_target() -> Vector2:
+	var rect := enemy.get_rect()
+	var left := enemy.position.x + rect.position.x * enemy.scale.x
+	var top := enemy.position.y + rect.position.y * enemy.scale.y
+	return Vector2(left + 40.0, top + 70.0)
+
+
 ## Put this stage's opponent on screen. No art means no opponent.
 func _show_enemy(song_id: String) -> void:
 	_enemy_pose = _pose(Rules.enemy_path(song_id), ENEMY_SCALE, ENEMY_FLOOR)
@@ -245,6 +300,8 @@ func _restart() -> void:
 
 	field.reset()
 	judge.setup(field)
+	_quoted.clear()
+	bubble.clear()
 	Events.hp_changed.emit(judge.hp)
 	hud.update_progress(0.0)
 	for g in track.ghosts:

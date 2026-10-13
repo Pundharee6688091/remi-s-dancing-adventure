@@ -50,11 +50,12 @@ func _row_for(entry: Dictionary) -> Control:
 	var id := String(entry.get("id", ""))
 	row.get_node("%Name").text = tr(String(entry.get("name", "")))
 	row.get_node("%Desc").text = tr(String(entry.get("desc", "")))
-
+	
 	var state: Label = row.get_node("%State")
 	if Achievements.is_earned(id):
 		state.text = tr("UI_ACH_UNLOCKED") % _pretty(Achievements.earned_on(id))
 		state.add_theme_color_override("font_color", Palette.AMBER)
+		row.get_node("%Complete?").color = Color(1.0, 0.956, 0.56, 1.0)
 	else:
 		state.text = "%d%%" % roundi(Achievements.progress(entry) * 100.0)
 		state.add_theme_color_override("font_color", Palette.MUTED)

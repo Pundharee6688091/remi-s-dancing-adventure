@@ -80,7 +80,12 @@
 		"type": "hp_below",
 		"value": 30
 	  },
-	  "squish": 2.0
+	  "squish": 2.0,
+	  "quotes": {
+		"50": "UI_S1_1_50",
+		"30": "UI_S1_1_30",
+		"0": "UI_S1_1_0"
+	  }
 	},
 	{
 	  "zone": 1,
@@ -116,7 +121,12 @@
 		"type": "hp_below",
 		"value": 30
 	  },
-	  "squish": 1.0
+	  "squish": 1.0,
+	  "quotes": {
+		"50": "UI_S1_2_50",
+		"30": "UI_S1_2_30",
+		"0": "UI_S1_2_0"
+	  }
 	},
 	{
 	  "zone": 1,
@@ -152,7 +162,12 @@
 		"type": "hp_below",
 		"value": 30
 	  },
-	  "squish": 1.0
+	  "squish": 1.0,
+	  "quotes": {
+		"50": "UI_S1_3_50",
+		"30": "UI_S1_3_30",
+		"0": "UI_S1_3_0"
+	  }
 	},
 	{
 	  "zone": 1,
