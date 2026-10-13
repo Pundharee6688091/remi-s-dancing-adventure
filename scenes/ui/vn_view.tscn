@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://blg2jndl314li" path="res://scenes/ui/vn_view.gd" id="1_2sygn"]
 [ext_resource type="Script" uid="uid://batawi1qqiibp" path="res://scenes/ui/parts/hint_bar.gd" id="2_hb"]
-[ext_resource type="PackedScene" path="res://scenes/ui/settings.tscn" id="3_set"]
+[ext_resource type="PackedScene" path="res://scenes/ui/parts/skip_summary.tscn" id="3_ss"]
+[ext_resource type="PackedScene" path="res://scenes/ui/settings.tscn" id="4_set"]
 
 [node name="VnView" type="Control" unique_id=1255231983]
 layout_mode = 3
@@ -24,6 +25,10 @@ anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("2_hb")
 
-[node name="Settings" parent="Overlay" unique_id=610677985 instance=ExtResource("3_set")]
+[node name="SkipSummary" parent="Overlay" instance=ExtResource("3_ss")]
+unique_name_in_owner = true
+visible = false
+
+[node name="Settings" parent="Overlay" unique_id=610677985 instance=ExtResource("4_set")]
 unique_name_in_owner = true
 visible = false

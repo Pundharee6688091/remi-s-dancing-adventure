@@ -5,8 +5,9 @@ const BGM := "res://music/vn_bgm1.wav"
 
 var timeline := ""
 
-## Whose backdrop to wear. Empty for a stage's intro, which is not the stage.
-var bg_stage := ""
+## The chapter's gist, shown before it is jumped. Empty for a chapter that has
+## none, which then skips straight through.
+var summary := ""
 
 ## What marks this chapter as watched. A stage's intro is remembered under its
 ## own key rather than the stage's, so the two never get confused.
@@ -18,7 +19,7 @@ var _can_skip_chapter := false
 
 func setup(params: Dictionary) -> void:
 	timeline = String(params.get("timeline", ""))
-	bg_stage = String(params.get("stage", ""))
+	summary = String(params.get("summary", ""))
 	seen_key = String(params.get("seen_key", ""))
 
 
@@ -31,6 +32,7 @@ func _ready() -> void:
 	_can_skip_chapter = GameManager.save.get("seen", []).has(seen_key)
 	%Settings.routed = false
 	%Settings.closed.connect(_close_settings)
+	%SkipSummary.answered.connect(_on_skip_answered)
 	_set_hints()
 	Events.language_changed.connect(_on_language_changed)
 
@@ -68,19 +70,41 @@ func _set_hints() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if %Settings.visible:
+	if %Settings.visible or %SkipSummary.is_open():
 		return
 	if event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
 		_open_settings()
 	elif _can_skip_chapter and event.is_action_pressed("skip_chapter"):
-		# Ending the timeline runs the normal finish path, so the node is
-		# still marked seen and the map still gets the player back.
-		# skip_ending, because otherwise end_timeline() starts Dialogic's
-		# built-in "[clear]" ending timeline and waits to be advanced through
-		# it, so timeline_ended never fires and the chapter never leaves.
 		get_viewport().set_input_as_handled()
-		Dialogic.end_timeline(true)
+		_ask_skip()
+
+
+## The gist goes up first, so jumping a chapter does not mean losing the
+## thread. A chapter with nothing written for it skips the way it always did.
+func _ask_skip() -> void:
+	if summary == "":
+		_skip_chapter()
+		return
+	Dialogic.paused = true
+	%Hints.hide()
+	%SkipSummary.ask(summary)
+
+
+func _on_skip_answered(skip: bool) -> void:
+	Dialogic.paused = false
+	%Hints.show()
+	if skip:
+		_skip_chapter()
+
+
+## Ending the timeline runs the normal finish path, so the node is still
+## marked seen and the map still gets the player back. skip_ending, because
+## otherwise end_timeline() starts Dialogic's built-in "[clear]" ending
+## timeline and waits to be advanced through it, so timeline_ended never fires
+## and the chapter never leaves.
+func _skip_chapter() -> void:
+	Dialogic.end_timeline(true)
 
 
 ## Pausing Dialogic is what stops the chapter advancing underneath, since

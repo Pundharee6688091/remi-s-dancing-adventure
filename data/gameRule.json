@@ -25,7 +25,6 @@
 
   "backgrounds": {
 	"map": "grass",
-	"fight": "meadow",
-	"story": "meadow"
+	"fight": "meadow"
   }
 }

@@ -24,9 +24,9 @@ elion (Surprised): Whoa-! #id:ac
 
 narrator: It was a young elf boy who seemed to have been in a rush to go somewhere. #id:ad
 
-join Theo (Surprised) leftmost
+join theo (Surprised) leftmost
 
-Theo: Ah-! #id:ae
+theo: Ah-! #id:ae
 
 narrator: A young boy with green hair and a charming face stumbled into view. From the wand in his hand, he appeared to be some kind of spellcaster. #id:af
 narrator: He fell to the ground, his green hair dropping over his face as the wand slipped from his hand. #id:b0
@@ -34,16 +34,16 @@ narrator: Looking dazed and confused, he slowly raised his head toward Elion, wh
 
 elion (Surprised): I am terribly sorry! Are you alright- #id:b2
 elion (Confused): Oh! It is you! #id:b3
-Theo: Eh...? Isn't it Elion? What are the odds of running into you here…! #id:b4
+theo: Eh...? Isn't it Elion? What are the odds of running into you here…! #id:b4
 
 narrator: It seemed that Elion and the mysterious boy already knew each other somehow. #id:b5
 narrator: Elion helped him back onto his feet before picking up the fallen wand and handing it back to him. #id:b6
 
 elion (Default): Well, I am currently looking for members to join a dancing contest at the festival. #id:b7
 elion (Smile): We need a group of four, so I am helping gather enough people to enter. #id:b8
-Theo (Surprised): Ah! The dance contest! #id:b9
-Theo (Smile): I'm actually going to sign up for it! They promise quite a lot of gold as a reward. I really need those for my research fund…! #id:ba
-Theo (Default): Sorry, Elion…! I have to part with you now. Hope we meet again…! #id:bb
+theo (Surprised): Ah! The dance contest! #id:b9
+theo (Smile): I'm actually going to sign up for it! They promise quite a lot of gold as a reward. I really need those for my research fund…! #id:ba
+theo (Default): Sorry, Elion…! I have to part with you now. Hope we meet again…! #id:bb
 
 update remi (Surprised)
 update elion (Surprised)
@@ -56,35 +56,35 @@ elion (Determined): Sir Theo! We are also going to participate in the contest to
 set {theo_name} = "Theo"
 
 remi (Please): Squeak! Squeak squeak!! Squeak—! #id:be
-Theo (Surprised): !!! #id:bf
-Theo (Confused): … #id:c0
+theo (Surprised): !!! #id:bf
+theo (Confused): … #id:c0
 elion: …!!! #id:c1
 remi: …!!! #id:c2
-Theo (Thinking): … #id:c3
-Theo (Default): …Alright. I could team up with you. However, you said you needed two more members. So it's Elion and…? #id:c4
+theo (Thinking): … #id:c3
+theo (Default): …Alright. I could team up with you. However, you said you needed two more members. So it's Elion and…? #id:c4
 elion (Default): Pardon me, Sir Theo. This is my companion and reliable teammate, Sir Remi! #id:c5
 remi (Happy): Squeak! #id:c6
 elion (Smile): And Sir Remi, this is Sir [b]Theo[/b], a wonderful [b]mage[/b] companion of mine. #id:c7
-Theo (Smile): Nice to meet you, Mr. Remi. #id:c8
+theo (Smile): Nice to meet you, Mr. Remi. #id:c8
 elion (Determined): Sir Theo, Sir Remi here is an exquisite and determined dancer. He is a pure soul who follows his dream despite the segregation and discrimination of his kind in the performing industry. I guarantee Sir Remi is a promising member of our team. #id:c9
 remi (Please): Squeak… #id:ca
-Theo (Surprised): …! #id:cb
-Theo (Thinking): … #id:cc
-Theo: (Elion is talking with a rat…? Since when could he do that…?) #id:cd
-Theo (Confused): (Ah… The rat… Remi was it…? Mister Remi is also a dancer…? And he was discriminated against in the industry because he is a rat? Wait— A rat can dance?! I have never seen one dance before. They can dance???) #id:ce
-Theo (Thinking): (No, no, no. That is a prejudice that rats can't dance, is it? Isn't that the same thing as what Mr. Remi faced? I'm… a bad person?) #id:cf
-Theo (Crashout): (From the first place, performing industry…? Rat language? Dancing rats? What is this information?! Why is Elion so normal about this??? Is this normal??? I guess this is normal???) #id:d0
+theo (Surprised): …! #id:cb
+theo (Thinking): … #id:cc
+theo: (Elion is talking with a rat…? Since when could he do that…?) #id:cd
+theo (Confused): (Ah… The rat… Remi was it…? Mister Remi is also a dancer…? And he was discriminated against in the industry because he is a rat? Wait— A rat can dance?! I have never seen one dance before. They can dance???) #id:ce
+theo (Thinking): (No, no, no. That is a prejudice that rats can't dance, is it? Isn't that the same thing as what Mr. Remi faced? I'm… a bad person?) #id:cf
+theo (Crashout): (From the first place, performing industry…? Rat language? Dancing rats? What is this information?! Why is Elion so normal about this??? Is this normal??? I guess this is normal???) #id:d0
 elion (Confused): Theo, sir? #id:d1
 remi (Confused): Squeak…? #id:d2
-Theo (Surprised): Ah— Um…! Sorry…! #id:d3
-Theo (Thinking): I get the situation now. If that's the case, I can join your party!... #id:d4
-Theo (Default): However, I really aim to win this competition. I need to see your capability first. Excuse my formalistic procedure, but would you mind showing your skills to me? #id:d5
+theo (Surprised): Ah— Um…! Sorry…! #id:d3
+theo (Thinking): I get the situation now. If that's the case, I can join your party!... #id:d4
+theo (Default): However, I really aim to win this competition. I need to see your capability first. Excuse my formalistic procedure, but would you mind showing your skills to me? #id:d5
 remi (Surprised): !!! #id:d6
 elion (Determined): This is an amazing opportunity, Sir Remi! Let's show him what you are made of. #id:d7
-Theo (Smile): I do know Elion and his style, so I must admit I am a little bit curious about you, new fella. I would appreciate it if you would be so kind as to dance to my tune? #id:d8
+theo (Smile): I do know Elion and his style, so I must admit I am a little bit curious about you, new fella. I would appreciate it if you would be so kind as to dance to my tune? #id:d8
 remi (Happy): Squeak! Squeak squeak! #id:d9
 elion (Smile): Now that's the spirit! Let's dance right away! #id:da
-Theo: Thank you, Mr. Remi. #id:db
-Theo: (I'm glad my confusion didn't offend him.) #id:dc
-Theo (Thinking): (And also, thank the universe I didn't ask Elion if Mr. Remi was his midday snack at first when I saw him holding a rat.) #id:dd
-Theo (Crashout): (That would be so much more awkward...) #id:de
+theo: Thank you, Mr. Remi. #id:db
+theo: (I'm glad my confusion didn't offend him.) #id:dc
+theo (Thinking): (And also, thank the universe I didn't ask Elion if Mr. Remi was his midday snack at first when I saw him holding a rat.) #id:dd
+theo (Crashout): (That would be so much more awkward...) #id:de

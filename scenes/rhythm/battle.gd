@@ -259,6 +259,7 @@ func _restart() -> void:
 
 func _pause() -> void:
 	_countdown_id += 1                       # invalidate a running countdown
+	countdown.stop()
 	state = State.PAUSED
 	song.stream_paused = true
 	countdown_label.modulate.a = 0.0
@@ -318,14 +319,16 @@ func _on_song_finished() -> void:
 func _countdown() -> bool:
 	_countdown_id += 1
 	var my_id := _countdown_id
-	countdown.stream = load(countdownSong)
-	for n in [3, 2, 1]:
+	countdown.play()
+	for n in [3, 2, 1, "GO!"]:
 		if not is_inside_tree():
+			countdown.stop()
 			return false          # the stage was left during the count-in
 		countdown_label.text = str(n)
 		_flash_count()
 		await get_tree().create_timer(0.6).timeout
 		if my_id != _countdown_id:
+			countdown.stop()
 			return false          # something superseded us
 
 	countdown_label.modulate.a = 0.0
