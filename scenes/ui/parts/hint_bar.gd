@@ -102,4 +102,4 @@ func _cap_label(text: String) -> Label:
 
 
 func _draw() -> void:
-	draw_dashed_line(Vector2(0, 0), Vector2(size.x, 0), Palette.MUTED, 2.0, 9.0)
+	draw_dashed_line(Vector2(0, 0), Vector2(size.x, 0), Palette.HAIRLINE, 2.0, 9.0)

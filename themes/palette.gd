@@ -4,10 +4,18 @@ extends RefCounted
 
 const BONE  := Color("#f7f5f0")   # page background
 const INK   := Color("#2b2b2b")   # text, borders, the song bar
-const MUTED := Color("#8a877f")   # secondary text, dividers
+const MUTED := Color("#595752")   # secondary text, dividers
+const HAIRLINE := Color("#8a877f")  # dividers and dashes, not text
 const FILL  := Color("#e6e3dc")   # placeholder boxes
+## The bright red draws the HP bar, the win line and the ghost arrows.
+## RED_INK is the same red dark enough to read as a word on a light card.
 const RED   := Color("#c9502f")   # monster HP, win line, hit line, ghosts
 const AMBER := Color("#e8a33d")   # judgement text, focus highlight
+## The same amber, dark enough to read as text on a white card. The bright
+## one is for shapes and highlights, where contrast with the page is not
+## what it is doing.
+const AMBER_INK := Color("#966927")
+const RED_INK := Color("#bc4b2c")
 const WHITE := Color("#ffffff")
 
 ## One colour per lane: up, left, right, down.

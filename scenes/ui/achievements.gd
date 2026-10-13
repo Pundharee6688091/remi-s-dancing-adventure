@@ -54,11 +54,14 @@ func _row_for(entry: Dictionary) -> Control:
 	var state: Label = row.get_node("%State")
 	if Achievements.is_earned(id):
 		state.text = tr("UI_ACH_UNLOCKED") % _pretty(Achievements.earned_on(id))
-		state.add_theme_color_override("font_color", Palette.AMBER)
-		row.get_node("%Complete?").color = Color(1.0, 0.956, 0.56, 1.0)
+		state.add_theme_color_override("font_color", Palette.AMBER_INK)
+		row.get_node("%Complete?").color = Color(Palette.AMBER)
 	else:
 		state.text = "%d%%" % roundi(Achievements.progress(entry) * 100.0)
 		state.add_theme_color_override("font_color", Palette.MUTED)
+		# a swatch, not a word, so it keeps the light grey rather than the
+		# darker one secondary text uses now
+		row.get_node("%Complete?").color = Color(Palette.HAIRLINE)
 		row.modulate.a = 0.75
 	return row
 

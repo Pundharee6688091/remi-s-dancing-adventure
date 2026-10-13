@@ -93,7 +93,7 @@ offset_top = -93.0
 offset_right = 224.0
 offset_bottom = -71.0
 grow_vertical = 0
-theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 text = "v0.1"
 
 [node name="Pill" type="Button" parent="." unique_id=821584625]

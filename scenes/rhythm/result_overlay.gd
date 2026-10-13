@@ -53,7 +53,7 @@ func _fill(r: Dictionary) -> void:
 	var win_at: int = r.get("win_at", 30)
 
 	%Title.text = tr("UI_STAGE_CLEAR_TITLE") if won else tr("UI_STAGE_FAILED_TITLE")
-	%Title.add_theme_color_override("font_color", Palette.INK if won else Palette.RED)
+	%Title.add_theme_color_override("font_color", Palette.INK if won else Palette.RED_INK)
 	%Sub.text = tr("UI_RESULT_SUB") % [tr("UI_STAGE") % r.get("stage", ""), r.get("song", "")]
 
 	var art := UIKit.cropped_texture(Rules.enemy_path(r.get("song_id", "")))

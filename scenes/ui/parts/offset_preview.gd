@@ -26,7 +26,7 @@ func _draw() -> void:
 	# how far off it actually is
 	if absf(dx) > 1.0:
 		draw_dashed_line(Vector2(line_x, mid), Vector2(arrow_x, mid),
-			Palette.MUTED, 2.0, 6.0)
+			Palette.HAIRLINE, 2.0, 6.0)
 
 	var live := NoteArt.at(2, Vector2(arrow_x, mid))
 	draw_polygon(live, PackedColorArray([Palette.lane_color(2)]))

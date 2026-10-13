@@ -96,7 +96,7 @@ script = ExtResource("5_dash")
 
 [node name="Plus" type="Label" parent="Row/Slot1/Pad/Box/Art/Empty" unique_id=1347197627]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 theme_override_font_sizes/font_size = 40
 text = "+"
 horizontal_alignment = 1
@@ -113,7 +113,7 @@ theme_override_font_sizes/font_size = 26
 
 [node name="Line" type="Label" parent="Row/Slot1/Pad/Box" unique_id=1175168434]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 theme_override_font_sizes/font_size = 15
 
 [node name="Slot2" type="Button" parent="Row" unique_id=346870352]
@@ -177,7 +177,7 @@ script = ExtResource("5_dash")
 
 [node name="Plus" type="Label" parent="Row/Slot2/Pad/Box/Art/Empty" unique_id=1347799037]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 theme_override_font_sizes/font_size = 40
 text = "+"
 horizontal_alignment = 1
@@ -194,7 +194,7 @@ theme_override_font_sizes/font_size = 26
 
 [node name="Line" type="Label" parent="Row/Slot2/Pad/Box" unique_id=1108080572]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 theme_override_font_sizes/font_size = 15
 
 [node name="Slot3" type="Button" parent="Row" unique_id=266482549]
@@ -258,7 +258,7 @@ script = ExtResource("5_dash")
 
 [node name="Plus" type="Label" parent="Row/Slot3/Pad/Box/Art/Empty" unique_id=20964240]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 theme_override_font_sizes/font_size = 40
 text = "+"
 horizontal_alignment = 1
@@ -275,7 +275,7 @@ theme_override_font_sizes/font_size = 26
 
 [node name="Line" type="Label" parent="Row/Slot3/Pad/Box" unique_id=464247277]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 theme_override_font_sizes/font_size = 15
 
 [node name="Detail" type="PanelContainer" parent="." unique_id=1871377763]
@@ -297,7 +297,7 @@ theme_override_font_sizes/font_size = 28
 [node name="PLine" type="Label" parent="Detail/Box" unique_id=1937051739]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 autowrap_mode = 3
 
 [node name="Gap" type="Control" parent="Detail/Box" unique_id=1655795241]
@@ -371,7 +371,7 @@ theme_override_font_sizes/font_size = 34
 [node name="Prompt" type="Label" parent="NamePanel/Centre/Card/Box" unique_id=1573590080]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 
 [node name="Gap1" type="Control" parent="NamePanel/Centre/Card/Box" unique_id=156896608]
 custom_minimum_size = Vector2(0, 18)
@@ -400,7 +400,7 @@ max_length = 12
 [node name="Counter" type="Label" parent="NamePanel/Centre/Card/Box/Field/Row" unique_id=633747819]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 theme_override_font_sizes/font_size = 14
 vertical_alignment = 1
 
@@ -411,7 +411,7 @@ layout_mode = 2
 [node name="Note" type="Label" parent="NamePanel/Centre/Card/Box" unique_id=1183333145]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.5411765, 0.5294118, 0.49803922, 1)
+theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 theme_override_font_sizes/font_size = 14
 autowrap_mode = 3
 
