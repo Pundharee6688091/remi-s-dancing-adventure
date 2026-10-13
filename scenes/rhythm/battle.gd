@@ -293,6 +293,10 @@ func _pause_info() -> String:
 
 
 func _restart() -> void:
+	# Retrying from the result screen means the bed is playing again. Take the
+	# floor back now rather than leaving it under the countdown until the
+	# stage's own song starts and pushes it out.
+	Audio.hold(true)
 	pause_overlay.hide()
 	result_overlay.hide()
 	song.stream_paused = false

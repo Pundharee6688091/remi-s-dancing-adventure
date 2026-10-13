@@ -26,6 +26,10 @@ const MUSIC := "res://music/The Bard\u2019s Proclamation.wav"
 ## level the chapter music was tuned to.
 const MUSIC_DB := -9.0
 const SILENT_DB := -60.0
+
+## Getting out of the way is quick, since whatever wants the floor is about to
+## start. Coming back afterwards takes its time.
+const DUCK_FADE := 0.25
 const FADE := 1.5
 
 var _players: Array[AudioStreamPlayer] = []
@@ -105,7 +109,10 @@ func _process(_delta: float) -> void:
 			busy = true
 	if busy != _ducked:
 		_ducked = busy
-		_fade_music(SILENT_DB if busy else MUSIC_DB)
+		if busy:
+			_fade_music(SILENT_DB, DUCK_FADE)
+		else:
+			_fade_music(MUSIC_DB)
 
 
 ## Keeps the bed down until it is let go, whatever the bus is doing.
@@ -115,7 +122,7 @@ func hold(on: bool) -> void:
 	_held = on
 	if on and not _ducked:
 		_ducked = true
-		_fade_music(SILENT_DB)
+		_fade_music(SILENT_DB, DUCK_FADE)
 
 
 ## Loops, so it carries a menu for as long as the player sits there.
@@ -133,7 +140,7 @@ func _start_music() -> void:
 
 ## Fading rather than cutting, and paused once it is silent so it holds its
 ## place instead of running on under a whole stage.
-func _fade_music(target_db: float) -> void:
+func _fade_music(target_db: float, secs := FADE) -> void:
 	if _music.stream == null:
 		return
 	if _music_fade != null and _music_fade.is_valid():
@@ -141,7 +148,7 @@ func _fade_music(target_db: float) -> void:
 	if target_db > SILENT_DB:
 		_music.stream_paused = false
 	_music_fade = create_tween()
-	_music_fade.tween_property(_music, "volume_db", target_db, FADE)
+	_music_fade.tween_property(_music, "volume_db", target_db, secs)
 	if target_db <= SILENT_DB:
 		_music_fade.finished.connect(func() -> void: _music.stream_paused = true)
 
