@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://ck5jbqhrpjjes"]
+
+[ext_resource type="Script" uid="uid://cjopiw63g64c0" path="res://scenes/ui/collection.gd" id="1_b0ylx"]
+[ext_resource type="Script" uid="uid://batawi1qqiibp" path="res://scenes/ui/parts/hint_bar.gd" id="2_hb"]
+[ext_resource type="PackedScene" uid="uid://iwxwyv8yb2st" path="res://scenes/ui/parts/party.tscn" id="3_vhpde"]
+
+[node name="Collections" type="Control" unique_id=357182641]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b0ylx")
+
+[node name="Title" type="Label" parent="." unique_id=1205036515]
+layout_mode = 1
+offset_left = 40.0
+offset_top = 24.0
+offset_right = 600.0
+offset_bottom = 76.0
+theme_override_font_sizes/font_size = 40
+text = "UI_COLLECTION"
+vertical_alignment = 1
+
+[node name="Rule" type="ColorRect" parent="." unique_id=511615386]
+layout_mode = 1
+offset_left = 40.0
+offset_top = 84.0
+offset_right = 1240.0
+offset_bottom = 86.0
+mouse_filter = 2
+color = Color(0.16862746, 0.16862746, 0.16862746, 1)
+
+[node name="Hints" type="Control" parent="." unique_id=1524442916]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("2_hb")
+
+[node name="party" parent="." unique_id=1034103788 instance=ExtResource("3_vhpde")]
+propagate_maximum_size = false
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+offset_left = 40.0
+offset_top = 104.0
+offset_right = 1240.0
+offset_bottom = 680.0
+window = Rect2(0, 0, 0, 0)
