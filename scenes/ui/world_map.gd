@@ -26,6 +26,11 @@ func _ready() -> void:
 	_settings.closed.connect(_sync_hints)
 	_settings.visibility_changed.connect(_sync_hints)
 	%Gear.pressed.connect(_settings.show)
+	# Hovering it walks the cursor onto it, so the mouse and the arrow keys
+	# never disagree about where you are.
+	%Gear.mouse_entered.connect(func() -> void:
+		if not _busy():
+			_set_cursor(Rules.node_order.size()))
 
 	%Bg.texture = Rules.background("map")
 
@@ -178,8 +183,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		SceneRouter.back()
 
 
+## One stop past the last node is the gear. The map has no focus to move, so
+## the cursor that walks the nodes walks onto it as well, rather than leaving
+## settings as something only a mouse can open.
+func _stops() -> int:
+	return Rules.node_order.size() + 1
+
+
+func _on_gear() -> bool:
+	return _view.cursor >= Rules.node_order.size()
+
+
 func _move(step: int) -> void:
-	_set_cursor(clampi(_view.cursor + step, 0, Rules.node_order.size() - 1))
+	_set_cursor(clampi(_view.cursor + step, 0, _stops() - 1))
 
 
 ## The one place the cursor moves, so walking with the arrow keys sounds the
@@ -190,10 +206,31 @@ func _set_cursor(i: int) -> void:
 	_view.cursor = i
 	Audio.play("hover")
 	_sync_card()
+	_mark_gear()
 	_view.queue_redraw()
 
 
+## The gear is not a node on the track, so it wears the cursor by hand. The
+## box is empty but for its border, or it would cover the cog drawn inside it.
+func _mark_gear() -> void:
+	if not _on_gear():
+		for slot in ["normal", "hover", "pressed"]:
+			%Gear.remove_theme_stylebox_override(slot)
+		return
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(Palette.AMBER, 0.18)
+	style.set_border_width_all(3)
+	style.border_color = Palette.AMBER
+	style.set_corner_radius_all(8)
+	for slot in ["normal", "hover", "pressed"]:
+		%Gear.add_theme_stylebox_override(slot, style)
+
+
 func _confirm() -> void:
+	if _on_gear():
+		Audio.play("click")
+		_settings.show()
+		return
 	var id: String = Rules.node_order[_view.cursor]
 	if not GameManager.is_unlocked(id):
 		# A locked node is not a selection: it shakes its head and says so.

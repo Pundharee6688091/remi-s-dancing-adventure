@@ -37,10 +37,12 @@ func _ready() -> void:
 			if not _panel_has_focus():
 				card.grab_focus())
 
-	UIKit.trap_focus(_cards)
+	# One stop past the last card, so walking right off slot three reaches it
+	# rather than wrapping straight back to slot one. It was mouse only
+	# before, which left no way to quit from here without a mouse.
+	%ExitGame.focus_mode = Control.FOCUS_ALL
+	UIKit.trap_focus(_cards + [%ExitGame])
 	_confirm.answered.connect(_on_confirmed)
-	# Focus stays trapped on the slot cards, so this one is for the mouse; the
-	# keyboard way out is Esc back to the main menu, which has its own Quit.
 	%ExitGame.pressed.connect(_ask_quit)
 	_confirm.visibility_changed.connect(_sync_hints)
 	_name_panel.visibility_changed.connect(_sync_hints)
