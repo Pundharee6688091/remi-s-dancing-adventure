@@ -433,8 +433,6 @@ func _plan_tips(stage: Dictionary) -> void:
 	_before_tips.clear()
 	_tip_showing = -1
 	%Tip.hide_tip()
-	%Tip.keep_clear = Rect2(0.0, track.global_position.y, TrackPanel.SCREEN_W,
-		TrackPanel.ROW_H * TrackPanel.LANE_COUNT)
 	var wanted: Array = stage.get("tips", [])
 	if wanted.is_empty():
 		return
@@ -473,7 +471,7 @@ func _show_before_tips() -> void:
 		if not is_inside_tree():
 			return            # the stage was left while the opening was running
 		_tip_key = String(tip.text)
-		%Tip.show_tip(tr(_tip_key), _tip_target(String(tip.get("point", ""))))
+		_show_tip(_tip_target(String(tip.get("point", ""))))
 		await get_tree().create_timer(3.4).timeout
 		%Tip.hide_tip()
 		await get_tree().create_timer(0.35).timeout
@@ -505,7 +503,27 @@ func _run_tips(now: float) -> void:
 	if point == "monster_bar" and not _has_enemy:
 		hud.ghost_monster(true)
 	_tip_key = String(_tips[wanted].text)
-	%Tip.show_tip(tr(_tip_key), _tip_target(point))
+	_show_tip(_tip_target(point))
+
+
+## Measured every time rather than once, because the health readout is not laid
+## out yet when the stage is planned and it comes and goes with the opponent.
+func _show_tip(target: Rect2) -> void:
+	%Tip.keep_clear = _tip_blocks()
+	%Tip.show_tip(tr(_tip_key), target)
+
+
+## What a tip must not cover: the lane the arrows travel down, and the
+## opponent's health, which is the one thing on screen a tip is likely to
+## land on and the one the player checks while it is up.
+func _tip_blocks() -> Array[Rect2]:
+	var blocks: Array[Rect2] = [Rect2(0.0, track.global_position.y,
+		TrackPanel.SCREEN_W, TrackPanel.ROW_H * TrackPanel.LANE_COUNT)]
+	if hud.monster_bar.visible:
+		blocks.append(hud.monster_label.get_global_rect()
+			.merge(hud.monster_pct.get_global_rect())
+			.merge(hud.monster_bar.get_global_rect()))
+	return blocks
 
 
 ## Where on screen each thing a tip can point at actually is.

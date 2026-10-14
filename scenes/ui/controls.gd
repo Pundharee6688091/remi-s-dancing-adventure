@@ -16,6 +16,12 @@ var _listening := -1
 
 var _rows: Array[PanelContainer] = []
 
+## True when SceneRouter owns this page. False when it is a panel opened from
+## the settings overlay, which closes itself instead of popping the stack.
+var routed := true
+
+signal closed()
+
 
 func _ready() -> void:
 	_build()
@@ -123,7 +129,18 @@ func _reset() -> void:
 
 
 func _close() -> void:
-	SceneRouter.back()
+	if routed:
+		SceneRouter.back()
+		return
+	closed.emit()
+	queue_free()
+
+
+## The page's own background, so it covers the map or the fight it was opened
+## over. A Control paints itself before its children, so this lands behind the
+## rows rather than across them.
+func _draw() -> void:
+	draw_rect(Rect2(Vector2.ZERO, size), Palette.BONE)
 
 
 ## While a row is waiting, every press belongs to it: taking the event here

@@ -4,7 +4,23 @@ extends Control
 
 const HEIGHT := 56.0
 
+## Caps the player is allowed to rebind, written here as the key they start
+## on. Screens still say ["Enter", "Open"], and the bar asks what Enter is
+## bound to now before it prints it, so one rebind shows up on every screen
+## instead of each of them having to remember.
+const LIVE := {
+	"Enter": "confirm", "Esc": "back",
+	"W": "up", "A": "left", "S": "down", "D": "right",
+}
+
+## A cap is a few letters wide, so the long names are cut down to what is
+## actually printed on the key. The controls page has room for the full name
+## and keeps it.
+const SHORT := {"Escape": "Esc", "Delete": "Del", "BackSpace": "Bksp"}
+
 var _row: HBoxContainer
+var _hints: Array = []
+var _with_language := true
 var _cap := StyleBoxFlat.new()
 var _cap_hover: StyleBoxFlat
 var _cap_down: StyleBoxFlat
@@ -39,12 +55,19 @@ func _ready() -> void:
 	_row.add_theme_constant_override("separation", 28)
 	add_child(_row)
 
+	# A rebind on the controls page has to reach the bar of every screen that
+	# is still up behind it, including the ones that refuse to be rebuilt.
+	InputManager.rebound.connect(_reprint)
+
 
 ## hints is a list of [key, label] pairs, optionally with a Callable third.
 ## key is one cap, or an array of caps that share the one description.
 ## Every bar ends with the language toggle, so it is reachable from any screen.
 func set_hints(hints: Array, with_language := true) -> void:
+	_hints = hints
+	_with_language = with_language
 	for c in _row.get_children():
+		_row.remove_child(c)
 		c.queue_free()
 
 	for pair in hints:
@@ -57,11 +80,25 @@ func set_hints(hints: Array, with_language := true) -> void:
 		_row.add_child(_cell("F2", tr("UI_LANGUAGE"), Loc.toggle))
 
 
+## Printed again with whatever is bound now. The bar keeps what it was asked
+## to show, so this costs the screens nothing.
+func _reprint() -> void:
+	if not _hints.is_empty():
+		set_hints(_hints, _with_language)
+
+
 func _cell(keys: Variant, label: String, cb: Callable) -> HBoxContainer:
 	var cell := HBoxContainer.new()
 	cell.add_theme_constant_override("separation", 7)
+	var printed: Array[String] = []
 	for k in (keys if keys is Array else [keys]):
-		cell.add_child(_cap_node(str(k), cb))
+		var cap := _live(str(k))
+		# Binding a lane to an arrow would otherwise print that arrow twice,
+		# once for the lane and once for the arrow that is always bound.
+		if cap in printed:
+			continue
+		printed.append(cap)
+		cell.add_child(_cap_node(cap, cb))
 
 	var word := Label.new()
 	word.text = label
@@ -70,6 +107,14 @@ func _cell(keys: Variant, label: String, cb: Callable) -> HBoxContainer:
 	word.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	cell.add_child(word)
 	return cell
+
+
+## The key this cap stands for today.
+func _live(cap: String) -> String:
+	if not LIVE.has(cap):
+		return cap
+	var name := InputManager.key_name(LIVE[cap])
+	return SHORT.get(name, name)
 
 
 func _cap_node(text: String, cb: Callable) -> Control:

@@ -8,6 +8,7 @@ const CONTROLS := "res://scenes/ui/controls.tscn"
 const STEP := 5          # volume rows move in fives
 
 var _row := 0
+var _controls: Control = null
 
 ## True when SceneRouter owns this screen. False when it is an overlay inside
 ## another screen, which closes itself instead of popping the stack.
@@ -183,6 +184,11 @@ func close() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible:
 		return
+	# This screen stays up behind the controls panel rather than hiding, so
+	# that the map does not count itself idle and rebuild the pair away on a
+	# language change. It just stops listening while the panel is on top.
+	if _controls != null:
+		return
 	if event.is_action_pressed("ui_down"):
 		_move(1)
 	elif event.is_action_pressed("ui_up"):
@@ -224,13 +230,27 @@ func _adjust(dir: int) -> void:
 
 
 func _activate() -> void:
-	if ROWS[_row] == "Controls":
-		# This screen doubles as an overlay over the map and over a fight.
-		# Opening another screen from there would tear the fight down and
-		# rebuild it on the way back, so the page waits until settings is
-		# the screen rather than a panel over one.
-		if not routed:
-			Audio.play("locked")
-			return
-		Audio.play("click")
+	if ROWS[_row] != "Controls":
+		return
+	Audio.play("click")
+	if routed:
 		SceneRouter.goto(CONTROLS)
+	else:
+		_open_controls()
+
+
+## As the gear overlay this screen has no stack to push onto, and routing away
+## from a fight would tear it down and rebuild it on the way back. So the page
+## comes up as a panel over this one and hands control back when it closes.
+func _open_controls() -> void:
+	if _controls != null:
+		return
+	_controls = load(CONTROLS).instantiate()
+	_controls.routed = false
+	_controls.closed.connect(_on_controls_closed)
+	add_sibling(_controls)
+
+
+func _on_controls_closed() -> void:
+	_controls = null
+	_refresh()
