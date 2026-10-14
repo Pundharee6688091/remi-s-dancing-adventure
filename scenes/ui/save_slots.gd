@@ -47,6 +47,7 @@ func _ready() -> void:
 	%ExitGame.pressed.connect(_ask_quit)
 	_confirm.visibility_changed.connect(_sync_hints)
 	_name_panel.visibility_changed.connect(_sync_hints)
+	_wire_name_panel()
 	_name_edit.text_submitted.connect(func(_t: String) -> void: _submit_name())
 	_name_edit.text_changed.connect(func(_t: String) -> void: _update_counter())
 	%Note.text = tr("UI_NAME_NOTE")
@@ -58,6 +59,36 @@ func _ready() -> void:
 
 	_refresh()
 	_cards[0].grab_focus()
+
+
+## The name panel is a small form: the field, then Start and Cancel under it.
+## Both buttons were set to take no focus at all, so the keyboard had nothing
+## to move to and down did nothing. Down from the field steps into them now,
+## left and right pick between them, and up comes back to the field.
+func _wire_name_panel() -> void:
+	var start: Button = %Start
+	var cancel: Button = %Cancel
+	for b in [start, cancel]:
+		b.focus_mode = Control.FOCUS_ALL
+
+	_name_edit.focus_neighbor_bottom = _name_edit.get_path_to(start)
+	_name_edit.focus_next = _name_edit.get_path_to(start)
+
+	for b in [start, cancel]:
+		b.focus_neighbor_top = b.get_path_to(_name_edit)
+
+	# A LineEdit eats the down key itself, so the neighbour above is never
+	# consulted. Taking it here is what actually gets out of the field.
+	_name_edit.gui_input.connect(func(e: InputEvent) -> void:
+		if e.is_action_pressed("ui_down"):
+			_name_edit.accept_event()
+			start.grab_focus())
+
+	start.focus_neighbor_right = start.get_path_to(cancel)
+	start.focus_next = start.get_path_to(cancel)
+	cancel.focus_neighbor_left = cancel.get_path_to(start)
+	cancel.focus_previous = cancel.get_path_to(start)
+	cancel.focus_next = cancel.get_path_to(_name_edit)
 
 
 func _set_hints() -> void:
