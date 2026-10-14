@@ -50,7 +50,8 @@ func _ready() -> void:
 	_name_edit.text_submitted.connect(func(_t: String) -> void: _submit_name())
 	_name_edit.text_changed.connect(func(_t: String) -> void: _update_counter())
 	%Note.text = tr("UI_NAME_NOTE")
-	%NameHints.set_hints([["Enter", tr("UI_START")], ["Esc", tr("UI_CANCEL")]])
+	%NameHints.set_hints([["Enter", tr("UI_START"), _submit_name],
+		["Esc", tr("UI_CANCEL"), _close_name_panel]])
 
 	_set_hints()
 	Events.language_changed.connect(_set_hints)
@@ -61,7 +62,8 @@ func _ready() -> void:
 
 func _set_hints() -> void:
 	%Hints.set_hints([[["←", "→"], tr("UI_CHOOSE_SLOT")], ["Enter", tr("UI_SELECT")],
-		["Del", tr("UI_DELETE")], ["Esc", tr("UI_BACK")]])
+		["Del", tr("UI_DELETE"), func() -> void: _ask_delete(_pending_slot)],
+		["Esc", tr("UI_BACK"), SceneRouter.back]])
 
 
 func _sync_hints() -> void:

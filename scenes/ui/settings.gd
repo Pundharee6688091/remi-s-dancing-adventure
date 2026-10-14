@@ -109,7 +109,7 @@ func _open_input(idx: int, event: InputEvent) -> void:
 
 func _set_hints() -> void:
 	%Hints.set_hints([[["↑", "↓"], tr("UI_MOVE")], [["←", "→"], tr("UI_ADJUST")],
-		["Enter", tr("UI_OPEN")], ["Esc", tr("UI_BACK")]])
+		["Enter", tr("UI_OPEN")], ["Esc", tr("UI_BACK"), close]])
 
 
 ## This screen re-texts itself, so it must not be rebuilt by the router, or

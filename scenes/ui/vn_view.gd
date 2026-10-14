@@ -104,8 +104,8 @@ func _on_language_changed() -> void:
 func _set_hints() -> void:
 	var hints: Array = [["Enter", tr("UI_NEXT")]]
 	if _can_skip_chapter:
-		hints.append(["Tab", tr("UI_SKIP_CHAPTER")])
-	hints.append(["Esc", tr("UI_SETTINGS")])
+		hints.append(["Tab", tr("UI_SKIP_CHAPTER"), _ask_skip])
+	hints.append(["Esc", tr("UI_SETTINGS"), _open_settings])
 	%Hints.set_hints(hints)
 
 

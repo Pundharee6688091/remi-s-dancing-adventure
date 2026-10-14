@@ -57,7 +57,7 @@ func open(stage_id: String) -> void:
 
 func _set_hints() -> void:
 	%Hints.set_hints([[["←", "→"], tr("UI_MOVE")], ["Enter", tr("UI_CONFIRM")],
-		["Esc", tr("UI_CLOSE")]])
+		["Esc", tr("UI_CLOSE"), hide]])
 
 
 func _on_fight_pressed() -> void:

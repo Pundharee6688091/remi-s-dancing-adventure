@@ -556,7 +556,7 @@ func _on_language_changed() -> void:
 
 func _set_hints() -> void:
 	%Hints.set_hints([[["W", "A", "S", "D", "↑", "←", "↓", "→"], tr("UI_HIT_ON_GHOST")],
-		["Esc", tr("UI_PAUSE")]])
+		["Esc", tr("UI_PAUSE"), _pause]])
 
 
 ## An open overlay brings its own hints, so the battle's would double up.

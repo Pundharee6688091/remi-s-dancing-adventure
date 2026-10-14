@@ -15,7 +15,8 @@ func _ready() -> void:
 
 
 func _set_hints() -> void:
-	%Hints.set_hints([[["↑", "↓"], tr("UI_SCROLL")], ["Esc", tr("UI_BACK")]])
+	%Hints.set_hints([[["↑", "↓"], tr("UI_SCROLL")],
+		["Esc", tr("UI_BACK"), SceneRouter.back]])
 
 
 func _refresh() -> void:
@@ -77,7 +78,17 @@ func _pretty(iso: String) -> String:
 	return "%d %s" % [int(bits[2]), tr(MONTHS[month - 1])]
 
 
+## The list has nothing focusable in it, so the arrow keys have to drive the
+## scroll themselves or the keyboard cannot read past the first screenful.
+const SCROLL_STEP := 60
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
 		SceneRouter.back()
+	elif event.is_action_pressed("ui_down"):
+		get_viewport().set_input_as_handled()
+		$Scroll.scroll_vertical += SCROLL_STEP
+	elif event.is_action_pressed("ui_up"):
+		get_viewport().set_input_as_handled()
+		$Scroll.scroll_vertical -= SCROLL_STEP

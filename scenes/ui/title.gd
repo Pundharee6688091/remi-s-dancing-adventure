@@ -63,7 +63,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		Loc.toggle()
 		return
 
-	var is_button := event is InputEventKey or event is InputEventJoypadButton
+	# A click counts too, or a player on the mouse alone cannot get past
+	# the title. The language pill handles its own click, so it never
+	# reaches here.
+	var is_button := event is InputEventKey or event is InputEventJoypadButton \
+		or event is InputEventMouseButton
 	if is_button and event.is_pressed() and not event.is_echo():
 		get_viewport().set_input_as_handled()
 		SceneRouter.goto(SAVE_SLOTS)

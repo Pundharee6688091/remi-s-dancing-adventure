@@ -140,7 +140,7 @@ func _gui_input(event: InputEvent) -> void:
 
 func _set_hints() -> void:
 	%Hints.set_hints([[["←", "→"], tr("UI_WALK")], ["Enter", tr("UI_OPEN")],
-		["Esc", tr("UI_MAIN_MENU")]])
+		["Esc", tr("UI_MAIN_MENU"), SceneRouter.back]])
 
 
 func _sync_hints() -> void:
