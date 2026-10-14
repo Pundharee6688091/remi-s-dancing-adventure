@@ -196,7 +196,8 @@ func _set_cursor(i: int) -> void:
 func _confirm() -> void:
 	var id: String = Rules.node_order[_view.cursor]
 	if not GameManager.is_unlocked(id):
-		# The shake is the answer here; a locked node is not a selection.
+		# A locked node is not a selection: it shakes its head and says so.
+		Audio.play("locked")
 		_view.shake()
 		return
 	Audio.play("click")

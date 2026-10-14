@@ -224,4 +224,6 @@ func _adjust(dir: int) -> void:
 
 func _activate() -> void:
 	if ROWS[_row] == "Controls":
-		pass             # the remap screen is not built yet
+		# The remap screen is not built yet, so say so rather than appear
+		# to have done something.
+		Audio.play("locked")

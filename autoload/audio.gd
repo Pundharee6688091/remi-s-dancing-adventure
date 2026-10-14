@@ -8,6 +8,8 @@ const SOUNDS := {
 	"arrow": "res://sfx/arrow.wav",
 	"win": "res://sfx/win.wav",
 	"lose": "res://sfx/lose.wav",
+	# the answer when something is not open yet
+	"locked": "res://sfx/Lock.wav",
 }
 
 ## Overlapping notes need more than one player or each hit cuts the last off.
