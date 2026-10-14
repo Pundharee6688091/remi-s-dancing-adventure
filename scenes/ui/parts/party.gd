@@ -40,6 +40,27 @@ func _ready() -> void:
 		_apply()
 
 
+## The editor builds the scene before it readies it, so this is the first
+## moment the picture can be cut. Cutting here is what puts it on the canvas
+## as soon as the scene is opened rather than only when the game runs.
+func _enter_tree() -> void:
+	_recrop()
+
+
+## Saving must not write the cut into the scene file. The window belongs to
+## the node, and a cut picture stored alongside it would be cut again the
+## next time the scene opened. So the uncut pictures go back for the save and
+## the cut is made again straight after.
+func _notification(what: int) -> void:
+	if not Engine.is_editor_hint():
+		return
+	if what == NOTIFICATION_EDITOR_PRE_SAVE:
+		for layer in _source:
+			layer.texture = _source[layer]
+	elif what == NOTIFICATION_EDITOR_POST_SAVE:
+		_recrop()
+
+
 ## Remember the uncut pictures. Done on demand rather than only on ready,
 ## because the inspector sets the window whenever it likes: while the scene
 ## is still loading, or after the editor has reloaded this script without
