@@ -35,6 +35,16 @@ var _source := {}
 
 
 func _ready() -> void:
+	_recrop()
+	if not Engine.is_editor_hint():
+		_apply()
+
+
+## Remember the uncut pictures. Done on demand rather than only on ready,
+## because the inspector sets the window whenever it likes: while the scene
+## is still loading, or after the editor has reloaded this script without
+## running _ready again. Either way the next crop has what it needs.
+func _collect() -> void:
 	for child in get_children():
 		var layer := child as TextureRect
 		if layer == null or layer.texture == null:
@@ -45,13 +55,12 @@ func _ready() -> void:
 		if tex is AtlasTexture:
 			tex = (tex as AtlasTexture).atlas
 		_source[layer] = tex
-	_recrop()
-	if not Engine.is_editor_hint():
-		_apply()
 
 
 ## Point every layer at the chosen part of its picture.
 func _recrop() -> void:
+	if _source.is_empty():
+		_collect()
 	for layer in _source:
 		var src: Texture2D = _source[layer]
 		if window.size.x <= 0.0 or window.size.y <= 0.0:
