@@ -15,8 +15,12 @@ extends Control
 ## does not have to be pushed left to stay off it.
 const PAD_L := 30.0
 const PAD_R := 30.0
-const PAD_T := 24.0
-const PAD_B := 56.0
+## The top and bottom do not match: the tail hangs off the bottom right, so
+## the drawn box's own middle sits above the middle of this rect. Giving the
+## top the larger share drops the line onto the box's middle instead of
+## leaving it floating above it.
+const PAD_T := 34.0
+const PAD_B := 46.0
 
 ## Where the tail's point sits, measured back from the bottom right corner.
 ## The tail is drawn at its own size whatever the bubble does, so this is
