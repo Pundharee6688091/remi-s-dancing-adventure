@@ -23,8 +23,11 @@ const PAD_B := 56.0
 ## fixed rather than a share of the picture.
 const TIP_BACK := Vector2(8.0, 11.0)
 
-const HEIGHT := 200.0
-const MIN_WIDTH := 360.0
+## The bubble is cut to the line. The floors are the smallest a nine-slice
+## can be drawn at without the corners meeting and squashing the drawing:
+## the two walls, and a little of the middle between them.
+const MIN_WIDTH := 150.0
+const MIN_HEIGHT := 104.0
 const MAX_WIDTH := 640.0
 
 ## How close to the screen edge the bubble may sit.
@@ -81,13 +84,20 @@ func _draw_line() -> void:
 	label.text = tr(_key)
 
 	# The walls take the same pixels whatever the bubble is, so the bubble is
-	# as wide as the line plus those. A line past the cap folds instead,
-	# which the box has room for two or three times over.
-	var want := label.get_minimum_size().x + PAD_L + PAD_R
-	var w := clampf(want, MIN_WIDTH, MAX_WIDTH)
-	if want > w:
+	# the line plus those, in both directions. A line past the cap folds, and
+	# the bubble grows downward by however many lines that comes to.
+	var one := label.get_minimum_size().x
+	var w := clampf(one + PAD_L + PAD_R, MIN_WIDTH, MAX_WIDTH)
+	var inner := w - PAD_L - PAD_R
+	if one > inner:
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	size = Vector2(w, HEIGHT)
+
+	# The label is given its width on its own first. A wrapped label works out
+	# how tall it is from the width it has, so asking it before it has been
+	# narrowed gets the height it was at some other width.
+	label.size = Vector2(inner, 0.0)
+	var tall := label.get_minimum_size().y
+	size = Vector2(w, maxf(tall + PAD_T + PAD_B, MIN_HEIGHT))
 	_place(label)
 
 	# Hang the bubble off the tail's point, then push it back on screen if a
