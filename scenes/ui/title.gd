@@ -21,11 +21,33 @@ func _ready() -> void:
 	_pill.text = Loc.current().to_upper()
 	_pill.pressed.connect(Loc.toggle)
 	_art.texture = UIKit.cropped_texture(KEY_ART)
+	_let_clicks_through()
 	_hop()
 
 	var hints := HintBar.new()
 	add_child(hints)
 	hints.set_hints([])
+
+
+## "Press any button" means the whole screen is the button, but a Control
+## takes the mouse by default, so the background, the margin box and the rows
+## inside it were all swallowing the click before it could reach
+## _unhandled_input. Everything stands aside except the language pill, which
+## is the one thing here with a click of its own.
+func _let_clicks_through() -> void:
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	for n in _every_child(self):
+		if n != _pill:
+			n.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+
+func _every_child(from: Node) -> Array[Control]:
+	var out: Array[Control] = []
+	for c in from.get_children():
+		if c is Control:
+			out.append(c)
+		out.append_array(_every_child(c))
+	return out
 
 
 ## Remi bobs on the spot while the title waits. Slowing on the way up and
@@ -62,7 +84,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		Loc.toggle()
 		return
-
 	# A click counts too, or a player on the mouse alone cannot get past
 	# the title. The language pill handles its own click, so it never
 	# reaches here.
