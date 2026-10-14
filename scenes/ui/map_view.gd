@@ -15,6 +15,10 @@ const ROAD := Color("#efe9dc")
 const PIN_ART := "res://sprite/Remi/Remi_pin.webp"
 
 var cursor := 0
+
+## Cleared while the screen's cursor has stepped off the track, so the map
+## does not go on marking a node as picked while something else is.
+var cursor_shown := true
 var _shake := 0.0
 var _pin_art: Texture2D = null
 var _art_loaded := false
@@ -45,7 +49,8 @@ func _draw() -> void:
 	_load_art()
 	_draw_road()
 	for i in Rules.node_order.size():
-		_draw_node(Rules.node_order[i], i == cursor, get_theme_default_font())
+		_draw_node(Rules.node_order[i], i == cursor and cursor_shown,
+			get_theme_default_font())
 
 func _road_nodes() -> Array:
 	var linked := {}

@@ -29,7 +29,11 @@ func _ready() -> void:
 		# Enter picks the slot and steps into the panel rather than loading.
 		card.pressed.connect(func() -> void: _enter_panel(slot))
 		# Highlighting a card is what drives the panel, by keyboard or mouse.
-		card.focus_entered.connect(func() -> void: _select(slot))
+		card.focus_entered.connect(func() -> void:
+			_select(slot)
+			# So coming back down off Quit lands on the card you left from
+			# rather than always on the first one.
+			_point_quit_at(card))
 		# Hovering a card highlights it, but not once the panel has been
 		# stepped into: otherwise the first mouse move afterwards drags the
 		# panel over to whichever card the cursor happened to cross.
@@ -37,11 +41,15 @@ func _ready() -> void:
 			if not _panel_has_focus():
 				card.grab_focus())
 
-	# One stop past the last card, so walking right off slot three reaches it
-	# rather than wrapping straight back to slot one. It was mouse only
-	# before, which left no way to quit from here without a mouse.
+	# Left and right walk the cards, up steps off them onto Quit and down
+	# comes back. Quit was mouse only before, which left no way out of here
+	# without one.
 	%ExitGame.focus_mode = Control.FOCUS_ALL
-	UIKit.trap_focus(_cards + [%ExitGame])
+	UIKit.trap_focus(_cards, "x")
+	for card in _cards:
+		card.focus_neighbor_top = card.get_path_to(%ExitGame)
+		card.focus_neighbor_bottom = card.get_path_to(%ExitGame)
+	_point_quit_at(_cards[0])
 	_confirm.answered.connect(_on_confirmed)
 	%ExitGame.pressed.connect(_ask_quit)
 	_confirm.visibility_changed.connect(_sync_hints)
@@ -158,6 +166,18 @@ func _select(slot: int) -> void:
 func _enter_panel(slot: int) -> void:
 	_pending_slot = slot
 	%Continue.grab_focus()
+
+
+## Every way off Quit goes back to one card, because it is the only thing on
+## its own row and a loop of one is just a dead end.
+func _point_quit_at(card: Control) -> void:
+	var to := %ExitGame.get_path_to(card)
+	%ExitGame.focus_neighbor_top = to
+	%ExitGame.focus_neighbor_bottom = to
+	%ExitGame.focus_neighbor_left = to
+	%ExitGame.focus_neighbor_right = to
+	%ExitGame.focus_next = to
+	%ExitGame.focus_previous = to
 
 
 func _panel_has_focus() -> bool:

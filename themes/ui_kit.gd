@@ -25,17 +25,22 @@ static func card(parent: Node, pos: Vector2, width: float) -> VBoxContainer:
 	return box
 
 
-## Keep keyboard focus inside a popup.
-static func trap_focus(controls: Array) -> void:
+## Keep keyboard focus inside a popup, looping from the last back to the
+## first. [param axis] says which arrows walk the loop: "both" by default,
+## "x" for a row and "y" for a column, so the other pair is free to mean
+## something else on that screen.
+static func trap_focus(controls: Array, axis := "both") -> void:
 	var n := controls.size()
 	for i in n:
 		var c: Control = controls[i]
 		var prev: Control = controls[(i - 1 + n) % n]
 		var next: Control = controls[(i + 1) % n]
-		c.focus_neighbor_left = c.get_path_to(prev)
-		c.focus_neighbor_top = c.get_path_to(prev)
-		c.focus_neighbor_right = c.get_path_to(next)
-		c.focus_neighbor_bottom = c.get_path_to(next)
+		if axis != "y":
+			c.focus_neighbor_left = c.get_path_to(prev)
+			c.focus_neighbor_right = c.get_path_to(next)
+		if axis != "x":
+			c.focus_neighbor_top = c.get_path_to(prev)
+			c.focus_neighbor_bottom = c.get_path_to(next)
 		c.focus_previous = c.get_path_to(prev)
 		c.focus_next = c.get_path_to(next)
 

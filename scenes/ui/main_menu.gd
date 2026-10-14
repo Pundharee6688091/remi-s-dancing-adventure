@@ -16,6 +16,15 @@ func _ready() -> void:
 	%Hints.set_hints([[["↑", "↓"], tr("UI_MOVE")], ["Enter", tr("UI_SELECT")],
 		["Esc", tr("UI_BACK_TO_PROFILES"), SceneRouter.back]])
 
+	# Down off the last item comes round to the first, instead of stopping
+	# dead the way Godot's own neighbours do. Read off the row itself, so an
+	# item added to the scene joins the loop without being named again here.
+	var items: Array[Control] = []
+	for n in _story.get_parent().get_children():
+		if n is Button:
+			items.append(n)
+	UIKit.trap_focus(items, "y")
+
 	_story.grab_focus()
 
 
@@ -25,6 +34,10 @@ func _sync_hints() -> void:
 
 func _on_story_pressed() -> void:
 	SceneRouter.goto(GameManager.WORLD_MAP)
+
+
+func _on_collection_pressed() -> void:
+	SceneRouter.goto(GameManager.COLLECTION)
 
 
 func _on_achievements_pressed() -> void:

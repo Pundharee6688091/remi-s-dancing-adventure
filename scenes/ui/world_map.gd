@@ -5,6 +5,9 @@ extends Control
 
 const ZONE_HEADER := preload("res://scenes/ui/parts/zone_header.tscn")
 
+## True while the cursor has stepped off the track onto the gear.
+var _gear := false
+
 @onready var _view: MapView = %Map
 @onready var _detail: StageDetail = %Detail
 @onready var _progress: Bar = %ProgressBar
@@ -30,7 +33,7 @@ func _ready() -> void:
 	# never disagree about where you are.
 	%Gear.mouse_entered.connect(func() -> void:
 		if not _busy():
-			_set_cursor(Rules.node_order.size()))
+			_step_off(true))
 
 	%Bg.texture = Rules.background("map")
 
@@ -144,7 +147,8 @@ func _gui_input(event: InputEvent) -> void:
 
 
 func _set_hints() -> void:
-	%Hints.set_hints([[["←", "→"], tr("UI_WALK")], ["Enter", tr("UI_OPEN")],
+	%Hints.set_hints([[["←", "→"], tr("UI_WALK")], ["↑", tr("UI_SETTINGS")],
+		["Enter", tr("UI_OPEN")],
 		["Esc", tr("UI_MAIN_MENU"), SceneRouter.back]])
 
 
@@ -173,9 +177,13 @@ func blocks_reload() -> bool:
 func _unhandled_input(event: InputEvent) -> void:
 	if _busy():
 		return
-	if event.is_action_pressed("ui_right") or event.is_action_pressed("ui_down"):
+	if event.is_action_pressed("ui_up"):
+		_step_off(true)
+	elif event.is_action_pressed("ui_down"):
+		_step_off(false)
+	elif event.is_action_pressed("ui_right"):
 		_move(1)
-	elif event.is_action_pressed("ui_left") or event.is_action_pressed("ui_up"):
+	elif event.is_action_pressed("ui_left"):
 		_move(-1)
 	elif event.is_action_pressed("ui_accept"):
 		_confirm()
@@ -183,27 +191,39 @@ func _unhandled_input(event: InputEvent) -> void:
 		SceneRouter.back()
 
 
-## One stop past the last node is the gear. The map has no focus to move, so
-## the cursor that walks the nodes walks onto it as well, rather than leaving
-## settings as something only a mouse can open.
-func _stops() -> int:
-	return Rules.node_order.size() + 1
-
-
+## The gear sits off the track rather than at the end of it: up steps off the
+## map onto it, down steps back. Left and right stay the walk along the track,
+## which is the one thing the map is for.
 func _on_gear() -> bool:
-	return _view.cursor >= Rules.node_order.size()
+	return _gear
+
+
+func _step_off(on: bool) -> void:
+	if _gear == on:
+		return
+	_gear = on
+	Audio.play("hover")
+	_mark_gear()
+	_view.cursor_shown = not on
+	_view.queue_redraw()
 
 
 func _move(step: int) -> void:
-	_set_cursor(clampi(_view.cursor + step, 0, _stops() - 1))
+	if _gear:
+		return               # nothing to walk along up here
+	_set_cursor(clampi(_view.cursor + step, 0, Rules.node_order.size() - 1))
 
 
 ## The one place the cursor moves, so walking with the arrow keys sounds the
 ## same as sweeping the mouse over the map.
 func _set_cursor(i: int) -> void:
-	if _view.cursor == i:
+	# Stepping back onto the node the cursor is already on still counts, or
+	# the mouse could not take it off the gear without crossing another node.
+	if _view.cursor == i and not _gear:
 		return
 	_view.cursor = i
+	_gear = false
+	_view.cursor_shown = true
 	Audio.play("hover")
 	_sync_card()
 	_mark_gear()
