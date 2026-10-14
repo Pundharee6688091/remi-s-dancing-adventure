@@ -42,7 +42,36 @@ func _ready() -> void:
 	_sync_names()
 	Dialogic.VAR.variable_was_set.connect(_on_variable_set)
 	Dialogic.timeline_ended.connect(_on_timeline_ended)
+	# The box is built, and Dialogic's own style applied to it, after the
+	# chapter starts, so the padding waits for the first line.
+	Dialogic.Text.about_to_show_text.connect(_pad_dialogue)
 	Dialogic.start(timeline)
+
+
+## Thai stacks a vowel and a tone mark above the letter, reaching about a
+## third of the font size higher than Latin ever does. The dialogue box is a
+## RichTextLabel, which clips whatever leaves its first line, so the tops of
+## that line were being cut off. Padding the text inside the box gives the
+## line the room, and the box's own art is untouched.
+##
+## Done from here rather than in the addon's own scene, so updating Dialogic
+## does not quietly undo it.
+const HEADROOM := 0.3
+
+var _padded := false
+
+func _pad_dialogue(_info := {}) -> void:
+	if _padded:
+		return
+	for n in get_tree().get_nodes_in_group("dialogic_dialog_text"):
+		var text := n as RichTextLabel
+		if text == null:
+			continue
+		var pad := roundi(text.get_theme_font_size("normal_font_size") * HEADROOM)
+		var box := StyleBoxEmpty.new()
+		box.content_margin_top = pad
+		text.add_theme_stylebox_override("normal", box)
+		_padded = true
 
 
 ## Dialogic keeps a character's name in a variable so it can read "???" until
