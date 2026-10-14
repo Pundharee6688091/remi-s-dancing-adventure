@@ -77,6 +77,45 @@ func pad_name(id: String) -> String:
 	return PAD_NAMES.get(p, "Button %d" % p) if p >= 0 else "—"
 
 
+## Who already answers to this press. Returns a row's label, "UI_CTRL_FIXED"
+## for one of the keys the game keeps for itself, or "" when it is free.
+##
+## Two rows on the same key would both fire at once: in a fight that is two
+## lanes off one press, and in a menu it is worse, because the row that moves
+## the cursor is also the row being rebound.
+func taken_by(id: String, event: InputEvent) -> String:
+	var key := -1
+	var pad := -1
+	if event is InputEventKey:
+		key = (event as InputEventKey).physical_keycode
+	elif event is InputEventJoypadButton:
+		pad = (event as InputEventJoypadButton).button_index
+	else:
+		return ""
+
+	for r in ROWS:
+		if r.id == id:
+			continue
+		if key != KEY_NONE and (binds[r.id]["key"] == key or r.also == key):
+			return String(r.label)
+		if pad >= 0 and binds[r.id]["pad"] == pad:
+			return String(r.label)
+
+	# The keys the game keeps: delete a save, swap language, skip a chapter.
+	for r in FIXED:
+		if key != KEY_NONE and (r.key == key or r.also == key):
+			return "UI_CTRL_FIXED"
+		if pad >= 0 and r.pad == pad:
+			return "UI_CTRL_FIXED"
+
+	# This row's own spare key is already its own, so it is not a clash, but
+	# binding onto it would leave the row with one key where it had two.
+	var mine := row(id)
+	if key != KEY_NONE and not mine.is_empty() and mine.also == key:
+		return "UI_CTRL_FIXED"
+	return ""
+
+
 ## Give a row a key or a pad button, whichever the player pressed. Returns
 ## false when the press was neither, so the page can keep waiting.
 func rebind(id: String, event: InputEvent) -> bool:

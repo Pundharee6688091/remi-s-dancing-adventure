@@ -216,3 +216,6 @@ UI_CTRL_PAD_ON,Gamepad connected,เชื่อมต่อจอยแล้�
 UI_CTRL_PAD_OFF,No gamepad,ไม่พบจอย
 UI_CTRL_NOTE,"One row is one action. Press Enter on a row, then press what you want: a key changes the keyboard column, a pad button changes the other. The arrow keys always work as well.",หนึ่งแถวคือหนึ่งการกระทำ กด Enter ที่แถว แล้วกดปุ่มที่ต้องการ ปุ่มลูกศรใช้ได้เสมอ
 UI_CHANGE,Change,เปลี่ยน
+UI_CTRL_TAKEN,"%s already uses that. Try another.",ปุ่มนี้ %s ใช้อยู่แล้ว ลองปุ่มอื่น
+UI_CTRL_FIXED,the game,ตัวเกม
+UI_CTRL_USE,Use,ใช้

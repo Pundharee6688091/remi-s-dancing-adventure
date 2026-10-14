@@ -10,11 +10,24 @@ const ROW_H := 50.0
 const ACTION_W := 220.0
 const GAP := 16.0
 
-## Which row the player is on, and which one is waiting for a press.
+## Which row the player is on, and which one is waiting for a press. The
+## reset button counts as one row past the last, so the arrow keys walk onto
+## it the same way they walk between the rows.
 var _row := 0
 var _listening := -1
 
+## Set when a press was refused, so the row can say why until the next one.
+var _clash := ""
+
 var _rows: Array[PanelContainer] = []
+
+
+func _stops() -> int:
+	return _rows.size() + 1
+
+
+func _on_reset() -> bool:
+	return _row == _rows.size()
 
 ## True when SceneRouter owns this page. False when it is a panel opened from
 ## the settings overlay, which closes itself instead of popping the stack.
@@ -28,6 +41,9 @@ func _ready() -> void:
 	Events.language_changed.connect(_refresh)
 	InputManager.rebound.connect(_refresh)
 	%Reset.pressed.connect(_reset)
+	# Hovering it picks it, the same as hovering a row, so the cursor and the
+	# arrow keys never disagree about where you are.
+	%Reset.mouse_entered.connect(func() -> void: _pick(_rows.size()))
 	_refresh()
 
 
@@ -74,8 +90,10 @@ func _refresh() -> void:
 		var key_label := grid.get_child(1) as Label
 		var pad_label := grid.get_child(2) as Label
 		if i == _listening:
-			# the whole row becomes the prompt while it waits
-			key_label.text = tr("UI_CTRL_PRESS")
+			# the whole row becomes the prompt while it waits, and says so
+			# when a press was turned down rather than silently ignoring it
+			key_label.text = tr("UI_CTRL_TAKEN") % tr(_clash) if _clash != "" \
+				else tr("UI_CTRL_PRESS")
 			pad_label.text = ""
 		else:
 			key_label.text = InputManager.key_name(id)
@@ -91,13 +109,29 @@ func _refresh() -> void:
 		style.content_margin_right = 16
 		_rows[i].add_theme_stylebox_override("panel", style)
 
+	_mark_reset()
+
+
+## The button is not a row, so it wears the highlight by hand. Godot's own
+## focus ring is off because the rows do not have one either, and two kinds of
+## "you are here" on one page reads as two cursors.
+func _mark_reset() -> void:
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color("#fff3dd") if _on_reset() else Palette.WHITE
+	style.set_border_width_all(4 if _on_reset() else 2)
+	style.border_color = Palette.AMBER if _on_reset() else Palette.INK
+	style.set_corner_radius_all(6)
+	for slot in ["normal", "hover", "pressed", "focus"]:
+		%Reset.add_theme_stylebox_override(slot, style)
+
 
 func _set_hints() -> void:
 	if _listening >= 0:
 		%Hints.set_hints([["Esc", tr("UI_CANCEL"), _stop_listening]])
 		return
 	%Hints.set_hints([[["↑", "↓"], tr("UI_MOVE")],
-		["Enter", tr("UI_CHANGE")], ["R", tr("UI_RESET"), _reset],
+		["Enter", tr("UI_CTRL_USE") if _on_reset() else tr("UI_CHANGE")],
+		["R", tr("UI_RESET"), _reset],
 		["Esc", tr("UI_BACK"), _close]])
 
 
@@ -113,13 +147,26 @@ func _on_row_input(event: InputEvent, which: int) -> void:
 		_listen()
 
 
+func _pick(which: int) -> void:
+	if _row == which or _listening >= 0:
+		return
+	_row = which
+	Audio.play("hover")
+	_refresh()
+
+
 func _listen() -> void:
+	if _on_reset():
+		_reset()
+		return
+	_clash = ""
 	_listening = _row
 	_refresh()
 
 
 func _stop_listening() -> void:
 	_listening = -1
+	_clash = ""
 	_refresh()
 
 
@@ -159,7 +206,17 @@ func _input(event: InputEvent) -> void:
 			and (event as InputEventKey).physical_keycode == KEY_ESCAPE:
 		_stop_listening()
 		return
-	if InputManager.rebind(String(InputManager.ROWS[_listening].id), event):
+	var id := String(InputManager.ROWS[_listening].id)
+	var clash := InputManager.taken_by(id, event)
+	if clash != "":
+		# Kept waiting rather than cancelled, so the answer to "that one is
+		# taken" is to press another key, not to start again.
+		_clash = clash
+		Audio.play("locked")
+		_refresh()
+		return
+	if InputManager.rebind(id, event):
+		Audio.play("click")
 		_stop_listening()
 
 
@@ -168,12 +225,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("ui_down"):
 		get_viewport().set_input_as_handled()
-		_row = wrapi(_row + 1, 0, _rows.size())
-		_refresh()
+		_pick(wrapi(_row + 1, 0, _stops()))
 	elif event.is_action_pressed("ui_up"):
 		get_viewport().set_input_as_handled()
-		_row = wrapi(_row - 1, 0, _rows.size())
-		_refresh()
+		_pick(wrapi(_row - 1, 0, _stops()))
 	elif event.is_action_pressed("ui_accept"):
 		get_viewport().set_input_as_handled()
 		_listen()
