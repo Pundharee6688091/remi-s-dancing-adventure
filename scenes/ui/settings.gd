@@ -4,6 +4,7 @@ extends Control
 ## and every change applies and saves the moment it happens.
 
 const ROWS := ["Music", "Sfx", "Speed", "Offset", "Language", "Fullscreen", "Controls"]
+const CONTROLS := "res://scenes/ui/controls.tscn"
 const STEP := 5          # volume rows move in fives
 
 var _row := 0
@@ -224,6 +225,12 @@ func _adjust(dir: int) -> void:
 
 func _activate() -> void:
 	if ROWS[_row] == "Controls":
-		# The remap screen is not built yet, so say so rather than appear
-		# to have done something.
-		Audio.play("locked")
+		# This screen doubles as an overlay over the map and over a fight.
+		# Opening another screen from there would tear the fight down and
+		# rebuild it on the way back, so the page waits until settings is
+		# the screen rather than a panel over one.
+		if not routed:
+			Audio.play("locked")
+			return
+		Audio.play("click")
+		SceneRouter.goto(CONTROLS)

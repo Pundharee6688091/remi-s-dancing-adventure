@@ -201,3 +201,18 @@ UI_JOB_REMI,Dancer,นักเต้น
 UI_JOB_ELION,Paladin,อัศวินศักดิ์สิทธิ์
 UI_JOB_THEO,Mage,นักเวท
 UI_JOB_CASSIA,Rogue,โจร
+UI_CTRL_ACTION,Action,การกระทำ
+UI_CTRL_KEYBOARD,Keyboard,แป้นพิมพ์
+UI_CTRL_PAD,Gamepad / dance pad,จอย / แผ่นเต้น
+UI_CTRL_UP,Up,ขึ้น
+UI_CTRL_LEFT,Left,ซ้าย
+UI_CTRL_RIGHT,Right,ขวา
+UI_CTRL_DOWN,Down,ลง
+UI_CTRL_CONFIRM,Confirm,ยืนยัน
+UI_CTRL_BACK,Back,ย้อนกลับ
+UI_CTRL_PRESS,Press a key or a gamepad button… (Esc cancels),กดปุ่มบนแป้นพิมพ์หรือจอย… (Esc เพื่อยกเลิก)
+UI_CTRL_RESET,Reset to default,คืนค่าเริ่มต้น
+UI_CTRL_PAD_ON,Gamepad connected,เชื่อมต่อจอยแล้ว
+UI_CTRL_PAD_OFF,No gamepad,ไม่พบจอย
+UI_CTRL_NOTE,"One row is one action. Press Enter on a row, then press what you want: a key changes the keyboard column, a pad button changes the other. The arrow keys always work as well.",หนึ่งแถวคือหนึ่งการกระทำ กด Enter ที่แถว แล้วกดปุ่มที่ต้องการ ปุ่มลูกศรใช้ได้เสมอ
+UI_CHANGE,Change,เปลี่ยน

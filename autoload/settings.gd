@@ -82,6 +82,9 @@ func _set_bus(name: String, percent: int) -> void:
 
 func save_settings() -> void:
 	var cfg := ConfigFile.new()
+	# Read first: the control bindings live in this file too, and building a
+	# fresh one here would throw them away.
+	cfg.load(PATH)
 	cfg.set_value("audio", "music", music)
 	cfg.set_value("audio", "sfx", sfx)
 	cfg.set_value("gameplay", "note_speed", note_speed)
