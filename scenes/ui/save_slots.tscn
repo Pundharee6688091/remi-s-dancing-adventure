@@ -63,7 +63,17 @@ custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 mouse_filter = 2
 
+[node name="party1" parent="Row/Slot1/Pad/Box/Art" unique_id=1034103788 instance=ExtResource("8_3ykmy")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Filled" type="PanelContainer" parent="Row/Slot1/Pad/Box/Art" unique_id=1900364345]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -72,10 +82,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_fill")
-
-[node name="party1" parent="Row/Slot1/Pad/Box/Art/Filled" unique_id=1034103788 instance=ExtResource("8_3ykmy")]
-unique_name_in_owner = true
-layout_mode = 2
 
 [node name="Portrait" type="TextureRect" parent="Row/Slot1/Pad/Box/Art/Filled" unique_id=429623450]
 visible = false
@@ -145,6 +151,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Filled" type="PanelContainer" parent="Row/Slot2/Pad/Box/Art" unique_id=320485858]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -226,6 +233,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Filled" type="PanelContainer" parent="Row/Slot3/Pad/Box/Art" unique_id=319063628]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
