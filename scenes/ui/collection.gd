@@ -6,14 +6,15 @@ extends Control
 ## beside a face matches the name above their dialogue. Nobody has to keep a
 ## second list of colours in step with the first.
 
-## Where each face sits in the picture, as a fraction of its width and height,
-## and which side the tag hangs on. Read off the art itself, so moving a
+## Where each line ends, as a fraction of the picture's width and height, and
+## which side the tag hangs on. The point sits beside the head rather than on
+## it, so the mark never lands on a face. Read off the art itself, so moving a
 ## character in the picture means moving the number here with them.
 const TAGS: Array[Dictionary] = [
-	{"who": "Theo", "at": Vector2(0.420, 0.310), "side": 1},
-	{"who": "Remi", "at": Vector2(0.430, 0.458), "side": -1},
-	{"who": "Elion", "at": Vector2(0.645, 0.455), "side": 1},
-	{"who": "Cassia", "at": Vector2(0.200, 0.615), "side": -1},
+	{"who": "Theo", "at": Vector2(0.530, 0.310), "side": 1},
+	{"who": "Remi", "at": Vector2(0.355, 0.458), "side": -1},
+	{"who": "Elion", "at": Vector2(0.820, 0.455), "side": 1},
+	{"who": "Cassia", "at": Vector2(0.070, 0.615), "side": -1},
 ]
 
 const DOT := 6.0        ## the mark left on the face
@@ -67,11 +68,26 @@ func _build() -> void:
 		var box := PanelContainer.new()
 		box.add_theme_stylebox_override("panel", frame)
 		box.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		var label := Label.new()
-		label.add_theme_font_size_override("font_size", 24)
-		label.add_theme_color_override("font_color", Palette.INK)
-		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		box.add_child(label)
+
+		var lines := VBoxContainer.new()
+		lines.add_theme_constant_override("separation", 0)
+		lines.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		box.add_child(lines)
+
+		var name_label := Label.new()
+		name_label.add_theme_font_size_override("font_size", 24)
+		name_label.add_theme_color_override("font_color", Palette.INK)
+		name_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		lines.add_child(name_label)
+
+		# what they do, under the name, in their own colour so the two lines
+		# read as one tag rather than two
+		var job_label := Label.new()
+		job_label.add_theme_font_size_override("font_size", 16)
+		job_label.add_theme_color_override("font_color", colour)
+		job_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		lines.add_child(job_label)
+
 		add_child(box)
 		_boxes[who] = box
 
@@ -96,8 +112,12 @@ func _refresh() -> void:
 		# Remi is the one playing, so he is always known. The rest keep their
 		# name to themselves until they have joined, the way the chapters do.
 		var known: bool = who == "Remi" or party.has(who)
-		var label: Label = _boxes[who].get_child(0)
-		label.text = Rules.character_name(who) if known else "???"
+		var lines: VBoxContainer = _boxes[who].get_child(0)
+		var name_label: Label = lines.get_child(0)
+		var job_label: Label = lines.get_child(1)
+		name_label.text = Rules.character_name(who) if known else "???"
+		job_label.text = tr("UI_JOB_" + who.to_upper()) if known else ""
+		job_label.visible = known
 		_boxes[who].modulate = Color.WHITE if known else Color(1, 1, 1, 0.45)
 	_place()
 
@@ -142,6 +162,10 @@ func _draw_lines() -> void:
 		var to_x: float = box.position.x + box.size.x + GAP if tag.side < 0 \
 			else box.position.x - GAP
 		_lines.draw_line(at, Vector2(to_x, at.y), colour, LINE)
+		# a pale ring under the mark, so a dark character cannot swallow it
+		var ring := Palette.WHITE
+		ring.a = box.modulate.a
+		_lines.draw_circle(at, DOT + 2.0, ring)
 		_lines.draw_circle(at, DOT, colour)
 
 
