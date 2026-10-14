@@ -3,24 +3,25 @@ extends Control
 ## A line of encouragement that pops up beside a fighter, holds, and fades.
 ## Layout lives in speech_bubble.tscn.
 ##
-## The art is one drawn oval stretched to whatever the line needs, so every
-## measurement below is a fraction of the bubble's size rather than a pixel
-## count. Pixels would drift the moment the bubble changed width.
+## The art is a nine-slice: the corners and the tail are drawn at their own
+## size and only the middle stretches, so the border keeps its weight however
+## wide the line is. That makes every measurement below a pixel count rather
+## than a fraction of the bubble, and they are read off the art in
+## ui/bubble_grid.png: a 300px square with a 24px wall on the top and left
+## and a 54px corner on the right and the bottom holding the tail.
 
-## How much of the width the text may use, after the oval's edges are kept
-## clear. The right side gives up more because the tail eats into it.
-const PAD_L := 0.13
-const PAD_R := 0.21
-const TEXT_FRAC := 1.0 - PAD_L - PAD_R
+## The wall, plus a little breathing room, on each side of the line. The two
+## sides match: the tail only eats into the band below the text, so the line
+## does not have to be pushed left to stay off it.
+const PAD_L := 30.0
+const PAD_R := 30.0
+const PAD_T := 24.0
+const PAD_B := 56.0
 
-## Where the tail's point sits in the art, as a fraction of the whole picture.
-const TIP := Vector2(0.956, 0.742)
-
-## The same for the height, so a line that has to wrap still sits inside the
-## oval instead of hanging out of it.
-const PAD_T := 0.18
-const PAD_B := 0.24
-const TEXT_V_FRAC := 1.0 - PAD_T - PAD_B
+## Where the tail's point sits, measured back from the bottom right corner.
+## The tail is drawn at its own size whatever the bubble does, so this is
+## fixed rather than a share of the picture.
+const TIP_BACK := Vector2(8.0, 11.0)
 
 const HEIGHT := 200.0
 const MIN_WIDTH := 360.0
@@ -79,11 +80,12 @@ func _draw_line() -> void:
 	label.autowrap_mode = TextServer.AUTOWRAP_OFF
 	label.text = tr(_key)
 
-	# The text gets a fixed share of the oval, so the bubble has to be wide
-	# enough that its share still fits the line. A line past the cap folds
-	# instead, which the oval has room for two or three times over.
-	var w := clampf(label.get_minimum_size().x / TEXT_FRAC, MIN_WIDTH, MAX_WIDTH)
-	if label.get_minimum_size().x > w * TEXT_FRAC:
+	# The walls take the same pixels whatever the bubble is, so the bubble is
+	# as wide as the line plus those. A line past the cap folds instead,
+	# which the box has room for two or three times over.
+	var want := label.get_minimum_size().x + PAD_L + PAD_R
+	var w := clampf(want, MIN_WIDTH, MAX_WIDTH)
+	if want > w:
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	size = Vector2(w, HEIGHT)
 	_place(label)
@@ -91,18 +93,18 @@ func _draw_line() -> void:
 	# Hang the bubble off the tail's point, then push it back on screen if a
 	# tall opponent has shoved it over an edge. The tail then misses them by
 	# however far it moved, which is better than losing half the line.
-	var tail := size * TIP
+	var tail := size - TIP_BACK
 	var room := get_viewport_rect().size - size - Vector2(MARGIN, MARGIN)
 	position = (_target - tail).clamp(Vector2(MARGIN, MARGIN), room)
 	pivot_offset = tail           # it grows out of the tail, not out of the middle
 
 
-## The text's share of the oval. Set here rather than left to anchors, because
+## The room inside the walls. Set here rather than left to anchors, because
 ## measuring a wrapped line means setting the label's width by hand first, and
 ## a width set by hand is one the anchors no longer own.
 func _place(label: Label) -> void:
-	label.position = Vector2(size.x * PAD_L, size.y * PAD_T)
-	label.size = Vector2(size.x * TEXT_FRAC, size.y * TEXT_V_FRAC)
+	label.position = Vector2(PAD_L, PAD_T)
+	label.size = Vector2(size.x - PAD_L - PAD_R, size.y - PAD_T - PAD_B)
 
 
 func _play() -> void:
