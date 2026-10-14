@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://d2lwnjgnj2x6t"]
 
 [ext_resource type="Script" uid="uid://cc71rb3ax76hf" path="res://scenes/ui/save_slots.gd" id="1_ss"]
-[ext_resource type="StyleBox" uid="uid://detwlqlh7ct7f" path="res://themes/panel_fill.tres" id="2_fill"]
 [ext_resource type="PackedScene" path="res://scenes/ui/parts/confirm_box.tscn" id="3_cf"]
 [ext_resource type="Script" uid="uid://batawi1qqiibp" path="res://scenes/ui/parts/hint_bar.gd" id="4_hb"]
 [ext_resource type="Script" uid="uid://fo864rkagmm8" path="res://scenes/ui/parts/dashed_box.gd" id="5_dash"]
 [ext_resource type="StyleBox" path="res://themes/field_box.tres" id="6_field"]
 [ext_resource type="StyleBox" path="res://themes/flat.tres" id="7_flat"]
 [ext_resource type="PackedScene" uid="uid://iwxwyv8yb2st" path="res://scenes/ui/parts/party.tscn" id="8_3ykmy"]
+[ext_resource type="StyleBox" uid="uid://cartframe001" path="res://themes/art_frame.tres" id="9_frame"]
 
 [node name="SaveSlots" type="Control" unique_id=89533245]
 layout_mode = 3
@@ -37,8 +37,9 @@ theme_override_constants/separation = 24
 
 [node name="Slot1" type="Button" parent="Row" unique_id=1826808008]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(260, 352)
+custom_minimum_size = Vector2(260, 250)
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="Pad" type="MarginContainer" parent="Row/Slot1" unique_id=899219254]
 layout_mode = 1
@@ -59,7 +60,7 @@ mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="Art" type="Control" parent="Row/Slot1/Pad/Box" unique_id=977228936]
-custom_minimum_size = Vector2(0, 250)
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 mouse_filter = 2
 
@@ -69,8 +70,11 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
+window = Rect2(87, 150, 1351, 889)
 
 [node name="Filled" type="PanelContainer" parent="Row/Slot1/Pad/Box/Art" unique_id=1900364345]
 visible = false
@@ -81,7 +85,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("2_fill")
+theme_override_styles/panel = ExtResource("9_frame")
 
 [node name="Portrait" type="TextureRect" parent="Row/Slot1/Pad/Box/Art/Filled" unique_id=429623450]
 visible = false
@@ -124,8 +128,9 @@ theme_override_font_sizes/font_size = 15
 
 [node name="Slot2" type="Button" parent="Row" unique_id=346870352]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(260, 352)
+custom_minimum_size = Vector2(260, 250)
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="Pad" type="MarginContainer" parent="Row/Slot2" unique_id=382352737]
 layout_mode = 1
@@ -146,9 +151,21 @@ mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="Art" type="Control" parent="Row/Slot2/Pad/Box" unique_id=414977180]
-custom_minimum_size = Vector2(0, 250)
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 mouse_filter = 2
+
+[node name="party2" parent="Row/Slot2/Pad/Box/Art" unique_id=1223807237 instance=ExtResource("8_3ykmy")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+window = Rect2(87, 150, 1351, 889)
 
 [node name="Filled" type="PanelContainer" parent="Row/Slot2/Pad/Box/Art" unique_id=320485858]
 visible = false
@@ -159,11 +176,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("2_fill")
-
-[node name="party2" parent="Row/Slot2/Pad/Box/Art/Filled" unique_id=1223807237 instance=ExtResource("8_3ykmy")]
-unique_name_in_owner = true
-layout_mode = 2
+theme_override_styles/panel = ExtResource("9_frame")
 
 [node name="Portrait" type="TextureRect" parent="Row/Slot2/Pad/Box/Art/Filled" unique_id=1127791653]
 visible = false
@@ -206,8 +219,9 @@ theme_override_font_sizes/font_size = 15
 
 [node name="Slot3" type="Button" parent="Row" unique_id=266482549]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(260, 352)
+custom_minimum_size = Vector2(260, 250)
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="Pad" type="MarginContainer" parent="Row/Slot3" unique_id=1613631823]
 layout_mode = 1
@@ -228,9 +242,21 @@ mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="Art" type="Control" parent="Row/Slot3/Pad/Box" unique_id=1025412270]
-custom_minimum_size = Vector2(0, 250)
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 mouse_filter = 2
+
+[node name="party3" parent="Row/Slot3/Pad/Box/Art" unique_id=701214161 instance=ExtResource("8_3ykmy")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+window = Rect2(87, 150, 1351, 889)
 
 [node name="Filled" type="PanelContainer" parent="Row/Slot3/Pad/Box/Art" unique_id=319063628]
 visible = false
@@ -241,7 +267,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("2_fill")
+theme_override_styles/panel = ExtResource("9_frame")
 
 [node name="Portrait" type="TextureRect" parent="Row/Slot3/Pad/Box/Art/Filled" unique_id=640030356]
 visible = false
@@ -249,10 +275,6 @@ layout_mode = 2
 mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
-
-[node name="party3" parent="Row/Slot3/Pad/Box/Art/Filled" unique_id=701214161 instance=ExtResource("8_3ykmy")]
-unique_name_in_owner = true
-layout_mode = 2
 
 [node name="Empty" type="MarginContainer" parent="Row/Slot3/Pad/Box/Art" unique_id=392308629]
 layout_mode = 1

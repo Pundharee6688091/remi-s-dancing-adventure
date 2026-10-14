@@ -78,9 +78,11 @@ func _refresh() -> void:
 		var info := SaveManager.summary(i + 1)
 		var used := not info.is_empty()
 
-		# The party picture is the art. The filled panel behind it belongs to
-		# the older design, where a single portrait sat inside a grey box.
+		# The picture is the art, and the panel over it is only the frame
+		# the wireframe draws around that art. The dashed box takes over on
+		# a slot nobody has used yet.
 		_partys[i].visible = used
+		card.get_node("Pad/Box/Art/Filled").visible = used
 		card.get_node("Pad/Box/Art/Empty").visible = not used
 		(card.get_node("Pad/Box/Name") as Label).text = \
 			info.name if used else tr("UI_NEW_GAME")
