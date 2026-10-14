@@ -131,11 +131,21 @@ func _start_music() -> void:
 		push_warning("No background music at " + MUSIC)
 		return
 	var stream: AudioStream = load(MUSIC)
-	if "loop" in stream:
-		stream.loop = true
+	# The bed used to stop dead after one play. The line meant to loop it
+	# looked for a "loop" property, which an imported wav does not have, so it
+	# never ran. Setting the loop in the import does not take either, on this
+	# Godot, so the track is started again when it ends, the same way the
+	# chapter music already handles it.
 	_music.stream = stream
+	if not _music.finished.is_connected(_restart_music):
+		_music.finished.connect(_restart_music)
 	_music.play()
 	_fade_music(MUSIC_DB)
+
+
+## Only ever reached if the track is not looping on its own.
+func _restart_music() -> void:
+	_music.play()
 
 
 ## Fading rather than cutting, and paused once it is silent so it holds its
