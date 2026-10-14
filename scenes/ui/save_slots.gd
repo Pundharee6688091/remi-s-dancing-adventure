@@ -5,7 +5,6 @@ extends Control
 ## Enter steps into the panel, Esc steps back out.
 
 const SLOTS := 3
-const PORTRAIT := "res://characters/Remi/Remi_default.png"
 
 var _cards: Array[Button] = []
 var _partys: Array[Party] = []
@@ -22,13 +21,11 @@ var _renaming := false
 func _ready() -> void:
 	_cards = [%Slot1, %Slot2, %Slot3]
 	_partys = [%party1, %party2, %party3]
-	var art := UIKit.cropped_texture(PORTRAIT)
 	for i in SLOTS:
 		var slot := i + 1
 		var card := _cards[i]
 		var party := _partys[i]
 		party.set_slot(slot)
-		(card.get_node("Pad/Box/Art/Filled/Portrait") as TextureRect).texture = art
 		# Enter picks the slot and steps into the panel rather than loading.
 		card.pressed.connect(func() -> void: _enter_panel(slot))
 		# Highlighting a card is what drives the panel, by keyboard or mouse.
@@ -71,24 +68,36 @@ func _wire_name_panel() -> void:
 	for b in [start, cancel]:
 		b.focus_mode = Control.FOCUS_ALL
 
-	_name_edit.focus_neighbor_bottom = _name_edit.get_path_to(start)
-	_name_edit.focus_next = _name_edit.get_path_to(start)
-
-	for b in [start, cancel]:
-		b.focus_neighbor_top = b.get_path_to(_name_edit)
-
-	# A LineEdit eats the down key itself, so the neighbour above is never
+	# A LineEdit eats the down key itself, so the neighbour below is never
 	# consulted. Taking it here is what actually gets out of the field.
 	_name_edit.gui_input.connect(func(e: InputEvent) -> void:
 		if e.is_action_pressed("ui_down"):
 			_name_edit.accept_event()
 			start.grab_focus())
 
+	# Every side of every control points at another part of this panel, so
+	# the focus cannot wander off onto the cards behind it. Without the ones
+	# that wrap, a second press of down walks straight out of the dialog.
+	_name_edit.focus_neighbor_bottom = _name_edit.get_path_to(start)
+	_name_edit.focus_neighbor_top = _name_edit.get_path_to(cancel)
+	_name_edit.focus_neighbor_left = _name_edit.get_path_to(_name_edit)
+	_name_edit.focus_neighbor_right = _name_edit.get_path_to(_name_edit)
+	_name_edit.focus_next = _name_edit.get_path_to(start)
+	_name_edit.focus_previous = _name_edit.get_path_to(cancel)
+
+	start.focus_neighbor_top = start.get_path_to(_name_edit)
+	start.focus_neighbor_bottom = start.get_path_to(_name_edit)
+	start.focus_neighbor_left = start.get_path_to(cancel)
 	start.focus_neighbor_right = start.get_path_to(cancel)
 	start.focus_next = start.get_path_to(cancel)
+	start.focus_previous = start.get_path_to(_name_edit)
+
+	cancel.focus_neighbor_top = cancel.get_path_to(_name_edit)
+	cancel.focus_neighbor_bottom = cancel.get_path_to(_name_edit)
 	cancel.focus_neighbor_left = cancel.get_path_to(start)
-	cancel.focus_previous = cancel.get_path_to(start)
+	cancel.focus_neighbor_right = cancel.get_path_to(start)
 	cancel.focus_next = cancel.get_path_to(_name_edit)
+	cancel.focus_previous = cancel.get_path_to(start)
 
 
 func _set_hints() -> void:
