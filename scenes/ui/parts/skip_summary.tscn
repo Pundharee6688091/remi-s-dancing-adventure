@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/ui/parts/skip_summary.gd" id="1_ss"]
 [ext_resource type="Script" path="res://scenes/ui/parts/hint_bar.gd" id="2_hb"]
+[ext_resource type="FontVariation" path="res://fonts/patrick_bold.tres" id="3_bold"]
 
 [node name="SkipSummary" type="Control"]
 visible = false
@@ -47,13 +48,18 @@ text = "UI_SUMMARY_TITLE"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Body" type="Label" parent="Centre/Card/Box"]
+[node name="Body" type="RichTextLabel" parent="Centre/Card/Box"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(700, 0)
 layout_mode = 2
-theme_override_constants/line_spacing = 6
-theme_override_font_sizes/font_size = 21
-autowrap_mode = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.16862746, 0.16862746, 0.16862746, 1)
+theme_override_constants/line_separation = 6
+theme_override_fonts/bold_font = ExtResource("3_bold")
+theme_override_font_sizes/normal_font_size = 21
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
 
 [node name="Spacer" type="Control" parent="Centre/Card/Box"]
 custom_minimum_size = Vector2(0, 6)

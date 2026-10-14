@@ -9,16 +9,34 @@ extends Control
 signal answered(skip: bool)
 
 
+## Thai stacks a vowel and a tone mark above the letter, and a rich text box
+## clips whatever leaves its first line, so that line's tops were being cut
+## off. The same headroom the dialogue box gets, for the same reason.
+const HEADROOM := 0.3
+
+
 func _ready() -> void:
 	UIKit.trap_focus([%Stay, %Skip])
+	_pad_body()
 	_set_hints()
 	Events.language_changed.connect(_set_hints)
 	hide()
 
 
+func _pad_body() -> void:
+	var box := StyleBoxEmpty.new()
+	box.content_margin_top = roundi(
+		%Body.get_theme_font_size("normal_font_size") * HEADROOM)
+	%Body.add_theme_stylebox_override("normal", box)
+
+
 ## key is a translation key out of stages.json rather than prose, so the gist
 ## follows the language the rest of the screen is in, including a change made
 ## from the settings screen while the card is up.
+##
+## The box reads BBCode, so a summary can put a name in bold the way the two
+## in stages.json already try to. Set as text rather than as parsed BBCode,
+## because text is what Godot translates for us on a language change.
 func ask(key: String) -> void:
 	%Body.text = key
 	show()
