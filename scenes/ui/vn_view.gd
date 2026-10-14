@@ -49,14 +49,16 @@ func _ready() -> void:
 
 
 ## Thai stacks a vowel and a tone mark above the letter, reaching about a
-## third of the font size higher than Latin ever does. The dialogue box is a
-## RichTextLabel, which clips whatever leaves its first line, so the tops of
-## that line were being cut off. Padding the text inside the box gives the
-## line the room, and the box's own art is untouched.
+## third of the font size higher than Latin ever does, and hangs a vowel below
+## it as well. Both labels are sized from the font's Latin ascent, so they clip
+## whatever leaves that line: the dialogue box cut the tops off its first line,
+## and the name tab cut the tone mark off a name like เรมี่. Padding the text
+## inside each gives it the room, and neither box's own art is touched.
 ##
 ## Done from here rather than in the addon's own scene, so updating Dialogic
 ## does not quietly undo it.
 const HEADROOM := 0.3
+const UNDERROOM := 0.12
 
 var _padded := false
 
@@ -72,6 +74,26 @@ func _pad_dialogue(_info := {}) -> void:
 		box.content_margin_top = pad
 		text.add_theme_stylebox_override("normal", box)
 		_padded = true
+	_pad_name()
+
+
+## The name tab hangs off the top of the dialogue box, so the room it needs has
+## to come out of the sky above it rather than out of the first line of speech.
+## Growing towards the beginning is what keeps its bottom edge where it is,
+## whatever Dialogic does with the tab's own offsets afterwards.
+func _pad_name() -> void:
+	for n in get_tree().get_nodes_in_group("dialogic_name_label"):
+		var label := n as Label
+		if label == null:
+			continue
+		var size := label.get_theme_font_size("font_size")
+		var box := StyleBoxEmpty.new()
+		box.content_margin_top = roundi(size * HEADROOM)
+		box.content_margin_bottom = roundi(size * UNDERROOM)
+		label.add_theme_stylebox_override("normal", box)
+		var tab := label.get_parent() as Control
+		if tab != null:
+			tab.grow_vertical = Control.GROW_DIRECTION_BEGIN
 
 
 ## Dialogic keeps a character's name in a variable so it can read "???" until
