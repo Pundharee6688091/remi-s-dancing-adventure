@@ -33,7 +33,12 @@ func _ready() -> void:
 		card.pressed.connect(func() -> void: _enter_panel(slot))
 		# Highlighting a card is what drives the panel, by keyboard or mouse.
 		card.focus_entered.connect(func() -> void: _select(slot))
-		card.mouse_entered.connect(card.grab_focus)
+		# Hovering a card highlights it, but not once the panel has been
+		# stepped into: otherwise the first mouse move afterwards drags the
+		# panel over to whichever card the cursor happened to cross.
+		card.mouse_entered.connect(func() -> void:
+			if not _panel_has_focus():
+				card.grab_focus())
 
 	UIKit.trap_focus(_cards)
 	_confirm.answered.connect(_on_confirmed)
