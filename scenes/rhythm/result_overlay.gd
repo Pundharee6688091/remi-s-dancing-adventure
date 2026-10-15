@@ -61,7 +61,7 @@ func _fill(r: Dictionary) -> void:
 	# The tutorial has no opponent, so an empty placeholder box would read
 	# as a missing asset rather than as "there is nobody here".
 	%Art.visible = art != null
-
+	%RemiDoneNotDone._done(won)
 	if opponent == "":
 		%Flavour.text = ""
 	elif r.get("last_quote", "") != "":
@@ -89,9 +89,13 @@ func _fill(r: Dictionary) -> void:
 		%HpBar.value = r.hp / 100.0
 		%HpBar.marker = win_at / 100.0
 
-	# The records, already counting this run.
+	# The records, already counting this run. Shown as how far the meter was
+	# driven down rather than what was left on it, so it reads the same way
+	# round as the combo beside it: a bigger number is a better run. What was
+	# left is its own default of 100, which as a record read as a perfect
+	# score when it meant the opposite.
 	%Best.visible = judged
-	%BestValue.text = "%d%%" % int(r.get("best_hp", r.hp))
+	%BestValue.text = "%d%%" % _damage(int(r.get("best_hp", r.hp)))
 	%BestCombo.visible = true
 	%BestComboValue.text = str(int(r.get("best_combo", r.get("max_combo", 0))))
 
@@ -134,3 +138,8 @@ func _on_continue_pressed() -> void:
 
 func _on_retry_pressed() -> void:
 	retry_pressed.emit()
+
+
+## How much of the meter a run took off, from what it left behind.
+static func _damage(left: int) -> int:
+	return clampi(100 - left, 0, 100)
