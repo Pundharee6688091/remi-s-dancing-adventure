@@ -83,7 +83,9 @@ func _ready() -> void:
 	var song_id: String = st.get("song", "song_tutorial")
 	_chart = ChartParser.parse(Rules.chart_path(song_id))
 	field.setup(_chart.notes)
-	beats_per_squish = int(st.get("squish"))
+	# Without the default this is int(null), which is 0, which makes the beat
+	# pulse zero milliseconds long.
+	beats_per_squish = int(st.get("squish", 1.0))
 
 	%Bg.texture = Rules.background("fight", stage_id)
 	_setup_remi()
