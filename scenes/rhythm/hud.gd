@@ -65,7 +65,7 @@ func update_progress(now_ms: float) -> void:
 
 func _on_hp_changed(hp: float) -> void:
 	monster_bar.value = hp / 100.0
-	monster_pct.text = "%d%%" % Rules.hp_display(hp)
+	monster_pct.text = "%s%%" % Rules.hp_text(hp)
 
 
 func _on_combo_changed(combo: int) -> void:

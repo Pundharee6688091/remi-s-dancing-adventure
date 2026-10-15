@@ -90,18 +90,30 @@ func damage(judgement: String) -> float:
 func note_speed() -> float:
 	return float(data.note_speed_px_per_ms) * Settings.speed_scale()
 
-func hp_display(hp: float) -> int:
-	return maxi(0, floori(hp))
+## The meter is shown to a tenth, and judged on that same figure rather than
+## on the number hiding behind it. Rounded, not floored: floor turned 0.9 into
+## 0, which handed out a three star run to anyone who had not quite got there.
+const STEP := 0.1
+
+
+func hp_display(hp: float) -> float:
+	return maxf(0.0, snappedf(hp, STEP))
+
+
+## The one place the meter is worded, so every screen says it the same way.
+func hp_text(hp: float) -> String:
+	return "%.1f" % hp_display(hp)
+
 
 func is_win(hp: float) -> bool:
-	return hp_display(hp) <= int(data.win_hp_percent)
+	return hp_display(hp) <= float(data.win_hp_percent)
 
 func stars_for_hp(hp: float) -> int:
 	var h := hp_display(hp)
 	var t: Dictionary = data.stars_hp_percent
-	if h <= int(t["3"]): return 3
-	if h <= int(t["2"]): return 2
-	if h <= int(t["1"]): return 1
+	if h <= float(t["3"]): return 3
+	if h <= float(t["2"]): return 2
+	if h <= float(t["1"]): return 1
 	return 0
 
 

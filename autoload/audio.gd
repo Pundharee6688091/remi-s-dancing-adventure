@@ -70,7 +70,7 @@ func _ready() -> void:
 
 	get_tree().node_added.connect(_on_node_added)
 	Events.note_judged.connect(_on_note_judged)
-	Events.stage_cleared.connect(func(_id: String, _hp: int) -> void: play("win"))
+	Events.stage_cleared.connect(func(_id: String, _hp: float) -> void: play("win"))
 	Events.stage_failed.connect(func(_id: String) -> void: play("lose"))
 
 

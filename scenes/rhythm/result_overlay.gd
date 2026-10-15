@@ -116,7 +116,7 @@ func _fill(r: Dictionary) -> void:
 		# A losing run already has the reason under this line, in numbers.
 		# Cheering the player on above it only said the same thing twice.
 		%Flavour.text = ""
-	%Reason.text = "" if won else tr("UI_FAIL_REASON") % [r.hp, win_at]
+	%Reason.text = "" if won else tr("UI_FAIL_REASON") % [Rules.hp_text(r.hp), win_at]
 
 	%Join.visible = won and opponent != ""
 	%JoinText.text = tr("UI_JOINED") % named
@@ -129,7 +129,7 @@ func _fill(r: Dictionary) -> void:
 	%Hp.visible = judged
 	%Reward.visible = judged
 	if judged:
-		%HpValue.text = "%d%%" % r.hp
+		%HpValue.text = "%s%%" % Rules.hp_text(r.hp)
 		%WinLine.text = tr("UI_WIN_LINE") % win_at
 		%HpBar.value = r.hp / 100.0
 		%HpBar.marker = win_at / 100.0

@@ -55,7 +55,7 @@ UI_PAUSED,PAUSED,หยุดชั่วคราว
 UI_RESUME,Resume,เล่นต่อ
 UI_RESTART_STAGE,Restart stage,เริ่มด่านใหม่
 UI_QUIT_STAGE,Quit to map,ออกไปที่แผนที่
-UI_PAUSE_INFO,%s · %d:%02d · %s %d%%,%s · %d:%02d · %s %d%%
+UI_PAUSE_INFO,%s · %d:%02d · %s %s%%,%s · %d:%02d · %s %s%%
 UI_MOVE,Move,เลื่อน
 UI_SELECT,Select,เลือก
 UI_STAGE_CLEAR_TITLE,STAGE CLEAR,ผ่านด่าน
@@ -126,7 +126,7 @@ UI_J_MISS,Miss,พลาด
 UI_BACK_TO_MAP,Back to map,กลับไปที่แผนที่
 UI_RETRY_SHORT,Retry,ลองใหม่
 UI_STILL_FIGHT,%s can still fight. Try again!,%s ยังสู้ไหว ลองใหม่อีกครั้ง!
-UI_FAIL_REASON,"Their meter was still at %d%%. You needed it under %d%%.",ความกังขายังอยู่ที่ %d%% คุณต้องทำให้ต่ำกว่า %d%%
+UI_FAIL_REASON,"Their meter was still at %s%%. You needed it under %d%%.",ความกังขายังอยู่ที่ %s%% คุณต้องทำให้ต่ำกว่า %d%%
 UI_NO_REWARD,none this time. Progress on other stages is not lost.,ยังไม่มีรางวัล ความคืบหน้าด่านอื่นไม่หายไป
 UI_SETTINGS_NOTE,changes apply and save immediately,การเปลี่ยนแปลงจะถูกบันทึกทันที
 UI_SET_MUSIC,Music volume,เสียงเพลง

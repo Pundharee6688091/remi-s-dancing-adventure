@@ -66,8 +66,8 @@ func is_unlocked(id: String) -> bool:
 			return false
 	return true
 	
-func best_hp_for(id: String) -> int:
-	return int(save.get("best_hp", {}).get(id, 100))
+func best_hp_for(id: String) -> float:
+	return float(save.get("best_hp", {}).get(id, 100.0))
 
 func best_combo_for(id: String) -> int:
 	return int(save.get("best_combo", {}).get(id, 0))
@@ -132,13 +132,13 @@ func evaluate_win(stage_id: String, hp: float) -> bool:
 		"win", {"type": "hp_below", "value": 30})
 	match String(rule.get("type", "hp_below")):
 		"hp_below":
-			return Rules.hp_display(hp) <= int(rule.value)
+			return Rules.hp_display(hp) <= float(rule.value)
 		_:
 			return false
 
 
-func _on_stage_cleared(stage_id: String, hp: int) -> void:
-	var best := mini(int(save.best_hp.get(stage_id, 100)), hp)
+func _on_stage_cleared(stage_id: String, hp: float) -> void:
+	var best := minf(float(save.best_hp.get(stage_id, 100.0)), hp)
 	save.best_hp[stage_id] = best
 	save.stars[stage_id] = Rules.stars_for_hp(best)
 
