@@ -24,9 +24,16 @@ func _ready() -> void:
 
 
 func _pad_body() -> void:
+	var at: int = %Body.get_theme_font_size("normal_font_size")
+	# A rich text box keeps a separate size per face, and the ones nobody set
+	# fall back to the theme's own, which is smaller than this box's. That is
+	# what made a name in [b] come out smaller than the sentence around it.
+	# Taken from the body size rather than typed again, so they cannot drift.
+	for face in ["bold_font_size", "italics_font_size", "bold_italics_font_size"]:
+		%Body.add_theme_font_size_override(face, at)
+
 	var box := StyleBoxEmpty.new()
-	box.content_margin_top = roundi(
-		%Body.get_theme_font_size("normal_font_size") * HEADROOM)
+	box.content_margin_top = roundi(at * HEADROOM)
 	%Body.add_theme_stylebox_override("normal", box)
 
 
