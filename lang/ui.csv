@@ -55,12 +55,12 @@ UI_PAUSED,PAUSED,หยุดชั่วคราว
 UI_RESUME,Resume,เล่นต่อ
 UI_RESTART_STAGE,Restart stage,เริ่มด่านใหม่
 UI_QUIT_STAGE,Quit to map,ออกไปที่แผนที่
-UI_PAUSE_INFO,%s · %d:%02d · %s HP %d%%,%s · %d:%02d · %s HP %d%%
+UI_PAUSE_INFO,%s · %d:%02d · %s %d%%,%s · %d:%02d · %s %d%%
 UI_MOVE,Move,เลื่อน
 UI_SELECT,Select,เลือก
 UI_STAGE_CLEAR_TITLE,STAGE CLEAR,ผ่านด่าน
 UI_STAGE_FAILED_TITLE,STAGE FAILED,ไม่ผ่านด่าน
-UI_MONSTER_HP_LEFT,Monster HP left   %d%%,พลังชีวิตศัตรูที่เหลือ   %d%%
+UI_MONSTER_HP_LEFT,Skeptical meter left   %d%%,ความกังขาที่เหลือ   %d%%
 UI_BEST_PCT,Best  %d%%,ดีที่สุด  %d%%
 UI_NEW_BEST,NEW BEST!  (was %d%%),สถิติใหม่!  (เดิม %d%%)
 UI_MAX_COMBO,Max combo  %d,คอมโบสูงสุด  %d
@@ -111,7 +111,7 @@ UI_START,Start,เริ่ม
 UI_DEFAULT_NAME,Remi,เรมี
 UI_NAME_NOTE,"Type your name · Thai or English · leave empty for ""Remi""","พิมพ์ชื่อของคุณ · ไทยหรืออังกฤษ · เว้นว่างไว้จะใช้ ""เรมี"""
 UI_RESULT_SUB,%s · %s,%s · %s
-UI_LBL_MONSTER_HP,Monster HP left,พลังชีวิตศัตรูที่เหลือ
+UI_LBL_MONSTER_HP,Skeptical meter left,ความกังขาที่เหลือ
 UI_WIN_LINE,win line %d%%,เส้นชนะ %d%%
 UI_TOO_TIRED,%s is too tired to keep fighting.,%s เหนื่อยเกินกว่าจะสู้ต่อแล้ว
 UI_JOINED,%s joined your party!,%s เข้าร่วมทีมของคุณแล้ว!
@@ -126,7 +126,7 @@ UI_J_MISS,Miss,พลาด
 UI_BACK_TO_MAP,Back to map,กลับไปที่แผนที่
 UI_RETRY_SHORT,Retry,ลองใหม่
 UI_STILL_FIGHT,%s can still fight. Try again!,%s ยังสู้ไหว ลองใหม่อีกครั้ง!
-UI_FAIL_REASON,It still had %d%% HP. You needed to get it under %d%%.,ศัตรูยังเหลือพลังชีวิต %d%% คุณต้องทำให้เหลือต่ำกว่า %d%%
+UI_FAIL_REASON,"Their meter was still at %d%%. You needed it under %d%%.",ความกังขายังอยู่ที่ %d%% คุณต้องทำให้ต่ำกว่า %d%%
 UI_NO_REWARD,none this time. Progress on other stages is not lost.,ยังไม่มีรางวัล ความคืบหน้าด่านอื่นไม่หายไป
 UI_SETTINGS_NOTE,changes apply and save immediately,การเปลี่ยนแปลงจะถูกบันทึกทันที
 UI_SET_MUSIC,Music volume,เสียงเพลง
@@ -220,3 +220,4 @@ UI_CTRL_TAKEN,"%s already uses that. Try another.",ปุ่มนี้ %s ใ�
 UI_CTRL_FIXED,the game,ตัวเกม
 UI_CTRL_USE,Use,ใช้
 UI_ACH_GOT,Achievement earned,ได้รับความสำเร็จ
+UI_NEW_RECORD,New record!,ทำลายสถิติ!

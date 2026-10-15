@@ -367,7 +367,10 @@ func _on_song_finished() -> void:
 	r.song_id = st.get("song", "")
 	r.opponent = st.get("opponent", "")
 	r.win_at = int(st.get("win", {}).get("value", 30))
+	# Both read before anything from this run is banked, so the result can
+	# tell whether this run is the one that set the record.
 	r.previous_best = GameManager.best_hp_for(stage_id)
+	r.previous_combo = GameManager.best_combo_for(stage_id)
 	r.last_quote = _last_quote
 
 	# Banked before the screen is built, so what it shows as the record

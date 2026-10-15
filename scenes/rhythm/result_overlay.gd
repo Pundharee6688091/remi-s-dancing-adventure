@@ -14,8 +14,13 @@ const JUDGEMENTS := ["perfect", "great", "good", "miss"]
 ## numbers rather than waiting for a rebuild that never comes.
 var _shown := {}
 
+## The "new record!" lines, made here rather than in the scene so the two
+## blocks they hang under keep whatever shape the layout gives them.
+var _record_tags := {}
+
 
 func _ready() -> void:
+	_make_record_tags()
 	_set_hints()
 	Events.language_changed.connect(_on_language_changed)
 	hide()
@@ -31,6 +36,16 @@ func _on_language_changed() -> void:
 	_set_buttons(_shown.won)          # the button labels are translated too
 	if had != null and is_instance_valid(had):
 		had.grab_focus()
+
+
+func _make_record_tags() -> void:
+	for block in [%Best, %BestCombo]:
+		var tag := Label.new()
+		tag.add_theme_font_size_override("font_size", 13)
+		tag.add_theme_color_override("font_color", Palette.AMBER_INK)
+		tag.visible = false
+		block.add_child(tag)
+		_record_tags[block] = tag
 
 
 func _set_hints() -> void:
@@ -99,6 +114,14 @@ func _fill(r: Dictionary) -> void:
 	%BestCombo.visible = true
 	%BestComboValue.text = str(int(r.get("best_combo", r.get("max_combo", 0))))
 
+	# Said only where this run is the one that set the record. The two numbers
+	# above already count it, so without this there is nothing to tell a
+	# record just taken from one standing since weeks ago.
+	_say_record(%Best, judged
+		and int(r.get("hp", 100)) < int(r.get("previous_best", 100)))
+	_say_record(%BestCombo,
+		int(r.get("max_combo", 0)) > int(r.get("previous_combo", 0)))
+
 	var c: Dictionary = r.counts
 	var total := 0
 	for j in JUDGEMENTS:
@@ -138,6 +161,16 @@ func _on_continue_pressed() -> void:
 
 func _on_retry_pressed() -> void:
 	retry_pressed.emit()
+
+
+## Shows or hides a block's record line, and re-words it, since the page is
+## filled again from the same numbers when the language changes.
+func _say_record(block: Control, beaten: bool) -> void:
+	var tag: Label = _record_tags.get(block)
+	if tag == null:
+		return
+	tag.text = tr("UI_NEW_RECORD")
+	tag.visible = beaten and block.visible
 
 
 ## How much of the meter a run took off, from what it left behind.
