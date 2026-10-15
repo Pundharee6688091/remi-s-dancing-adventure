@@ -113,13 +113,11 @@ func _sync_card() -> void:
 
 
 
-## Chart title and audio length, looked up once per song.
+## Song name and audio length, looked up once per song.
 func _song_info(song_id: String) -> Dictionary:
 	if _song_cache.has(song_id):
 		return _song_cache[song_id]
-	var info := {"title": song_id, "length": 0.0}
-	if FileAccess.file_exists(Rules.chart_path(song_id)):
-		info.title = ChartParser.parse(Rules.chart_path(song_id)).title
+	var info := {"title": Rules.song_title(song_id), "length": 0.0}
 	if ResourceLoader.exists(Rules.song_path(song_id)):
 		var stream: AudioStream = load(Rules.song_path(song_id))
 		if stream != null:

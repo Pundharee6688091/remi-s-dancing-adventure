@@ -293,10 +293,15 @@ func _apply(sprite: Sprite2D, pose: Dictionary, x: float, scale: float) -> void:
 	sprite.show()
 
 
+## The folder this stage's song lives in, which is also its name.
+func _song_id() -> String:
+	return String(Rules.stage(stage_id).get("song", ""))
+
+
 func _pause_info() -> String:
 	var secs := int(conductor.song_time_ms() / 1000.0)
 	var opp: String = Rules.stage(stage_id).get("opponent", "")
-	return tr("UI_PAUSE_INFO") % [_chart.get("title", ""), secs / 60, secs % 60,
+	return tr("UI_PAUSE_INFO") % [Rules.song_title(_song_id()), secs / 60, secs % 60,
 		Rules.character_name(opp) if opp != "" else "—", Rules.hp_text(judge.hp)]
 
 
@@ -316,6 +321,7 @@ func _restart() -> void:
 	_last_quote = ""
 	bubble.clear()
 	Events.hp_changed.emit(judge.hp)
+	Events.combo_changed.emit(judge.combo)
 	hud.update_progress(0.0)
 	for g in track.ghosts:
 		g.set_pressed(false)
@@ -363,7 +369,7 @@ func _on_song_finished() -> void:
 	var r := judge.result()
 	r.won = GameManager.evaluate_win(stage_id, judge.hp)
 	r.stage = tr(String(st.get("label", "")))
-	r.song = _chart.get("title", "")
+	r.song = Rules.song_title(_song_id())
 	r.song_id = st.get("song", "")
 	r.opponent = st.get("opponent", "")
 	r.win_at = int(st.get("win", {}).get("value", 30))

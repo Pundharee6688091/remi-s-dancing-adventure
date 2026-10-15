@@ -47,6 +47,13 @@ func roster() -> Array[String]:
 	return out
 
 
+## What a song is called. The folder it lives in is its name, so the name
+## cannot drift from the files the way the chart's own TITLE header had: that
+## said "Theo's Theme" for the song in the "A Mage's Foehn" folder.
+func song_title(song_id: String) -> String:
+	return song_id
+
+
 func enemy_path(song_id: String) -> String:
 	return "res://songs/%s/Enemy.png" % song_id
 

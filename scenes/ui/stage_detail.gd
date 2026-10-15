@@ -37,7 +37,8 @@ func open(stage_id: String) -> void:
 		var stream: AudioStream = load(Rules.song_path(song_id))
 		if stream != null:
 			secs = int(stream.get_length())
-		%Value.text = tr("UI_SONG_TIME") % [chart.title, secs / 60, secs % 60]
+		%Value.text = tr("UI_SONG_TIME") % [Rules.song_title(song_id),
+			secs / 60, secs % 60]
 		%ValueDiff.text = "●".repeat(int(chart.level))
 	else:
 		%Value.text = tr("UI_SONG_MISSING")
