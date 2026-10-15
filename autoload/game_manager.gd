@@ -6,6 +6,8 @@ const WORLD_MAP := "res://scenes/ui/world_map.tscn"
 const VN_VIEW := "res://scenes/ui/vn_view.tscn"
 const SETTINGS := "res://scenes/ui/settings.tscn"
 const ACHIEVEMENTS := "res://scenes/ui/achievements.tscn"
+const COLLECTION := "res://scenes/ui/collection.tscn"
+const CONTROLS := "res://scenes/ui/controls.tscn"
 
 var slot := 0
 var save: Dictionary = {}
@@ -42,6 +44,8 @@ func is_cleared(id: String) -> bool:
 	return save.get("stars", {}).has(id)
 
 func is_unlocked(id: String) -> bool:
+	if SaveManager.is_cheat(save):
+		return true
 	for req in Rules.stage(id).get("requires", []):
 		if not is_cleared(req):
 			return false
