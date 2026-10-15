@@ -14,9 +14,11 @@ const JUDGEMENTS := ["perfect", "great", "good", "miss"]
 ## numbers rather than waiting for a rebuild that never comes.
 var _shown := {}
 
-## The "new record!" lines, made here rather than in the scene so the two
-## blocks they hang under keep whatever shape the layout gives them.
-var _record_tags := {}
+## The small line under the combo, and the stamp across the meter panel.
+## Made here rather than in the scene so the blocks they hang on keep
+## whatever shape the layout gives them.
+var _combo_tag: Label
+var _stamp: Label
 
 
 func _ready() -> void:
@@ -38,14 +40,40 @@ func _on_language_changed() -> void:
 		had.grab_focus()
 
 
+const STAMP_TILT := -7.0
+const STAMP_INSET := Vector2(26.0, 14.0)
+
+
 func _make_record_tags() -> void:
-	for block in [%Best, %BestCombo]:
-		var tag := Label.new()
-		tag.add_theme_font_size_override("font_size", 13)
-		tag.add_theme_color_override("font_color", Palette.AMBER_INK)
-		tag.visible = false
-		block.add_child(tag)
-		_record_tags[block] = tag
+	_combo_tag = Label.new()
+	_combo_tag.add_theme_font_size_override("font_size", 13)
+	_combo_tag.add_theme_color_override("font_color", Palette.AMBER_INK)
+	_combo_tag.visible = false
+	%BestCombo.add_child(_combo_tag)
+
+	# Across the top right of the meter panel, leaning, like something
+	# stamped on a page rather than another figure in a column. Hung off the
+	# page itself rather than put in the panel's row, because a container
+	# lays its children out square and a stamp in one would sit up straight.
+	_stamp = Label.new()
+	_stamp.add_theme_font_size_override("font_size", 30)
+	_stamp.add_theme_color_override("font_color", Palette.AMBER_INK)
+	_stamp.rotation_degrees = STAMP_TILT
+	_stamp.visible = false
+	add_child(_stamp)
+	%Hp.item_rect_changed.connect(_place_stamp)
+
+
+## Pinned to the meter panel's own top right corner, so it follows the panel
+## whatever the wording underneath does to the layout.
+func _place_stamp() -> void:
+	if _stamp == null:
+		return
+	var panel: Control = %Hp
+	var wide: float = maxf(_stamp.size.x, _stamp.get_minimum_size().x)
+	_stamp.pivot_offset = Vector2(wide, 0.0)
+	_stamp.global_position = panel.global_position \
+		+ Vector2(panel.size.x - wide - STAMP_INSET.x, STAMP_INSET.y)
 
 
 func _set_hints() -> void:
@@ -85,7 +113,9 @@ func _fill(r: Dictionary) -> void:
 	elif won:
 		%Flavour.text = tr("UI_TOO_TIRED") % named
 	else:
-		%Flavour.text = tr("UI_STILL_FIGHT") % named
+		# A losing run already has the reason under this line, in numbers.
+		# Cheering the player on above it only said the same thing twice.
+		%Flavour.text = ""
 	%Reason.text = "" if won else tr("UI_FAIL_REASON") % [r.hp, win_at]
 
 	%Join.visible = won and opponent != ""
@@ -104,23 +134,20 @@ func _fill(r: Dictionary) -> void:
 		%HpBar.value = r.hp / 100.0
 		%HpBar.marker = win_at / 100.0
 
-	# The records, already counting this run. Shown as how far the meter was
-	# driven down rather than what was left on it, so it reads the same way
-	# round as the combo beside it: a bigger number is a better run. What was
-	# left is its own default of 100, which as a record read as a perfect
-	# score when it meant the opposite.
-	%Best.visible = judged
-	%BestValue.text = "%d%%" % _damage(int(r.get("best_hp", r.hp)))
+	# The best meter is gone: it said the same thing as the big figure at the
+	# top of the page, only older.
 	%BestCombo.visible = true
 	%BestComboValue.text = str(int(r.get("best_combo", r.get("max_combo", 0))))
 
-	# Said only where this run is the one that set the record. The two numbers
-	# above already count it, so without this there is nothing to tell a
-	# record just taken from one standing since weeks ago.
-	_say_record(%Best, judged
-		and int(r.get("hp", 100)) < int(r.get("previous_best", 100)))
-	_say_record(%BestCombo,
-		int(r.get("max_combo", 0)) > int(r.get("previous_combo", 0)))
+	# Said only where this run is the one that set the record. The numbers
+	# already count it, so without this there is nothing to tell a record
+	# just taken from one standing since weeks ago.
+	_stamp.text = tr("UI_NEW_RECORD")
+	_stamp.visible = judged \
+		and int(r.get("hp", 100)) < int(r.get("previous_best", 100))
+	_place_stamp()
+	_combo_tag.text = tr("UI_NEW_RECORD")
+	_combo_tag.visible = int(r.get("max_combo", 0)) > int(r.get("previous_combo", 0))
 
 	var c: Dictionary = r.counts
 	var total := 0
@@ -161,18 +188,3 @@ func _on_continue_pressed() -> void:
 
 func _on_retry_pressed() -> void:
 	retry_pressed.emit()
-
-
-## Shows or hides a block's record line, and re-words it, since the page is
-## filled again from the same numbers when the language changes.
-func _say_record(block: Control, beaten: bool) -> void:
-	var tag: Label = _record_tags.get(block)
-	if tag == null:
-		return
-	tag.text = tr("UI_NEW_RECORD")
-	tag.visible = beaten and block.visible
-
-
-## How much of the meter a run took off, from what it left behind.
-static func _damage(left: int) -> int:
-	return clampi(100 - left, 0, 100)

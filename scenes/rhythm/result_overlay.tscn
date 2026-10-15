@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d3u3ywbqu2yr3" path="res://scenes/rhythm/result_overlay.gd" id="1_ro"]
 [ext_resource type="Script" uid="uid://batawi1qqiibp" path="res://scenes/ui/parts/hint_bar.gd" id="2_hb"]
 [ext_resource type="Script" uid="uid://bxoedpfs1ey4h" path="res://scenes/rhythm/bar.gd" id="3_bar"]
+[ext_resource type="PackedScene" uid="uid://d3e6vwtvemahm" path="res://scenes/ui/parts/remi_done_not_done.tscn" id="3_cpmt3"]
 [ext_resource type="StyleBox" uid="uid://detwlqlh7ct7f" path="res://themes/panel_fill.tres" id="4_fill"]
 
 [node name="ResultOverlay" type="Control" unique_id=210010231]
@@ -35,16 +36,16 @@ theme_override_constants/separation = 28
 [node name="Title" type="Label" parent="Header" unique_id=1815268653]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_font_sizes/font_size = 52
 vertical_alignment = 1
+
 [node name="Sub" type="Label" parent="Header" unique_id=1254176572]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 theme_override_font_sizes/font_size = 22
 vertical_alignment = 1
-size_flags_vertical = 4
+
 [node name="Left" type="VBoxContainer" parent="." unique_id=918482096]
 layout_mode = 1
 offset_left = 40.0
@@ -90,10 +91,9 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Icon" type="PanelContainer" parent="Left/Join" unique_id=725649467]
-custom_minimum_size = Vector2(48, 48)
+[node name="RemiDoneNotDone" parent="Left/Join" unique_id=947837759 instance=ExtResource("3_cpmt3")]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_styles/panel = ExtResource("4_fill")
 
 [node name="JoinText" type="Label" parent="Left/Join" unique_id=421102755]
 unique_name_in_owner = true
@@ -121,25 +121,22 @@ theme_override_constants/separation = 14
 
 [node name="Key" type="Label" parent="Right/Hp/Box/Row" unique_id=388055466]
 layout_mode = 2
-size_flags_vertical = 4
-vertical_alignment = 1
 theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 text = "UI_LBL_MONSTER_HP"
+vertical_alignment = 1
 
 [node name="HpValue" type="Label" parent="Right/Hp/Box/Row" unique_id=425121831]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 4
-vertical_alignment = 1
 theme_override_font_sizes/font_size = 48
+vertical_alignment = 1
 
 [node name="WinLine" type="Label" parent="Right/Hp/Box/Row" unique_id=111804509]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 4
-vertical_alignment = 1
 theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 theme_override_font_sizes/font_size = 14
+vertical_alignment = 1
 
 [node name="Gap" type="Control" parent="Right/Hp/Box" unique_id=1858319420]
 custom_minimum_size = Vector2(0, 22)
@@ -298,21 +295,6 @@ text = "UI_LBL_STARS"
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5882353, 0.4117647, 0.15294118, 1)
-theme_override_font_sizes/font_size = 30
-
-[node name="Best" type="VBoxContainer" parent="Right/Stats/Box/Side" unique_id=905981293]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="BestKey" type="Label" parent="Right/Stats/Box/Side/Best" unique_id=202228260]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
-text = "UI_LBL_BEST"
-
-[node name="BestValue" type="Label" parent="Right/Stats/Box/Side/Best" unique_id=777432722]
-unique_name_in_owner = true
-layout_mode = 2
 theme_override_font_sizes/font_size = 30
 
 [node name="BestCombo" type="VBoxContainer" parent="Right/Stats/Box/Side" unique_id=1751275978]
