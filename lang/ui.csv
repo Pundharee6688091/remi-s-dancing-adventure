@@ -1,22 +1,22 @@
 keys,en,th
-UI_GAME_TITLE,REMI'S DANCING ADVENTURE,การผจญภัยนักเต้นของเรมี
-UI_PRESS_ANY_BUTTON,PRESS ANY BUTTON,กดปุ่มใดก็ได้
+UI_GAME_TITLE,REMI'S DANCING ADVENTURE,การผจญภัย​นัก​เต้น​ของ​เร​มี
+UI_PRESS_ANY_BUTTON,PRESS ANY BUTTON,กดปุ่ม​ใด​ก็ได้
 UI_STORY,Story,เนื้อเรื่อง
-UI_COLLECTION,Collection,ของสะสม
+UI_COLLECTION,Collection,ของ​สะสม
 UI_ACHIEVEMENTS,Achievements,ความสำเร็จ
 UI_SETTINGS,Settings,ตั้งค่า
-UI_QUIT,Quit,ออกจากเกม
-UI_QUIT_CONFIRM,Quit the game?,ต้องการออกจากเกมหรือไม่
-UI_MENU_HINT,▲ ▼ Move     Enter Select     Esc Change profile,▲ ▼ เลื่อน     Enter เลือก     Esc เปลี่ยนโปรไฟล์
-UI_SELECT_PROFILE,Select profile,เลือกโปรไฟล์
-UI_SLOTS_HINT,◀ ▶ Choose slot     Enter Select     Del Delete     Esc Back,◀ ▶ เลือกช่อง     Enter เลือก     Del ลบ     Esc ย้อนกลับ
+UI_QUIT,Quit,ออกจาก​เกม
+UI_QUIT_CONFIRM,Quit the game?,ต้องการ​ออกจาก​เกม​หรือไม่
+UI_MENU_HINT,▲ ▼ Move     Enter Select     Esc Change profile,▲ ▼ เลื่อน     Enter เลือก     Esc เปลี่ยน​โปรไฟล์
+UI_SELECT_PROFILE,Select profile,เลือก​โปรไฟล์
+UI_SLOTS_HINT,◀ ▶ Choose slot     Enter Select     Del Delete     Esc Back,◀ ▶ เลือก​ช่อง     Enter เลือก     Del ลบ     Esc ย้อนกลับ
 UI_EMPTY_SLOT,"New game
-empty slot","เกมใหม่
+empty slot","เกม​ใหม่
 ช่องว่าง"
-UI_DELETE_CONFIRM,"Delete profile ""%s""?","ลบโปรไฟล์ ""%s"" หรือไม่"
+UI_DELETE_CONFIRM,"Delete profile ""%s""?","ลบ​โปรไฟล์ ""%s"" หรือไม่"
 UI_DELETE,Delete,ลบ
-UI_NAME_PROMPT,What should we call you?,อยากให้เราเรียกคุณว่าอะไร
-UI_YOUR_NAME,Your name,ชื่อของคุณ
+UI_NAME_PROMPT,What should we call you?,อยาก​ให้​เรา​เรียก​คุณ​ว่า​อะไร
+UI_YOUR_NAME,Your name,ชื่อ​ของ​คุณ
 UI_NAME_HINT,Enter Start     Esc Cancel,Enter เริ่ม     Esc ยกเลิก
 UI_YES,Yes,ตกลง
 UI_CANCEL,Cancel,ยกเลิก
@@ -33,43 +33,43 @@ UI_FIGHT,Fight!,สู้!
 UI_SONG,Song      %s,เพลง       %s
 UI_BPM,BPM       %d,BPM        %d
 UI_LEVEL,Level     %s,ระดับ      %s
-UI_SONG_MISSING,This song is not in the game yet.,ยังไม่มีเพลงนี้ในเกม
+UI_SONG_MISSING,This song is not in the game yet.,ยัง​ไม่มี​เพลง​นี้​ใน​เกม
 UI_OPPONENT,Opponent  %s,คู่แข่ง      %s
-UI_BEST,Best      %s,ดีที่สุด     %s
-UI_REWARD,Reward    %s joins your party,รางวัล     %s เข้าร่วมทีมของคุณ
-UI_LOCKED,locked,ล็อกอยู่
-UI_CLEARED,cleared,ผ่านแล้ว
-UI_NOT_CLEARED,not cleared,ยังไม่ผ่าน
-UI_SEEN,seen,ดูแล้ว
-UI_NOT_SEEN,not seen yet,ยังไม่ได้ดู
+UI_BEST,Best      %s,ดี​ที่สุด     %s
+UI_REWARD,Reward    %s joins your party,รางวัล     %s เข้าร่วม​ทีม​ของ​คุณ
+UI_LOCKED,locked,ล็อก​อยู่
+UI_CLEARED,cleared,ผ่าน​แล้ว
+UI_NOT_CLEARED,not cleared,ยัง​ไม่​ผ่าน
+UI_SEEN,seen,ดู​แล้ว
+UI_NOT_SEEN,not seen yet,ยัง​ไม่​ได้​ดู
 UI_DOT_FIGHT,· fight,· ต่อสู้
-UI_DOT_STORY,· story scene,· ฉากเนื้อเรื่อง
-UI_STAGE_CLEAR_COUNT,Stage Clear: %d/%d,ผ่านด่าน: %d/%d
-UI_LEGEND_STORY,story scene,ฉากเนื้อเรื่อง
+UI_DOT_STORY,· story scene,· ฉาก​เนื้อเรื่อง
+UI_STAGE_CLEAR_COUNT,Stage Clear: %d/%d,ผ่าน​ด่าน: %d/%d
+UI_LEGEND_STORY,story scene,ฉาก​เนื้อเรื่อง
 UI_LEGEND_FIGHT,fight,ต่อสู้
-UI_LEGEND_DONE,done,ผ่านแล้ว
+UI_LEGEND_DONE,done,ผ่าน​แล้ว
 UI_SONG_LABEL,SONG,เพลง
 UI_COMBO,COMBO,คอมโบ
 UI_MONSTER_HP,SKEPTICAL METER,ความกังขา
 UI_PAUSED,PAUSED,หยุดชั่วคราว
-UI_RESUME,Resume,เล่นต่อ
-UI_RESTART_STAGE,Restart stage,เริ่มด่านใหม่
-UI_QUIT_STAGE,Quit to map,ออกไปที่แผนที่
+UI_RESUME,Resume,เล่น​ต่อ
+UI_RESTART_STAGE,Restart stage,เริ่ม​ด่าน​ใหม่
+UI_QUIT_STAGE,Quit to map,ออกไป​ที่​แผนที่
 UI_PAUSE_INFO,%s · %d:%02d · %s %s%%,%s · %d:%02d · %s %s%%
 UI_MOVE,Move,เลื่อน
 UI_SELECT,Select,เลือก
-UI_STAGE_CLEAR_TITLE,STAGE CLEAR,ผ่านด่าน
-UI_STAGE_FAILED_TITLE,STAGE FAILED,ไม่ผ่านด่าน
-UI_MONSTER_HP_LEFT,Skeptical meter left   %d%%,ความกังขาที่เหลือ   %d%%
-UI_BEST_PCT,Best  %d%%,ดีที่สุด  %d%%
-UI_NEW_BEST,NEW BEST!  (was %d%%),สถิติใหม่!  (เดิม %d%%)
-UI_MAX_COMBO,Max combo  %d,คอมโบสูงสุด  %d
+UI_STAGE_CLEAR_TITLE,STAGE CLEAR,ผ่าน​ด่าน
+UI_STAGE_FAILED_TITLE,STAGE FAILED,ไม่​ผ่าน​ด่าน
+UI_MONSTER_HP_LEFT,Skeptical meter left   %d%%,ความกังขา​ที่เหลือ   %d%%
+UI_BEST_PCT,Best  %d%%,ดี​ที่สุด  %d%%
+UI_NEW_BEST,NEW BEST!  (was %d%%),สถิติ​ใหม่!  (เดิม %d%%)
+UI_MAX_COMBO,Max combo  %d,คอมโบ​สูงสุด  %d
 UI_PERFECT,Perfect  %d,Perfect  %d
 UI_GREAT,Great    %d,Great    %d
 UI_GOOD,Good     %d,Good     %d
 UI_MISS,Miss     %d,Miss     %d
-UI_PLAY_AGAIN,Play again,เล่นอีกครั้ง
-UI_SLOT_LINE,%s · last played %s,%s · เล่นล่าสุด %s
+UI_PLAY_AGAIN,Play again,เล่น​อีกครั้ง
+UI_SLOT_LINE,%s · last played %s,%s · เล่น​ล่าสุด %s
 UI_MON_1,Jan,ม.ค.
 UI_MON_2,Feb,ก.พ.
 UI_MON_3,Mar,มี.ค.
@@ -83,143 +83,143 @@ UI_MON_10,Oct,ต.ค.
 UI_MON_11,Nov,พ.ย.
 UI_MON_12,Dec,ธ.ค.
 UI_LANGUAGE,Language,ภาษา
-UI_CHANGE_PROFILE,Change profile,เปลี่ยนโปรไฟล์
-UI_CHOOSE_SLOT,Choose slot,เลือกช่อง
-UI_BACK_TO_PROFILES,Back to profiles,กลับไปหน้าโปรไฟล์
+UI_CHANGE_PROFILE,Change profile,เปลี่ยน​โปรไฟล์
+UI_CHOOSE_SLOT,Choose slot,เลือก​ช่อง
+UI_BACK_TO_PROFILES,Back to profiles,กลับไป​หน้า​โปรไฟล์
 UI_ZONE,Zone %d,โซน %d
 UI_CHOOSE,Choose,เลือก
 UI_CONFIRM,Confirm,ยืนยัน
 UI_CLOSE,Close,ปิด
 UI_RESET, Reset, รีเซ็ต
-UI_DELETE_BODY,All progress in this slot will be lost. This cannot be undone.,ความคืบหน้าทั้งหมดในช่องนี้จะหายไป และกู้คืนไม่ได้
+UI_DELETE_BODY,All progress in this slot will be lost. This cannot be undone.,ความคืบหน้า​ทั้งหมด​ใน​ช่อง​นี้​จะ​หายไป และ​กู้​คืน​ไม่​ได้
 UI_LBL_SONG,Song,เพลง
-UI_LBL_DIFFICULTY,Difficulty,ความยาก
-UI_LBL_BEST,Best,ดีที่สุด
+UI_LBL_DIFFICULTY,Difficulty,ความ​ยาก
+UI_LBL_BEST,Best,ดี​ที่สุด
 UI_LBL_REWARD,Reward,รางวัล
 UI_SONG_TIME,%s · %d:%02d,%s · %d:%02d
-UI_NOT_CLEARED_DASH,— (not cleared),— (ยังไม่ผ่าน)
-UI_REWARD_JOINS,%s joins your party,%s เข้าร่วมทีมของคุณ
-UI_NEW_GAME,New game,เกมใหม่
+UI_NOT_CLEARED_DASH,— (not cleared),— (ยัง​ไม่​ผ่าน)
+UI_REWARD_JOINS,%s joins your party,%s เข้าร่วม​ทีม​ของ​คุณ
+UI_NEW_GAME,New game,เกม​ใหม่
 UI_EMPTY_SLOT_LINE,empty slot,ช่องว่าง
-UI_CONTINUE,Continue,เล่นต่อ
-UI_RENAME,Rename,เปลี่ยนชื่อ
-UI_DELETE_PROFILE,Delete profile,ลบโปรไฟล์
-UI_RENAME_PROMPT,What should we call you instead?,อยากให้เราเรียกคุณว่าอะไรแทน
-UI_HIT_ON_GHOST,Hit on the ghost,กดตรงลูกศรจาง
+UI_CONTINUE,Continue,เล่น​ต่อ
+UI_RENAME,Rename,เปลี่ยน​ชื่อ
+UI_DELETE_PROFILE,Delete profile,ลบ​โปรไฟล์
+UI_RENAME_PROMPT,What should we call you instead?,อยาก​ให้​เรา​เรียก​คุณ​ว่า​อะไร​แทน
+UI_HIT_ON_GHOST,Hit on the ghost,กด​ตรง​ลูกศร​จาง
 UI_PAUSE,Pause,หยุดชั่วคราว
 UI_START,Start,เริ่ม
-UI_DEFAULT_NAME,Remi,เรมี
-UI_NAME_NOTE,"Type your name · Thai or English · leave empty for ""Remi""","พิมพ์ชื่อของคุณ · ไทยหรืออังกฤษ · เว้นว่างไว้จะใช้ ""เรมี"""
+UI_DEFAULT_NAME,Remi,เร​มี
+UI_NAME_NOTE,"Type your name · Thai or English · leave empty for ""Remi""","พิมพ์​ชื่อ​ของ​คุณ · ไทย​หรือ​อังกฤษ · เว้น​ว่าง​ไว้​จะ​ใช้ ""เร​มี"""
 UI_RESULT_SUB,%s · %s,%s · %s
-UI_LBL_MONSTER_HP,Skeptical meter left,ความกังขาที่เหลือ
-UI_WIN_LINE,win line %d%%,เส้นชนะ %d%%
-UI_CONVINCED,%s has no doubts left.,%s หมดข้อสงสัยแล้ว
-UI_JOINED,%s joined your party!,%s เข้าร่วมทีมของคุณแล้ว!
-UI_NOTES_HIT,Notes hit,โน้ตที่กดถูก
+UI_LBL_MONSTER_HP,Skeptical meter left,ความกังขา​ที่เหลือ
+UI_WIN_LINE,win line %d%%,เส้น​ชนะ %d%%
+UI_CONVINCED,%s has no doubts left.,%s หมด​ข้อสงสัย​แล้ว
+UI_JOINED,%s joined your party!,%s เข้าร่วม​ทีม​ของ​คุณ​แล้ว!
+UI_NOTES_HIT,Notes hit,โน้ต​ที่​กด​ถูก
 UI_LBL_STARS,Stars,ดาว
 UI_REWARDS,Rewards,รางวัล
-UI_RETRY,Retry for a better run,ลองใหม่ให้ดีกว่าเดิม
+UI_RETRY,Retry for a better run,ลอง​ใหม่​ให้​ดีกว่า​เดิม
 UI_J_PERFECT,Perfect,เป๊ะ
 UI_J_GREAT,Great,เยี่ยม
 UI_J_GOOD,Good,ดี
 UI_J_MISS,Miss,พลาด
-UI_BACK_TO_MAP,Back to map,กลับไปที่แผนที่
-UI_RETRY_SHORT,Retry,ลองใหม่
-UI_STILL_DOUBTS,%s still has their doubts.,%s ยังคงเคลือบแคลงใจอยู่
-UI_FAIL_REASON,"Their meter was still at %s%%. You needed it under %d%%.",ความกังขายังอยู่ที่ %s%% คุณต้องทำให้ต่ำกว่า %d%%
-UI_NO_REWARD,none this time. Progress on other stages is not lost.,ยังไม่มีรางวัล ความคืบหน้าด่านอื่นไม่หายไป
-UI_SETTINGS_NOTE,changes apply and save immediately,การเปลี่ยนแปลงจะถูกบันทึกทันที
+UI_BACK_TO_MAP,Back to map,กลับไป​ที่​แผนที่
+UI_RETRY_SHORT,Retry,ลอง​ใหม่
+UI_STILL_DOUBTS,%s still has their doubts.,%s ยังคง​เคลือบแคลง​ใจ​อยู่
+UI_FAIL_REASON,"Their meter was still at %s%%. You needed it under %d%%.",ความกังขา​ยัง​อยู่​ที่ %s%% คุณ​ต้อง​ทำให้​ต่ำกว่า %d%%
+UI_NO_REWARD,none this time. Progress on other stages is not lost.,ยัง​ไม่มี​รางวัล ความคืบหน้า​ด่าน​อื่น​ไม่​หายไป
+UI_SETTINGS_NOTE,changes apply and save immediately,การเปลี่ยนแปลง​จะ​ถูก​บันทึก​ทันที
 UI_SET_MUSIC,Music volume,เสียงเพลง
-UI_SET_SFX,Sound effects,เสียงประกอบ
-UI_SET_SPEED,Note speed,ความเร็วโน้ต
-UI_SET_FULLSCREEN,Fullscreen,เต็มจอ
-UI_SET_CONTROLS,Controls,ปุ่มควบคุม
+UI_SET_SFX,Sound effects,เสียง​ประกอบ
+UI_SET_SPEED,Note speed,ความเร็ว​โน้ต
+UI_SET_FULLSCREEN,Fullscreen,เต็ม​จอ
+UI_SET_CONTROLS,Controls,ปุ่ม​ควบคุม
 UI_ON,ON,เปิด
 UI_OFF,OFF,ปิด
 UI_OPEN_ARROW,Open ›,เปิด ›
 UI_ADJUST,Adjust,ปรับ
 UI_ADJUST_HINT,adjust,ปรับ
-UI_SET_OFFSET,Audio offset,ชดเชยเสียง
+UI_SET_OFFSET,Audio offset,ชดเชย​เสียง
 UI_MS,%+d ms,%+d ms
-UI_OFFSET_ON,%+d ms · the arrow is on the line when the beat plays,%+d ms · ลูกศรอยู่ตรงเส้นพอดีตอนจังหวะดัง
-UI_OFFSET_PAST,"%+d ms · the arrow is %d px past the line when the beat plays, so you press early",%+d ms · ลูกศรเลยเส้นไป %d px ตอนจังหวะดัง คุณจึงต้องกดเร็วขึ้น
-UI_OFFSET_SHORT,"%+d ms · the arrow is %d px short of the line when the beat plays, so you press late",%+d ms · ลูกศรยังไม่ถึงเส้น %d px ตอนจังหวะดัง คุณจึงต้องกดช้าลง
+UI_OFFSET_ON,%+d ms · the arrow is on the line when the beat plays,%+d ms · ลูกศร​อยู่​ตรง​เส้น​พอดี​ตอน​จังหวะ​ดัง
+UI_OFFSET_PAST,"%+d ms · the arrow is %d px past the line when the beat plays, so you press early",%+d ms · ลูกศร​เลย​เส้น​ไป %d px ตอน​จังหวะ​ดัง คุณ​จึง​ต้อง​กด​เร็ว​ขึ้น
+UI_OFFSET_SHORT,"%+d ms · the arrow is %d px short of the line when the beat plays, so you press late",%+d ms · ลูกศร​ยัง​ไม่ถึง​เส้น %d px ตอน​จังหวะ​ดัง คุณ​จึง​ต้อง​กด​ช้า​ลง
 UI_NEXT,Next,ถัดไป
-UI_SKIP_CHAPTER,Skip chapter,ข้ามบท
-UI_TIP_LANES,Arrows slide towards the line on the right. Press the matching key as they arrive.,ลูกศรจะเลื่อนไปทางเส้นด้านขวา กดปุ่มให้ตรงทิศตอนที่ลูกศรมาถึงเส้น
-UI_TIP_TIMING,"The closer to the line you press, the better the hit counts.",ยิ่งกดตอนลูกศรใกล้เส้นมากเท่าไร ผลที่ได้ก็ยิ่งดีมากเท่านั้น
-UI_TIP_COMBO,Keep hitting without missing to build the combo beside the line.,กดให้ติดต่อกันโดยไม่พลาด เพื่อสะสมคอมโบที่แสดงอยู่ข้างเส้น
-UI_LBL_BEST_COMBO,Best combo,คอมโบสูงสุด
-UI_TIP_SONGBAR,"This bar fills as the song plays, so you can see how far through you are.",แถบนี้จะเต็มขึ้นเรื่อย ๆ ตามเพลงที่เล่น ทำให้รู้ว่าเหลืออีกไกลแค่ไหน
-UI_TIP_HEALTH,In a real stage this is how much fight your opponent has left. Hitting arrows wears it down past the line.,ในด่านจริง แถบนี้คือกำลังใจที่เหลืออยู่ของคู่แข่ง การกดลูกศรให้ถูกจะลดมันลงจนต่ำกว่าเส้น
-UI_ACH_FIRST_STEP,First step,ก้าวแรก
-UI_ACH_FIRST_STEP_D,Overall stars 4,ได้ดาวรวม 4 ดวง
-UI_ACH_HALF_WAY,Half way through,มาได้ครึ่งทางแล้ว
-UI_ACH_HALF_WAY_D,Overall stars 8,ได้ดาวรวม 8 ดวง
-UI_ACH_RISING_STAR,The rising star,ดาวรุ่งพุ่งแรง
-UI_ACH_RISING_STAR_D,Earn three stars for all stages.,ได้สามดาวครบทุกด่าน
+UI_SKIP_CHAPTER,Skip chapter,ข้าม​บท
+UI_TIP_LANES,Arrows slide towards the line on the right. Press the matching key as they arrive.,ลูกศร​จะ​เลื่อน​ไป​ทาง​เส้น​ด้าน​ขวา กดปุ่ม​ให้​ตรง​ทิศ​ตอน​ที่​ลูกศร​มาถึง​เส้น
+UI_TIP_TIMING,"The closer to the line you press, the better the hit counts.",ยิ่ง​กด​ตอน​ลูกศร​ใกล้​เส้น​มาก​เท่าไร ผล​ที่​ได้​ก็​ยิ่ง​ดีมาก​เท่านั้น
+UI_TIP_COMBO,Keep hitting without missing to build the combo beside the line.,กด​ให้​ติดต่อกัน​โดยไม่​พลาด เพื่อ​สะสม​คอมโบ​ที่​แสดง​อยู่​ข้าง​เส้น
+UI_LBL_BEST_COMBO,Best combo,คอมโบ​สูงสุด
+UI_TIP_SONGBAR,"This bar fills as the song plays, so you can see how far through you are.",แถบ​นี้​จะ​เต็ม​ขึ้น​เรื่อย ๆ ตาม​เพลง​ที่​เล่น ทำให้​รู้ว่า​เหลือ​อีก​ไกล​แค่​ไหน
+UI_TIP_HEALTH,In a real stage this is how much fight your opponent has left. Hitting arrows wears it down past the line.,ใน​ด่าน​จริง แถบ​นี้​คือ​กำลังใจ​ที่เหลือ​อยู่​ของ​คู่แข่ง การกด​ลูกศร​ให้​ถูก​จะ​ลด​มัน​ลง​จน​ต่ำกว่า​เส้น
+UI_ACH_FIRST_STEP,First step,ก้าว​แรก
+UI_ACH_FIRST_STEP_D,Overall stars 4,ได้​ดาว​รวม 4 ดวง
+UI_ACH_HALF_WAY,Half way through,มา​ได้​ครึ่งทาง​แล้ว
+UI_ACH_HALF_WAY_D,Overall stars 8,ได้​ดาว​รวม 8 ดวง
+UI_ACH_RISING_STAR,The rising star,ดาวรุ่ง​พุ่ง​แรง
+UI_ACH_RISING_STAR_D,Earn three stars for all stages.,ได้​สาม​ดาว​ครบ​ทุก​ด่าน
 UI_ACH_SHARP_EARS,Sharp ears,หูไว
-UI_ACH_SHARP_EARS_D,Got more than 30 combo in any song,ทำคอมโบเกิน 30 ในเพลงใดก็ได้
-UI_ACH_CUT_A_RUG,Cut a rug!,ลีลาเด็ด!
-UI_ACH_CUT_A_RUG_D,Didn't get MISS or GOOD in any song,จบเพลงโดยไม่มี MISS หรือ GOOD เลย
-UI_ACH_ELION,"Fantastic, Sir Remi!",ยอดเยี่ยมมาก ท่านเรมี่!
-UI_ACH_ELION_D,You got approved by Elion!,เอลิออนยอมรับคุณแล้ว!
+UI_ACH_SHARP_EARS_D,Got more than 30 combo in any song,ทำ​คอมโบ​เกิน 30 ใน​เพลง​ใด​ก็ได้
+UI_ACH_CUT_A_RUG,Cut a rug!,ลีลา​เด็ด!
+UI_ACH_CUT_A_RUG_D,Didn't get MISS or GOOD in any song,จบ​เพลง​โดย​ไม่มี MISS หรือ GOOD เลย
+UI_ACH_ELION,"Fantastic, Sir Remi!",ยอดเยี่ยม​มาก ท่าน​เร​มี่!
+UI_ACH_ELION_D,You got approved by Elion!,เอ​ลิ​ออ​น​ยอมรับ​คุณ​แล้ว!
 UI_ACH_THEO,Woah…!,ว้าว…!
-UI_ACH_THEO_D,You got approved by Theo...!,ธีโอยอมรับคุณแล้ว...!
-UI_ACH_CASSIA,...Not bad.,...ก็ไม่เลวนี่
-UI_ACH_CASSIA_D,You got... approved? by Cassia.,แคสเซียยอมรับคุณ... มั้งนะ
-UI_ACH_UNLOCKED,Unlocked · %s,ปลดล็อกแล้ว · %s
+UI_ACH_THEO_D,You got approved by Theo...!,ธี​โอย​อม​รับ​คุณ​แล้ว...!
+UI_ACH_CASSIA,...Not bad.,...ก็​ไม่เลว​นี่
+UI_ACH_CASSIA_D,You got... approved? by Cassia.,แค​สเซีย​ยอมรับ​คุณ... มั้ง​นะ
+UI_ACH_UNLOCKED,Unlocked · %s,ปลด​ล็อก​แล้ว · %s
 UI_ACH_COUNT,%d / %d,%d / %d
 UI_SCROLL,Scroll,เลื่อน
-UI_SUMMARY_TITLE,Chapter summary,เรื่องย่อของบทนี้
-UI_SKIP_STAY,Keep reading,อ่านต่อ
-UI_SUMMARY_V1_1,"Remi hears about the festival's dancing contest but learns he needs a team of four. He searches all day, but everyone ignores him or is afraid of him, and he finally collapses, discouraged. [b]Elion Theran[/b], a young elf paladin, finds him, understands his squeaks, and offers to join without hesitation. Curious to see a rat dance, Elion asks for a performance.",เรมี่ได้ข่าวเรื่องงานประกวดเต้นรำ การประกวดต้องเป็นทีมสมาชิกสี่คน เรมี่พยายามตามหาคนมาร่วมทีมทั้งวันแต่ก็ไม่มีใครสนใจเรมี่เลย ระหว่างที่เรมี่กำลังเศร้าเสียใจ เรมี่ก็ได้พบกับ[b]เอลิออน เทรัน[/b] เอลฟ์อัศวินศักด์สิทธิ์ที่พร้อมจะเข้าร่วมทีมของเรมี่โดยไม่ลังเล! เขาได้ขอให้เรมี่ลองแสดงให้เขาดูด้วยความใคร่รู้
-UI_SUMMARY_V1_2,"Elion praises Remi's dance and officially joins, but they still need two more members. [b]Theo[/b], a green-haired elf mage and an old acquaintance of Elion's, crashes into Elion while rushing to sign up for the contest himself, since he needs the gold for his research. Elion and Remi convince him to team up. Inside his head, Theo panics over talking rats, dancing rats, and his own prejudices. Wanting to win, he asks to see Remi's skills first.",เอลิออนชมการแสดงของเรมี่และตกลงเข้าร่วมทีมทันที! แต่ถึงอย่างนั้นทีมของพวกเขาก็ยังขาดสมาชิกอีกสองคน ทันใดนั้น [b]ธีโอ[/b] นักเวทเอลฟ์ผมสีเขียว ก็พุ่งเข้ามาชนเอลิออนอย่างจัง! พวกเขาพบว่าธีโอกำลังรีบไปลงทะเบียนการประกวดเพื่อหวังเงินรางวัลไปเป็นทุนวิจัยเวทมนต์ ทั้งสองจึงขอให้ธีโอร่วมทีมกับพวกเขา ธีโอต้องการที่จะชนะรางวัล จึงขอให้เรมี่ลองแสดงความสามารถให้ชม
-UI_SUMMARY_V1_3,"Impressed, Theo joins, and the team needs one last member. Elion has no idea who that could be, but Theo remembers someone quick, precise, and perfectly balanced. They find [b]Cassia[/b], a tiefling rogue, but she refuses to join a contest, especially a team led by a rat. Elion defends Remi, Theo suggests she watch him dance first, and Cassia agrees.",ธีโอตัดสินใจร่วมทีมกับพวกเรมี่ด้วยความประทับใจ พวกเขาขาดสมาชิกอีกเพียงคนเดียวเท่านั้น ธีโอนึกได้ว่าระหว่างทางเขาเห็น[b]แคสเซีย[/b] ทีฟลิ่งโจรผู้มีฝีเท้าว่องไวและการเคลื่อนไหวคล่องแคล่ว พวกเขาตัดสินใจจะไปชวนเธอเข้าร่วมทีม แต่เมื่อพวกเขาได้เจอแคสเซีย เธอกลับปฏิเสธที่จะเข้าร่วมทีมที่นำโดยหนูตัวจ้อยอย่างไร้เยื่อใย ธีโอเสนอให้เธอลองดูการแสดงของเรมี่ก่อนสักครั้งแล้วค่อยตัดสินใจ
-UI_SUMMARY_V1_4,"After a tense silence, Cassia admits Remi is better than she expected, and joins the team. The group of four is finally complete: Remi the rat with his big dream, [b]Elion[/b] the kind-hearted paladin, [b]Theo[/b] the thoughtful mage, and [/b]Cassia the fierce rogue. They set off toward the festival, where the dancing contest is waiting for them, and perhaps the beginning of something much greater.",หลังจากเงียบไปครู่หนึ่ง แคสเซียก็ยอมรับว่าเรมี่มีความสามารถกว่าที่เธอคิดไว้และยอมเข้าร่วมทีม ในที่สุดทีมของ[b]เรมี่[/b] เจ้าหนูตัวน้อยผู้มีความฝัน [b]เอลิออน[/b] อัศวินศักดิ์สิทธิ์ผู้ใจดี [b]ธีโอ[/b] นักเวทช่างคิด และ[b]แคสเซีย[/b] โจรแสนทะนงตน ก็พร้อมที่จะเข้าร่วมการประกวดแล้ว! พวกเขามุ่งหน้าสู่ลานประกวด สถานที่ที่มีความท้าทายมากมายรอพวกเขาอยู่
-UI_S1_1_50,You’ve got this!,สู้เขาท่านเรมี่!
-UI_S1_1_30,You’re truly a dancer!,สมกับเป็นยอดนักเต้น!
-UI_S1_1_0,"Fantastic, Sir Remi!",ยอดเยี่ยมมาก ท่านเรมี่!
-UI_S1_2_50, Keep it up!, อีกนิดเดียว!
+UI_SUMMARY_TITLE,Chapter summary,เรื่องย่อ​ของ​บท​นี้
+UI_SKIP_STAY,Keep reading,อ่าน​ต่อ
+UI_SUMMARY_V1_1,"Remi hears about the festival's dancing contest but learns he needs a team of four. He searches all day, but everyone ignores him or is afraid of him, and he finally collapses, discouraged. [b]Elion Theran[/b], a young elf paladin, finds him, understands his squeaks, and offers to join without hesitation. Curious to see a rat dance, Elion asks for a performance.",เร​มี่​ได้ข่าว​เรื่อง​งาน​ประกวด​เต้นรำ การประกวด​ต้อง​เป็น​ทีม​สมาชิก​สี่​คน เร​มี่​พยายาม​ตามหา​คน​มา​ร่วม​ทีม​ทั้งวัน​แต่​ก็​ไม่มีใคร​สนใจ​เร​มี่​เลย ระหว่าง​ที่​เร​มี่​กำลัง​เศร้า​เสียใจ เร​มี่​ก็ได้​พบ​กับ[b]เอ​ลิ​ออ​น เท​รัน[/b] เอลฟ์​อัศวิน​ศักด์​สิทธิ์​ที่​พร้อม​จะ​เข้าร่วม​ทีม​ของ​เร​มี่​โดยไม่​ลังเล! เขา​ได้​ขอให้​เร​มี่​ลอง​แสดง​ให้​เขา​ดู​ด้วย​ความใคร่​รู้
+UI_SUMMARY_V1_2,"Elion praises Remi's dance and officially joins, but they still need two more members. [b]Theo[/b], a green-haired elf mage and an old acquaintance of Elion's, crashes into Elion while rushing to sign up for the contest himself, since he needs the gold for his research. Elion and Remi convince him to team up. Inside his head, Theo panics over talking rats, dancing rats, and his own prejudices. Wanting to win, he asks to see Remi's skills first.",เอ​ลิ​ออ​น​ชม​การแสดง​ของ​เร​มี่​และ​ตกลง​เข้าร่วม​ทีม​ทันที! แต่​ถึง​อย่างนั้น​ทีม​ของ​พวกเขา​ก็​ยัง​ขาด​สมาชิก​อีก​สอง​คน ทันใดนั้น [b]ธีโอ[/b] นัก​เวท​เอลฟ์​ผม​สี​เขียว ก็​พุ่ง​เข้ามา​ชน​เอ​ลิ​ออ​นอ​ย่าง​จัง! พวกเขา​พบว่า​ธีโอ​กำลัง​รีบ​ไป​ลงทะเบียน​การประกวด​เพื่อ​หวัง​เงินรางวัล​ไป​เป็น​ทุนวิจัย​เวทมนต์ ทั้งสอง​จึง​ขอให้​ธีโอ​ร่วม​ทีม​กับ​พวกเขา ธีโอ​ต้องการ​ที่​จะ​ชนะ​รางวัล จึง​ขอให้​เร​มี่​ลอง​แสดงความสามารถ​ให้​ชม
+UI_SUMMARY_V1_3,"Impressed, Theo joins, and the team needs one last member. Elion has no idea who that could be, but Theo remembers someone quick, precise, and perfectly balanced. They find [b]Cassia[/b], a tiefling rogue, but she refuses to join a contest, especially a team led by a rat. Elion defends Remi, Theo suggests she watch him dance first, and Cassia agrees.",ธีโอ​ตัดสินใจ​ร่วม​ทีม​กับ​พวก​เร​มี่​ด้วย​ความประทับใจ พวกเขา​ขาด​สมาชิก​อีก​เพียง​คนเดียว​เท่านั้น ธีโอ​นึกได้​ว่า​ระหว่างทาง​เขา​เห็น[b]แค​สเซีย[/b] ที​ฟลิ่ง​โจร​ผู้​มี​ฝีเท้า​ว่องไว​และ​การเคลื่อนไหว​คล่องแคล่ว พวกเขา​ตัดสินใจ​จะ​ไป​ชวน​เธอ​เข้าร่วม​ทีม แต่​เมื่อ​พวกเขา​ได้​เจอ​แค​สเซีย เธอ​กลับ​ปฏิเสธ​ที่​จะ​เข้าร่วม​ทีม​ที่​นำ​โดย​หนู​ตัว​จ้อย​อย่าง​ไร้​เยื่อใย ธีโอ​เสนอ​ให้​เธอ​ลองดู​การแสดง​ของ​เร​มี่​ก่อน​สักครั้ง​แล้ว​ค่อย​ตัดสินใจ
+UI_SUMMARY_V1_4,"After a tense silence, Cassia admits Remi is better than she expected, and joins the team. The group of four is finally complete: Remi the rat with his big dream, [b]Elion[/b] the kind-hearted paladin, [b]Theo[/b] the thoughtful mage, and [/b]Cassia the fierce rogue. They set off toward the festival, where the dancing contest is waiting for them, and perhaps the beginning of something much greater.",หลังจาก​เงียบ​ไป​ครู่หนึ่ง แค​สเซีย​ก็​ยอมรับ​ว่า​เร​มี่​มี​ความสามารถ​กว่า​ที่​เธอ​คิด​ไว้​และ​ยอม​เข้าร่วม​ทีม ใน​ที่สุด​ทีม​ของ[b]เร​มี่[/b] เจ้า​หนู​ตัว​น้อย​ผู้​มี​ความฝัน [b]เอ​ลิ​ออ​น[/b] อัศวิน​ศักดิ์สิทธิ์​ผู้​ใจดี [b]ธีโอ[/b] นัก​เวท​ช่างคิด และ[b]แค​สเซีย[/b] โจร​แสน​ทะนงตน ก็​พร้อม​ที่​จะ​เข้าร่วม​การประกวด​แล้ว! พวกเขา​มุ่งหน้า​สู่​ลาน​ประกวด สถานที่​ที่​มี​ความท้าทาย​มากมาย​รอ​พวกเขา​อยู่
+UI_S1_1_50,You’ve got this!,สู้​เขา​ท่าน​เร​มี่!
+UI_S1_1_30,You’re truly a dancer!,สม​กับ​เป็นยอด​นัก​เต้น!
+UI_S1_1_0,"Fantastic, Sir Remi!",ยอดเยี่ยม​มาก ท่าน​เร​มี่!
+UI_S1_2_50, Keep it up!, อีก​นิดเดียว!
 UI_S1_2_30, !!!, !!!
 UI_S1_2_0, Whoa…!, ว้าว…!
-UI_S1_3_50, Still immature, เจ้ายังอ่อนหัดนัก
+UI_S1_3_50, Still immature, เจ้า​ยัง​อ่อนหัด​นัก
 UI_S1_3_30, Hmph…?, หืม…?
-UI_S1_3_0, …Not bad, …ก็ไม่เลวนี่
+UI_S1_3_0, …Not bad, …ก็​ไม่เลว​นี่
 UI_QUOTED,“%s”,“%s”
-UI_GO,GO!,ไปเลย!
-UI_NODE_TUTORIAL,Tutorial,บทฝึกหัด
+UI_GO,GO!,ไป​เลย!
+UI_NODE_TUTORIAL,Tutorial,บท​ฝึกหัด
 UI_NODE_STORY_1,Story 1,เนื้อเรื่อง 1
 UI_NODE_STORY_2,Story 2,เนื้อเรื่อง 2
 UI_NODE_STORY_3,Story 3,เนื้อเรื่อง 3
 UI_NODE_STORY_4,Story 4,เนื้อเรื่อง 4
-UI_NAME_ELION,Elion,เอลิออน
+UI_NAME_ELION,Elion,เอ​ลิ​ออ​น
 UI_NAME_THEO,Theo,ธีโอ
-UI_NAME_CASSIA,Cassia,แคสเซีย
-UI_NAME_REMI,Remi,เรมี่
-UI_JOB_REMI,Dancer,นักเต้น
-UI_JOB_ELION,Paladin,อัศวินศักดิ์สิทธิ์
-UI_JOB_THEO,Mage,นักเวท
+UI_NAME_CASSIA,Cassia,แค​สเซีย
+UI_NAME_REMI,Remi,เร​มี่
+UI_JOB_REMI,Dancer,นัก​เต้น
+UI_JOB_ELION,Paladin,อัศวิน​ศักดิ์สิทธิ์
+UI_JOB_THEO,Mage,นัก​เวท
 UI_JOB_CASSIA,Rogue,โจร
 UI_CTRL_ACTION,Action,การกระทำ
-UI_CTRL_KEYBOARD,Keyboard,แป้นพิมพ์
-UI_CTRL_PAD,Gamepad / dance pad,จอย / แผ่นเต้น
+UI_CTRL_KEYBOARD,Keyboard,แป้น​พิมพ์
+UI_CTRL_PAD,Gamepad / dance pad,จอย / แผ่น​เต้น
 UI_CTRL_UP,Up,ขึ้น
 UI_CTRL_LEFT,Left,ซ้าย
 UI_CTRL_RIGHT,Right,ขวา
 UI_CTRL_DOWN,Down,ลง
 UI_CTRL_CONFIRM,Confirm,ยืนยัน
 UI_CTRL_BACK,Back,ย้อนกลับ
-UI_CTRL_PRESS,Press a key or a gamepad button… (Esc cancels),กดปุ่มบนแป้นพิมพ์หรือจอย… (Esc เพื่อยกเลิก)
-UI_CTRL_RESET,Reset to default,คืนค่าเริ่มต้น
-UI_CTRL_PAD_ON,Gamepad connected,เชื่อมต่อจอยแล้ว
-UI_CTRL_PAD_OFF,No gamepad,ไม่พบจอย
-UI_CTRL_NOTE,"One row is one action. Press Enter on a row, then press what you want: a key changes the keyboard column, a pad button changes the other. The arrow keys always work as well.",หนึ่งแถวคือหนึ่งการกระทำ กด Enter ที่แถว แล้วกดปุ่มที่ต้องการ ปุ่มลูกศรใช้ได้เสมอ
+UI_CTRL_PRESS,Press a key or a gamepad button… (Esc cancels),กดปุ่ม​บน​แป้น​พิมพ์​หรือ​จอย… (Esc เพื่อ​ยกเลิก)
+UI_CTRL_RESET,Reset to default,คืน​ค่าเริ่มต้น
+UI_CTRL_PAD_ON,Gamepad connected,เชื่อมต่อ​จอย​แล้ว
+UI_CTRL_PAD_OFF,No gamepad,ไม่​พบ​จอย
+UI_CTRL_NOTE,"One row is one action. Press Enter on a row, then press what you want: a key changes the keyboard column, a pad button changes the other. The arrow keys always work as well.",หนึ่ง​แถว​คือ​หนึ่ง​การกระทำ กด Enter ที่​แถว แล้ว​กดปุ่ม​ที่​ต้องการ ปุ่ม​ลูกศร​ใช้ได้​เสมอ
 UI_CHANGE,Change,เปลี่ยน
-UI_CTRL_TAKEN,"%s already uses that. Try another.",ปุ่มนี้ %s ใช้อยู่แล้ว ลองปุ่มอื่น
-UI_CTRL_FIXED,the game,ตัวเกม
+UI_CTRL_TAKEN,"%s already uses that. Try another.",ปุ่ม​นี้ %s ใช้​อยู่แล้ว ลอง​ปุ่ม​อื่น
+UI_CTRL_FIXED,the game,ตัว​เกม
 UI_CTRL_USE,Use,ใช้
-UI_ACH_GOT,Achievement earned,ได้รับความสำเร็จ
+UI_ACH_GOT,Achievement earned,ได้​รับ​ความสำเร็จ
 UI_NEW_RECORD,New record!,ทำลายสถิติ!
 UI_CHEAT_PASS,Pass,ผ่าน
-UI_CHEAT_FAIL,Fail,ไม่ผ่าน
+UI_CHEAT_FAIL,Fail,ไม่​ผ่าน
