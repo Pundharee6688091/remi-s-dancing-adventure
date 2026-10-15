@@ -81,7 +81,7 @@ func _wire_name_panel() -> void:
 	# A LineEdit eats the down key itself, so the neighbour below is never
 	# consulted. Taking it here is what actually gets out of the field.
 	_name_edit.gui_input.connect(func(e: InputEvent) -> void:
-		if e.is_action_pressed("ui_down"):
+		if _steps_down(e):
 			_name_edit.accept_event()
 			start.grab_focus())
 
@@ -166,6 +166,18 @@ func _select(slot: int) -> void:
 func _enter_panel(slot: int) -> void:
 	_pending_slot = slot
 	%Continue.grab_focus()
+
+
+## Down out of the name field, by the arrow or the pad, and nothing else.
+## The menus answer to S as well as the down arrow, since the controls page
+## lets a lane key drive a menu, but while a field has the focus a letter is
+## a letter: otherwise a name with an S in it could not be typed at all.
+static func _steps_down(e: InputEvent) -> bool:
+	if not e.is_pressed() or e.is_echo():
+		return false
+	if e is InputEventKey:
+		return (e as InputEventKey).physical_keycode == KEY_DOWN
+	return e is InputEventJoypadButton and e.is_action_pressed("ui_down")
 
 
 ## Every way off Quit goes back to one card, because it is the only thing on
