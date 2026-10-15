@@ -113,7 +113,7 @@ UI_NAME_NOTE,"Type your name · Thai or English · leave empty for ""Remi""","�
 UI_RESULT_SUB,%s · %s,%s · %s
 UI_LBL_MONSTER_HP,Skeptical meter left,ความกังขาที่เหลือ
 UI_WIN_LINE,win line %d%%,เส้นชนะ %d%%
-UI_TOO_TIRED,%s is too tired to keep fighting.,%s เหนื่อยเกินกว่าจะสู้ต่อแล้ว
+UI_CONVINCED,%s has no doubts left.,%s หมดข้อสงสัยแล้ว
 UI_JOINED,%s joined your party!,%s เข้าร่วมทีมของคุณแล้ว!
 UI_NOTES_HIT,Notes hit,โน้ตที่กดถูก
 UI_LBL_STARS,Stars,ดาว
@@ -125,7 +125,7 @@ UI_J_GOOD,Good,ดี
 UI_J_MISS,Miss,พลาด
 UI_BACK_TO_MAP,Back to map,กลับไปที่แผนที่
 UI_RETRY_SHORT,Retry,ลองใหม่
-UI_STILL_FIGHT,%s can still fight. Try again!,%s ยังสู้ไหว ลองใหม่อีกครั้ง!
+UI_STILL_DOUBTS,%s still has their doubts.,%s ยังไม่หายสงสัย
 UI_FAIL_REASON,"Their meter was still at %s%%. You needed it under %d%%.",ความกังขายังอยู่ที่ %s%% คุณต้องทำให้ต่ำกว่า %d%%
 UI_NO_REWARD,none this time. Progress on other stages is not lost.,ยังไม่มีรางวัล ความคืบหน้าด่านอื่นไม่หายไป
 UI_SETTINGS_NOTE,changes apply and save immediately,การเปลี่ยนแปลงจะถูกบันทึกทันที

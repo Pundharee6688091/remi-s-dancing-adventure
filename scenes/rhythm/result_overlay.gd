@@ -111,7 +111,7 @@ func _fill(r: Dictionary) -> void:
 		# What they actually said this run beats anything written about them.
 		%Flavour.text = tr("UI_QUOTED") % tr(r.last_quote)
 	elif won:
-		%Flavour.text = tr("UI_TOO_TIRED") % named
+		%Flavour.text = tr("UI_CONVINCED") % named
 	else:
 		# A losing run already has the reason under this line, in numbers.
 		# Cheering the player on above it only said the same thing twice.
