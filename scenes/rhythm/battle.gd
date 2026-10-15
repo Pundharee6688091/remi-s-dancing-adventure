@@ -150,10 +150,41 @@ func _process(delta: float) -> void:
 	_squish(enemy, _enemy_pose, ENEMY_SCALE, _beat_pulse(now, ENEMY_BEAT_SHIFT))
 
 
+## Straight to the pass or the fail screen, for showing either of them
+## without playing the stage out. Function keys, so they cannot collide with
+## anything the controls page lets the player rebind.
+const CHEAT_PASS := KEY_F5
+const CHEAT_FAIL := KEY_F6
+
+
+## Only while running from the editor, or on the demo profile. An exported
+## release build handed to a playtester has neither, so nobody stumbles into
+## it mid-song and wonders what happened.
+func _cheats_on() -> bool:
+	return OS.is_debug_build() or SaveManager.is_cheat(GameManager.save)
+
+
+## Put the meter where the win line wants it, then go down the same path the
+## end of the song takes, so the result screen is built the usual way and the
+## run is banked the usual way.
+func _cheat_end(pass_it: bool) -> void:
+	judge.hp = 0.0 if pass_it else 100.0
+	Events.hp_changed.emit(judge.hp)
+	song.stop()
+	_on_song_finished()
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	# Settings is a full overlay and owns every key while it is up.
 	if settings_overlay.visible:
 		return
+	if state == State.PLAYING and _cheats_on() and event is InputEventKey \
+			and event.is_pressed() and not event.is_echo():
+		var code: int = (event as InputEventKey).physical_keycode
+		if code == CHEAT_PASS or code == CHEAT_FAIL:
+			get_viewport().set_input_as_handled()
+			_cheat_end(code == CHEAT_PASS)
+			return
 	match state:
 		State.PLAYING:
 			if event.is_action_pressed("ui_cancel"):
@@ -582,8 +613,12 @@ func _on_language_changed() -> void:
 
 
 func _set_hints() -> void:
-	%Hints.set_hints([[["W", "A", "S", "D", "↑", "←", "↓", "→"], tr("UI_HIT_ON_GHOST")],
-		["Esc", tr("UI_PAUSE"), _pause]])
+	var hints: Array = [[["W", "A", "S", "D", "↑", "←", "↓", "→"],
+		tr("UI_HIT_ON_GHOST")], ["Esc", tr("UI_PAUSE"), _pause]]
+	if _cheats_on():
+		hints.append(["F5", tr("UI_CHEAT_PASS")])
+		hints.append(["F6", tr("UI_CHEAT_FAIL")])
+	%Hints.set_hints(hints)
 
 
 ## An open overlay brings its own hints, so the battle's would double up.

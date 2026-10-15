@@ -125,7 +125,7 @@ UI_J_GOOD,Good,ดี
 UI_J_MISS,Miss,พลาด
 UI_BACK_TO_MAP,Back to map,กลับไปที่แผนที่
 UI_RETRY_SHORT,Retry,ลองใหม่
-UI_STILL_DOUBTS,%s still has their doubts.,%s ยังไม่หายสงสัย
+UI_STILL_DOUBTS,%s still has their doubts.,%s ยังคงเคลือบแคลงใจอยู่
 UI_FAIL_REASON,"Their meter was still at %s%%. You needed it under %d%%.",ความกังขายังอยู่ที่ %s%% คุณต้องทำให้ต่ำกว่า %d%%
 UI_NO_REWARD,none this time. Progress on other stages is not lost.,ยังไม่มีรางวัล ความคืบหน้าด่านอื่นไม่หายไป
 UI_SETTINGS_NOTE,changes apply and save immediately,การเปลี่ยนแปลงจะถูกบันทึกทันที
@@ -221,3 +221,5 @@ UI_CTRL_FIXED,the game,ตัวเกม
 UI_CTRL_USE,Use,ใช้
 UI_ACH_GOT,Achievement earned,ได้รับความสำเร็จ
 UI_NEW_RECORD,New record!,ทำลายสถิติ!
+UI_CHEAT_PASS,Pass,ผ่าน
+UI_CHEAT_FAIL,Fail,ไม่ผ่าน
