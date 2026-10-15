@@ -113,9 +113,8 @@ func _fill(r: Dictionary) -> void:
 	elif won:
 		%Flavour.text = tr("UI_CONVINCED") % named
 	else:
-		# A losing run already has the reason under this line, in numbers.
-		# Cheering the player on above it only said the same thing twice.
-		%Flavour.text = ""
+		# The reason underneath is the numbers; this is the person.
+		%Flavour.text = tr("UI_STILL_DOUBTS") % named
 	%Reason.text = "" if won else tr("UI_FAIL_REASON") % [Rules.hp_text(r.hp), win_at]
 
 	%Join.visible = won and opponent != ""
