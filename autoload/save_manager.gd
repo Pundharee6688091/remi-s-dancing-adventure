@@ -3,10 +3,8 @@ extends Node
 const SLOTS := 3
 const VERSION := 1
 
-## A profile under this name has every stage open from the start, for showing
-## the game off without playing through it first. It is not a save: it is
-## wiped when the game closes, and again on the way up in case the game was
-## killed rather than closed, so it can never be mistaken for real progress.
+## A profile under this name has every stage open from the start, it is
+## wiped when the game closes.
 const CHEAT_NAME := "PISHITJAI"
 const DEFAULTS := {"stars": {}, "best_hp": {}, "best_combo": {},
 	"achievements": {}, "full_combo": [], "seen": [], "party": []}
@@ -16,9 +14,6 @@ func _ready() -> void:
 	_wipe_cheats()
 
 
-## Autoloads leave the tree as the game shuts down, which covers both the
-## window being closed and the Quit button, where a close notification only
-## covers the first.
 func _exit_tree() -> void:
 	_wipe_cheats()
 

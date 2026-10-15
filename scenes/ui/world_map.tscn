@@ -4,9 +4,10 @@
 [ext_resource type="Script" uid="uid://ckxi82468krt2" path="res://scenes/ui/map_view.gd" id="2_mv"]
 [ext_resource type="Script" uid="uid://bxoedpfs1ey4h" path="res://scenes/rhythm/bar.gd" id="3_bar"]
 [ext_resource type="Script" uid="uid://batawi1qqiibp" path="res://scenes/ui/parts/hint_bar.gd" id="4_hb"]
+[ext_resource type="Texture2D" uid="uid://dx7v202gr0o6u" path="res://songs/A Mage's Foehn/Enemy.png" id="5_6o1hw"]
 [ext_resource type="PackedScene" path="res://scenes/ui/stage_detail.tscn" id="5_sd"]
 [ext_resource type="Script" uid="uid://diybsjmk6s61x" path="res://scenes/ui/parts/gear_icon.gd" id="6_gear"]
-[ext_resource type="PackedScene" path="res://scenes/ui/settings.tscn" id="7_set"]
+[ext_resource type="PackedScene" uid="uid://b2hc4igh8p6of" path="res://scenes/ui/settings.tscn" id="7_set"]
 
 [sub_resource type="StyleBoxFlat" id="info_box"]
 content_margin_left = 14.0
@@ -14,14 +15,6 @@ content_margin_top = 14.0
 content_margin_right = 14.0
 content_margin_bottom = 14.0
 bg_color = Color(1, 1, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.16862746, 0.16862746, 0.16862746, 1)
-
-[sub_resource type="StyleBoxFlat" id="slot"]
-bg_color = Color(0.9019608, 0.8901961, 0.8627451, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -131,6 +124,7 @@ offset_bottom = 62.0
 theme_override_font_sizes/font_size = 32
 text = "UI_WORLD_MAP"
 vertical_alignment = 1
+
 [node name="ProgressLabel" type="Label" parent="." unique_id=790394993]
 layout_mode = 1
 offset_left = 190.0
@@ -140,8 +134,9 @@ offset_bottom = 54.0
 theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 theme_override_font_sizes/font_size = 18
 text = "UI_PROGRESS"
-vertical_alignment = 1
 horizontal_alignment = 2
+vertical_alignment = 1
+
 [node name="ProgressBar" type="Control" parent="." unique_id=921008568]
 unique_name_in_owner = true
 layout_mode = 1
@@ -165,6 +160,7 @@ offset_bottom = 54.0
 theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 theme_override_font_sizes/font_size = 18
 vertical_alignment = 1
+
 [node name="Party" type="Label" parent="." unique_id=430376987]
 unique_name_in_owner = true
 layout_mode = 1
@@ -176,6 +172,7 @@ theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 theme_override_font_sizes/font_size = 18
 horizontal_alignment = 2
 vertical_alignment = 1
+
 [node name="Gear" type="Button" parent="." unique_id=1463360885]
 unique_name_in_owner = true
 layout_mode = 1
@@ -211,16 +208,23 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 20
 
-[node name="Art" type="PanelContainer" parent="InfoCard/Row" unique_id=1734557316]
+[node name="Art" type="TextureRect" parent="InfoCard/Row" unique_id=1807372014]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(110, 76)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_styles/panel = SubResource("slot")
+texture = ExtResource("5_6o1hw")
+expand_mode = 2
+stretch_mode = 6
 
 [node name="Who" type="Label" parent="InfoCard/Row/Art" unique_id=1733547526]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 0
+offset_left = 2.0
+offset_top = 27.0
+offset_right = 108.0
+offset_bottom = 48.0
 theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 theme_override_font_sizes/font_size = 15
 horizontal_alignment = 1
@@ -247,10 +251,9 @@ theme_override_font_sizes/font_size = 26
 [node name="Kind" type="Label" parent="InfoCard/Row/Text/TitleRow" unique_id=1554385348]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 4
-vertical_alignment = 1
 theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 theme_override_font_sizes/font_size = 17
+vertical_alignment = 1
 
 [node name="Line" type="Label" parent="InfoCard/Row/Text" unique_id=68726800]
 unique_name_in_owner = true

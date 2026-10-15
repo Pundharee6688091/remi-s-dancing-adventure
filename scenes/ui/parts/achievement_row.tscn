@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://l8hr56jxajil"]
 
+[ext_resource type="PackedScene" uid="uid://d3e6vwtvemahm" path="res://scenes/ui/parts/remi_done_not_done.tscn" id="1_4716x"]
+
 [sub_resource type="StyleBoxFlat" id="row"]
 content_margin_left = 24.0
 content_margin_top = 16.0
@@ -21,11 +23,9 @@ theme_override_styles/panel = SubResource("row")
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="Complete?" type="ColorRect" parent="Row" unique_id=366523636]
+[node name="RemiDoneNotDone" parent="Row" unique_id=947837759 instance=ExtResource("1_4716x")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-color = Color(0.8089983, 0.8089983, 0.8089982, 1)
 
 [node name="Text" type="VBoxContainer" parent="Row" unique_id=1281385655]
 layout_mode = 2

@@ -35,8 +35,8 @@
 	  ],
 	  "requires": [],
 	  "pos": [
-		130,
-		260
+		70,
+		250
 	  ],
 	  "song": "Remi's Song",
 	  "opponent": "",
@@ -57,7 +57,7 @@
 	  ],
 	  "pos": [
 		200,
-		340
+		350
 	  ],
 	  "summary": "UI_SUMMARY_V1_1"
 	},

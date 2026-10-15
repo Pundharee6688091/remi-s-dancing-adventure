@@ -6,6 +6,8 @@ const ROW := preload("res://scenes/ui/parts/achievement_row.tscn")
 const MONTHS := ["UI_MON_1", "UI_MON_2", "UI_MON_3", "UI_MON_4", "UI_MON_5", "UI_MON_6",
 	"UI_MON_7", "UI_MON_8", "UI_MON_9", "UI_MON_10", "UI_MON_11", "UI_MON_12"]
 
+const REMI_DONE = preload("res://Others/Achievement_done.png")
+const REMI_NOT_DONE = preload("res://Others/Achievement_notdone.png")
 
 func _ready() -> void:
 	_set_hints()
@@ -56,14 +58,13 @@ func _row_for(entry: Dictionary) -> Control:
 	if Achievements.is_earned(id):
 		state.text = tr("UI_ACH_UNLOCKED") % _pretty(Achievements.earned_on(id))
 		state.add_theme_color_override("font_color", Palette.AMBER_INK)
-		row.get_node("%Complete?").color = Color(Palette.AMBER)
 	else:
 		state.text = "%d%%" % roundi(Achievements.progress(entry) * 100.0)
 		state.add_theme_color_override("font_color", Palette.MUTED)
 		# a swatch, not a word, so it keeps the light grey rather than the
 		# darker one secondary text uses now
-		row.get_node("%Complete?").color = Color(Palette.HAIRLINE)
 		row.modulate.a = 0.75
+	row.get_node("%RemiDoneNotDone")._done(Achievements.is_earned(id))
 	return row
 
 

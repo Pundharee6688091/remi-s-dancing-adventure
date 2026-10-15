@@ -1,11 +1,11 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://b2hc4igh8p6of"]
 
-[ext_resource type="Script" path="res://scenes/ui/settings.gd" id="1_set"]
-[ext_resource type="Script" path="res://scenes/rhythm/bar.gd" id="2_bar"]
-[ext_resource type="Script" path="res://scenes/ui/parts/hint_bar.gd" id="3_hb"]
-[ext_resource type="Script" path="res://scenes/ui/parts/offset_preview.gd" id="4_prev"]
+[ext_resource type="Script" uid="uid://vahpbieq2bjr" path="res://scenes/ui/settings.gd" id="1_set"]
+[ext_resource type="Script" uid="uid://bxoedpfs1ey4h" path="res://scenes/rhythm/bar.gd" id="2_bar"]
+[ext_resource type="Script" uid="uid://batawi1qqiibp" path="res://scenes/ui/parts/hint_bar.gd" id="3_hb"]
+[ext_resource type="Script" uid="uid://djmkfg7qqkcos" path="res://scenes/ui/parts/offset_preview.gd" id="4_prev"]
 
-[node name="Settings" type="Control"]
+[node name="Settings" type="Control" unique_id=2015410805]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_set")
 
-[node name="Bg" type="ColorRect" parent="."]
+[node name="Bg" type="ColorRect" parent="." unique_id=1846914383]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +23,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.96862745, 0.9607843, 0.9411765, 1)
 
-[node name="Header" type="HBoxContainer" parent="."]
+[node name="Header" type="HBoxContainer" parent="." unique_id=1170142203]
 layout_mode = 1
 offset_left = 32.0
 offset_top = 18.0
@@ -31,21 +31,19 @@ offset_right = 1248.0
 offset_bottom = 68.0
 theme_override_constants/separation = 20
 
-[node name="Title" type="Label" parent="Header"]
+[node name="Title" type="Label" parent="Header" unique_id=541986096]
 layout_mode = 2
-size_flags_vertical = 4
-vertical_alignment = 1
 theme_override_font_sizes/font_size = 40
 text = "UI_SETTINGS"
-
-[node name="Note" type="Label" parent="Header"]
-layout_mode = 2
-size_flags_vertical = 4
 vertical_alignment = 1
+
+[node name="Note" type="Label" parent="Header" unique_id=2027573201]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 text = "UI_SETTINGS_NOTE"
+vertical_alignment = 1
 
-[node name="Rows" type="VBoxContainer" parent="."]
+[node name="Rows" type="VBoxContainer" parent="." unique_id=1576716474]
 layout_mode = 1
 offset_left = 40.0
 offset_top = 88.0
@@ -53,24 +51,23 @@ offset_right = 1240.0
 offset_bottom = 560.0
 theme_override_constants/separation = 10
 
-[node name="Music" type="PanelContainer" parent="Rows"]
+[node name="Music" type="PanelContainer" parent="Rows" unique_id=1561400038]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
 theme_type_variation = &"Row"
 
-[node name="Box" type="HBoxContainer" parent="Rows/Music"]
+[node name="Box" type="HBoxContainer" parent="Rows/Music" unique_id=1484422854]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Key" type="Label" parent="Rows/Music/Box"]
+[node name="Key" type="Label" parent="Rows/Music/Box" unique_id=220083571]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_font_sizes/font_size = 21
 text = "UI_SET_MUSIC"
 
-[node name="Bar" type="Control" parent="Rows/Music/Box"]
+[node name="Bar" type="Control" parent="Rows/Music/Box" unique_id=487526409]
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -78,36 +75,33 @@ size_flags_vertical = 4
 script = ExtResource("2_bar")
 fill_color = Color(0.169, 0.169, 0.169, 1)
 
-[node name="Value" type="Label" parent="Rows/Music/Box"]
+[node name="Value" type="Label" parent="Rows/Music/Box" unique_id=856960034]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
-size_flags_vertical = 4
 
-[node name="Hint" type="Label" parent="Rows/Music/Box"]
+[node name="Hint" type="Label" parent="Rows/Music/Box" unique_id=2109128020]
 custom_minimum_size = Vector2(84, 0)
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_colors/font_color = Color(0.7372549, 0.29411766, 0.17254902, 1)
 theme_override_font_sizes/font_size = 15
 
-[node name="Sfx" type="PanelContainer" parent="Rows"]
+[node name="Sfx" type="PanelContainer" parent="Rows" unique_id=2001149863]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
 theme_type_variation = &"Row"
 
-[node name="Box" type="HBoxContainer" parent="Rows/Sfx"]
+[node name="Box" type="HBoxContainer" parent="Rows/Sfx" unique_id=349828574]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Key" type="Label" parent="Rows/Sfx/Box"]
+[node name="Key" type="Label" parent="Rows/Sfx/Box" unique_id=1180672829]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_font_sizes/font_size = 21
 text = "UI_SET_SFX"
 
-[node name="Bar" type="Control" parent="Rows/Sfx/Box"]
+[node name="Bar" type="Control" parent="Rows/Sfx/Box" unique_id=452829325]
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -115,36 +109,33 @@ size_flags_vertical = 4
 script = ExtResource("2_bar")
 fill_color = Color(0.169, 0.169, 0.169, 1)
 
-[node name="Value" type="Label" parent="Rows/Sfx/Box"]
+[node name="Value" type="Label" parent="Rows/Sfx/Box" unique_id=687829707]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
-size_flags_vertical = 4
 
-[node name="Hint" type="Label" parent="Rows/Sfx/Box"]
+[node name="Hint" type="Label" parent="Rows/Sfx/Box" unique_id=36835734]
 custom_minimum_size = Vector2(84, 0)
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_colors/font_color = Color(0.7372549, 0.29411766, 0.17254902, 1)
 theme_override_font_sizes/font_size = 15
 
-[node name="Speed" type="PanelContainer" parent="Rows"]
+[node name="Speed" type="PanelContainer" parent="Rows" unique_id=867656268]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
 theme_type_variation = &"Row"
 
-[node name="Box" type="HBoxContainer" parent="Rows/Speed"]
+[node name="Box" type="HBoxContainer" parent="Rows/Speed" unique_id=269038779]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Key" type="Label" parent="Rows/Speed/Box"]
+[node name="Key" type="Label" parent="Rows/Speed/Box" unique_id=2100512941]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_font_sizes/font_size = 21
 text = "UI_SET_SPEED"
 
-[node name="Bar" type="Control" parent="Rows/Speed/Box"]
+[node name="Bar" type="Control" parent="Rows/Speed/Box" unique_id=2124908996]
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -152,36 +143,33 @@ size_flags_vertical = 4
 script = ExtResource("2_bar")
 fill_color = Color(0.169, 0.169, 0.169, 1)
 
-[node name="Value" type="Label" parent="Rows/Speed/Box"]
+[node name="Value" type="Label" parent="Rows/Speed/Box" unique_id=908450894]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
-size_flags_vertical = 4
 
-[node name="Hint" type="Label" parent="Rows/Speed/Box"]
+[node name="Hint" type="Label" parent="Rows/Speed/Box" unique_id=141037058]
 custom_minimum_size = Vector2(84, 0)
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_colors/font_color = Color(0.7372549, 0.29411766, 0.17254902, 1)
 theme_override_font_sizes/font_size = 15
 
-[node name="Offset" type="PanelContainer" parent="Rows"]
+[node name="Offset" type="PanelContainer" parent="Rows" unique_id=378205311]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
 theme_type_variation = &"Row"
 
-[node name="Box" type="HBoxContainer" parent="Rows/Offset"]
+[node name="Box" type="HBoxContainer" parent="Rows/Offset" unique_id=168876288]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Key" type="Label" parent="Rows/Offset/Box"]
+[node name="Key" type="Label" parent="Rows/Offset/Box" unique_id=2105428834]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_font_sizes/font_size = 21
 text = "UI_SET_OFFSET"
 
-[node name="Bar" type="Control" parent="Rows/Offset/Box"]
+[node name="Bar" type="Control" parent="Rows/Offset/Box" unique_id=746831945]
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -189,127 +177,114 @@ size_flags_vertical = 4
 script = ExtResource("2_bar")
 fill_color = Color(0.169, 0.169, 0.169, 1)
 
-[node name="Value" type="Label" parent="Rows/Offset/Box"]
+[node name="Value" type="Label" parent="Rows/Offset/Box" unique_id=352624649]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
-size_flags_vertical = 4
 
-[node name="Hint" type="Label" parent="Rows/Offset/Box"]
+[node name="Hint" type="Label" parent="Rows/Offset/Box" unique_id=2134730612]
 custom_minimum_size = Vector2(84, 0)
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_colors/font_color = Color(0.7372549, 0.29411766, 0.17254902, 1)
 theme_override_font_sizes/font_size = 15
 
-[node name="Language" type="PanelContainer" parent="Rows"]
+[node name="Language" type="PanelContainer" parent="Rows" unique_id=943298562]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
 theme_type_variation = &"Row"
 
-[node name="Box" type="HBoxContainer" parent="Rows/Language"]
+[node name="Box" type="HBoxContainer" parent="Rows/Language" unique_id=318707491]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Key" type="Label" parent="Rows/Language/Box"]
+[node name="Key" type="Label" parent="Rows/Language/Box" unique_id=1035758799]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_font_sizes/font_size = 21
 text = "UI_LANGUAGE"
 
-[node name="Push" type="Control" parent="Rows/Language/Box"]
+[node name="Push" type="Control" parent="Rows/Language/Box" unique_id=1189398528]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="OptA" type="Label" parent="Rows/Language/Box"]
+[node name="OptA" type="Label" parent="Rows/Language/Box" unique_id=1851952943]
 layout_mode = 2
-size_flags_vertical = 4
 theme_type_variation = &"Choice"
 text = "English"
 
-[node name="OptB" type="Label" parent="Rows/Language/Box"]
+[node name="OptB" type="Label" parent="Rows/Language/Box" unique_id=533166607]
 layout_mode = 2
-size_flags_vertical = 4
 theme_type_variation = &"Choice"
 text = "ภาษาไทย"
 
-[node name="Hint" type="Label" parent="Rows/Language/Box"]
+[node name="Hint" type="Label" parent="Rows/Language/Box" unique_id=1698811959]
 custom_minimum_size = Vector2(84, 0)
 layout_mode = 2
-size_flags_vertical = 4
 
-[node name="Fullscreen" type="PanelContainer" parent="Rows"]
+[node name="Fullscreen" type="PanelContainer" parent="Rows" unique_id=1925654013]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
 theme_type_variation = &"Row"
 
-[node name="Box" type="HBoxContainer" parent="Rows/Fullscreen"]
+[node name="Box" type="HBoxContainer" parent="Rows/Fullscreen" unique_id=1271033605]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Key" type="Label" parent="Rows/Fullscreen/Box"]
+[node name="Key" type="Label" parent="Rows/Fullscreen/Box" unique_id=883620294]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_font_sizes/font_size = 21
 text = "UI_SET_FULLSCREEN"
 
-[node name="Push" type="Control" parent="Rows/Fullscreen/Box"]
+[node name="Push" type="Control" parent="Rows/Fullscreen/Box" unique_id=1473913300]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="OptA" type="Label" parent="Rows/Fullscreen/Box"]
+[node name="OptA" type="Label" parent="Rows/Fullscreen/Box" unique_id=757086808]
 layout_mode = 2
-size_flags_vertical = 4
 theme_type_variation = &"Choice"
 text = "UI_ON"
 
-[node name="OptB" type="Label" parent="Rows/Fullscreen/Box"]
+[node name="OptB" type="Label" parent="Rows/Fullscreen/Box" unique_id=1070142723]
 layout_mode = 2
-size_flags_vertical = 4
 theme_type_variation = &"Choice"
 text = "UI_OFF"
 
-[node name="Hint" type="Label" parent="Rows/Fullscreen/Box"]
+[node name="Hint" type="Label" parent="Rows/Fullscreen/Box" unique_id=1768517546]
 custom_minimum_size = Vector2(84, 0)
 layout_mode = 2
-size_flags_vertical = 4
 
-[node name="Controls" type="PanelContainer" parent="Rows"]
+[node name="Controls" type="PanelContainer" parent="Rows" unique_id=1319893523]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
 theme_type_variation = &"Row"
 
-[node name="Box" type="HBoxContainer" parent="Rows/Controls"]
+[node name="Box" type="HBoxContainer" parent="Rows/Controls" unique_id=797537599]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Key" type="Label" parent="Rows/Controls/Box"]
+[node name="Key" type="Label" parent="Rows/Controls/Box" unique_id=1306764830]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_font_sizes/font_size = 21
 text = "UI_SET_CONTROLS"
 
-[node name="Push" type="Control" parent="Rows/Controls/Box"]
+[node name="Push" type="Control" parent="Rows/Controls/Box" unique_id=1712732922]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Open" type="Label" parent="Rows/Controls/Box"]
+[node name="Open" type="Label" parent="Rows/Controls/Box" unique_id=1186094009]
 layout_mode = 2
-size_flags_vertical = 4
 theme_type_variation = &"Choice"
 text = "UI_OPEN_ARROW"
 
-[node name="Hint" type="Label" parent="Rows/Controls/Box"]
+[node name="Hint" type="Label" parent="Rows/Controls/Box" unique_id=412615158]
 custom_minimum_size = Vector2(84, 0)
 layout_mode = 2
-size_flags_vertical = 4
 
-[node name="PreviewCaption" type="Label" parent="."]
+[node name="PreviewCaption" type="Label" parent="." unique_id=769232175]
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = 40.0
@@ -319,9 +294,10 @@ offset_bottom = 578.0
 theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 theme_override_font_sizes/font_size = 15
 
-[node name="Preview" type="Control" parent="."]
+[node name="Preview" type="Control" parent="." unique_id=1971704976]
 unique_name_in_owner = true
 layout_mode = 1
+anchors_preset = 0
 offset_left = 40.0
 offset_top = 582.0
 offset_right = 1240.0
@@ -329,8 +305,9 @@ offset_bottom = 644.0
 mouse_filter = 2
 script = ExtResource("4_prev")
 
-[node name="Hints" type="Control" parent="."]
+[node name="Hints" type="Control" parent="." unique_id=128456723]
 unique_name_in_owner = true
 layout_mode = 1
+anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("3_hb")

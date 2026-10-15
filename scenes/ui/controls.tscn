@@ -1,9 +1,9 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://b7uj71o8ktujf"]
 
-[ext_resource type="Script" path="res://scenes/ui/controls.gd" id="1_ctl"]
-[ext_resource type="Script" path="res://scenes/ui/parts/hint_bar.gd" id="2_hb"]
+[ext_resource type="Script" uid="uid://bu32tk5iysb0w" path="res://scenes/ui/controls.gd" id="1_ctl"]
+[ext_resource type="Script" uid="uid://batawi1qqiibp" path="res://scenes/ui/parts/hint_bar.gd" id="2_hb"]
 
-[node name="Controls" type="Control"]
+[node name="Controls" type="Control" unique_id=1588857245]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ctl")
 
-[node name="Title" type="Label" parent="."]
+[node name="Title" type="Label" parent="." unique_id=653711611]
 layout_mode = 1
 offset_left = 40.0
 offset_top = 24.0
@@ -22,7 +22,7 @@ theme_override_font_sizes/font_size = 40
 text = "UI_SET_CONTROLS"
 vertical_alignment = 1
 
-[node name="PadDot" type="ColorRect" parent="."]
+[node name="PadDot" type="ColorRect" parent="." unique_id=1387582655]
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = 452.0
@@ -31,7 +31,7 @@ offset_right = 462.0
 offset_bottom = 55.0
 mouse_filter = 2
 
-[node name="PadLine" type="Label" parent="."]
+[node name="PadLine" type="Label" parent="." unique_id=1092640783]
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = 472.0
@@ -42,7 +42,7 @@ theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 theme_override_font_sizes/font_size = 18
 vertical_alignment = 1
 
-[node name="Rule" type="ColorRect" parent="."]
+[node name="Rule" type="ColorRect" parent="." unique_id=1215417065]
 layout_mode = 1
 offset_left = 40.0
 offset_top = 84.0
@@ -51,7 +51,7 @@ offset_bottom = 86.0
 mouse_filter = 2
 color = Color(0.16862746, 0.16862746, 0.16862746, 1)
 
-[node name="Head" type="HBoxContainer" parent="."]
+[node name="Head" type="HBoxContainer" parent="." unique_id=1713387556]
 layout_mode = 1
 offset_left = 56.0
 offset_top = 96.0
@@ -60,28 +60,28 @@ offset_bottom = 118.0
 mouse_filter = 2
 theme_override_constants/separation = 16
 
-[node name="A" type="Label" parent="Head"]
+[node name="A" type="Label" parent="Head" unique_id=843392437]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 theme_override_font_sizes/font_size = 14
 text = "UI_CTRL_ACTION"
 
-[node name="K" type="Label" parent="Head"]
+[node name="K" type="Label" parent="Head" unique_id=704553048]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 theme_override_font_sizes/font_size = 14
 text = "UI_CTRL_KEYBOARD"
 
-[node name="P" type="Label" parent="Head"]
+[node name="P" type="Label" parent="Head" unique_id=1455826831]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.34901962, 0.34117648, 0.32156864, 1)
 theme_override_font_sizes/font_size = 14
 text = "UI_CTRL_PAD"
 
-[node name="Rows" type="VBoxContainer" parent="."]
+[node name="Rows" type="VBoxContainer" parent="." unique_id=154474521]
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = 40.0
@@ -90,18 +90,18 @@ offset_right = 1240.0
 offset_bottom = 500.0
 theme_override_constants/separation = 8
 
-[node name="Reset" type="Button" parent="."]
+[node name="Reset" type="Button" parent="." unique_id=1259224943]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(240, 44)
 layout_mode = 1
-focus_mode = 0
 offset_left = 40.0
 offset_top = 516.0
 offset_right = 280.0
 offset_bottom = 560.0
+focus_mode = 0
 text = "UI_CTRL_RESET"
 
-[node name="Note" type="Label" parent="."]
+[node name="Note" type="Label" parent="." unique_id=1418804818]
 layout_mode = 1
 offset_left = 40.0
 offset_top = 576.0
@@ -112,8 +112,9 @@ theme_override_font_sizes/font_size = 15
 text = "UI_CTRL_NOTE"
 autowrap_mode = 3
 
-[node name="Hints" type="Control" parent="."]
+[node name="Hints" type="Control" parent="." unique_id=335043298]
 unique_name_in_owner = true
 layout_mode = 1
+anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("2_hb")

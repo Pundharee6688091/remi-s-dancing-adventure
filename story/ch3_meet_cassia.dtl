@@ -7,39 +7,39 @@ set {cassia_name} = "???"
 narrator: Once again, Remi finished his dance beautifully, this time under Theo's amazed gaze. #id:32
 narrator: theo stared at him in disbelief, clearly impressed by what he had just witnessed. #id:33
 
-join theo (Surprised) leftmost
-theo (Surprised): Whoa- #id:34
-theo (Thinking): I must admit, I had my doubts at first... but you really are good at this, Mr. Remi. #id:35
+join Theo (Surprised) leftmost
+Theo (Surprised): Whoa- #id:34
+Theo (Thinking): I must admit, I had my doubts at first... but you really are good at this, Mr. Remi. #id:35
 join elion (Default) right
 elion (Default): Just as I expected from Sir Remi! Another wonderful performance! #id:36
 join remi (Please) left
 remi (Please): Squeak! #id:37
-theo (Default): Then it's settled. Count me in as another member of your team. #id:38
-theo (Smile): I hope we'll get along well. #id:39
+Theo (Default): Then it's settled. Count me in as another member of your team. #id:38
+Theo (Smile): I hope we'll get along well. #id:39
 elion (Smile): Thank you very much! #id:3a
 remi (Happy): Squeak! Squeak!! #id:3b
-theo (Default): So… what now? #id:3c
+Theo (Default): So… what now? #id:3c
 elion (Determined): We have three members now, so we are nearly there! Let us go find the final member of our group! #id:3d
-theo (Thinking): Hmm… #id:3e
-theo (Default): And do you have any idea who that last person might be? #id:3f
+Theo (Thinking): Hmm… #id:3e
+Theo (Default): And do you have any idea who that last person might be? #id:3f
 elion (Default): From the bottom of my heart, I can confidently say… #id:40
 elion (Smile): I have absolutely no idea! #id:41
 remi (Sad): …squeak… #id:42
-theo (Crashout): …I see. #id:43
+Theo (Crashout): …I see. #id:43
 
 narrator: The three of them stood there in silence, staring at one another without a single idea coming to mind. #id:44
 narrator: After a long moment, Theo was the first to speak. #id:45
 
-theo (Thinking): ...Actually, I think I might know someone. #id:46
+Theo (Thinking): ...Actually, I think I might know someone. #id:46
 remi (Confused): Squeak...? #id:47
-theo (Default): Before I ran into you two, I saw someone wandering around nearby. #id:48
-theo (Thinking): She's incredibly quick on her feet, with sharp reflexes, perfect balance, and precise movements... Honestly, those skills would be perfect for dancing. #id:49
-theo (Default): If we can convince her to join us, I think we would have a pretty good chance of winning this contest. #id:4a
+Theo (Default): Before I ran into you two, I saw someone wandering around nearby. #id:48
+Theo (Thinking): She's incredibly quick on her feet, with sharp reflexes, perfect balance, and precise movements... Honestly, those skills would be perfect for dancing. #id:49
+Theo (Default): If we can convince her to join us, I think we would have a pretty good chance of winning this contest. #id:4a
 elion (Determined): Oh! Then we must find her at once! #id:4b
-theo (Thinking): Yeah... but, uh... we should probably be a little careful when we approach her. #id:4c
+Theo (Thinking): Yeah... but, uh... we should probably be a little careful when we approach her. #id:4c
 elion (Confused): Careful? #id:4d
-theo (Default): Well, she can be... uhh… #id:4e
-theo (Crashout): Intense…? #id:4f
+Theo (Default): Well, she can be... uhh… #id:4e
+Theo (Crashout): Intense…? #id:4f
 
 narrator: And so, the three of them set off in search of the mysterious woman Theo had spoken of. #id:50
 
@@ -52,18 +52,18 @@ narrator: After a short while, Theo suddenly slowed his pace and looked ahead. #
 
 join elion right
 join remi left 
-join theo leftmost 
-theo (Default): ...There. #id:53
+join Theo leftmost 
+Theo (Default): ...There. #id:53
 
 narrator: A red-skinned tiefling stood with her back to them, white hair shifting above a dark scarf draped like a short cloak as she quietly searched the area. #id:54
 narrator: With her back turned to them, none of them could see her face. #id:55
 narrator: While the group stood there in silence, Theo cautiously stepped forward. #id:56
 
-theo: Hey, Cas- #id:57
+Theo: Hey, Cas- #id:57
 
 narrator: Suddenly, in an instant, she vanished from sight. #id:58
 
-theo (Surprised): Huh-?! #id:59
+Theo (Surprised): Huh-?! #id:59
 
 join cassia (Intimidate) rightmost 
 
@@ -71,7 +71,7 @@ narrator: Before anyone could react, that tiefling was already behind him, a bla
 
 elion (Surprised): Sir Theo!!! #id:5b
 remi (Surprised): Squeak!!! #id:5c
-theo (Shocked): !!! #id:5d
+Theo (Shocked): !!! #id:5d
 
 narrator: The mysterious tiefling paused at Theo's terrified reaction before immediately lowering her weapon. #id:5e
 
@@ -80,7 +80,7 @@ cassia (Default): Oh- it's just you. #id:5f
 narrator: As if nothing had happened, the dagger vanished from sight just as quickly as it had appeared. #id:60
 narrator: Standing before them now was an intimidating-looking tiefling, her eyes hidden beneath a dark blindfold. #id:61
 
-theo (Crashout): …!!! #id:62
+Theo (Crashout): …!!! #id:62
 elion (Smile): Ah! Lady Cassia! So it really is you. We meet again! #id:63
 
 # Elion says her name here, so the name box stops saying ??? from this point on.
@@ -91,10 +91,10 @@ remi: Squeak?! #id:64
 narrator: Somehow, it seemed Elion knew this intimidating tiefling as well. #id:65
 narrator: At this point, Remi was beginning to wonder just how many people Elion knew. #id:66
 
-theo (Shocked): Uh- Umm… Ahem-! #id:67
-theo (Default): Um, Mr. Remi, this is [b]Cassia[/b]. She is- well… a [b]rogue[/b] I and Elion have met from our earlier missio- #id:68
+Theo (Shocked): Uh- Umm… Ahem-! #id:67
+Theo (Default): Um, Mr. Remi, this is [b]Cassia[/b]. She is- well… a [b]rogue[/b] I and Elion have met from our earlier missio- #id:68
 cassia (Default): State your purpose. #id:69
-theo (Shocked): …! #id:6a
+Theo (Shocked): …! #id:6a
 elion (Determined): We heard that this festival is hosting a dancing contest, so we have been searching for another member to join our team! #id:6b
 elion (Default): There are three of us so far. If you joined us, our team would finally be complete. #id:6c
 cassia: Three? #id:6d
@@ -109,9 +109,9 @@ elion (Smile): This is Sir Remi, the finest dancer I have ever had the honor of 
 remi (Happy): Squeak! #id:74
 cassia (Disapproved): … #id:75
 cassia (Default): I am going to ignore the fact that you can apparently talk to a rat and move on. #id:76
-theo (Crashout): (!!! Thank god. I'm not the only one wondering how the hell Elion can understand a rat!!!) #id:77
+Theo (Crashout): (!!! Thank god. I'm not the only one wondering how the hell Elion can understand a rat!!!) #id:77
 cassia: So you came all this way just to ask if I would join a dancing contest? #id:78
-theo (Default): ...Exactly. #id:79
+Theo (Default): ...Exactly. #id:79
 elion (Default): With your remarkable speed and precision, I am certain you would be a great addition to our- #id:7a
 cassia: I refuse. #id:7b
 remi (Surprised): Squeak?!! #id:7c
@@ -124,14 +124,14 @@ elion: Lady Cassia, please reconsider. #id:82
 elion: Sir Remi has worked very hard for this opportunity. I truly believe he deserves a chance. #id:83
 remi (Please): Squeak… #id:84
 cassia (Surprised): And why should that matter to me? #id:85
-theo (Thinking): U-Um... maybe… #id:86
-theo (Default): Maybe you could watch him dance first…? #id:87
+Theo (Thinking): U-Um... maybe… #id:86
+Theo (Default): Maybe you could watch him dance first…? #id:87
 cassia (Intimidate): …What? #id:88
-theo (Shocked): J-Just once! Then you can decide after that. #id:89
-theo (Crashout): (Please…! For my research fund…!) #id:8a
+Theo (Shocked): J-Just once! Then you can decide after that. #id:89
+Theo (Crashout): (Please…! For my research fund…!) #id:8a
 cassia (Disapproved): Hm… #id:8b
 elion: Please, Lady Cassia. #id:8c
-theo (Default): Y- Yes! Please… #id:8d
+Theo (Default): Y- Yes! Please… #id:8d
 remi (Please): Squeak! #id:8e
 cassia (Default): … #id:8f
 cassia: If this rat is really as good as you two claim, then prove it to me. #id:90

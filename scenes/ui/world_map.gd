@@ -95,7 +95,9 @@ func _sync_card() -> void:
 	var fight: bool = n.get("type") == "fight"
 
 	var who: String = n.get("opponent", "")
-	%Who.text = Rules.character_name(who)
+	var song: String = n.get("song", "")
+	%Art.texture = Rules.enemy_art(song) if who != "" else null
+	%Art.visible = %Art.texture != null
 	%Title.text = tr(String(n.get("label", "UI_STORY")))
 	%Kind.text = tr("UI_DOT_FIGHT") if fight else tr("UI_DOT_STORY")
 
@@ -108,6 +110,7 @@ func _sync_card() -> void:
 			tr("UI_CLEARED") if GameManager.stars_for(id) > 0 else tr("UI_NOT_CLEARED")]
 	else:
 		%Line.text = tr("UI_SEEN") if GameManager.is_cleared(id) else tr("UI_NOT_SEEN")
+
 
 
 ## Chart title and audio length, looked up once per song.

@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://d3e6vwtvemahm"]
+
+[ext_resource type="Script" uid="uid://do0i3yc4ikkjq" path="res://scenes/ui/parts/remi_done_not_done.gd" id="1_dxhkc"]
+[ext_resource type="Texture2D" uid="uid://dlq5txoqp78fa" path="res://Others/Achievement_notdone.png" id="2_1g30s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q8b88"]
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(0.169, 0.169, 0.169, 1)
+
+[node name="RemiDoneNotDone" type="PanelContainer" unique_id=947837759]
+propagate_maximum_size = false
+offset_right = 100.0
+offset_bottom = 100.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_q8b88")
+script = ExtResource("1_dxhkc")
+
+[node name="Complete" type="ColorRect" parent="." unique_id=1519738652]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+color = Color(0.8089983, 0.8089983, 0.8089982, 1)
+
+[node name="RemiIcon" type="TextureRect" parent="Complete" unique_id=1964652190]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_1g30s")
+expand_mode = 2

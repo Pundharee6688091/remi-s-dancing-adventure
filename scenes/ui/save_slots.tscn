@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d2lwnjgnj2x6t"]
 
 [ext_resource type="Script" uid="uid://cc71rb3ax76hf" path="res://scenes/ui/save_slots.gd" id="1_ss"]
+[ext_resource type="Texture2D" uid="uid://1f2tlg5qvf8v" path="res://backgrounds/grass.webp" id="2_yfu6b"]
 [ext_resource type="PackedScene" path="res://scenes/ui/parts/confirm_box.tscn" id="3_cf"]
 [ext_resource type="Script" uid="uid://batawi1qqiibp" path="res://scenes/ui/parts/hint_bar.gd" id="4_hb"]
 [ext_resource type="Script" uid="uid://fo864rkagmm8" path="res://scenes/ui/parts/dashed_box.gd" id="5_dash"]
@@ -17,6 +18,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ss")
+
+[node name="Bg" type="TextureRect" parent="." unique_id=548895250]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_yfu6b")
+expand_mode = 2
 
 [node name="Title" type="Label" parent="." unique_id=324419421]
 layout_mode = 1
@@ -74,7 +85,7 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
-window = Rect2(87, 150, 1351, 889)
+window = Rect2(87, 300, 1351, 1200)
 
 [node name="Filled" type="PanelContainer" parent="Row/Slot1/Pad/Box/Art" unique_id=1900364345]
 visible = false
@@ -165,7 +176,7 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
-window = Rect2(87, 150, 1351, 889)
+window = Rect2(87, 300, 1351, 1200)
 
 [node name="Filled" type="PanelContainer" parent="Row/Slot2/Pad/Box/Art" unique_id=320485858]
 visible = false
@@ -256,7 +267,7 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
-window = Rect2(87, 150, 1351, 889)
+window = Rect2(87, 300, 1351, 1200)
 
 [node name="Filled" type="PanelContainer" parent="Row/Slot3/Pad/Box/Art" unique_id=319063628]
 visible = false
@@ -356,6 +367,17 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"Danger"
 text = "UI_DELETE_PROFILE"
+
+[node name="ExitGame" type="Button" parent="." unique_id=568734459]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 700.0
+offset_top = 578.0
+offset_right = 868.0
+offset_bottom = 626.0
+focus_mode = 0
+theme_type_variation = &"Danger"
+text = "UI_QUIT"
 
 [node name="NamePanel" type="Control" parent="." unique_id=420199284]
 unique_name_in_owner = true
@@ -476,17 +498,6 @@ layout_mode = 1
 anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("4_hb")
-
-[node name="ExitGame" type="Button" parent="." unique_id=568734459]
-unique_name_in_owner = true
-layout_mode = 1
-offset_left = 700.0
-offset_top = 578.0
-offset_right = 868.0
-offset_bottom = 626.0
-focus_mode = 0
-theme_type_variation = &"Danger"
-text = "UI_QUIT"
 
 [node name="Hints" type="Control" parent="." unique_id=2111902106]
 unique_name_in_owner = true
