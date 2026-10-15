@@ -35,8 +35,28 @@ func song_path(song_id: String) -> String:
 func chart_path(song_id: String) -> String:
 	return "res://songs/%s/chart.txt" % song_id
 
+## Everyone who can join, in the order they are met. Read off the stages
+## rather than listed again here, so a character added there joins this
+## without being named twice.
+func roster() -> Array[String]:
+	var out: Array[String] = []
+	for id in node_order:
+		var who := String(stage(id).get("opponent", ""))
+		if who != "" and not out.has(who):
+			out.append(who)
+	return out
+
+
 func enemy_path(song_id: String) -> String:
 	return "res://songs/%s/Enemy.png" % song_id
+
+
+func enemy_art(song_id: String) -> Texture2D:
+	if song_id == "":
+		return null
+	var path := enemy_path(song_id)
+	return load(path) if ResourceLoader.exists(path) else null
+
 
 ## Backgrounds are named rather than pathed, so stages.json stays readable and
 ## the art can be renamed or moved without the data following it around.

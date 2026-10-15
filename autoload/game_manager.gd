@@ -27,17 +27,30 @@ func _ready() -> void:
 func start_new_game(new_slot: int, player_name: String) -> void:
 	slot = new_slot
 	save = SaveManager.create(slot, player_name)
+	_stock_demo_party()
 	SceneRouter.goto(MAIN_MENU)
 
 
 func load_slot(chosen: int) -> void:
 	slot = chosen
 	save = SaveManager.load_slot(slot)
+	_stock_demo_party()
 	# Catches up a profile made before an achievement existed. Quietly: these
 	# were earned long ago, and a card for each one on opening a save would
 	# bury the screen.
 	Achievements.refresh(false)
 	SceneRouter.goto(MAIN_MENU)
+
+## The demo profile is for showing the game off, which means the party as
+## well as the map: everyone is already in it rather than earned one fight at
+## a time. Written down like any other party, since this profile is thrown
+## away when the game closes anyway.
+func _stock_demo_party() -> void:
+	if not SaveManager.is_cheat(save):
+		return
+	save["party"] = Rules.roster()
+	SaveManager.write(slot, save)
+
 
 # ------------ World Map ---------------
 func is_cleared(id: String) -> bool:
