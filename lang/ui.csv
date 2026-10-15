@@ -219,3 +219,4 @@ UI_CHANGE,Change,เปลี่ยน
 UI_CTRL_TAKEN,"%s already uses that. Try another.",ปุ่มนี้ %s ใช้อยู่แล้ว ลองปุ่มอื่น
 UI_CTRL_FIXED,the game,ตัวเกม
 UI_CTRL_USE,Use,ใช้
+UI_ACH_GOT,Achievement earned,ได้รับความสำเร็จ

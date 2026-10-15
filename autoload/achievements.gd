@@ -7,6 +7,11 @@ signal earned(id: String)
 
 const PATH := "res://data/achievements.json"
 
+## The card that says so. Put over the whole game from here rather than
+## dropped into each screen, so it survives a scene change and no screen has
+## to remember to carry it.
+const TOAST := "res://scenes/ui/parts/achievement_toast.tscn"
+
 var list: Array = []
 
 
@@ -18,6 +23,12 @@ func _ready() -> void:
 	var raw: Variant = JSON.parse_string(f.get_as_text())
 	if raw is Dictionary:
 		list = raw.get("achievements", [])
+	# Deferred because the root is still being built while autoloads ready.
+	call_deferred("_put_up_the_card")
+
+
+func _put_up_the_card() -> void:
+	get_tree().root.add_child(load(TOAST).instantiate())
 
 
 func is_earned(id: String) -> bool:
@@ -59,7 +70,10 @@ func record_run(stage_id: String, counts: Dictionary) -> void:
 
 
 ## Awards anything now deserved. Returns what was new, so a caller can say so.
-func refresh() -> Array[String]:
+##
+## [param announce] is false when a profile is being caught up on everything
+## it already deserved, which is not the moment to pop a card for each one.
+func refresh(announce := true) -> Array[String]:
 	var fresh: Array[String] = []
 	if not GameManager.save.has("achievements"):
 		GameManager.save["achievements"] = {}
@@ -71,7 +85,8 @@ func refresh() -> Array[String]:
 			continue
 		GameManager.save.achievements[id] = Time.get_date_string_from_system()
 		fresh.append(id)
-		earned.emit(id)
+		if announce:
+			earned.emit(id)
 	if not fresh.is_empty():
 		SaveManager.write(GameManager.slot, GameManager.save)
 	return fresh

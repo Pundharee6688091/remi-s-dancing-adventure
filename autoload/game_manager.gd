@@ -33,8 +33,10 @@ func start_new_game(new_slot: int, player_name: String) -> void:
 func load_slot(chosen: int) -> void:
 	slot = chosen
 	save = SaveManager.load_slot(slot)
-	# Catches up a profile made before an achievement existed.
-	Achievements.refresh()
+	# Catches up a profile made before an achievement existed. Quietly: these
+	# were earned long ago, and a card for each one on opening a save would
+	# bury the screen.
+	Achievements.refresh(false)
 	SceneRouter.goto(MAIN_MENU)
 
 # ------------ World Map ---------------
