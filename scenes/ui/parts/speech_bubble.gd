@@ -108,7 +108,12 @@ func _draw_line() -> void:
 	# tall opponent has shoved it over an edge. The tail then misses them by
 	# however far it moved, which is better than losing half the line.
 	var tail := size - TIP_BACK
-	var room := get_viewport_rect().size - size - Vector2(MARGIN, MARGIN)
+	# The game's own area, not the window's. On a screen that is not 16:9 the
+	# window is larger than the game and the bubble would drift out over the
+	# padding at the side.
+	var screen: Vector2 = get_parent().size if get_parent() is Control \
+		else get_viewport_rect().size
+	var room := screen - size - Vector2(MARGIN, MARGIN)
 	position = (_target - tail).clamp(Vector2(MARGIN, MARGIN), room)
 	pivot_offset = tail           # it grows out of the tail, not out of the middle
 

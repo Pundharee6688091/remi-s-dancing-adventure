@@ -23,6 +23,11 @@ var _showing := {}
 
 
 func _ready() -> void:
+	# This sits above every screen rather than inside one, so it is anchored
+	# to the window and has to be nudged back onto the game: on a screen that
+	# is not 16:9 the window's bottom right corner is out in the padding.
+	get_viewport().size_changed.connect(_follow_stage)
+	_follow_stage()
 	_card.modulate.a = 0.0
 	# The same badge the achievements screen uses, always in its earned
 	# state, since nothing unearned ever gets a card.
@@ -31,7 +36,12 @@ func _ready() -> void:
 	Events.language_changed.connect(_retext)
 
 
+func _follow_stage() -> void:
+	offset = -SceneRouter.stage_rect().position
+
+
 func _on_earned(id: String) -> void:
+	Audio.play("achievement")
 	for entry in Achievements.list:
 		if String(entry.get("id", "")) == id:
 			_queue.append(entry)
