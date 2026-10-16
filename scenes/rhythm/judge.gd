@@ -37,6 +37,10 @@ func press(lane: int, now: float) -> String:
 		return ""
 
 	var judgement := _judgement_for(best_d)
+	# Signed, not the absolute distance used to pick the note: early and late
+	# are different mistakes, and a machine running its audio late shows up as
+	# every lane leaning the same way.
+	Telemetry.note_hit(lane, now - best.t_ms, judgement)
 	_apply(best, judgement)
 	return judgement
 

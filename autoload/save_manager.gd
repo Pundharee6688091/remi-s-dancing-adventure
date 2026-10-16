@@ -142,7 +142,12 @@ func write(slot: int, save: Dictionary) -> bool:
 	var moved := d.rename("slot_%d.json.tmp" % slot, "slot_%d.json" % slot)
 	if moved != OK:
 		push_error("Cannot finish save for slot %d" % slot)
+		Telemetry.event("save_write", {"slot": slot, "ok": false})
 		return false
+	# The name is counted, not recorded: these are other people's sessions and
+	# their own names are none of the log's business.
+	Telemetry.event("save_write", {"slot": slot, "ok": true,
+		"name_len": String(save.get("name", "")).length()})
 	return true
 
 

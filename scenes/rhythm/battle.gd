@@ -77,6 +77,10 @@ var _has_enemy := true
 var _poses: Array = []
 var _pose_time := 0.0
 
+## When the song began by the wall clock, so the song's own clock can be
+## compared against it.
+var _began_ms := 0.0
+
 
 func _ready() -> void:
 	var st := Rules.stage(stage_id)
@@ -103,6 +107,10 @@ func _ready() -> void:
 	hud.show_monster(_has_enemy)
 	_read_quotes(st)
 	_plan_tips(st)
+	Telemetry.context({"stage_id": stage_id, "notes_total": _chart.notes.size()})
+	Telemetry.stage_started(stage_id, {"song": song_id,
+		"notes": _chart.notes.size(), "bpm": _chart.bpm,
+		"note_speed": Settings.note_speed, "offset_ms": Settings.offset})
 
 	Events.hp_changed.connect(_on_hp_changed)
 	pause_overlay.resume_pressed.connect(_resume)
@@ -150,6 +158,12 @@ func _process(delta: float) -> void:
 	_run_tips(now)
 	_squish(remi, _poses[_pose_now], REMI_SCALE, _beat_pulse(now))
 	_squish(enemy, _enemy_pose, ENEMY_SCALE, _beat_pulse(now, ENEMY_BEAT_SHIFT))
+
+	# The clock the notes are drawn against, against the wall clock. Desync
+	# has no symptom a counter can see; this is what makes it a number.
+	Telemetry.context({"state": "playing", "live_notes": field.alive_count(),
+		"hp": judge.hp, "combo": judge.combo,
+		"audio_drift_ms": now - (Time.get_ticks_msec() - _began_ms)})
 
 
 ## Straight to the pass or the fail screen, for showing either of them
@@ -363,6 +377,10 @@ func _restart() -> void:
 	if not await _countdown():
 		return
 	conductor.start()
+	# The drift baseline, taken here rather than when the screen was built:
+	# the countdown sits between the two and would read as two seconds of
+	# drift that is not there.
+	_began_ms = Time.get_ticks_msec()
 	state = State.PLAYING
 
 
@@ -386,6 +404,8 @@ func _resume() -> void:
 	if not await _countdown():
 		return
 	song.stream_paused = false
+	# Resuming shifts the wall clock on by however long the pause lasted.
+	_began_ms = Time.get_ticks_msec() - conductor.song_time_ms()
 	state = State.PLAYING
 
 
@@ -426,6 +446,8 @@ func _on_song_finished() -> void:
 
 	r.best_hp = GameManager.best_hp_for(stage_id)
 	r.best_combo = GameManager.best_combo_for(stage_id)
+	Telemetry.stage_ended(r)
+	Telemetry.context({"state": "result", "live_notes": 0})
 	result_overlay.show_result(r)
 
 
