@@ -9,7 +9,13 @@ extends Control
 @export var marker_color := Palette.RED
 
 func _set_value(v: float) -> void:
-	value = clampf(v, 0.0, 1.0)
+	var now := clampf(v, 0.0, 1.0)
+	# Guarded because the song bar is given the clock every single frame, and
+	# without this it redrew every frame of every song for a value that only
+	# changes when the pixel it draws does.
+	if is_equal_approx(now, value):
+		return
+	value = now
 	queue_redraw()
 
 func _set_marker(v: float) -> void:

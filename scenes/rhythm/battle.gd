@@ -81,6 +81,10 @@ var _pose_time := 0.0
 ## compared against it.
 var _began_ms := 0.0
 
+## The counters in the corner. Off unless F3 is pressed, so a playtester never
+## sees them by accident and they colour nobody's impression of the game.
+var _showing_counters := false
+
 
 func _ready() -> void:
 	var st := Rules.stage(stage_id)
@@ -161,9 +165,12 @@ func _process(delta: float) -> void:
 
 	# The clock the notes are drawn against, against the wall clock. Desync
 	# has no symptom a counter can see; this is what makes it a number.
-	Telemetry.context({"state": "playing", "live_notes": field.alive_count(),
-		"hp": judge.hp, "combo": judge.combo,
-		"audio_drift_ms": now - (Time.get_ticks_msec() - _began_ms)})
+	var live := field.alive_count()
+	var drift: float = now - (Time.get_ticks_msec() - _began_ms)
+	Telemetry.context({"state": "playing", "live_notes": live,
+		"hp": judge.hp, "combo": judge.combo, "audio_drift_ms": drift})
+	if _showing_counters:
+		_draw_counters(live, drift)
 
 
 ## Straight to the pass or the fail screen, for showing either of them
@@ -191,6 +198,9 @@ func _cheat_end(pass_it: bool) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	# Before the settings guard: the counters are ours, and being able to see
+	# them with a menu open is the point of them.
+	_counters_input(event)
 	# Settings is a full overlay and owns every key while it is up.
 	if settings_overlay.visible:
 		return
@@ -222,6 +232,26 @@ func _unhandled_input(event: InputEvent) -> void:
 				GameManager.leave_stage()
 				
 				
+
+## F3 rather than a menu entry: it is for us and whoever is watching over a
+## tester's shoulder, not a setting anyone has to find.
+func _counters_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.is_echo() \
+			and (event as InputEventKey).physical_keycode == KEY_F3:
+		_showing_counters = not _showing_counters
+		debug.visible = _showing_counters
+
+
+## The same numbers the log is keeping, on screen, so a stutter can be seen
+## as it happens rather than found in a spreadsheet afterwards.
+func _draw_counters(live: int, drift: float) -> void:
+	debug.text = "%d fps  %.1f ms\n%d/%d notes\n%.0f MB\ndrift %+.0f ms" % [
+		Engine.get_frames_per_second(),
+		Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0,
+		live, field.notes.size(),
+		Performance.get_monitor(Performance.MEMORY_STATIC) / 1048576.0,
+		drift]
+
 
 func _lane_input(event: InputEvent, judging: bool) -> void:
 	for lane in 4:
