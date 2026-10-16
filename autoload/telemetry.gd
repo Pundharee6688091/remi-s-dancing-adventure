@@ -11,7 +11,14 @@ extends Node
 ## than copied. And every line is flushed as it is written, because a session
 ## that ends in a crash is the one whose log matters most.
 
-const DIR := "user://sessions"
+## Beside the game itself, not buried in the player's AppData. On Tuesday the
+## game runs off a USB stick: the tester plays, hands the stick back, and the
+## whole session is sitting in a folder next to the exe. Nobody has to find
+## anything, and nothing has to be sent.
+##
+## Falls back to the usual place if the folder the game sits in is read only,
+## which a locked-down lab machine might well be.
+const FOLDER := "sessions"
 
 ## How often a row of counters is written. The frame times behind it are
 ## gathered every frame, not sampled at this rate: an average of 60 FPS with
@@ -41,6 +48,13 @@ var _hits := {}
 var _stage := ""
 var _context := {}
 
+## Just enough to write a readable ending, so the file does not have to be
+## read line by line to find out how the session went.
+var _played: Array[String] = []
+var _worst_frame := 0.0
+var _worst_where := ""
+var _problems := 0
+
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -52,26 +66,44 @@ func _exit_tree() -> void:
 		return
 	_flush_sample()
 	event("session_end", {"clean": true})
+	_write_summary()
 	_csv.close()
 	_log.close()
 
 
+## The last thing in the file, in plain words. Whoever opens it should be able
+## to tell how the session went without reading the events above it.
+func _write_summary() -> void:
+	var secs: float = (Time.get_ticks_msec() - _started_ms) / 1000.0
+	_log.store_line("")
+	_log.store_line("--- how it went ---")
+	# Minutes once there are any, because "0 minutes" is not an answer.
+	_log.store_line("played for: %s" % ("%.0f seconds" % secs if secs < 90.0
+		else "%.0f minutes" % (secs / 60.0)))
+	_log.store_line("stages:     %s" % ("none" if _played.is_empty()
+		else ", ".join(_played)))
+	_log.store_line("worst frame: %.0f ms%s" % [_worst_frame,
+		"" if _worst_where == "" else " on " + _worst_where])
+	_log.store_line("problems:   %d" % _problems)
+	_log.flush()
+
+
 # ---------- the session ----------
 
-func _start() -> void:
-	if not SaveManager.can_write:
-		push_warning("No session log: user:// cannot be written to")
-		return
-	var d := DirAccess.open("user://")
-	if d == null:
-		return
-	if not d.dir_exists("sessions"):
-		d.make_dir("sessions")
+var _dir := ""
 
-	_session = "%s_%s" % [
-		Time.get_datetime_string_from_system().replace(":", "-"), _machine()]
-	_csv = FileAccess.open("%s/%s.csv" % [DIR, _session], FileAccess.WRITE)
-	_log = FileAccess.open("%s/%s.log" % [DIR, _session], FileAccess.WRITE)
+
+func _start() -> void:
+	_dir = _pick_folder()
+	if _dir == "":
+		push_warning("No session log: nowhere writable to put it")
+		return
+
+	var now := Time.get_datetime_dict_from_system()
+	_session = "session_%04d-%02d-%02d_%02d%02d_%s" % [now.year, now.month,
+		now.day, now.hour, now.minute, _machine()]
+	_csv = FileAccess.open("%s/%s.csv" % [_dir, _session], FileAccess.WRITE)
+	_log = FileAccess.open("%s/%s.txt" % [_dir, _session], FileAccess.WRITE)
 	if _csv == null or _log == null:
 		push_warning("No session log: could not open the files")
 		return
@@ -87,6 +119,32 @@ func _start() -> void:
 		+ "node_count,orphan_count,draw_calls,scene,stage_id,"
 		+ "live_notes,audio_drift_ms")
 	_csv.flush()
+
+
+## Next to the game if that will take it, otherwise the usual save folder.
+## Returns "" when neither will.
+func _pick_folder() -> String:
+	var tries: Array[String] = []
+	# Only an exported build: run from the editor and "the folder the game is
+	# in" is Godot's own application bundle, which is not where anybody wants
+	# a playtest log.
+	if OS.has_feature("standalone"):
+		tries.append(OS.get_executable_path().get_base_dir())
+	tries.append("user://")
+	for base in tries:
+		var d := DirAccess.open(base)
+		if d == null:
+			continue
+		if not d.dir_exists(FOLDER) and d.make_dir(FOLDER) != OK:
+			continue
+		var path: String = base.path_join(FOLDER)
+		var probe := FileAccess.open(path.path_join(".check"), FileAccess.WRITE)
+		if probe == null:
+			continue
+		probe.close()
+		DirAccess.open(path).remove(".check")
+		return path
+	return ""
 
 
 ## In the log rather than the CSV, so the CSV stays one clean table that a
@@ -167,6 +225,10 @@ func _flush_sample() -> void:
 		_context.get("live_notes", 0),
 		"%.1f" % float(_context.get("audio_drift_ms", 0.0)),
 	]
+	if worst > _worst_frame:
+		_worst_frame = worst
+		_worst_where = String(_context.get("scene", ""))
+
 	var text: Array[String] = []
 	for cell in row:
 		text.append(str(cell))
@@ -189,6 +251,8 @@ func context(now: Dictionary) -> void:
 func event(what: String, fields := {}) -> void:
 	if not recording:
 		return
+	if what == "error" or fields.get("ok") == false:
+		_problems += 1
 	var parts: Array[String] = ["%d" % (Time.get_ticks_msec() - _started_ms), what]
 	for key in fields:
 		parts.append("%s=%s" % [key, str(fields[key]).replace("\n", " ")])
@@ -215,6 +279,8 @@ func stage_started(stage_id: String, fields := {}) -> void:
 
 
 func stage_ended(result: Dictionary) -> void:
+	_played.append("%s (%s)" % [result.get("stage", "?"),
+		"passed" if result.get("won", false) else "failed"])
 	var fields := result.duplicate()
 	fields.erase("counts")
 	for key in result.get("counts", {}):
