@@ -10,6 +10,7 @@ const SOUNDS := {
 	"lose": "res://sfx/lose.wav",
 	# the answer when something is not open yet
 	"locked": "res://sfx/Lock.wav",
+	"achievement": "res://sfx/Achievement.wav"
 }
 
 ## Overlapping notes need more than one player or each hit cuts the last off.
@@ -173,6 +174,11 @@ func _on_node_added(n: Node) -> void:
 	if not (n is BaseButton):
 		return
 	n.pressed.connect(play.bind("click"))
+	# The log wants the same presses the click sound does, and this is already
+	# the one place that sees every button in the game.
+	n.pressed.connect(func() -> void:
+		Telemetry.event("button_press", {"name": n.name,
+			"screen": n.owner.name if n.owner != null else "?"}))
 	n.mouse_entered.connect(play.bind("hover"))
 	n.focus_entered.connect(_on_focus_entered)
 

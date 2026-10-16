@@ -79,11 +79,13 @@ func _start() -> void:
 	recording = true
 	_started_ms = Time.get_ticks_msec()
 	_write_header()
-	_csv.store_line("t_ms,fps_avg,fps_min,frame_ms_avg,frame_ms_max,frame_ms_p99,"
-		+ "time_process_ms,time_physics_ms,mem_static,mem_static_max,"
-		+ "node_count,orphan_count,object_count,resource_count,"
-		+ "draw_calls,video_mem,scene,stage_id,state,live_notes,notes_total,"
-		+ "hp,combo,audio_drift_ms")
+	# Eleven columns, not twenty-four. Everything here is either something no
+	# other column can tell you, or something the event log does not already
+	# say. frame_ms_avg and frame_ms_max went first: they are 1000/fps_avg
+	# and 1000/fps_min, the same two facts written twice.
+	_csv.store_line("t_ms,fps_avg,fps_min,frame_ms_p99,mem_static,"
+		+ "node_count,orphan_count,draw_calls,scene,stage_id,"
+		+ "live_notes,audio_drift_ms")
 	_csv.flush()
 
 
@@ -153,24 +155,16 @@ func _flush_sample() -> void:
 		roundi(Time.get_ticks_msec() - _started_ms),
 		"%.1f" % (1000.0 / maxf(avg, 0.001)),
 		"%.1f" % (1000.0 / maxf(worst, 0.001)),
-		"%.2f" % avg, "%.2f" % worst, "%.2f" % p99,
-		"%.2f" % (Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0),
-		"%.2f" % (Performance.get_monitor(Performance.TIME_PHYSICS_PROCESS) * 1000.0),
+		# Kept beside the two above because it is the one frame figure they
+		# cannot be turned into: the shape of the bad frames, not the worst.
+		"%.2f" % p99,
 		int(Performance.get_monitor(Performance.MEMORY_STATIC)),
-		int(Performance.get_monitor(Performance.MEMORY_STATIC_MAX)),
 		int(Performance.get_monitor(Performance.OBJECT_NODE_COUNT)),
 		int(Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT)),
-		int(Performance.get_monitor(Performance.OBJECT_COUNT)),
-		int(Performance.get_monitor(Performance.OBJECT_RESOURCE_COUNT)),
 		int(Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME)),
-		int(Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED)),
 		_context.get("scene", ""),
 		_context.get("stage_id", ""),
-		_context.get("state", ""),
 		_context.get("live_notes", 0),
-		_context.get("notes_total", 0),
-		"%.1f" % float(_context.get("hp", 0.0)),
-		_context.get("combo", 0),
 		"%.1f" % float(_context.get("audio_drift_ms", 0.0)),
 	]
 	var text: Array[String] = []

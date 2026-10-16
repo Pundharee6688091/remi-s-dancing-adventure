@@ -87,6 +87,7 @@ func refresh(announce := true) -> Array[String]:
 		fresh.append(id)
 		if announce:
 			earned.emit(id)
+			Telemetry.event("achievement_earned", {"id": id})
 	if not fresh.is_empty():
 		SaveManager.write(GameManager.slot, GameManager.save)
 	return fresh

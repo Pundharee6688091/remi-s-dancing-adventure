@@ -383,6 +383,15 @@ func _pause_info() -> String:
 
 
 func _restart() -> void:
+	# Where in the song they gave up is the interesting part, so it is logged
+	# before anything is reset. Only once the song has actually run: entering
+	# a stage comes through here too, and a retry at nought milliseconds
+	# before a note has been seen is not a retry.
+	if _began_ms > 0.0:
+		Telemetry.event("retry", {"stage": stage_id,
+			"at_ms": roundi(conductor.song_time_ms()),
+			"hp": "%.1f" % judge.hp, "combo": judge.combo})
+	_began_ms = 0.0
 	# Retrying from the result screen means the bed is playing again. Take the
 	# floor back now rather than leaving it under the countdown until the
 	# stage's own song starts and pushes it out.
@@ -415,6 +424,8 @@ func _restart() -> void:
 
 
 func _pause() -> void:
+	Telemetry.event("pause", {"stage": stage_id,
+		"at_ms": roundi(conductor.song_time_ms())})
 	_countdown_id += 1                       # invalidate a running countdown
 	countdown.stop()
 	state = State.PAUSED
@@ -424,6 +435,7 @@ func _pause() -> void:
 
 
 func _resume() -> void:
+	Telemetry.event("resume", {"stage": stage_id})
 	pause_overlay.hide()
 
 	if not conductor.is_running():

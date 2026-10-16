@@ -127,6 +127,7 @@ func start_stage(stage_id: String) -> void:
 
 
 func leave_stage() -> void:
+	Telemetry.event("quit_to_map", {"stage": current_stage_id})
 	SceneRouter.back()
 
 
