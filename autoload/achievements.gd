@@ -85,6 +85,7 @@ func refresh(announce := true) -> Array[String]:
 			continue
 		GameManager.save.achievements[id] = Time.get_date_string_from_system()
 		fresh.append(id)
+		Telemetry.event("achievement_earned", {"id": id})
 		if announce:
 			earned.emit(id)
 	if not fresh.is_empty():

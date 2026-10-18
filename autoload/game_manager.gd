@@ -93,6 +93,7 @@ func stars_for(id: String) -> int:
 	return int(save.get("stars", {}).get(id, 0))
 	
 func enter_node(id: String) -> void:
+	Telemetry.node_chosen(id, String(Rules.stage(id).get("type", "")))
 	match String(Rules.stage(id).get("type", "")):
 		"story":
 			_play_story(id)
@@ -125,6 +126,7 @@ func start_stage(stage_id: String) -> void:
 
 
 func leave_stage() -> void:
+	Telemetry.node_left()
 	SceneRouter.back()
 
 
@@ -186,5 +188,8 @@ func _on_story_finished() -> void:
 	if not save.seen.has(current_stage_id):
 		save.seen.append(current_stage_id)
 		SaveManager.write(slot, save)
+	# Closed here as well as when a stage is left, or the time spent back on
+	# the map would go on the chapter's bill.
+	Telemetry.node_left()
 	SceneRouter.back()
 	Events.progress_changed.emit()

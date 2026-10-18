@@ -132,6 +132,7 @@ func rebind(id: String, event: InputEvent) -> bool:
 		return false
 	apply()
 	_save()
+	Telemetry.event("rebind", {"row": id, "to": key_name(id)})
 	rebound.emit()
 	return true
 
@@ -140,6 +141,7 @@ func reset() -> void:
 	_defaults()
 	apply()
 	_save()
+	Telemetry.event("rebind", {"row": "all", "to": "defaults"})
 	rebound.emit()
 
 

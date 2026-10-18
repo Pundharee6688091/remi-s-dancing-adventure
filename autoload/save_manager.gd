@@ -96,8 +96,11 @@ func write(slot: int, save: Dictionary) -> void:
 	var f := FileAccess.open(temp, FileAccess.WRITE)
 	if f == null:
 		push_error("Cannot write save: " + _path(slot))
+		Telemetry.event("save_write", {"slot": slot, "ok": false,
+			"why": "cannot open the file"})
 		return
-	f.store_string(JSON.stringify(save, "  "))
+	var text := JSON.stringify(save, "  ")
+	f.store_string(text)
 	f.close()
 
 	var d := DirAccess.open("user://")
@@ -109,6 +112,11 @@ func write(slot: int, save: Dictionary) -> void:
 		d.remove(final)
 	if d.rename(final + ".tmp", final) != OK:
 		push_error("Cannot finish save for slot %d" % slot)
+		Telemetry.event("save_write", {"slot": slot, "ok": false,
+			"why": "cannot rename the temp file into place"})
+		return
+	Telemetry.event("save_write", {"slot": slot, "ok": true,
+		"bytes": text.length()})
 
 
 func delete(slot: int) -> void:

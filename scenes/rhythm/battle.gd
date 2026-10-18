@@ -105,7 +105,7 @@ func _ready() -> void:
 	Events.hp_changed.connect(_on_hp_changed)
 	pause_overlay.resume_pressed.connect(_resume)
 	pause_overlay.restart_pressed.connect(_restart)
-	pause_overlay.quit_pressed.connect(GameManager.leave_stage)
+	pause_overlay.quit_pressed.connect(_quit_to_map)
 	pause_overlay.settings_pressed.connect(_open_settings)
 	settings_overlay.routed = false
 	settings_overlay.closed.connect(_close_settings)
@@ -336,7 +336,19 @@ func _pause_info() -> String:
 		Rules.character_name(opp) if opp != "" else "—", Rules.hp_text(judge.hp)]
 
 
+## How many times this stage has been played since the screen opened. _ready()
+## ends by calling _restart(), so without this the first run would be logged
+## as a retry of a run that never happened.
+var _runs := 0
+
+
 func _restart() -> void:
+	# Read before the conductor is stopped, because where in the song they
+	# gave up is the interesting half of a retry.
+	if _runs > 0:
+		Telemetry.event("retry", {"stage": stage_id,
+			"at_ms": int(conductor.song_time_ms()),
+			"hp": Rules.hp_display(judge.hp), "combo": judge.combo})
 	# Retrying from the result screen means the bed is playing again. Take the
 	# floor back now rather than leaving it under the countdown until the
 	# stage's own song starts and pushes it out.
@@ -361,6 +373,10 @@ func _restart() -> void:
 	if not await _countdown():
 		return
 	conductor.start()
+	_runs += 1
+	Telemetry.stage_started(stage_id, {"song": _song_id(),
+		"notes": _chart.notes.size(), "bpm": _chart.bpm,
+		"note_speed": Settings.note_speed, "offset_ms": Settings.offset})
 	state = State.PLAYING
 
 
@@ -370,10 +386,13 @@ func _pause() -> void:
 	state = State.PAUSED
 	song.stream_paused = true
 	countdown_label.modulate.a = 0.0
+	Telemetry.event("pause", {"stage": stage_id,
+		"at_ms": int(conductor.song_time_ms())})
 	pause_overlay.open(_pause_info())
 
 
 func _resume() -> void:
+	Telemetry.event("resume", {"stage": stage_id})
 	pause_overlay.hide()
 
 	if not conductor.is_running():
@@ -385,6 +404,16 @@ func _resume() -> void:
 		return
 	song.stream_paused = false
 	state = State.PLAYING
+
+
+## Leaving part way through is worth a line of its own. A stage that is
+## cleared and a stage that is walked out of both end up back on the map, and
+## nothing else in the log would tell them apart.
+func _quit_to_map() -> void:
+	Telemetry.event("quit_to_map", {"stage": stage_id,
+		"at_ms": int(conductor.song_time_ms()),
+		"hp": Rules.hp_display(judge.hp)})
+	GameManager.leave_stage()
 
 
 func _on_song_finished() -> void:
@@ -424,6 +453,7 @@ func _on_song_finished() -> void:
 
 	r.best_hp = GameManager.best_hp_for(stage_id)
 	r.best_combo = GameManager.best_combo_for(stage_id)
+	Telemetry.stage_ended(r)
 	result_overlay.show_result(r)
 
 

@@ -37,6 +37,10 @@ func press(lane: int, now: float) -> String:
 		return ""
 
 	var judgement := _judgement_for(best_d)
+	# Signed, unlike best_d: early is negative, late is positive. The
+	# direction is the whole point, since a session where every press leans
+	# the same way is a machine with late audio, not a player with bad timing.
+	Telemetry.note_hit(lane, now - best.t_ms, judgement)
 	_apply(best, judgement)
 	return judgement
 

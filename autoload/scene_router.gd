@@ -128,7 +128,13 @@ func _swap(path: String, params: Dictionary) -> void:
 	_current_path = path
 	_current_params = params
 	_current = inst
+	# Timed around the whole swap rather than the teardown, because building
+	# the new screen is the part that would be felt as a stutter.
+	var began := Time.get_ticks_usec()
 	_stage.add_child(inst)
+	Telemetry.screen(path.get_file())
+	Telemetry.event("screen_built", {"to": path.get_file(),
+		"took_ms": "%.1f" % ((Time.get_ticks_usec() - began) / 1000.0)})
 
 
 func reload() -> void:
