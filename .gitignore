@@ -4,3 +4,6 @@
 
 # Exported builds
 /export/
+
+# Test run output
+/tests/results.txt

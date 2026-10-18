@@ -119,6 +119,11 @@ func taken_by(id: String, event: InputEvent) -> String:
 ## Give a row a key or a pad button, whichever the player pressed. Returns
 ## false when the press was neither, so the page can keep waiting.
 func rebind(id: String, event: InputEvent) -> bool:
+	# Refused here as well as on the controls page. The page asks first and
+	# says who has it, which is the nice answer; this is the one that makes
+	# "never two lanes on one key" true of the game rather than of one screen.
+	if taken_by(id, event) != "":
+		return false
 	if event is InputEventKey:
 		binds[id]["key"] = (event as InputEventKey).physical_keycode
 	elif event is InputEventJoypadButton:
