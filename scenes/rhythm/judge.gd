@@ -9,14 +9,9 @@ var counts := {"perfect": 0, "great": 0, "good": 0, "miss": 0}
 var _field: NoteField = null
 var _total := 0
 
-## How far the miss sweep has walked. The chart is sorted by time, so
-## everything before this has had its moment and nothing after it has.
-var _swept := 0
-
 func setup(field: NoteField) -> void:
 	_field = field
 	_total = maxi(field.notes.size(), 1)
-	_swept = 0
 	hp = 100.0
 	combo = 0
 	max_combo = 0
@@ -42,30 +37,15 @@ func press(lane: int, now: float) -> String:
 		return ""
 
 	var judgement := _judgement_for(best_d)
-	# Signed, not the absolute distance used to pick the note: early and late
-	# are different mistakes, and a machine running its audio late shows up as
-	# every lane leaning the same way.
-	Telemetry.note_hit(lane, now - best.t_ms, judgement)
 	_apply(best, judgement)
 	return judgement
 
 
 ## Notes that slid past their window without being hit.
-##
-## Walks on from where it stopped rather than over the whole chart. The notes
-## are in time order, so the first one still inside its window is proof that
-## every note after it is too, and a note already behind the cursor cannot
-## come back. Scanning the lot every frame meant re-reading notes judged
-## minutes ago.
 func sweep(now: float) -> void:
-	var window := Rules.window("good")
-	while _swept < _field.notes.size():
-		var n: Dictionary = _field.notes[_swept]
-		if now - n.t_ms <= window:
-			return
-		if not n.judged:
+	for n in _field.notes:
+		if not n.judged and now - n.t_ms > Rules.window("good"):
 			_apply(n, "miss")
-		_swept += 1
 
 
 ## The song ended. Anything still unjudged is a miss.

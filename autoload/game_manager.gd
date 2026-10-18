@@ -31,23 +31,15 @@ func start_new_game(new_slot: int, player_name: String) -> void:
 	SceneRouter.goto(MAIN_MENU)
 
 
-## Returns false when there was nothing sound to open, so the caller can
-## offer a new profile rather than walking on with an empty dictionary. That
-## is what used to happen with a broken file, and the first stage clear then
-## reached for a key that was never there.
-func load_slot(chosen: int) -> bool:
-	var loaded := SaveManager.load_slot(chosen)
-	if loaded.is_empty():
-		return false
+func load_slot(chosen: int) -> void:
 	slot = chosen
-	save = loaded
+	save = SaveManager.load_slot(slot)
 	_stock_demo_party()
 	# Catches up a profile made before an achievement existed. Quietly: these
 	# were earned long ago, and a card for each one on opening a save would
 	# bury the screen.
 	Achievements.refresh(false)
 	SceneRouter.goto(MAIN_MENU)
-	return true
 
 ## The demo profile is for showing the game off, which means the party as
 ## well as the map: everyone is already in it rather than earned one fight at
@@ -127,7 +119,6 @@ func start_stage(stage_id: String) -> void:
 
 
 func leave_stage() -> void:
-	Telemetry.event("quit_to_map", {"stage": current_stage_id})
 	SceneRouter.back()
 
 

@@ -29,7 +29,6 @@ GameManager="*uid://cdex5h8vlh7wk"
 Dialogic="*uid://ds2q0uclmolvu"
 Audio="*res://autoload/audio.gd"
 Achievements="*res://autoload/achievements.gd"
-Telemetry="*res://autoload/telemetry.gd"
 
 [dialogic]
 

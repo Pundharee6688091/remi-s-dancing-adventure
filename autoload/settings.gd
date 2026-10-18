@@ -36,7 +36,6 @@ func speed_scale() -> float:
 
 
 func set_value(key: String, value: Variant) -> void:
-	var was: Variant = get(key)
 	match key:
 		"music":
 			music = clampi(int(value), 0, 100)
@@ -52,9 +51,6 @@ func set_value(key: String, value: Variant) -> void:
 			return
 	apply()
 	save_settings()
-	# Logged after the clamp, so it records what the setting became rather
-	# than what was asked for.
-	Telemetry.event("setting_change", {"key": key, "from": was, "to": get(key)})
 	changed.emit()
 
 

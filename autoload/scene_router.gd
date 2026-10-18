@@ -114,7 +114,6 @@ func depth() -> int:
 
 
 func _swap(path: String, params: Dictionary) -> void:
-	var began := Time.get_ticks_usec()
 	if _current != null:
 		_stage.remove_child(_current)
 		_current.queue_free()
@@ -130,12 +129,6 @@ func _swap(path: String, params: Dictionary) -> void:
 	_current_params = params
 	_current = inst
 	_stage.add_child(inst)
-
-	# Timed around the whole swap rather than the teardown: building the new
-	# screen is the part that would show up as a stutter.
-	Telemetry.context({"scene": path.get_file()})
-	Telemetry.event("scene_change", {"to": path.get_file(),
-		"took_ms": "%.1f" % ((Time.get_ticks_usec() - began) / 1000.0)})
 
 
 func reload() -> void:

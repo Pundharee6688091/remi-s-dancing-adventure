@@ -17,7 +17,6 @@ func _ready() -> void:
 func apply(code: String) -> void:
 	if not code in LOCALES:
 		return
-	Telemetry.event("language_change", {"from": current(), "to": code})
 	TranslationServer.set_locale(code)
 	var f := FileAccess.open(PATH, FileAccess.WRITE)
 	if f != null:

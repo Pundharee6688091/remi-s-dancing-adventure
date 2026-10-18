@@ -68,7 +68,7 @@ func enemy_art(song_id: String) -> Texture2D:
 ## Backgrounds are named rather than pathed, so stages.json stays readable and
 ## the art can be renamed or moved without the data following it around.
 ## Either extension, because the art gets redrawn and re-exported and the
-## data file should not have to follow it around.
+## data file should not have to follow it around. Meadow is a png now.
 func bg_path(bg_id: String) -> String:
 	for ext in [".webp", ".png"]:
 		var path := "res://backgrounds/%s%s" % [bg_id, ext]
@@ -90,42 +90,18 @@ func background(kind: String, stage_id := "") -> Texture2D:
 		return null
 	return load(path)
 
-## Every rule below reads through a default rather than off the dictionary
-## directly. A game rule that has gone missing used to let the game boot and
-## reach the map perfectly well, then die on the first note of the first
-## fight, which is the worst place to find out.
-const FALLBACK := {
-	"windows_ms": {"perfect": 45.0, "great": 90.0, "good": 135.0},
-	"residual": {"perfect": 0.0, "great": 30.0, "good": 50.0, "miss": 100.0},
-	"stars_hp_percent": {"3": 0.0, "2": 15.0, "1": 30.0},
-	"win_hp_percent": 30.0,
-	"note_speed_px_per_ms": 0.6,
-}
-
-
 func window(judgement: String) -> float:
-	return _rule("windows_ms", judgement)
+	return float(data.windows_ms[judgement])
 
 func residual(judgement: String) -> float:
-	return _rule("residual", judgement)
-
-
-## One value out of a named group, falling back a step at a time: the file,
-## then the group's own defaults, then zero.
-func _rule(group: String, key: String) -> float:
-	var live: Dictionary = data.get(group, {})
-	if live.has(key):
-		return float(live[key])
-	push_warning("Missing game rule %s.%s, using the default" % [group, key])
-	return float(FALLBACK[group].get(key, 0.0))
+	return float(data.residual[judgement])
 
 func damage(judgement: String) -> float:
 	return 100.0 - residual(judgement)
 
 ## The chart's base speed, scaled by the player's note speed setting.
 func note_speed() -> float:
-	return float(data.get("note_speed_px_per_ms",
-		FALLBACK.note_speed_px_per_ms)) * Settings.speed_scale()
+	return float(data.note_speed_px_per_ms) * Settings.speed_scale()
 
 ## The meter is shown to a tenth, and judged on that same figure rather than
 ## on the number hiding behind it. Rounded, not floored: floor turned 0.9 into
@@ -143,12 +119,11 @@ func hp_text(hp: float) -> String:
 
 
 func is_win(hp: float) -> bool:
-	return hp_display(hp) <= float(data.get("win_hp_percent",
-		FALLBACK.win_hp_percent))
+	return hp_display(hp) <= float(data.win_hp_percent)
 
 func stars_for_hp(hp: float) -> int:
 	var h := hp_display(hp)
-	var t: Dictionary = data.get("stars_hp_percent", FALLBACK.stars_hp_percent)
+	var t: Dictionary = data.stars_hp_percent
 	if h <= float(t["3"]): return 3
 	if h <= float(t["2"]): return 2
 	if h <= float(t["1"]): return 1

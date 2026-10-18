@@ -11,8 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://cq4lhgw3ba01v" path="res://scenes/rhythm/pause_overlay.tscn" id="8_nbtlf"]
 [ext_resource type="Texture2D" uid="uid://dx7v202gr0o6u" path="res://songs/A Mage's Foehn/Enemy.png" id="9_tb7li"]
 [ext_resource type="Script" uid="uid://batawi1qqiibp" path="res://scenes/ui/parts/hint_bar.gd" id="10_hb"]
-[ext_resource type="PackedScene" uid="uid://b2hc4igh8p6of" path="res://scenes/ui/settings.tscn" id="11_set"]
+[ext_resource type="PackedScene" path="res://scenes/ui/settings.tscn" id="11_set"]
 [ext_resource type="PackedScene" path="res://scenes/rhythm/tip_card.tscn" id="12_tip"]
+
 [ext_resource type="PackedScene" path="res://scenes/ui/parts/speech_bubble.tscn" id="13_bub"]
 
 [node name="Battle" type="Control" unique_id=1101702470]
@@ -47,17 +48,9 @@ bus = &"SFX"
 script = ExtResource("2_o0565")
 
 [node name="Debug" type="Label" parent="." unique_id=1711428741]
-visible = false
 layout_mode = 0
-offset_left = 1020.0
-offset_top = 6.0
-offset_right = 1272.0
-offset_bottom = 96.0
-horizontal_alignment = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 14
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="Remi" type="Sprite2D" parent="." unique_id=1704623360]
 position = Vector2(196, 341.33182)
@@ -94,9 +87,9 @@ theme_override_font_sizes/font_size = 170
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Bubble" parent="." unique_id=1771049147 instance=ExtResource("13_bub")]
+[node name="Bubble" parent="." instance=ExtResource("13_bub")]
 unique_name_in_owner = true
-layout_mode = 0
+visible = false
 
 [node name="Tip" parent="." unique_id=1727381944 instance=ExtResource("12_tip")]
 unique_name_in_owner = true

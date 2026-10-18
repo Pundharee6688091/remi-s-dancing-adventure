@@ -77,23 +77,13 @@ var _has_enemy := true
 var _poses: Array = []
 var _pose_time := 0.0
 
-## When the song began by the wall clock, so the song's own clock can be
-## compared against it.
-var _began_ms := 0.0
-
-## The counters in the corner. Off unless F3 is pressed, so a playtester never
-## sees them by accident and they colour nobody's impression of the game.
-var _showing_counters := false
-
 
 func _ready() -> void:
 	var st := Rules.stage(stage_id)
 	var song_id: String = st.get("song", "song_tutorial")
 	_chart = ChartParser.parse(Rules.chart_path(song_id))
 	field.setup(_chart.notes)
-	# Without the default this is int(null), which is 0, which makes the beat
-	# pulse zero milliseconds long.
-	beats_per_squish = int(st.get("squish", 1.0))
+	beats_per_squish = int(st.get("squish"))
 
 	%Bg.texture = Rules.background("fight", stage_id)
 	_setup_remi()
@@ -111,10 +101,6 @@ func _ready() -> void:
 	hud.show_monster(_has_enemy)
 	_read_quotes(st)
 	_plan_tips(st)
-	Telemetry.context({"stage_id": stage_id, "notes_total": _chart.notes.size()})
-	Telemetry.stage_started(stage_id, {"song": song_id,
-		"notes": _chart.notes.size(), "bpm": _chart.bpm,
-		"note_speed": Settings.note_speed, "offset_ms": Settings.offset})
 
 	Events.hp_changed.connect(_on_hp_changed)
 	pause_overlay.resume_pressed.connect(_resume)
@@ -163,15 +149,6 @@ func _process(delta: float) -> void:
 	_squish(remi, _poses[_pose_now], REMI_SCALE, _beat_pulse(now))
 	_squish(enemy, _enemy_pose, ENEMY_SCALE, _beat_pulse(now, ENEMY_BEAT_SHIFT))
 
-	# The clock the notes are drawn against, against the wall clock. Desync
-	# has no symptom a counter can see; this is what makes it a number.
-	var live := field.alive_count()
-	var drift: float = now - (Time.get_ticks_msec() - _began_ms)
-	Telemetry.context({"state": "playing", "live_notes": live,
-		"hp": judge.hp, "combo": judge.combo, "audio_drift_ms": drift})
-	if _showing_counters:
-		_draw_counters(live, drift)
-
 
 ## Straight to the pass or the fail screen, for showing either of them
 ## without playing the stage out. Function keys, so they cannot collide with
@@ -198,9 +175,6 @@ func _cheat_end(pass_it: bool) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	# Before the settings guard: the counters are ours, and being able to see
-	# them with a menu open is the point of them.
-	_counters_input(event)
 	# Settings is a full overlay and owns every key while it is up.
 	if settings_overlay.visible:
 		return
@@ -232,26 +206,6 @@ func _unhandled_input(event: InputEvent) -> void:
 				GameManager.leave_stage()
 				
 				
-
-## F3 rather than a menu entry: it is for us and whoever is watching over a
-## tester's shoulder, not a setting anyone has to find.
-func _counters_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and not event.is_echo() \
-			and (event as InputEventKey).physical_keycode == KEY_F3:
-		_showing_counters = not _showing_counters
-		debug.visible = _showing_counters
-
-
-## The same numbers the log is keeping, on screen, so a stutter can be seen
-## as it happens rather than found in a spreadsheet afterwards.
-func _draw_counters(live: int, drift: float) -> void:
-	debug.text = "%d fps  %.1f ms\n%d/%d notes\n%.0f MB\ndrift %+.0f ms" % [
-		Engine.get_frames_per_second(),
-		Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0,
-		live, field.notes.size(),
-		Performance.get_monitor(Performance.MEMORY_STATIC) / 1048576.0,
-		drift]
-
 
 func _lane_input(event: InputEvent, judging: bool) -> void:
 	for lane in 4:
@@ -383,15 +337,6 @@ func _pause_info() -> String:
 
 
 func _restart() -> void:
-	# Where in the song they gave up is the interesting part, so it is logged
-	# before anything is reset. Only once the song has actually run: entering
-	# a stage comes through here too, and a retry at nought milliseconds
-	# before a note has been seen is not a retry.
-	if _began_ms > 0.0:
-		Telemetry.event("retry", {"stage": stage_id,
-			"at_ms": roundi(conductor.song_time_ms()),
-			"hp": "%.1f" % judge.hp, "combo": judge.combo})
-	_began_ms = 0.0
 	# Retrying from the result screen means the bed is playing again. Take the
 	# floor back now rather than leaving it under the countdown until the
 	# stage's own song starts and pushes it out.
@@ -416,16 +361,10 @@ func _restart() -> void:
 	if not await _countdown():
 		return
 	conductor.start()
-	# The drift baseline, taken here rather than when the screen was built:
-	# the countdown sits between the two and would read as two seconds of
-	# drift that is not there.
-	_began_ms = Time.get_ticks_msec()
 	state = State.PLAYING
 
 
 func _pause() -> void:
-	Telemetry.event("pause", {"stage": stage_id,
-		"at_ms": roundi(conductor.song_time_ms())})
 	_countdown_id += 1                       # invalidate a running countdown
 	countdown.stop()
 	state = State.PAUSED
@@ -435,7 +374,6 @@ func _pause() -> void:
 
 
 func _resume() -> void:
-	Telemetry.event("resume", {"stage": stage_id})
 	pause_overlay.hide()
 
 	if not conductor.is_running():
@@ -446,8 +384,6 @@ func _resume() -> void:
 	if not await _countdown():
 		return
 	song.stream_paused = false
-	# Resuming shifts the wall clock on by however long the pause lasted.
-	_began_ms = Time.get_ticks_msec() - conductor.song_time_ms()
 	state = State.PLAYING
 
 
@@ -488,8 +424,6 @@ func _on_song_finished() -> void:
 
 	r.best_hp = GameManager.best_hp_for(stage_id)
 	r.best_combo = GameManager.best_combo_for(stage_id)
-	Telemetry.stage_ended(r)
-	Telemetry.context({"state": "result", "live_notes": 0})
 	result_overlay.show_result(r)
 
 
