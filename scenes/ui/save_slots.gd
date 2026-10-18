@@ -198,9 +198,11 @@ func _panel_has_focus() -> bool:
 
 func _open_slot(slot: int) -> void:
 	_pending_slot = slot
-	if SaveManager.exists(slot):
-		GameManager.load_slot(slot)
-	else:
+	# Asked to open it, rather than asked whether a file is sitting there: a
+	# file can be there and still be unreadable, and then this is an empty
+	# slot and should behave like one.
+	if not GameManager.load_slot(slot):
+		_refresh()
 		_ask_name(false)
 
 
