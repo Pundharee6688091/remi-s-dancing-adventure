@@ -13,9 +13,6 @@ var summary := ""
 ## own key rather than the stage's, so the two never get confused.
 var seen_key := ""
 
-## Only offered on a re-read, so a first time through cannot be jumped.
-var _can_skip_chapter := false
-
 
 func setup(params: Dictionary) -> void:
 	timeline = String(params.get("timeline", ""))
@@ -29,7 +26,6 @@ func _ready() -> void:
 		push_warning("Story node has no timeline")
 		Events.story_finished.emit()
 		return
-	_can_skip_chapter = GameManager.save.get("seen", []).has(seen_key)
 	%Settings.routed = false
 	%Settings.closed.connect(_close_settings)
 	%SkipSummary.answered.connect(_on_skip_answered)
@@ -154,8 +150,7 @@ func _on_language_changed() -> void:
 
 func _set_hints() -> void:
 	var hints: Array = [["Enter", tr("UI_NEXT")]]
-	if _can_skip_chapter:
-		hints.append(["Tab", tr("UI_SKIP_CHAPTER"), _ask_skip])
+	hints.append(["Tab", tr("UI_SKIP_CHAPTER"), _ask_skip])
 	hints.append(["Esc", tr("UI_SETTINGS"), _open_settings])
 	%Hints.set_hints(hints)
 
@@ -167,7 +162,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
 		_open_settings()
-	elif _can_skip_chapter and event.is_action_pressed("skip_chapter"):
+	elif event.is_action_pressed("skip_chapter"):
 		get_viewport().set_input_as_handled()
 		_ask_skip()
 

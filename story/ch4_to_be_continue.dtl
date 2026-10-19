@@ -1,4 +1,4 @@
-[background arg="res://backgrounds/meadow.webp" fade="1.0"]
+[background arg="res://backgrounds/meadow.png" fade="1.0"]
 # Everyone has been introduced by now, so all name boxes show real names.
 set {elion_name} = "Elion"
 set {theo_name} = "Theo"

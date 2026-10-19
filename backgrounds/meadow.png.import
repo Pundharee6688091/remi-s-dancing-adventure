@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfkbc7tbr07gn"
-path="res://.godot/imported/meadow.webp-2d44c398372a66c1c2894904789035d8.ctex"
+uid="uid://ddbnk8f8iaefo"
+path="res://.godot/imported/meadow.png-8c673b9e43e3c8e762169abc141c4314.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://backgrounds/meadow.webp"
-dest_files=["res://.godot/imported/meadow.webp-2d44c398372a66c1c2894904789035d8.ctex"]
+source_file="res://backgrounds/meadow.png"
+dest_files=["res://.godot/imported/meadow.png-8c673b9e43e3c8e762169abc141c4314.ctex"]
 
 [params]
 

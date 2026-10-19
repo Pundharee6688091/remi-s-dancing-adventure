@@ -45,7 +45,7 @@ narrator: And so, the three of them set off in search of the mysterious woman Th
 
 leave --All-- 
 
-[background arg="res://backgrounds/meadow.webp" fade="1.0"]
+[background arg="res://backgrounds/meadow.png" fade="1.0"]
 
 narrator: They searched around the nearby streets, following the direction Theo had last seen her heading. #id:51
 narrator: After a short while, Theo suddenly slowed his pace and looked ahead. #id:52
