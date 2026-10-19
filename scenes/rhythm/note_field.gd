@@ -16,10 +16,16 @@ func setup(chart_notes: Array) -> void:
 	if not Settings.changed.is_connected(_refresh_speed):
 		Settings.changed.connect(_refresh_speed)
 	notes.clear()
-	for n in chart_notes:
+	for i in chart_notes.size():
+		var n: Dictionary = chart_notes[i]
 		notes.append({
 			"t_ms": n.t_ms,
 			"lane": n.lane,
+			# Carried through from the chart so a miss can say where in the
+			# song it happened. Without these a missed note is only a count,
+			# and "the misses all cluster at bar 12" cannot be asked.
+			"beat": n.get("beat", 0.0),
+			"index": i,
 			"judged": false,
 			"node": null,
 		})

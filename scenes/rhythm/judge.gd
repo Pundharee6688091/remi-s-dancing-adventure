@@ -79,6 +79,9 @@ func _judgement_for(d: float) -> String:
 
 func _apply(n: Dictionary, judgement: String) -> void:
 	n.judged = true
+	if judgement == "miss":
+		Telemetry.note_missed(n.lane, int(n.get("index", -1)),
+			float(n.get("beat", 0.0)), n.t_ms)
 	counts[judgement] += 1
 	hp = maxf(0.0, hp - Rules.damage(judgement) / float(_total))
 

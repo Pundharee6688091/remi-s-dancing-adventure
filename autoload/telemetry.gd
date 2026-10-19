@@ -32,6 +32,15 @@ const FOLDER := "sessions"
 ## engine errors actually land. Set in project.godot, read back here.
 const ENGINE_LOG := "debug/file_logging/log_path"
 
+## Four beats to a bar, matching the chart format, so a missed note's beat can
+## be reported as the bar a reader would find it in.
+const BEATS_PER_BAR := 4.0
+
+## The feedback questions, in the order they are asked and in the order the
+## columns come out, named here so the screen and the csv cannot drift apart.
+const FEEDBACK_ORDER := ["learn", "timing", "meter", "difficulty", "looks",
+	"again"]
+
 var recording := false
 
 var _dir := ""
@@ -74,6 +83,26 @@ var _attempt_frames: Array[float] = []
 ## stage ends. Held in memory rather than flushed per press, because a press
 ## is the one thing here that happens faster than a file wants to be written.
 var _presses: Array = []
+## [lane, index in the chart, bar] per miss. A count of misses says the stage
+## was hard; these say which part of it was.
+var _misses: Array = []
+## How busy the chart is, carried from stage_start so it can sit in the row.
+var _nps := 0.0
+
+## The audio against the wall clock, and how far apart they ever got during
+## this attempt. Memory is kept as its peak, since growth over a session is
+## the only thing worth knowing about it.
+var _drift_ms := 0.0
+var _drift_worst := 0.0
+var _mem_peak := 0.0
+var _live_notes := 0
+
+## Audio drift and output latency need a real sound card to mean anything.
+## With no display server there is no audio device either, so the song clock
+## advances at the mixer's own rate and the drift figure measures that rather
+## than the game. Those cells are left blank instead of filled with a number
+## nobody should trust.
+var _real_audio := true
 
 ## Which of the two the player is actually using, and how much.
 var _device := ""
@@ -124,15 +153,20 @@ func _start() -> void:
 		return
 
 	recording = true
+	_real_audio = DisplayServer.get_name() != "headless"
 	_started_ms = Time.get_ticks_msec()
 	_note_engine_log()
 	_write_header()
 
 	# One row per attempt. Short enough to read, wide enough that the report's
 	# numbers can all be taken from this one table.
+	# fps_min is deliberately absent: it is 1000/worst_frame_ms, the same fact
+	# written twice. frame_ms_p99 is here instead, which is the one frame
+	# figure the other two cannot be turned into, and the honest number for a
+	# rhythm game: the shape of the bad frames rather than the single worst.
 	_csv.store_line("stage,attempt,won,stars,meter_pct,perfect,great,good,"
-		+ "miss,max_combo,mean_offset_ms,spread_ms,seconds,fps_avg,fps_min,"
-		+ "worst_frame_ms")
+		+ "miss,max_combo,mean_offset_ms,spread_ms,seconds,nps,fps_avg,"
+		+ "frame_ms_p99,worst_frame_ms,mem_mb,drift_ms")
 	_csv.flush()
 
 
@@ -179,7 +213,8 @@ func _write_header() -> void:
 		"fullscreen": Settings.fullscreen,
 		# The song clock compensates for this, so a machine with unusual
 		# latency explains a whole session's worth of complaints about timing.
-		"audio_latency_ms": "%.1f" % (AudioServer.get_output_latency() * 1000.0),
+		"audio_latency_ms": ("%.1f" % (AudioServer.get_output_latency() * 1000.0)
+			if DisplayServer.get_name() != "headless" else "no audio device"),
 		"language": Loc.current(),
 		"note_speed": Settings.note_speed,
 		"offset_ms": Settings.offset,
@@ -282,6 +317,9 @@ func stage_started(stage_id: String, fields := {}) -> void:
 	if not recording:
 		return
 	_stage = stage_id
+	_nps = float(fields.get("nps", 0.0))
+	_misses.clear()
+	_drift_worst = 0.0
 	if not _tries.has(stage_id):
 		_tries[stage_id] = {"attempts": 0, "clears": 0, "fails": 0}
 	_tries[stage_id].attempts += 1
@@ -302,6 +340,24 @@ func note_hit(lane: int, error_ms: float, judgement: String) -> void:
 	if not recording:
 		return
 	_presses.append([lane, error_ms, judgement])
+
+
+## A note slid past without being hit. The position is the whole point: a
+## count of misses says the stage was hard, this says which bar of it was.
+func note_missed(lane: int, index: int, beat: float, _t_ms: float) -> void:
+	if not recording:
+		return
+	_misses.append([lane, index, int(beat / BEATS_PER_BAR)])
+
+
+## Called every frame while a song is actually running.
+func playing(drift_ms: float, live_notes: int) -> void:
+	if not recording:
+		return
+	_drift_ms = drift_ms
+	_live_notes = live_notes
+	if absf(drift_ms) > absf(_drift_worst):
+		_drift_worst = drift_ms
 
 
 func stage_ended(result: Dictionary) -> void:
@@ -339,9 +395,16 @@ func stage_ended(result: Dictionary) -> void:
 		fields["n_" + key] = counts[key]
 	fields["seconds"] = "%.0f" % secs
 	fields["mean_offset_ms"] = "%.1f" % offs.mean
+	fields["spread_ms"] = "%.1f" % offs.spread
+	fields["mem_mb"] = "%.1f" % _mem_mb()
+	if _real_audio:
+		fields["drift_ms"] = "%.1f" % _drift_worst
+		fields["audio_latency_ms"] = "%.1f" \
+			% (AudioServer.get_output_latency() * 1000.0)
 	if frames.known:
 		fields["fps_avg"] = "%.1f" % frames.fps_avg
-		fields["fps_min"] = "%.1f" % frames.fps_min
+		fields["frame_ms_p99"] = "%.1f" % frames.p99
+		fields["worst_frame_ms"] = "%.1f" % frames.worst
 	event("stage_end", fields)
 
 	# Every press of this attempt, kept per lane and in the order they were
@@ -356,6 +419,33 @@ func stage_ended(result: Dictionary) -> void:
 		event("press_offsets", {"stage": _stage, "attempt": _attempt,
 			"lane": lane, "n": mine.size(), "ms": ",".join(mine)})
 
+	# Which notes were missed, per lane and in order, so a run of misses at one
+	# point in the song shows up as a run rather than as a total.
+	for lane in 4:
+		var bars: Array[String] = []
+		for m in _misses:
+			if int(m[0]) == lane:
+				bars.append(str(int(m[2])))
+		if bars.is_empty():
+			continue
+		event("misses", {"stage": _stage, "attempt": _attempt, "lane": lane,
+			"n": bars.size(), "bars": ",".join(bars)})
+
+	# And the answer to the question itself, worked out rather than left for
+	# somebody to count by hand: the bars where the misses pile up.
+	if not _misses.is_empty():
+		var per_bar := {}
+		for m in _misses:
+			var bar := int(m[2])
+			per_bar[bar] = int(per_bar.get(bar, 0)) + 1
+		var worst_bars: Array = per_bar.keys()
+		worst_bars.sort_custom(func(a, b): return per_bar[a] > per_bar[b])
+		var named: Array[String] = []
+		for bar in worst_bars.slice(0, mini(5, worst_bars.size())):
+			named.append("%d(%d)" % [bar, per_bar[bar]])
+		event("miss_clusters", {"stage": _stage, "attempt": _attempt,
+			"bars_worst_first": " ".join(named)})
+
 	_csv.store_line(",".join([
 		_stage, str(_attempt), "1" if won else "0",
 		str(result.get("stars", 0)), "%.1f" % float(result.get("hp", 0.0)),
@@ -363,15 +453,19 @@ func stage_ended(result: Dictionary) -> void:
 		str(counts.get("good", 0)), str(counts.get("miss", 0)),
 		str(result.get("max_combo", 0)),
 		"%.1f" % offs.mean, "%.1f" % offs.spread, "%.0f" % secs,
+		"%.2f" % _nps,
 		# Left blank rather than zeroed when no frame went by, so a
 		# spreadsheet averages the attempts that were actually measured.
 		"%.1f" % frames.fps_avg if frames.known else "",
-		"%.1f" % frames.fps_min if frames.known else "",
+		"%.1f" % frames.p99 if frames.known else "",
 		"%.1f" % frames.worst if frames.known else "",
+		"%.1f" % _mem_mb(),
+		"%.1f" % _drift_worst if _real_audio else "",
 	]))
 	_csv.flush()
 
 	_presses.clear()
+	_misses.clear()
 	_attempt_frames.clear()
 	_stage = ""
 
@@ -401,6 +495,9 @@ func _process(delta: float) -> void:
 	_frames.append(ms)
 	if _stage != "":
 		_attempt_frames.append(ms)
+	var mem := _mem_mb()
+	if mem > _mem_peak:
+		_mem_peak = mem
 	if ms > _worst_frame:
 		_worst_frame = ms
 		_worst_where = _screen if _stage == "" else _stage
@@ -413,11 +510,15 @@ func _process(delta: float) -> void:
 		_frames.clear()
 
 
+func _mem_mb() -> float:
+	return Performance.get_monitor(Performance.MEMORY_STATIC) / 1048576.0
+
+
 ## Returns known = false when no frames went by, which happens for an attempt
 ## that ended inside a single frame. Zero would be read as a measurement.
 func _spread(frames: Array[float]) -> Dictionary:
 	if frames.is_empty():
-		return {"known": false, "fps_avg": 0.0, "fps_min": 0.0, "worst": 0.0}
+		return {"known": false, "fps_avg": 0.0, "p99": 0.0, "worst": 0.0}
 	var total := 0.0
 	var worst := 0.0
 	for ms in frames:
@@ -425,10 +526,15 @@ func _spread(frames: Array[float]) -> Dictionary:
 		if ms > worst:
 			worst = ms
 	var avg: float = total / frames.size()
+	# Sorted only for the percentile, which is the one figure that needs the
+	# whole distribution rather than a running total.
+	var sorted := frames.duplicate()
+	sorted.sort()
+	var p99: float = sorted[mini(int(sorted.size() * 0.99), sorted.size() - 1)]
 	return {
 		"known": true,
 		"fps_avg": 1000.0 / maxf(avg, 0.001),
-		"fps_min": 1000.0 / maxf(worst, 0.001),
+		"p99": p99,
 		"worst": worst,
 	}
 
@@ -457,6 +563,44 @@ func _input(event_in: InputEvent) -> void:
 	if kind != _device:
 		_device = kind
 		event("input_device", {"now": kind})
+
+
+# ---------- what the tester says ----------
+
+## One row per tester, appended to a single csv that every session adds to, so
+## the whole set opens in Excel as one table rather than as a folder of files
+## somebody has to paste together.
+##
+## Returns false when it could not be written, so the screen can say so rather
+## than thanking somebody for an answer that went nowhere.
+func feedback(answers: Dictionary) -> bool:
+	if _dir == "":
+		return false
+	var path := _dir.path_join("feedback.csv")
+	var fresh := not FileAccess.file_exists(path)
+	var f := FileAccess.open(path, FileAccess.READ_WRITE if not fresh
+		else FileAccess.WRITE)
+	if f == null:
+		push_warning("Could not write the feedback csv")
+		return false
+
+	var columns: Array[String] = ["when", "session", "played_before"]
+	for q in FEEDBACK_ORDER:
+		columns.append(q)
+	if fresh:
+		f.store_line(",".join(columns))
+	else:
+		f.seek_end()
+
+	var row: Array[String] = [Time.get_datetime_string_from_system(), _session]
+	row.append(str(int(answers.get("played_before", -1))))
+	for q in FEEDBACK_ORDER:
+		row.append(str(int(answers.get(q, 0))))
+	f.store_line(",".join(row))
+	f.close()
+
+	event("feedback", answers)
+	return true
 
 
 # ---------- errors ----------
@@ -522,6 +666,12 @@ func _write_summary() -> void:
 		_log.store_line("average fps: %.1f" % (1000.0 / maxf(sum / n, 0.001)))
 	_log.store_line("worst frame: %.0f ms%s" % [_worst_frame,
 		"" if _worst_where == "" else " on " + _worst_where])
+	_log.store_line("peak memory: %.1f MB" % _mem_peak)
+	if _real_audio:
+		_log.store_line("audio delay: %.1f ms as reported by the sound card"
+			% (AudioServer.get_output_latency() * 1000.0))
+	else:
+		_log.store_line("audio delay: not measured, no audio device")
 	_log.store_line("problems:    %d" % _problems)
 
 	_log.store_line("")

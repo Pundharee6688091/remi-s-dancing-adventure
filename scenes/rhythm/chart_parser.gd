@@ -44,6 +44,32 @@ static func parse(path: String) -> Dictionary:
 	return chart
 
 
+## How busy a chart is, which is the difficulty number the test plan asks for.
+##
+## Measured across the span the notes actually occupy rather than the whole
+## song, because a long quiet intro would make a dense chart look easy. peak is
+## the busiest single second anywhere in the chart, which is the part a player
+## actually struggles with: an average of two notes a second is a different
+## song depending on whether it ever reaches eight.
+static func density(chart: Dictionary) -> Dictionary:
+	var notes: Array = chart.get("notes", [])
+	var n := notes.size()
+	if n == 0:
+		return {"notes": 0, "span_s": 0.0, "nps": 0.0, "peak_nps": 0}
+	var span: float = maxf((float(notes[n - 1].t_ms)
+		- float(notes[0].t_ms)) / 1000.0, 0.001)
+	# The notes are already sorted by time, so one pass with a window that
+	# only ever moves forward finds the busiest second.
+	var peak := 0
+	var tail := 0
+	for head in n:
+		while float(notes[head].t_ms) - float(notes[tail].t_ms) > 1000.0:
+			tail += 1
+		peak = maxi(peak, head - tail + 1)
+	return {"notes": n, "span_s": span, "nps": float(n) / span,
+		"peak_nps": peak}
+
+
 static func _read_header(chart: Dictionary, key: String, value: String) -> void:
 	match key.to_upper():
 		"TITLE":  chart.title = value

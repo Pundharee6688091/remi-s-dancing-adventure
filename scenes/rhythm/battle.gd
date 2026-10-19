@@ -142,6 +142,7 @@ func _process(delta: float) -> void:
 	if state != State.PLAYING:
 		return
 	var now: float = conductor.song_time_ms()
+	Telemetry.playing(conductor.drift_ms(), field.alive_count())
 	field.update(now)
 	judge.sweep(now)
 	hud.update_progress(now)
@@ -374,8 +375,10 @@ func _restart() -> void:
 		return
 	conductor.start()
 	_runs += 1
+	var busy := ChartParser.density(_chart)
 	Telemetry.stage_started(stage_id, {"song": _song_id(),
 		"notes": _chart.notes.size(), "bpm": _chart.bpm,
+		"nps": "%.2f" % busy.nps, "peak_nps": busy.peak_nps,
 		"note_speed": Settings.note_speed, "offset_ms": Settings.offset})
 	state = State.PLAYING
 

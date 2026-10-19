@@ -124,6 +124,13 @@ theme_override_font_sizes/font_size = 30
 text = "UI_SETTINGS"
 alignment = 0
 
+[node name="Feedback" type="Button" parent="Items"]
+custom_minimum_size = Vector2(360, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "UI_FB_MENU"
+alignment = 0
+
 [node name="Quit" type="Button" parent="Items" unique_id=173471163]
 custom_minimum_size = Vector2(360, 60)
 layout_mode = 2
@@ -167,4 +174,5 @@ layout_mode = 1
 [connection signal="pressed" from="Items/Collection" to="." method="_on_collection_pressed"]
 [connection signal="pressed" from="Items/Achievements" to="." method="_on_achievements_pressed"]
 [connection signal="pressed" from="Items/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Items/Feedback" to="." method="_on_feedback_pressed"]
 [connection signal="pressed" from="Items/Quit" to="." method="_on_quit_pressed"]
