@@ -31,6 +31,12 @@ Audio="*res://autoload/audio.gd"
 Achievements="*res://autoload/achievements.gd"
 Telemetry="*res://autoload/telemetry.gd"
 
+[debug]
+
+file_logging/enable_file_logging=true
+file_logging/log_path="user://logs/remi.log"
+file_logging/max_log_files=20
+
 [dialogic]
 
 directories/dch_directory={
@@ -147,12 +153,3 @@ renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0.96862745, 0.9607843, 0.9411765, 1)
-
-[debug]
-
-; Script errors and engine errors only land here. The session log notes where
-; this file is and copies its own share of it in at the end, so one file can
-; be handed back rather than two.
-file_logging/enable_file_logging=true
-file_logging/log_path="user://logs/remi.log"
-file_logging/max_log_files=20
