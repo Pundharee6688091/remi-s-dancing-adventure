@@ -202,6 +202,14 @@ func _write_header() -> void:
 		"session": _session,
 		"started": Time.get_datetime_string_from_system(),
 		"godot": Engine.get_version_info().get("string", "?"),
+		# Which template produced these numbers, because a debug build carries
+		# the debugger and its extra checks and is measurably slower than the
+		# release build a player gets. Without this line a frame time in here
+		# cannot be compared with one from another session.
+		"build": "debug" if OS.is_debug_build() else "release",
+		# And whether something was profiling it at the time, which costs more
+		# again. A session with this attached is not a session to quote.
+		"debugger": "attached" if EngineDebugger.is_active() else "none",
 		"os": "%s %s" % [OS.get_name(), OS.get_version()],
 		"cpu": "%s x%d" % [OS.get_processor_name(), OS.get_processor_count()],
 		"gpu": "%s (%s)" % [RenderingServer.get_video_adapter_name(),

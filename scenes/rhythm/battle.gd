@@ -648,9 +648,10 @@ func _on_language_changed() -> void:
 func _set_hints() -> void:
 	var hints: Array = [[["W", "A", "S", "D", "↑", "←", "↓", "→"],
 		tr("UI_HIT_ON_GHOST")], ["Esc", tr("UI_PAUSE"), _pause]]
-	if _cheats_on():
-		hints.append(["F5", tr("UI_CHEAT_PASS")])
-		hints.append(["F6", tr("UI_CHEAT_FAIL")])
+	# F5 and F6 are left off the bar on purpose. They still work where
+	# _cheats_on() allows them, but a debug build turns that on for whoever is
+	# holding the keyboard, and a playtester should not be shown a way to skip
+	# the stage they were asked to play.
 	%Hints.set_hints(hints)
 
 
