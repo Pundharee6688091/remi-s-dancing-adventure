@@ -79,6 +79,9 @@ var _pose_time := 0.0
 
 
 func _ready() -> void:
+	# The label is in the scene with no text, so it shows nothing either way,
+	# but saying so here means the F3 toggle has a known state to start from.
+	debug.visible = false
 	var st := Rules.stage(stage_id)
 	var song_id: String = st.get("song", "song_tutorial")
 	_chart = ChartParser.parse(Rules.chart_path(song_id))
@@ -142,7 +145,10 @@ func _process(delta: float) -> void:
 	if state != State.PLAYING:
 		return
 	var now: float = conductor.song_time_ms()
-	Telemetry.playing(conductor.drift_ms(), field.alive_count())
+	var live := field.alive_count()
+	Telemetry.playing(conductor.drift_ms(), live)
+	if _showing_counters:
+		_draw_counters(live)
 	field.update(now)
 	judge.sweep(now)
 	hud.update_progress(now)
@@ -176,6 +182,7 @@ func _cheat_end(pass_it: bool) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	_counters_input(event)
 	# Settings is a full overlay and owns every key while it is up.
 	if settings_overlay.visible:
 		return
@@ -335,6 +342,63 @@ func _pause_info() -> String:
 	var opp: String = Rules.stage(stage_id).get("opponent", "")
 	return tr("UI_PAUSE_INFO") % [Rules.song_title(_song_id()), secs / 60, secs % 60,
 		Rules.character_name(opp) if opp != "" else "—", Rules.hp_text(judge.hp)]
+
+
+## The counters in the corner. Off unless F3 is pressed, so a playtester never
+## sees them by accident and they colour nobody's impression of the game.
+##
+## This exists because the editor's profiler cannot reach a release build, and
+## on a lab machine there is no editor to reach it from. The session log has
+## the same numbers afterwards; this is for watching over somebody's shoulder
+## while it happens, which is when a stutter is easiest to understand.
+var _showing_counters := false
+
+
+## F3 rather than a menu entry: it is for us and whoever is watching a tester,
+## not a setting anybody has to find. Works in a release build on purpose,
+## because that is the build the lab machines run.
+func _counters_input(event: InputEvent) -> void:
+	if not (event is InputEventKey and event.is_pressed() and not event.is_echo()):
+		return
+	if (event as InputEventKey).physical_keycode != KEY_F3:
+		return
+	get_viewport().set_input_as_handled()
+	_showing_counters = not _showing_counters
+	debug.visible = _showing_counters
+	if _showing_counters:
+		_style_counters()
+
+
+## Readable over whatever art is behind it, and small enough to ignore.
+func _style_counters() -> void:
+	debug.position = Vector2(12, 12)
+	debug.size = Vector2(240, 104)
+	debug.add_theme_font_size_override("font_size", 15)
+	debug.add_theme_color_override("font_color", Palette.WHITE)
+	var box := StyleBoxFlat.new()
+	box.bg_color = Color(0, 0, 0, 0.62)
+	box.set_corner_radius_all(4)
+	box.content_margin_left = 8
+	box.content_margin_right = 8
+	box.content_margin_top = 4
+	box.content_margin_bottom = 4
+	debug.add_theme_stylebox_override("normal", box)
+
+
+## Frame time comes from the frame itself rather than from Performance's
+## TIME_PROCESS, which Godot only refreshes about once a second and which read
+## higher than the whole frame when this was tried the first time.
+func _draw_counters(live: int) -> void:
+	var ms: float = get_process_delta_time() * 1000.0
+	debug.text = "%d fps   %.1f ms\n%d/%d notes live\n%.0f MB" % [
+		Engine.get_frames_per_second(), ms,
+		live, field.notes.size(),
+		Performance.get_monitor(Performance.MEMORY_STATIC) / 1048576.0]
+	# Left off entirely with no audio device, the same as in the session log:
+	# the playback position then advances at the mixer's own rate and the
+	# figure describes that rather than the game.
+	if DisplayServer.get_name() != "headless":
+		debug.text += "\ndrift %+.0f ms" % conductor.drift_ms()
 
 
 ## How many times this stage has been played since the screen opened. _ready()
