@@ -172,7 +172,12 @@ func _pick_folder() -> String:
 	# Only in an exported build. Run from the editor and "the folder the game
 	# is in" is Godot's own application bundle, which is not where anybody
 	# wants a playtest log, and writing there once already made a mess.
-	if OS.has_feature("standalone"):
+	#
+	# The tag is "template". It is not "standalone": that was Godot 3, and in
+	# Godot 4 it is not a tag at all, so the test was simply always false.
+	# The folder beside the exe was never even tried, and every exported
+	# build fell back to user:// without ever saying so.
+	if OS.has_feature("template"):
 		tries.append(OS.get_executable_path().get_base_dir())
 	tries.append("user://")
 	for base in tries:
