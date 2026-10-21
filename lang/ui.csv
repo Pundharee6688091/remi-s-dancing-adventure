@@ -223,31 +223,3 @@ UI_ACH_GOT,Achievement earned,ได้​รับ​ความสำเร�
 UI_NEW_RECORD,New record!,ทำลายสถิติ!
 UI_CHEAT_PASS,Pass,ผ่าน
 UI_CHEAT_FAIL,Fail,ไม่​ผ่าน
-UI_FB_MENU,Feedback,ความ​คิด​เห็น
-UI_FB_TITLE,TELL US WHAT YOU THINK,บอก​เรา​ว่า​คุณ​คิด​อย่างไร
-UI_FB_INTRO,Seven questions. Nothing here records your name.,เจ็ด​คำถาม ไม่​มี​การ​บันทึก​ชื่อ​ของ​คุณ
-UI_FB_LEARN,How easy was it to learn?,เรียน​รู้​วิธี​เล่น​ได้​ง่าย​แค่​ไหน
-UI_FB_HARD,Hard,ยาก
-UI_FB_EASY,Easy,ง่าย
-UI_FB_TIMING,Did the timing feel fair?,จังหวะ​การ​ตัดสิน​ยุติธรรม​ไหม
-UI_FB_UNFAIR,Unfair,ไม่​ยุติธรรม
-UI_FB_FAIR,Fair,ยุติธรรม
-UI_FB_METER,Was the Skeptical Meter clear?,ความ​กังขา​เข้าใจ​ง่าย​ไหม
-UI_FB_UNCLEAR,Confusing,สับสน
-UI_FB_CLEAR,Clear,ชัดเจน
-UI_FB_DIFFICULTY,How hard was it overall?,โดย​รวม​ยาก​แค่​ไหน
-UI_FB_TOO_EASY,Too easy,ง่าย​เกิน​ไป
-UI_FB_TOO_HARD,Too hard,ยาก​เกิน​ไป
-UI_FB_LOOKS,How were the art and the music?,ภาพ​และ​เพลง​เป็น​อย่างไร
-UI_FB_POOR,Poor,ไม่​ดี
-UI_FB_GREAT,Great,ดี​มาก
-UI_FB_AGAIN,Would you play it again?,จะ​กลับ​มา​เล่น​อีก​ไหม
-UI_FB_NEVER,No,ไม่​เล่น
-UI_FB_DEFINITELY,Definitely,เล่น​แน่นอน
-UI_FB_PLAYED_BEFORE,Played a rhythm game before?,เคย​เล่น​เกม​จังหวะ​มา​ก่อน​ไหม
-UI_FB_MOVE,Move,เลื่อน
-UI_FB_ANSWER,Answer,ตอบ
-UI_FB_SEND,Send,ส่ง
-UI_FB_LEFT,%d left,เหลือ​อีก %d ข้อ
-UI_FB_THANKS,Thank you. Your answers are saved.,ขอบคุณ คำตอบ​ของ​คุณ​ถูก​บันทึก​แล้ว
-UI_FB_FAILED,Could not save your answers. Tell the person running the test.,บันทึก​คำตอบ​ไม่​ได้ กรุณา​แจ้ง​ผู้​ดูแล​การ​ทดสอบ

@@ -36,11 +36,6 @@ const ENGINE_LOG := "debug/file_logging/log_path"
 ## be reported as the bar a reader would find it in.
 const BEATS_PER_BAR := 4.0
 
-## The feedback questions, in the order they are asked and in the order the
-## columns come out, named here so the screen and the csv cannot drift apart.
-const FEEDBACK_ORDER := ["learn", "timing", "meter", "difficulty", "looks",
-	"again"]
-
 var recording := false
 
 var _dir := ""
@@ -571,44 +566,6 @@ func _input(event_in: InputEvent) -> void:
 	if kind != _device:
 		_device = kind
 		event("input_device", {"now": kind})
-
-
-# ---------- what the tester says ----------
-
-## One row per tester, appended to a single csv that every session adds to, so
-## the whole set opens in Excel as one table rather than as a folder of files
-## somebody has to paste together.
-##
-## Returns false when it could not be written, so the screen can say so rather
-## than thanking somebody for an answer that went nowhere.
-func feedback(answers: Dictionary) -> bool:
-	if _dir == "":
-		return false
-	var path := _dir.path_join("feedback.csv")
-	var fresh := not FileAccess.file_exists(path)
-	var f := FileAccess.open(path, FileAccess.READ_WRITE if not fresh
-		else FileAccess.WRITE)
-	if f == null:
-		push_warning("Could not write the feedback csv")
-		return false
-
-	var columns: Array[String] = ["when", "session", "played_before"]
-	for q in FEEDBACK_ORDER:
-		columns.append(q)
-	if fresh:
-		f.store_line(",".join(columns))
-	else:
-		f.seek_end()
-
-	var row: Array[String] = [Time.get_datetime_string_from_system(), _session]
-	row.append(str(int(answers.get("played_before", -1))))
-	for q in FEEDBACK_ORDER:
-		row.append(str(int(answers.get(q, 0))))
-	f.store_line(",".join(row))
-	f.close()
-
-	event("feedback", answers)
-	return true
 
 
 # ---------- errors ----------

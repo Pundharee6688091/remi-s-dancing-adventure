@@ -8,7 +8,6 @@ const SETTINGS := "res://scenes/ui/settings.tscn"
 const ACHIEVEMENTS := "res://scenes/ui/achievements.tscn"
 const COLLECTION := "res://scenes/ui/collection.tscn"
 const CONTROLS := "res://scenes/ui/controls.tscn"
-const FEEDBACK := "res://scenes/ui/feedback.tscn"
 
 var slot := 0
 var save: Dictionary = {}
