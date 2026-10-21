@@ -370,9 +370,24 @@ func _counters_input(event: InputEvent) -> void:
 
 
 ## Readable over whatever art is behind it, and small enough to ignore.
+##
+## Top right, anchored rather than placed: the song bar and its title live top
+## left, and a box sitting on them is worse than useless. Anchoring to the
+## parent's right edge means no 1280 written down here, so it stays put if the
+## stage is ever laid out at another size.
+const COUNTERS := Vector2(240.0, 104.0)
+const COUNTERS_EDGE := 12.0
+
+
 func _style_counters() -> void:
-	debug.position = Vector2(12, 12)
-	debug.size = Vector2(240, 104)
+	debug.anchor_left = 1.0
+	debug.anchor_right = 1.0
+	debug.anchor_top = 0.0
+	debug.anchor_bottom = 0.0
+	debug.offset_left = -(COUNTERS.x + COUNTERS_EDGE)
+	debug.offset_right = -COUNTERS_EDGE
+	debug.offset_top = COUNTERS_EDGE
+	debug.offset_bottom = COUNTERS_EDGE + COUNTERS.y
 	debug.add_theme_font_size_override("font_size", 15)
 	debug.add_theme_color_override("font_color", Palette.WHITE)
 	var box := StyleBoxFlat.new()

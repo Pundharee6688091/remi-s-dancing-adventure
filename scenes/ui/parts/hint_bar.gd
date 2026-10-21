@@ -26,9 +26,11 @@ var _cap_hover: StyleBoxFlat
 var _cap_down: StyleBoxFlat
 
 func _ready() -> void:
-	position = Vector2(0.0, 720.0 - HEIGHT)
-	size = Vector2(1280.0, HEIGHT)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	get_viewport().size_changed.connect(_fit)
+	if get_parent() is Control:
+		(get_parent() as Control).resized.connect(_fit)
+	_fit()
 
 	_cap.bg_color = Palette.WHITE
 	_cap.border_color = Palette.INK
@@ -58,6 +60,22 @@ func _ready() -> void:
 	# A rebind on the controls page has to reach the bar of every screen that
 	# is still up behind it, including the ones that refuse to be rebuilt.
 	InputManager.rebound.connect(_reprint)
+
+
+## The bar sits on the bottom edge of whatever it is inside, which is not
+## always 1280x720.
+##
+## Every ordinary screen is a Control of exactly that size, so the old
+## hardcoded numbers were right there. The visual novel is not: it puts its bar
+## in a CanvasLayer, where the space is the whole window, and Dialogic draws
+## its background and text box across that whole window too. On a window that
+## was not 16:9 the hardcoded 720 left the bar floating in the middle of the
+## text box instead of under it.
+func _fit() -> void:
+	var room: Vector2 = get_parent().size if get_parent() is Control \
+		else get_viewport_rect().size
+	position = Vector2(0.0, room.y - HEIGHT)
+	size = Vector2(room.x, HEIGHT)
 
 
 ## hints is a list of [key, label] pairs, optionally with a Callable third.
