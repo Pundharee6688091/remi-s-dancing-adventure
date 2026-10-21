@@ -43,6 +43,15 @@ EXT="$(awk -v want="name=\"$PRESET\"" '
 OUT="$HERE/export/Remi-debug.$EXT"
 rm -rf "$OUT"
 
+# Exporting from the command line rewrites export_path in the preset file,
+# which would leave the repository dirty after every profiling run and put a
+# stray change in somebody's next commit. Put it back exactly as it was.
+PRESETS="$HERE/export_presets.cfg"
+KEEP="$(mktemp)"
+cp "$PRESETS" "$KEEP"
+restore() { cp "$KEEP" "$PRESETS"; rm -f "$KEEP"; }
+trap restore EXIT
+
 echo "Exporting '$PRESET' with debug enabled, to $(basename "$OUT")"
 "$GODOT" --headless --path "$HERE" --export-debug "$PRESET" "$OUT" \
 	2>&1 | grep -vE "^\[ *[0-9]+%" | tail -4
@@ -85,4 +94,6 @@ fi
 BIN="$(find "$OUT/Contents/MacOS" -maxdepth 1 -type f -perm -111 | head -1)"
 [ -n "$BIN" ] || { echo "No executable inside $OUT" >&2; exit 1; }
 echo "Launching against the profiler on 127.0.0.1:$PORT"
-exec "$BIN" --remote-debug "tcp://127.0.0.1:$PORT"
+# Not exec: that replaces this shell and the trap above would never restore
+# the preset file.
+"$BIN" --remote-debug "tcp://127.0.0.1:$PORT"
