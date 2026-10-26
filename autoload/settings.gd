@@ -50,6 +50,13 @@ func set_value(key: String, value: Variant) -> void:
 			offset = clampi(int(value), -OFFSET_RANGE, OFFSET_RANGE)
 		_:
 			return
+	# Nothing changed, so there is nothing to apply, save or announce. Holding
+	# a row already at its limit used to rewrite settings.cfg and emit a
+	# change on every key repeat: 81% of the setting events in the playtest
+	# logs were a value being set to what it already was, one of them 399
+	# times in a session.
+	if get(key) == was:
+		return
 	apply()
 	save_settings()
 	# Logged after the clamp, so it records what the setting became rather

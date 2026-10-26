@@ -56,9 +56,14 @@ func drift_ms() -> float:
 	# play() instead, it measures the sound card's start-up delay once and
 	# then reports that same delay forever as though it were drift, which is
 	# exactly the wrong answer: what matters is whether the gap grows.
+	# A finished stream reports position 0 while this clock keeps running, so
+	# the last frames of every song produced a reading of minus the whole
+	# song length. Across 181 playtest attempts that spurious value was the
+	# largest seen every single time, and it was the only thing the drift
+	# column ever reported. Position 0 means not playing, not drifted.
+	if pos <= 0.0:
+		return 0.0
 	if not _clock_set:
-		if pos <= 0.0:
-			return 0.0
 		_clock_set = true
 		_began_ms = Time.get_ticks_msec() - pos * 1000.0
 	return pos * 1000.0 - (Time.get_ticks_msec() - _began_ms)
